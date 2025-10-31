@@ -1,127 +1,378 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trading Potential — Hero Section</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-<style>
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #ffffff;
-  color: #0d1a33;
-}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Treading — Earn From Home (Students & Housewives)</title>
 
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 80px 10%;
-  flex-wrap: wrap;
-}
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
 
-.hero-text {
-  max-width: 500px;
-}
+  <style>
+    :root{
+      --bg:#071127; --card:#071724; --muted:#9fb8cc; --text:#e9f6fb;
+      --accent1:#06b6d4; --accent2:#9d4edd; --gold:#ffd58e;
+      --glass: rgba(255,255,255,0.04);
+      --maxw:1150px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      background: linear-gradient(180deg,#031021 0%, #071127 60%);
+      color:var(--text);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
 
-.hero-text h1 {
-  font-size: 42px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: #102347;
-}
+    /* NAV */
+    header.nav{position:sticky;top:0;z-index:80;background:linear-gradient(180deg, rgba(2,10,23,.6), rgba(2,10,23,.35));backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+    .nav-inner{height:68px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-family:Poppins, Inter}
+    .brand img{width:42px;height:42px;border-radius:8px;object-fit:cover}
+    .brand .title{font-size:18px;color:var(--text)}
+    .nav-links{display:flex;gap:14px;align-items:center}
+    .nav-links a{color:var(--muted);font-weight:600;text-decoration:none;padding:8px 10px;border-radius:8px}
+    .nav-links a:hover{color:#fff;background:rgba(255,255,255,0.02)}
+    .cta-wh{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#04111b;padding:10px 14px;border-radius:10px;font-weight:800;text-decoration:none}
 
-.hero-text p {
-  font-size: 16px;
-  color: #4b5a75;
-  margin: 20px 0 30px;
-}
+    /* floating CTA */
+    .floating{
+      position:fixed;left:50%;transform:translateX(-50%);top:18px;z-index:90;padding:9px 16px;border-radius:999px;background:linear-gradient(90deg,#ff6aa2,#9b5cff);font-weight:800;color:#fff;box-shadow:0 18px 40px rgba(155,59,255,0.12);display:inline-flex;gap:10px;align-items:center
+    }
 
-.hero-buttons {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+    /* HERO */
+    .hero{padding:72px 0 38px}
+    .hero-grid{display:grid;grid-template-columns:1fr 520px;gap:28px;align-items:center}
+    @media (max-width:980px){ .hero-grid{grid-template-columns:1fr;gap:20px;padding-bottom:10px} }
+    .hero-left{max-width:680px}
+    .eyebrow{display:inline-block;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#04111b;font-weight:800;font-size:13px}
+    h1{font-family:Poppins, Inter;font-weight:800;font-size:clamp(30px,5.4vw,44px);margin:18px 0;color:var(--text);line-height:1.06}
+    .hl{color:var(--gold)}
+    .lead{color:var(--muted);font-size:16px;margin:18px 0 22px;max-width:56ch}
+    .kpi-row{display:flex;gap:18px;align-items:center;margin-bottom:18px}
+    .kpi{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:10px 14px;font-weight:700;color:var(--text);box-shadow:0 8px 30px rgba(2,6,23,0.5)}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+    .btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#04101a;padding:12px 18px;border-radius:12px;font-weight:800;border:none;cursor:pointer}
+    .btn-ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.06);padding:10px 16px;border-radius:12px;cursor:pointer}
 
-.hero-buttons a {
-  text-decoration: none;
-  font-weight: 600;
-}
+    /* hero right */
+    .hero-visual{display:flex;justify-content:center;align-items:center}
+    .visual-card{width:100%;max-width:520px;border-radius:18px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);display:grid;place-items:center}
+    .visual-card img{width:100%;height:auto;display:block;border-radius:8px;transform:rotate(6deg);}
 
-.hero-buttons .btn-primary {
-  background-color: #102347;
-  color: #fff;
-  padding: 12px 22px;
-  border-radius: 6px;
-  font-size: 15px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: background 0.3s;
-}
+    /* FEATURES */
+    .features{padding:40px 0}
+    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:16px}
+    @media (max-width:980px){ .features-grid{grid-template-columns:1fr} }
+    .feature{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.03);padding:18px;border-radius:12px}
+    .feature .icon{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#04111b;font-weight:800;margin-bottom:12px}
 
-.hero-buttons .btn-primary:hover {
-  background-color: #243a69;
-}
+    /* Mentor */
+    .mentor{display:grid;grid-template-columns:300px 1fr;gap:22px;align-items:center;padding:36px 0}
+    @media (max-width:980px){ .mentor{grid-template-columns:1fr;gap:16px} }
+    .mentor-photo{width:100%;height:100%;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+    .mentor-photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .mentor-detail h3{font-family:Poppins;font-size:22px;color:var(--text)}
+    .mentor-detail p{color:var(--muted);margin-top:8px}
 
-.hero-buttons .btn-link {
-  color: #102347;
-  font-size: 15px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s;
-}
+    /* Testimonials */
+    .testimonials{padding:28px 0}
+    .test-row{display:flex;gap:12px;align-items:center;overflow:hidden;padding:8px 0}
+    .test-row img{width:200px;height:auto;border-radius:12px;flex:0 0 auto;box-shadow:0 14px 40px rgba(2,6,23,0.45)}
+    .test-controls{display:flex;gap:8px;justify-content:center;margin-top:12px}
 
-.hero-buttons .btn-link:hover {
-  border-color: #102347;
-}
+    /* FORM */
+    .form-section{padding:34px 0}
+    .form-wrap{display:grid;grid-template-columns:1fr 380px;gap:18px;align-items:start}
+    @media (max-width:980px){ .form-wrap{grid-template-columns:1fr} }
+    .form-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    label{display:block;color:var(--muted);margin:10px 0 6px}
+    input,select,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);outline:none}
+    .send-btn{margin-top:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#04101a;padding:12px 14px;border-radius:10px;border:none;font-weight:800;cursor:pointer}
+    .note{color:var(--muted);font-size:14px;margin-top:8px}
 
-.hero-image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 300px;
-}
+    footer{padding:26px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02);margin-top:18px;text-align:center}
 
-.hero-image img {
-  max-width: 350px;
-  width: 100%;
-  height: auto;
-}
+    /* small */
+    @media (max-width:520px){
+      .hero{padding:44px 0}
+      .hero-grid{grid-template-columns:1fr}
+      h1{font-size:26px}
+      .visual-card{max-width:320px}
+    }
 
-@media (max-width: 900px) {
-  .hero {
-    flex-direction: column-reverse;
-    text-align: center;
-  }
-  .hero-text {
-    max-width: 600px;
-  }
-  .hero-image img {
-    max-width: 280px;
-  }
-}
-</style>
+    /* subtle reveal */
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.on{opacity:1;transform:none}
+  </style>
+
+  <!-- Meta Pixel kept -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)
+    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','905585234905857');
+    fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=905585234905857&ev=PageView&noscript=1"/></noscript>
 </head>
 <body>
 
-<section class="hero">
-  <div class="hero-text">
-    <h1>Trading potential while<br> minimizing expenses!</h1>
-    <p>In the world of trading, it's essential to strive for maximum potential while keeping expenses in check.</p>
-    <div class="hero-buttons">
-      <a href="#" class="btn-primary">START TRADING ⚡</a>
-      <a href="#" class="btn-link">→ Try demo account</a>
-    </div>
-  </div>
-  <div class="hero-image">
-    <img src="https://i.postimg.cc/P5J0vBv1/trading-candles.png" alt="Trading Candles Illustration">
-  </div>
-</section>
+  <div class="floating">▶ Watch Intro • Message on WhatsApp</div>
 
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <img src="https://i.postimg.cc/3rVMTKYG/adhabits-logo.png" alt="Treading">
+        <div class="title">Treading</div>
+      </div>
+
+      <nav class="nav-links" aria-label="Main nav">
+        <a href="#features">What you'll learn</a>
+        <a href="#mentor">Your Mentor</a>
+        <a href="#proof">Proof</a>
+        <a class="cta-wh" href="#getstart">Message: WhatsApp</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-left reveal on">
+          <span class="eyebrow">Work From Home • 100% Commission</span>
+          <h1>Trading potential while <span class="hl">minimizing expenses</span>!</h1>
+          <p class="lead">In the world of trading & affiliate offers, simple steps can create steady income. Students, housewives & job-holders — start part-time and scale as you learn.</p>
+
+          <div class="kpi-row">
+            <div class="kpi">🏆 1800+ Active Members</div>
+            <div class="kpi">💬 1:1 WhatsApp Support</div>
+          </div>
+
+          <div class="cta-row">
+            <button id="primaryCta" class="btn-primary">START EARNING ⚡</button>
+            <button id="demoCta" class="btn-ghost">→ Try demo account</button>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal on">
+          <div class="visual-card">
+            <!-- Illustration - replace with your own if needed -->
+            <img src="https://i.postimg.cc/qvMV7hS5/3d-trading-candles.png" alt="Trading Illustration">
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FEATURES -->
+  <section id="features" class="features container">
+    <h2 style="font-family:Poppins;font-size:22px">What you'll learn</h2>
+    <p style="color:var(--muted);margin-top:6px">Practical, phone-based steps — no fancy tools required. Scripts, creatives & onboarding included.</p>
+
+    <div class="features-grid">
+      <div class="feature reveal on">
+        <div class="icon">💡</div>
+        <h3 style="margin-bottom:6px">Simple Offer Pitch</h3>
+        <div style="color:var(--muted)">Copy-paste scripts that convert on WhatsApp — no cold-call pressure.</div>
+      </div>
+
+      <div class="feature reveal on">
+        <div class="icon">📞</div>
+        <h3 style="margin-bottom:6px">WhatsApp Selling</h3>
+        <div style="color:var(--muted)">Learn message flow, voice-note usage & follow-up sequences for faster onboarding.</div>
+      </div>
+
+      <div class="feature reveal on">
+        <div class="icon">💸</div>
+        <h3 style="margin-bottom:6px">Daily Payouts</h3>
+        <div style="color:var(--muted)">Simple payout options and clear commission tracking — get paid quick.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENTOR -->
+  <section id="mentor" class="mentor container reveal on">
+    <div class="mentor-photo">
+      <img src="https://i.postimg.cc/Gm7QK2yD/rukyaa-mam.jpg" alt="Rukyaa mam">
+    </div>
+    <div class="mentor-detail">
+      <span style="display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#04111b;font-weight:800">Your Mentor</span>
+      <h3>Hi, Rukyaa mam here — I help you earn 100% commissions</h3>
+      <p>I work with students, housewives and full-time affiliates. I’ll give you step-by-step scripts, creatives, and daily support — from first sale to consistent income.</p>
+
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <button class="btn-primary" id="mentorChat">💬 Chat with Rukyaa mam</button>
+        <button class="btn-ghost" id="mentorPlans">View Plans</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section id="proof" class="testimonials container">
+    <h2 style="font-family:Poppins;font-size:22px">Proof — Real WhatsApp Screens</h2>
+    <p style="color:var(--muted);margin-top:6px">Screenshots from affiliates who started with zero experience.</p>
+
+    <div class="test-row" id="testRow" style="margin-top:12px">
+      <img src="https://i.postimg.cc/PJtN2tcP/nasreen-mam-finel.jpg" alt="t1">
+      <img src="https://i.postimg.cc/G3qpbnVx/Rukkaya-appi-finel.jpg" alt="t2">
+      <img src="https://i.postimg.cc/LXSzFFwM/Farheen-mam.jpg" alt="t3">
+      <img src="https://i.postimg.cc/vBDGBcp7/Firdous-finel.jpg" alt="t4">
+      <img src="https://i.postimg.cc/CxF50LL7/Ahemadi-mam-finel.jpg" alt="t5">
+    </div>
+
+    <div class="test-controls">
+      <small style="color:var(--muted)">Hover to pause • Auto-scroll</small>
+    </div>
+  </section>
+
+  <!-- FORM / LEAD -->
+  <section id="getstart" class="form-section container">
+    <h2 style="font-family:Poppins;font-size:22px">Get Started — Become an Affiliate</h2>
+    <p style="color:var(--muted);margin-top:6px">Send a quick message to Rukyaa mam and get onboarding on WhatsApp.</p>
+
+    <div class="form-wrap" style="margin-top:12px">
+      <form id="leadForm" class="form-card" onsubmit="return false;">
+        <label for="name">Your Name</label>
+        <input id="name" type="text" placeholder="Your full name" required>
+
+        <label for="phone">Phone Number</label>
+        <input id="phone" type="tel" placeholder="10-digit mobile number" required>
+
+        <label for="profession">Profession</label>
+        <select id="profession">
+          <option>Student</option>
+          <option>Housewife</option>
+          <option>Job Person</option>
+          <option>Business</option>
+          <option>Other</option>
+        </select>
+
+        <label for="city">City (optional)</label>
+        <input id="city" type="text" placeholder="City">
+
+        <button id="sendBtn" class="send-btn">Send on WhatsApp — Start Now</button>
+        <div class="note">We will save your lead and open WhatsApp for quick onboarding. By sending you agree to get messages on WhatsApp.</div>
+      </form>
+
+      <aside class="form-card" style="display:flex;flex-direction:column;gap:10px;justify-content:center">
+        <strong style="font-size:18px;color:var(--text)">Why join Treading?</strong>
+        <ul style="color:var(--muted);margin-left:16px">
+          <li>Easy onboarding — copy-paste scripts</li>
+          <li>Phone-only setup — no laptop needed</li>
+          <li>Daily support & quick payouts</li>
+        </ul>
+        <div style="margin-top:10px">
+          <div style="color:var(--muted);font-weight:700">Contact</div>
+          <div style="margin-top:6px"><a href="tel:+917249960757" style="color:var(--text);text-decoration:none">+91 72499 60577</a></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <small>© 2025 Treading — All rights reserved • Terms apply</small>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    /***** REVEAL ON SCROLL (small) *****/
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      const obs = new IntersectionObserver((entries, o) => {
+        entries.forEach(e => {
+          if(e.isIntersecting){ e.target.classList.add('on'); o.unobserve(e.target); }
+        });
+      }, {threshold:0.18});
+      els.forEach(el => obs.observe(el));
+    })();
+
+    /***** Testimonials simple auto-scroll *****/
+    (function(){
+      const row = document.getElementById('testRow');
+      if(!row) return;
+      let pos = 0;
+      let maxScroll = 0;
+      function recalc(){ maxScroll = Math.max(0, row.scrollWidth - row.parentElement.clientWidth); }
+      recalc(); window.addEventListener('resize', recalc);
+      let t;
+      function start(){
+        t = setInterval(()=>{
+          pos += 220;
+          if(pos > maxScroll) pos = 0;
+          row.style.transform = `translateX(-${pos}px)`;
+          row.style.transition = 'transform .8s ease';
+        }, 3000);
+      }
+      row.parentElement.addEventListener('mouseenter', ()=> clearInterval(t));
+      row.parentElement.addEventListener('mouseleave', start);
+      setTimeout(start, 700);
+    })();
+
+    /***** WHATSAPP LEAD + Save (fire & forget) *****/
+    const WHATSAPP_TO = "917249960757"; // +91 72499 60577 — user requested number
+    // If you have a Google Apps Script endpoint to save leads, set it here:
+    const SCRIPT_URL = ""; // optional: "https://script.google.com/macros/s/XXXXXXXX/exec"
+
+    function sendToServer(params){
+      if(!SCRIPT_URL) return;
+      try{
+        if(navigator.sendBeacon){
+          const blob = new Blob([params.toString()], {type:'application/x-www-form-urlencoded'});
+          navigator.sendBeacon(SCRIPT_URL, blob);
+        } else {
+          fetch(SCRIPT_URL, {method:'POST', body: params, mode:'no-cors', keepalive:true}).catch(()=>{});
+        }
+      }catch(e){}
+    }
+
+    document.getElementById('sendBtn').addEventListener('click', function(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const profession = document.getElementById('profession').value;
+      const city = document.getElementById('city').value.trim();
+
+      if(!name || !phone){ alert('Please enter name and phone'); return; }
+      if(!/^\d{10}$/.test(phone)){ alert('Enter valid 10-digit phone number'); return; }
+
+      // Save (optional)
+      const params = new URLSearchParams({ name, phone, profession, city, source: 'treading_landing' });
+      sendToServer(params);
+
+      // Track Lead with meta pixel
+      try{ if(window.fbq) fbq('track','Lead',{content_name:'Affiliate Onboard'}); }catch(_){}
+
+      // Open WhatsApp with formatted message
+      const msg = `Hello Rukyaa mam, I want to become an affiliate and start earning.%0AName: ${name}%0APhone: ${phone}%0AProfession: ${profession}%0ACity: ${city || 'Not provided'}%0A%0APlease guide me.`;
+      window.open(`https://wa.me/${WHATSAPP_TO}?text=${msg}`, '_blank');
+
+      // small UI response
+      this.disabled = true;
+      this.textContent = 'Opening WhatsApp...';
+      setTimeout(()=>{ this.disabled=false; this.textContent='Send on WhatsApp — Start Now'; }, 1200);
+    });
+
+    /***** Quick CTAs *****/
+    document.getElementById('primaryCta').addEventListener('click', function(){ document.getElementById('name').focus(); window.location.hash = '#getstart'; });
+    document.getElementById('demoCta').addEventListener('click', function(){ alert('Demo account: we will share demo steps after you message on WhatsApp.'); });
+
+    document.getElementById('mentorChat').addEventListener('click', function(){
+      const msg = encodeURIComponent('Hello Rukyaa mam, I want to join as an affiliate. Please guide me.');
+      window.open(`https://wa.me/${WHATSAPP_TO}?text=${msg}`, '_blank');
+    });
+
+    /***** Floating CTA click scroll *****/
+    document.querySelector('.floating').addEventListener('click', function(){ document.querySelector('.hero-visual')?.scrollIntoView({behavior:'smooth'}); });
+  </script>
 </body>
 </html>
