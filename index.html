@@ -1,782 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Treading — Earn From Home (Students & Housewives Welcome)</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trading Potential — Hero Section</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#071127; --text:#e7eef6; --muted:#9fb8cc; --stroke:#123047;
-  --grad:linear-gradient(135deg,#ff6aa2,#22d3ee 55%,#6ee7b7);
-  --accent:#6ee7b7; --accent2:#ff6aa2;
-  --card:#071827;
-  --gold:#ffd58e;
-  --answer-black:#06101d;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-a{color:inherit;text-decoration:none}
-.container{max-width:1150px;margin:auto;padding:0 18px}
-
-/* NAV */
-.nav{position:sticky;top:0;z-index:60;background:rgba(7,17,39,.88);backdrop-filter:saturate(160%) blur(8px);border-bottom:1px solid var(--stroke)}
-.nav-inner{height:64px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800}
-.logo{width:28px;height:28px}
-.logo img{width:100%;height:100%;object-fit:contain}
-
-.nav-links{display:flex;align-items:center;gap:18px}
-.nav-links a{color:#c9dfe8;font-weight:700;font-size:15px}
-.nav-links a:hover{color:#fff}
-
-.hamb{display:none;cursor:pointer;border:1px solid #17415b;border-radius:10px;padding:8px 10px}
-.hamb span{display:block;width:22px;height:2px;background:#c9dfe8;margin:4px 0;border-radius:2px}
-@media (max-width:860px){
-  .nav-links{display:none}
-  .hamb{display:block}
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #ffffff;
+  color: #0d1a33;
 }
 
-/* floating banner compact */
-.floating-bar{
-  position:fixed;left:50%;transform:translateX(-50%);top:16px;z-index:90;
-  background:linear-gradient(90deg,#06b6d4,#9d4edd);color:#fff;padding:8px 14px;border-radius:999px;font-weight:800;box-shadow:0 14px 40px rgba(157,78,221,.12);
-  display:inline-flex;gap:10px;align-items:center;cursor:pointer;animation:floaty 2.8s ease-in-out infinite;
-  border:2px solid rgba(255,255,255,.04);
-  font-size:13px;max-width:360px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 10%;
+  flex-wrap: wrap;
 }
-@keyframes floaty{0%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}100%{transform:translateX(-50%) translateY(0)}}
 
-/* HERO */
-.hero{
-  padding:70px 0 30px;
-  background:
-   radial-gradient(1200px 600px at 80% -10%, rgba(157,78,221,.16), transparent 60%),
-   radial-gradient(900px 500px at -10% 10%, rgba(6,182,212,.08), transparent 60%);
+.hero-text {
+  max-width: 500px;
 }
-.eyebrow{display:inline-block;padding:7px 12px;border:1px solid #123a55;border-radius:999px;color:#bfeaf0;margin-bottom:12px;font-size:14px}
-h1{font-family:Poppins,system-ui,Arial;font-weight:800;font-size:clamp(26px,6vw,48px);line-height:1.02;letter-spacing:-.02em;margin-bottom:10px;color:var(--text)}
-.headline-animated{display:inline-block;white-space:normal;overflow:visible}
-.hl2{color:var(--accent2)}
 
-/* layout */
-.video-area{display:grid;grid-template-columns:1fr 420px;gap:26px;align-items:start;margin-top:18px;align-items:start}
-@media (max-width:980px){.video-area{grid-template-columns:1fr;gap:18px;justify-items:center}}
-.player-wrap{border-radius:16px;overflow:hidden;border:1px solid #183248;background:#071427;box-shadow: 0 30px 60px rgba(0,0,0,0.5)}
-.player-frame{position:relative;padding-top:56.25%;background:#0b1220;overflow:hidden}
-.player-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.player-card{background:#04111b;color:#e6f7f2;padding:14px;border-radius:0 0 12px 12px}
-.player-shadow{box-shadow:0 40px 80px rgba(0,0,0,.45);border-radius:12px}
+.hero-text h1 {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #102347;
+}
 
-.kpis{color:#cfeef3;margin:10px 0 18px;font-size:15px}
-.cta{display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 16px}
-.btn{padding:12px 18px;border-radius:12px;font-weight:800;transition:transform .18s ease, box-shadow .18s ease;cursor:pointer}
-.btn.primary{background:var(--grad);color:#06101d;border:none}
-.btn.primary:hover{transform:scale(1.03);box-shadow:0 0 18px rgba(139,92,246,.45)}
-.btn.secondary{background:#0f1526;border:1px solid #214a66;color:#d7eef3}
-.btn.secondary:hover{transform:scale(1.02);box-shadow:0 0 12px rgba(34,211,238,.2)}
-.panel{border:1px solid var(--stroke);background:#071724;border-radius:14px;padding:12px;color:#aeb9ce;font-size:14px}
+.hero-text p {
+  font-size: 16px;
+  color: #4b5a75;
+  margin: 20px 0 30px;
+}
 
-/* right column selectors */
-.video-select{display:flex;flex-direction:column;gap:12px}
-.vitem{border:2px solid rgba(255,255,255,0.03);padding:10px;border-radius:10px;display:flex;gap:12px;align-items:center;cursor:pointer;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent)}
-.vitem.active{border-color:#22d3ee;box-shadow:0 8px 30px rgba(34,211,238,0.06);transform:translateY(-3px)}
-.thumb{width:64px;height:44px;background:#e6e9ed;border-radius:6px;flex:0 0 auto;display:grid;place-items:center;color:#222;font-weight:700}
-.vmeta h4{margin:0;font-weight:800;color:#e6edf7;font-size:15px}
-.vmeta p{margin:4px 0 0;color:#9fb0c9;font-size:13px}
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
-/* reasons */
-.reasons{margin-top:8px;padding:12px;border-radius:12px;background:linear-gradient(180deg,rgba(34,211,238,0.03), rgba(157,78,221,0.02));border:1px solid rgba(255,255,255,0.02)}
-.reasons ul{margin:8px 0 0;padding-left:18px;color:#dfeff8}
-.reasons li{margin:8px 0}
+.hero-buttons a {
+  text-decoration: none;
+  font-weight: 600;
+}
 
-/* FEATURES GRID */
-.features-section{padding:40px 0 60px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
-.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:18px;align-items:start;padding-top:8px;overflow:visible}
-@media (max-width:1000px){.features-grid{grid-template-columns:repeat(2,1fr)}}
+.hero-buttons .btn-primary {
+  background-color: #102347;
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 6px;
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.3s;
+}
 
-.feature-card{background:transparent;border-radius:12px;padding:18px;color:var(--text);border:1px solid rgba(255,255,255,0.03)}
-.feature-card .icon{width:48px;height:48px;border-radius:10px;display:grid;place-items:center;margin-bottom:12px;background:linear-gradient(90deg,#06b6d4,#9d4edd);color:#04111b;font-weight:900}
+.hero-buttons .btn-primary:hover {
+  background-color: #243a69;
+}
 
-/* mobile behaviour: full white boxes + sticky stacking effect */
-@media (max-width:640px){
-  .features-grid{grid-template-columns:1fr;padding-top:12px;gap:20px}
-  .feature-card{
-    background:#fff;border-radius:12px;padding:28px 20px;text-align:center;color:#0b1220;
-    box-shadow:0 10px 30px rgba(0,0,0,0.12);transition:transform .18s ease, box-shadow .18s ease;
-    width:100%; /* full width */
-    margin:0 auto;
+.hero-buttons .btn-link {
+  color: #102347;
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.hero-buttons .btn-link:hover {
+  border-color: #102347;
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+}
+
+.hero-image img {
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
   }
-  .feature-card .icon{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;margin:0 auto 16px;background:linear-gradient(90deg,#06b6d4,#9d4edd);color:#fff;font-weight:800}
-  .feature-card h3{margin:6px 0 10px;font-size:20px;color:#06101d}
-  .feature-card p{color:#6b7889;margin:0;font-size:16px}
-
-  /* we will toggle .sticky state from JS; when sticky we position */
-  .feature-card.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    left: 0;
-    right: 0;
+  .hero-text {
+    max-width: 600px;
   }
-
-  .feature-card.on-top{ z-index: 400; transform: translateY(-6px); box-shadow:0 30px 80px rgba(0,0,0,0.25);}
+  .hero-image img {
+    max-width: 280px;
+  }
 }
-
-/* ensure sticky cards content is visible above neighboring card edges */
-.features-grid, .feature-card { overflow: visible; }
-
-/* coach */
-.coach-section{max-width:1150px;margin:48px auto;padding:0 18px;display:grid;grid-template-columns:1fr;gap:24px;align-items:center;color:var(--text)}
-.coach-inner{display:grid;grid-template-columns:1fr;gap:22px;align-items:center}
-.coach-photo{width:100%;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.45);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
-.coach-photo img{width:100%;height:100%;display:block;object-fit:cover}
-.coach-copy{display:flex;flex-direction:column;gap:12px}
-.coach-badge{display:inline-block;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,#06b6d4,#9d4edd);color:#fff;font-weight:700;width:max-content}
-.coach-head{font-family:Poppins,system-ui,Arial;font-weight:800;font-size:clamp(20px,4.2vw,36px);line-height:1.02;margin:6px 0;color:var(--text)}
-.coach-desc{color:var(--muted);max-width:66ch}
-.coach-stats{display:flex;flex-direction:column;gap:10px;margin-top:8px}
-.stat-pill{background:linear-gradient(180deg,#061424,#071127);border-radius:12px;padding:12px 16px;min-width:160px;display:flex;flex-direction:column;align-items:center;box-shadow:0 12px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.02);color:var(--text)}
-.stat-num{font-weight:900;font-size:20px;color:#6ee7b7}
-.stat-label{font-size:13px;color:var(--muted);margin-top:6px;text-align:center}
-.coach-cta{margin-top:14px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.btn-chat{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;background:linear-gradient(90deg,#25d366,#06b658);color:#061016;font-weight:800;border:none;cursor:pointer;box-shadow:0 12px 30px rgba(2,6,23,0.45)}
-
-@media(min-width:980px){
-  .coach-inner{grid-template-columns:420px 1fr;align-items:start}
-  .coach-stats{flex-direction:column;align-self:start}
-}
-
-/* steps / form etc */
-.steps{padding:48px 0}
-.steps-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-@media (max-width:980px){.steps-grid{grid-template-columns:1fr}}
-.step-card{background:#fff;border-radius:10px;padding:20px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 28px rgba(0,0,0,.08)}
-.step-num{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:linear-gradient(90deg,#06b6d4,#9d4edd);color:#fff;font-size:20px}
-/* heading golden, paragraph full black and strong */
-.step-body h4{margin:0;font-size:18px;color:var(--gold);font-weight:800}
-.step-body p{margin:6px 0 0;color:var(--answer-black);line-height:1.45;font-weight:700;opacity:1}
-
-/* form */
-#getstart{padding:36px 0}
-.form-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:start}
-@media (max-width:980px){.form-wrap{grid-template-columns:1fr}}
-.form-card{border:1px solid #133144;background:linear-gradient(180deg,#061427,#041220);border-radius:16px;padding:18px}
-label{display:block;margin:10px 0 6px;color:#bfcfe2}
-select,input{width:100%;background:#071824;border:1px solid #1b3a52;border-radius:12px;color:#e6f7f2;padding:12px 14px;outline:none}
-select:focus,input:focus{border-color:#3a8bd8}
-.form-note{margin:8px 0 2px;color:#9fb8cc}
-.form-btn{margin-top:12px;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:12px;background:#25d366;color:#061016;font-weight:800;border:none;cursor:pointer}
-.form-hint{color:#93a4c6;margin-left:8px}
-.right-box{border:1px solid #133144;background:#071724;border-radius:16px;padding:18px}
-
-/* testimonials carousel */
-.testimonials-wrap{position:relative;overflow:hidden;padding-top:12px}
-.testimonials-row{display:flex;gap:12px;align-items:center;transition:transform .45s ease}
-.testimonials-row img{width:200px;border-radius:12px;flex:0 0 auto}
-
-/* small-screen adjustments */
-@media (max-width:520px){
-  .hero{padding:36px 0}
-  h1{font-size:24px;line-height:1.06}
-  .player-frame{padding-top:56.25%;max-height:420px}
-  .player-wrap{border-radius:12px}
-  .player-card{padding:12px}
-  .floating-bar{left:50%;right:auto;transform:translateX(-50%);width:auto;max-width:360px;font-size:13px;top:12px;padding:8px 12px}
-  .nav-inner{padding:0 10px}
-  .btn{padding:10px 14px}
-  .kpis{font-size:13px}
-  .video-area{gap:14px}
-  .vmeta h4{font-size:14px}
-  .vmeta p{font-size:12px}
-  .coach-head{font-size:20px}
-  .player-wrap{margin:0 auto}
-}
-
-/* reveal */
-.reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease, transform .6s ease}
-.reveal.on{opacity:1;transform:none}
-
 </style>
-
-<!-- ====== META PIXEL (kept same) - ID: 905585234905857 ====== -->
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)
-}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','905585234905857');
-fbq('track','PageView');
-</script>
-<noscript>
-  <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=905585234905857&ev=PageView&noscript=1"/>
-</noscript>
-<!-- ======================================================================= -->
-
 </head>
 <body>
 
-<header class="nav">
-  <div class="container nav-inner">
-    <div class="brand">
-      <span class="logo"><img src="https://i.postimg.cc/3rVMTKYG/adhabits-logo.png" alt="Treading" /></span>
-      <span>Treading</span>
-    </div>
-    <nav class="nav-links">
-      <a href="#features">What you'll learn</a>
-      <a href="#coach">Your Mentor</a>
-      <a href="#testimonials">Proof</a>
-      <a href="#getstart" class="btn secondary">WhatsApp</a>
-    </nav>
-    <div class="hamb" id="hamb"><span></span><span></span><span></span></div>
-  </div>
-  <div class="mobile-menu" id="mnav" style="display:none">
-    <a href="#features">What you'll learn</a>
-    <a href="#coach">Your Mentor</a>
-    <a href="#testimonials">Proof</a>
-    <a href="#getstart">WhatsApp</a>
-  </div>
-</header>
-
-<div class="floating-bar" id="floatBanner">▶ Watch short intro — Start Earning from Home</div>
-
 <section class="hero">
-  <div class="container">
-    <div class="reveal on">
-      <span class="eyebrow">Work From Home — 100% Commissions</span>
-      <h1>
-        Earn With <span class="hl2">100% Commission Offers</span><br>
-        <span class="headline-animated">Students, Housewives & Everyone — Simple steps to real income</span>
-      </h1>
-
-      <div class="kpis">Join Over <b style="color:var(--gold)">1800+</b> people already earning with Treading</div>
-
-      <div class="video-area">
-        <!-- main player -->
-        <div>
-          <div class="player-wrap player-shadow">
-            <div class="player-frame" id="playerFrame">
-              <!-- original video id kept; replace if you want your own -->
-              <iframe id="mainPlayer" src="https://www.youtube.com/embed/P_YFHwjGcno?rel=0&modestbranding=1&playsinline=1" title="Treading Intro" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-            <div class="player-card">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-                <div>
-                  <div style="font-weight:800;font-size:17px;color:#04111b">Short Presentation</div>
-                  <div style="color:#9fb8cc;margin-top:6px">See how homemakers & students started earning full commissions.</div>
-                </div>
-                <div style="display:flex;gap:10px;align-items:center">
-                  <div class="timer" id="countdown">00:59:59</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- selectors -->
-        <aside>
-          <div class="video-select">
-            <div class="vitem active" data-video="P_YFHwjGcno">
-              <div class="thumb">▶</div>
-              <div class="vmeta">
-                <h4>Intro — Treading</h4>
-                <p>How to start, onboard & get first commissions quickly.</p>
-              </div>
-            </div>
-
-            <div class="reasons">
-              <strong>Why watch?</strong>
-              <ul>
-                <li>Real affiliate examples — 100% payouts</li>
-                <li>Phone-based work — no special skills required</li>
-                <li>Step-by-step onboarding for students & homemakers</li>
-                <li>Repeatable, safe process</li>
-              </ul>
-            </div>
-          </div>
-        </aside>
-      </div>
-
-      <div style="margin-top:18px" class="cta">
-        <button class="btn primary" id="ctaStart">I want 100% commissions — Get started</button>
-        <a href="#features" class="btn secondary">See What You Learn</a>
-      </div>
-
-      <div class="panel">⚡ Fast onboarding • ✅ 1:1 mentor • 💬 WhatsApp support</div>
+  <div class="hero-text">
+    <h1>Trading potential while<br> minimizing expenses!</h1>
+    <p>In the world of trading, it's essential to strive for maximum potential while keeping expenses in check.</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn-primary">START TRADING ⚡</a>
+      <a href="#" class="btn-link">→ Try demo account</a>
     </div>
+  </div>
+  <div class="hero-image">
+    <img src="https://i.postimg.cc/P5J0vBv1/trading-candles.png" alt="Trading Candles Illustration">
   </div>
 </section>
-
-<section id="features" class="features-section">
-  <div class="container" id="featuresContainer">
-    <div class="join-head">
-      <h2>🌱 Aap Yahan Seekhenge</h2>
-      <p>Real, phone-based aur sustainable income — students, housewives & jobholders welcome.</p>
-    </div>
-
-    <div class="features-grid" id="featuresGrid">
-      <div class="feature-card pop-anim" data-pop>
-        <div class="icon">💡</div>
-        <h3>Simple Steps — No Fancy Skills</h3>
-        <p>Follow our scripts & creatives — start with phone and basic messaging.</p>
-      </div>
-
-      <div class="feature-card pop-anim" data-pop>
-        <div class="icon">📞</div>
-        <h3>WhatsApp Based Sales</h3>
-        <p>Message-based onboarding and payouts — no complex tools.</p>
-      </div>
-
-      <div class="feature-card pop-anim" data-pop>
-        <div class="icon">⏰</div>
-        <h3>Flexible Timing</h3>
-        <p>Work as per your schedule — part-time friendly.</p>
-      </div>
-
-      <div class="feature-card pop-anim" data-pop>
-        <div class="icon">🧾</div>
-        <h3>Daily Payout Options</h3>
-        <p>Simple payouts and weekly help from mentor.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="steps">
-  <div class="container">
-    <h2 style="text-align:center;font-weight:800;font-size:34px;color:var(--text)">What Happens When You Join?</h2>
-    <div style="height:12px"></div>
-    <div class="steps-grid">
-      <div class="step-card reveal">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h4>Instant Connection</h4>
-          <p>Message on WhatsApp & instantly connect with Rukyaa mam for quick guidance.</p>
-      </div>
-      </div>
-
-      <div class="step-card reveal">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h4>Complete Access</h4>
-          <p>Unlock step-by-step onboarding, scripts & creatives for affiliates.</p>
-        </div>
-      </div>
-
-      <div class="step-card reveal">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h4>Daily Mentorship</h4>
-          <p>Daily support — small & big package sellers both welcome.</p>
-        </div>
-      </div>
-
-      <div class="step-card reveal">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <h4>Start Earning</h4>
-          <p>Start earning 100% commissions with simple repeatable offers.</p>
-        </div>
-      </div>
-    </div>
-
-    <div style="margin-top:26px;text-align:center">
-      <button class="btn primary" id="bottomWhats">💬 Message on WhatsApp: +91 7249960757</button>
-    </div>
-  </div>
-</section>
-
-<section id="coach" class="coach-section">
-  <div class="coach-inner container">
-    <div class="coach-photo reveal">
-      <!-- keep existing image or replace URL -->
-      <img src="https://i.postimg.cc/vm9tGMTm/Whats-App-Image-2025-09-26-at-11-47-37.jpg" alt="Rukyaa mam">
-    </div>
-
-    <div class="coach-copy reveal">
-      <span class="coach-badge">Your Mentor</span>
-      <h3 class="coach-head">Hi, Rukyaa mam here — I help students & homemakers earn <span style="color:var(--gold)">100% commissions</span></h3>
-      <p class="coach-desc">I work with students, homemakers and full-time affiliates. If you're stuck, I'll guide you step-by-step — from first sale to consistent income. I provide creatives, scripts, and onboarding support.</p>
-
-      <div class="coach-stats" aria-hidden="false">
-        <div class="stat-pill">
-          <div class="stat-num knum" data-count="3">0</div>
-          <div class="stat-label">Years Experience</div>
-        </div>
-
-        <div class="stat-pill">
-          <div class="stat-num knum" data-count="250">0</div>
-          <div class="stat-label">Affiliates Helped</div>
-        </div>
-
-        <div class="stat-pill">
-          <div class="stat-num knum" data-count="100000">0</div>
-          <div class="stat-label">Leads Delivered</div>
-        </div>
-      </div>
-
-      <div class="coach-cta">
-        <button class="btn-chat" id="coachChatBtn">💬 Talk with Rukyaa mam on WhatsApp</button>
-        <button id="coachWhats" class="btn secondary" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);padding:12px 16px;border-radius:12px;">Get 1:1 — Start Chat</button>
-        <button class="btn secondary" id="coachLearnBtn" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);padding:12px 16px;border-radius:12px;">View Affiliate Plans</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="testimonials" style="padding:36px 0">
-  <div class="container">
-    <h2 style="font-weight:800">Proof — Real Results</h2>
-    <p style="color:#9fb8cc;margin-top:8px">WhatsApp screenshots from affiliates who started with zero.</p>
-
-    <div class="testimonials-wrap" style="margin-top:12px">
-      <div id="testRow" class="testimonials-row">
-        <!-- images from original; you can add/remove -->
-        <img src="https://i.postimg.cc/PJtN2tcP/nasreen-mam-finel.jpg" alt="test1">
-        <img src="https://i.postimg.cc/G3qpbnVx/Rukkaya-appi-finel.jpg" alt="test2">
-        <img src="https://i.postimg.cc/LXSzFFwM/Farheen-mam.jpg" alt="test3">
-        <img src="https://i.postimg.cc/vBDGBcp7/Firdous-finel.jpg" alt="test4">
-        <img src="https://i.postimg.cc/CxF50LL7/Ahemadi-mam-finel.jpg" alt="test5">
-        <img src="https://i.postimg.cc/nhcF5R0w/balvinder-finel.jpg" alt="test6">
-        <img src="https://i.postimg.cc/rFhXd8NQ/faizeen-finel.jpg" alt="test7">
-        <img src="https://i.postimg.cc/FRbwhmKb/Nadeem-finel.jpg" alt="test8">
-        <img src="https://i.postimg.cc/pL97pKTL/Rukhsaar-finel.jpg" alt="test9">
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="getstart">
-  <div class="container form-wrap">
-    <div class="form-card">
-      <h3>Get Started — Become an Affiliate</h3>
-      <p class="form-note">Hello Rukyaa mam, I want to become an affiliate and start earning. My details below 👇</p>
-
-      <label for="name">Your Name</label>
-      <input id="name" type="text" placeholder="Your name" required>
-
-      <label for="phone">Phone Number</label>
-      <input id="phone" type="tel" placeholder="10-digit number" required>
-
-      <label for="profession">Profession</label>
-      <select id="profession">
-        <option value="Student">Student</option>
-        <option value="Job Person">Job Person</option>
-        <option value="Housewife">Housewife</option>
-        <option value="Business Person">Business Person</option>
-        <option value="Other">Other</option>
-      </select>
-
-      <div style="margin-top:10px">
-        <button id="sendBtn" class="form-btn">Send on WhatsApp</button>
-        <span class="form-hint">Auto-opens WhatsApp after saving.</span>
-      </div>
-    </div>
-
-    <aside class="right-box reveal">
-      <h3>Ready to Earn Daily?</h3>
-      <p style="color:#9fb8cc">Click and message us to get affiliate onboarding and creatives.</p>
-
-      <div style="margin-top:12px" class="stat-grid" aria-hidden="true">
-        <div class="stat" style="display:inline-block;margin-right:12px">
-          <div class="num knum" data-count="3">0</div>
-          <div class="lbl" style="color:#9fb8cc">Years</div>
-        </div>
-        <div class="stat" style="display:inline-block;margin-right:12px">
-          <div class="num knum" data-count="250">0</div>
-          <div class="lbl" style="color:#9fb8cc">Affiliates</div>
-        </div>
-        <div class="stat" style="display:inline-block">
-          <div class="num knum" data-count="50">0</div>
-          <div class="lbl" style="color:#9fb8cc">₹50 L+ Budget</div>
-        </div>
-      </div>
-    </aside>
-  </div>
-</section>
-
-<footer>
-  <div class="foot" style="max-width:1150px;margin:auto;padding:16px 18px 26px;color:#aeb8cc">
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
-      <small>© 2025 Treading. All rights reserved.</small>
-      <div><a class="terms" href="#terms">Terms</a></div>
-    </div>
-    <div id="terms" style="margin-top:8px;color:#9fb8cc">
-      <b>Terms &amp; Conditions:</b> Services are provided as-is. All payments are <u>Non-Refundable</u>.
-    </div>
-  </div>
-</footer>
-
-<script>
-/* mobile menu toggle */
-const hamb = document.getElementById('hamb'), mnav = document.getElementById('mnav');
-if(hamb) hamb.onclick = () => { mnav.style.display = (mnav.style.display === 'block') ? 'none' : 'block'; };
-
-/* reveal */
-function revealInit(){
-  const revealEls = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver((entries, o)=>{
-    entries.forEach(en=>{
-      if(en.isIntersecting){
-        en.target.classList.add('on');
-        o.unobserve(en.target);
-      }
-    });
-  }, {threshold: 0.18});
-  revealEls.forEach(el=>obs.observe(el));
-}
-revealInit();
-
-/* number animation */
-function animateNum(el, to, dur=1200){
-  const start = performance.now(), from = 0;
-  function step(now){
-    const p = Math.min(1,(now-start)/dur);
-    const ease = 1 - Math.pow(1-p,3);
-    el.textContent = Math.floor(from + ease*to).toLocaleString('en-IN');
-    if(p < 1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-document.querySelectorAll('.knum, .num').forEach(k => {
-  k.textContent = '0';
-  const target = parseInt(k.dataset.count || '0', 10) || 0;
-  const ioNum = new IntersectionObserver((entries, ob) => {
-    entries.forEach(e => {
-      if(e.isIntersecting){
-        animateNum(k, target, 1300);
-        ob.unobserve(e.target);
-      }
-    });
-  }, {threshold: 0.4});
-  ioNum.observe(k);
-});
-
-/* video selector */
-const videoItems = document.querySelectorAll('.vitem');
-const mainPlayer = document.getElementById('mainPlayer');
-videoItems.forEach(item=>{
-  item.addEventListener('click', ()=>{
-    videoItems.forEach(i=>i.classList.remove('active'));
-    item.classList.add('active');
-    const vid = item.dataset.video;
-    if(mainPlayer) mainPlayer.src = `https://www.youtube.com/embed/${vid}?rel=0&modestbranding=1&playsinline=1&autoplay=1`;
-    if(window.innerWidth < 900) document.getElementById('playerFrame')?.scrollIntoView({behavior:'smooth', block:'center'});
-  });
-});
-
-/* ---------- Sticky stacking logic for feature cards (mobile) ---------- */
-const featuresContainer = document.getElementById('featuresContainer');
-const featuresGrid = document.getElementById('featuresGrid');
-let mobileCards = featuresGrid ? Array.from(featuresGrid.querySelectorAll('.feature-card')) : [];
-const mobileBreakpoint = 640;
-const cardStackStep = 56;
-const baseTop = 110;
-
-function enableStacking(){
-  if(!mobileCards.length) mobileCards = featuresGrid ? Array.from(featuresGrid.querySelectorAll('.feature-card')) : [];
-  if(!mobileCards.length || !featuresContainer) return;
-
-  const sectionRect = featuresContainer.getBoundingClientRect();
-  const sectionTopAbs = window.scrollY + sectionRect.top;
-  const sectionHeight = sectionRect.height;
-  const start = sectionTopAbs - 160;
-  const end = sectionTopAbs + sectionHeight - 80;
-
-  function onScroll(){
-    if(window.innerWidth > mobileBreakpoint) {
-      mobileCards.forEach((c)=>{
-        c.classList.remove('sticky', 'on-top');
-        c.style.top = '';
-        c.style.zIndex = '';
-      });
-      return;
-    }
-    const s = window.scrollY;
-    if(s >= start && s <= end){
-      mobileCards.forEach((card, idx) => {
-        card.classList.add('sticky');
-        const topVal = Math.max(14, baseTop - (idx * cardStackStep));
-        card.style.top = topVal + 'px';
-        card.style.zIndex = 300 + idx;
-      });
-      mobileCards.forEach(c=>c.classList.remove('on-top'));
-      const progress = (s - start) / Math.max(1, (end - start));
-      const topIndex = Math.min(mobileCards.length - 1, Math.floor(progress * (mobileCards.length)));
-      if(mobileCards[topIndex]) mobileCards[topIndex].classList.add('on-top');
-    } else {
-      mobileCards.forEach((card)=>{
-        card.classList.remove('sticky', 'on-top');
-        card.style.top = '';
-        card.style.zIndex = '';
-      });
-    }
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  onScroll();
-}
-
-/* small tap animation for feature cards */
-mobileCards.forEach(card=>{
-  card.addEventListener('click', ()=> {
-    card.classList.add('pop');
-    setTimeout(()=>card.classList.remove('pop'), 700);
-  });
-});
-
-/* countdown (1 hour persisted) */
-(function(){
-  const cdElem = document.getElementById('countdown');
-  if(!cdElem) return;
-  const key = 'treading_countdown_end';
-  let end = sessionStorage.getItem(key);
-  if(!end || isNaN(+end)){
-    end = Date.now() + (60*60*1000);
-    sessionStorage.setItem(key, end);
-  } else end = +end;
-  function tick(){
-    const now = Date.now();
-    const diff = Math.max(0, end - now);
-    const hrs = Math.floor(diff / (1000*60*60));
-    const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
-    const secs = Math.floor((diff % (1000*60)) / 1000);
-    cdElem.textContent = `${String(hrs).padStart(2,'0')}:${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
-    if(diff>0) requestAnimationFrame(tick); else cdElem.textContent = '00:00:00';
-  }
-  tick();
-})();
-
-/* Form & WhatsApp integration updated to new number */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw_kWCv2WVEtUP8h_faBvknYqGQyAHD3OxmmT142m_oFzIogN0oATucPQ9Waeso-rzQ2A/exec";
-/* NEW WhatsApp target (user provided) */
-const WHATSAPP_TO = "917249960757"; // +91 7249960757
-
-function saveLeadFast(params){
-  try{
-    const utm = sessionStorage.getItem('treading_utm');
-    if(utm) params.append('utm', utm);
-    if(navigator.sendBeacon){
-      const blob = new Blob([params.toString()], {type:'application/x-www-form-urlencoded'});
-      navigator.sendBeacon(SCRIPT_URL, blob);
-    }else{
-      fetch(SCRIPT_URL, { method:'POST', body: params, mode:'no-cors', keepalive:true }).catch(()=>{});
-    }
-  }catch(_){}
-}
-function track(e,d){ try{ fbq && fbq('track', e, d||{}); }catch(_){ } }
-function trackCustom(n,d){ try{ fbq && fbq('trackCustom', n, d||{}); }catch(_){ } }
-
-function openWhatsApp({name, phone, plan, profession}){
-  trackCustom('WhatsAppOpen', {plan});
-  const msg = `Hello Rukyaa mam, I want to become an affiliate and start earning.\nThis is my detail:\nName: ${name}\nPhone: ${phone}\nProfession: ${profession || 'Not specified'}\nPlan: ${plan || 'Affiliate Onboard'}\n\nPlease guide me.`;
-  window.open(`https://wa.me/${WHATSAPP_TO}?text=${encodeURIComponent(msg)}`, '_blank');
-}
-
-/* Extra: track any WhatsApp links (custom event) */
-function bindWhatsAppLinks(){
-  document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]').forEach(a=>{
-    a.addEventListener('click', ()=> trackCustom('WhatsAppLinkClick'));
-  });
-}
-bindWhatsAppLinks();
-
-/* Form submit (sends lead payload AND fires fbq Lead event) */
-const sendBtn = document.getElementById('sendBtn');
-if(sendBtn){
-  sendBtn.addEventListener('click', (e)=>{
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const profession = document.getElementById('profession').value.trim();
-    const plan = sessionStorage.getItem('treading_plan') || 'Affiliate Starter';
-    if(!name || !phone){ alert('Please enter your Name and Phone.'); return; }
-    if(!/^\d{10}$/.test(phone)){ alert('Enter 10-digit phone number.'); return; }
-    const old = sendBtn.textContent; sendBtn.disabled = true; sendBtn.textContent = 'Opening WhatsApp...';
-    const payload = new URLSearchParams({ name, phone, plan, profession });
-    saveLeadFast(payload);
-    track('Lead', { content_name: plan, content_category: 'Affiliate' });
-    openWhatsApp({name, phone, plan, profession});
-    setTimeout(()=>{ sendBtn.disabled=false; sendBtn.textContent = old; }, 1200);
-  });
-}
-
-/* Quick CTAs and contact tracking for mentor buttons */
-document.getElementById('ctaStart')?.addEventListener('click', ()=>{
-  sessionStorage.setItem('treading_plan', 'Affiliate Onboard');
-  document.getElementById('name')?.focus({preventScroll:true});
-  location.hash = '#getstart';
-});
-document.getElementById('bottomWhats')?.addEventListener('click', ()=>{
-  sessionStorage.setItem('treading_plan', 'Affiliate Onboard');
-  document.getElementById('name')?.focus({preventScroll:true});
-  location.hash = '#getstart';
-});
-
-/* coach chat - track Contact when user initiates conversation */
-document.getElementById('coachChatBtn')?.addEventListener('click', ()=>{
-  try{ if(window.fbq) fbq('trackCustom','WhatsAppCoachClick'); }catch(e){}
-  track('Contact', { source: 'coachChat' });
-  const msg = `Hello Rukyaa mam, I want to join as an affiliate.\nName:\nPhone:\nInterested in: Affiliate onboarding / 100% commission offers`;
-  window.open(`https://wa.me/${WHATSAPP_TO}?text=${encodeURIComponent(msg)}`, '_blank');
-});
-document.getElementById('coachWhats')?.addEventListener('click', ()=>{
-  sessionStorage.setItem('treading_plan', 'Coach 1:1');
-  document.getElementById('name')?.focus({preventScroll:true});
-  location.hash = '#getstart';
-  track('Contact', { source: 'coachWhats' });
-});
-document.getElementById('coachLearnBtn')?.addEventListener('click', ()=>{
-  const t = document.getElementById('plans') || document.getElementById('getstart');
-  if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
-});
-
-/* ensure stacking runs after load */
-window.addEventListener('load', ()=> setTimeout(enableStacking, 120));
-window.addEventListener('orientationchange', ()=> setTimeout(enableStacking, 160));
-
-/* ---------- Testimonials auto-slide (simple, robust) ---------- */
-(function(){
-  const row = document.getElementById('testRow');
-  if(!row) return;
-  let pos = 0;
-  const cardWidth = 212; // image width + gap approx (200 + 12)
-  const maxScroll = row.scrollWidth - row.parentElement.clientWidth;
-  let auto;
-  function start(){
-    auto = setInterval(()=>{
-      pos += cardWidth;
-      if(pos > maxScroll) pos = 0;
-      row.style.transform = `translateX(-${pos}px)`;
-    }, 3000);
-  }
-  function stop(){
-    clearInterval(auto);
-  }
-  row.parentElement.addEventListener('mouseenter', stop);
-  row.parentElement.addEventListener('mouseleave', start);
-  // responsive recalc
-  window.addEventListener('resize', ()=> {
-    row.style.transform = 'translateX(0)';
-    pos = 0;
-  });
-  // start after small delay (ensure images loaded)
-  setTimeout(start, 600);
-})();
-
-/* pause float banner click -> scroll to video */
-document.getElementById('floatBanner')?.addEventListener('click', ()=>{
-  document.getElementById('playerFrame')?.scrollIntoView({behavior:'smooth', block:'center'});
-});
-
-/* ensure whatsapp links bound */
-bindWhatsAppLinks();
-</script>
 
 </body>
 </html>
