@@ -13,7 +13,8 @@
     --muted:#a6b0b4;
     --card:#0d0e0f;
     --glass: rgba(255,255,255,0.02);
-    --glow: 0 10px 34px rgba(217,177,75,0.12);
+    --glow: 0 12px 44px rgba(217,177,75,0.12);
+    --radius:14px;
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#0b0c0d 0%, #0f1112 100%);color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
@@ -25,13 +26,12 @@
       linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
     background-size:80px 80px; opacity:.12; mix-blend-mode:overlay;}
 
-  /* common container */
   .container {max-width:1200px;margin:0 auto;padding:0 6%;}
 
   /* ---------- HERO ---------- */
-  header.hero{position:relative;z-index:2;padding:70px 0 40px;}
+  header.hero{position:relative;z-index:2;padding:70px 0 30px;}
   .hero-inner{display:flex;gap:36px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
-  .left{flex:1 1 640px;min-width:280px}
+  .left{flex:1 1 640px;min-width:260px}
   .right{flex:0 0 420px;display:flex;align-items:center;justify-content:center;min-width:240px}
   .logo-wrap{display:flex;gap:12px;align-items:center;margin-bottom:14px}
   .logo{width:78px;height:78px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.04)}
@@ -89,12 +89,9 @@
   .bootcamp-grid{max-width:1200px;margin:0 auto;padding:0 6%;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
   .day-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:22px 20px;min-height:220px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45);position:relative}
   .day-pill{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--card);padding:6px 14px;border-radius:20px;font-weight:700;color:var(--accent);border:1px solid rgba(217,177,75,0.12);font-size:13px}
-  .day-card h4{margin-top:12px;font-size:15px;font-weight:700;color:#fff}
+  .day-card h4{margin-top:18px;font-size:15px;font-weight:700;color:#fff}
   .day-card ul{margin:12px 0 0;padding-left:16px;color:#cfcfcf;line-height:1.6;font-size:14px}
   .day-card ul li{margin-bottom:8px}
-
-  /* make last row single column for day7 optionally */
-  .day-card.large{grid-column:span 1}
 
   /* ---------- BONUSES ---------- */
   .bonus-section{padding:80px 0 100px;background:linear-gradient(180deg,#0c0d0c 0%, #0b0b0b 100%);text-align:center}
@@ -114,6 +111,39 @@
   .claim-btn{display:inline-block;padding:12px 22px;border-radius:40px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);transition:transform .18s}
   .claim-btn:hover{transform:translateY(-3px)}
 
+  /* ---------- ABOUT US ---------- */
+  .about-section{padding:80px 0 40px;background:linear-gradient(180deg,#0f0f0f 0%, #0d0d0d 100%);text-align:center}
+  .about-section h2{font-size:34px;color:var(--accent);margin-bottom:18px}
+  .about-section p{color:#cfcfcf;max-width:900px;margin:0 auto 18px;line-height:1.8}
+  .stats-row{display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+  .mini-card{border:1px solid rgba(217,177,75,0.08);padding:18px 24px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));min-width:130px}
+  .mini-card .k{font-weight:800;color:var(--accent);font-size:20px}
+  .mini-card .t{color:var(--muted);font-size:13px;margin-top:6px}
+
+  .mission{margin:28px auto 6px;max-width:1000px;border-left:4px solid var(--accent);padding:18px;background:linear-gradient(90deg, rgba(217,177,75,0.03), transparent);color:#d9d7c5;border-radius:8px}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials{padding:70px 0 60px;text-align:center;background:linear-gradient(180deg,#0c0b0b 0%, #0b0b0b 100%)}
+  .testimonials h2{font-size:32px;color:var(--accent);margin-bottom:24px}
+  .test-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0 6%}
+  .test-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45)}
+  .stars{color:var(--accent);margin-bottom:10px}
+  .quote{font-size:14px;color:#d0d0d0;line-height:1.7;margin-bottom:14px;font-style:italic}
+  .author{font-weight:800;color:#fff;font-size:14px}
+  .role{color:var(--muted);font-size:12px}
+
+  /* ---------- PRICING CARD ---------- */
+  .pricing-section{padding:80px 0 120px;text-align:center;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%)}
+  .pricing-section h2{font-size:34px;color:var(--accent);margin-bottom:18px}
+  .pricing-wrap{max-width:360px;margin:28px auto 0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow)}
+  .badge-limited{position:relative;display:inline-block;background:var(--accent);color:#111;padding:6px 12px;border-radius:18px;font-weight:800;margin-bottom:8px;font-size:12px}
+  .price-old{color:var(--muted);text-decoration:line-through;font-size:14px}
+  .price{font-size:44px;font-weight:900;color:var(--accent);margin:6px 0}
+  .price-sub{color:#cfcfcf;font-size:13px;margin-bottom:12px}
+  .features-list{text-align:left;margin:14px 0 18px;padding-left:16px;color:#cfcfcf;line-height:1.7}
+  .features-list li{margin-bottom:8px}
+  .enroll-btn{display:inline-block;padding:12px 20px;border-radius:30px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);margin-top:12px}
+
   /* ---------- Animations & small JS helpers ---------- */
   .fade-up{opacity:0;transform:translateY(16px);animation:fadeUp .7s cubic-bezier(.2,.9,.2,1) forwards}
   .fade-delay-1{animation-delay:.12s}
@@ -126,6 +156,7 @@
     .features-grid{grid-template-columns:repeat(2,1fr)}
     .bootcamp-grid{grid-template-columns:repeat(2,1fr)}
     .bonus-grid{grid-template-columns:repeat(2,1fr)}
+    .test-grid{grid-template-columns:repeat(2,1fr)}
     .hero-h{font-size:52px}
   }
   @media(max-width:800px){
@@ -136,7 +167,9 @@
     .features-grid{grid-template-columns:1fr}
     .bootcamp-grid{grid-template-columns:1fr}
     .bonus-grid{grid-template-columns:1fr}
+    .test-grid{grid-template-columns:1fr}
     .stop-heading{font-size:34px}
+    .about-section h2{font-size:28px}
   }
   @media(max-width:480px){
     .hero-h{font-size:30px}
@@ -144,6 +177,9 @@
     .stop-subtext{font-size:15px}
     .cta-row{gap:10px}
     .btn{padding:10px 16px}
+    .day-card{min-height:unset;padding:16px}
+    .bonus-card{min-height:unset;padding:18px}
+    .pricing-wrap{padding:18px}
   }
 </style>
 </head>
@@ -254,7 +290,7 @@
     <div class="bootcamp-grid">
       <div class="day-card">
         <div class="day-pill">Day 1</div>
-        <h4 style="margin-top:18px">Foundation & Market Basics</h4>
+        <h4>Foundation & Market Basics</h4>
         <ul>
           <li>Forex vs Stocks comparison</li>
           <li>Global Trading Sessions overview</li>
@@ -266,7 +302,7 @@
 
       <div class="day-card">
         <div class="day-pill">Day 2</div>
-        <h4 style="margin-top:18px">Core Concepts to Trade Confidently</h4>
+        <h4>Core Concepts to Trade Confidently</h4>
         <ul>
           <li>Lot Size calculation and management</li>
           <li>Understanding Spread mechanics</li>
@@ -278,7 +314,7 @@
 
       <div class="day-card">
         <div class="day-pill">Day 3</div>
-        <h4 style="margin-top:18px">Live Trading Walkthrough + Platform Basics</h4>
+        <h4>Live Trading Walkthrough + Platform Basics</h4>
         <ul>
           <li>MT5 platform comprehensive setup</li>
           <li>Order Placement step-by-step guide</li>
@@ -290,7 +326,7 @@
 
       <div class="day-card">
         <div class="day-pill">Day 4</div>
-        <h4 style="margin-top:18px">Chart Analysis & Indicators</h4>
+        <h4>Chart Analysis & Indicators</h4>
         <ul>
           <li>Candlesticks patterns and reading</li>
           <li>Chart Types and their applications</li>
@@ -302,7 +338,7 @@
 
       <div class="day-card">
         <div class="day-pill">Day 5</div>
-        <h4 style="margin-top:18px">Strategy Day – 21+ Proven Forex Setups</h4>
+        <h4>Strategy Day – 21+ Proven Forex Setups</h4>
         <ul>
           <li>Double Top/Bottom pattern strategies</li>
           <li>Support-Resistance level trading</li>
@@ -314,7 +350,7 @@
 
       <div class="day-card">
         <div class="day-pill">Day 6</div>
-        <h4 style="margin-top:18px">Fundamental & Sentiment Analysis</h4>
+        <h4>Fundamental & Sentiment Analysis</h4>
         <ul>
           <li>Major News Events impact analysis</li>
           <li>NFP and economic calendar mastery</li>
@@ -326,7 +362,7 @@
 
       <div class="day-card">
         <div class="day-pill">Day 7</div>
-        <h4 style="margin-top:18px">Go Live + Broker Account Setup</h4>
+        <h4>Go Live + Broker Account Setup</h4>
         <ul>
           <li>Transition from demo to live trading</li>
           <li>Broker account setup walkthrough</li>
@@ -387,6 +423,90 @@
       <div class="val">₹10,000/-</div>
       <p>All bonuses included FREE with your course enrollment</p>
       <a class="claim-btn" href="#claim">🎁 CLAIM YOUR BONUSES NOW</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section fade-up">
+  <div class="container">
+    <h2>About Us</h2>
+    <p>WiFi Money is an education-first platform dedicated to empowering individuals with the right knowledge, tools, consultation, and mentorship to succeed in the financial markets — especially in Forex trading.</p>
+    <p>We don't just teach theory. We provide practical, actionable training, real-time trade analysis, expert consultation, and hand-holding support that helps traders build skill, confidence, and consistent income.</p>
+
+    <div class="stats-row" role="list" aria-label="Key stats">
+      <div class="mini-card" role="listitem">
+        <div class="k">50+</div>
+        <div class="t">Expert Mentors</div>
+      </div>
+      <div class="mini-card" role="listitem">
+        <div class="k">20,000+</div>
+        <div class="t">Empowered Individuals</div>
+      </div>
+      <div class="mini-card" role="listitem">
+        <div class="k">100%</div>
+        <div class="t">Transparent</div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <strong>Our mission is simple:</strong> To make financial market education accessible, transparent, and profitable — without the fluff, hype, or fake promises.
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials fade-up">
+  <div class="container">
+    <h2>Student Success Stories</h2>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <div class="quote">"This course completely transformed my trading approach. I went from losing ₹8,000 in my first year to making ₹20,000 profit in just 6 months after completing WiFiMoney."</div>
+        <div class="author">Tanishka Chauhan</div>
+        <div class="role">Software Engineer — Full-time Trader</div>
+      </div>
+
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <div class="quote">"The risk management module alone saved me from bankruptcy. Now I trade with confidence, knowing exactly how to protect my capital."</div>
+        <div class="author">Rahul Tiwari</div>
+        <div class="role">Business Owner — Profitable Trader</div>
+      </div>
+
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <div class="quote">"The live trading sessions are pure gold. Watching the instructor trade in real-time and explaining every decision taught me more than years of YouTube videos."</div>
+        <div class="author">Michael Rodriguez</div>
+        <div class="role">Financial Analyst — Independent Trader</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING / CTA -->
+<section class="pricing-section fade-up">
+  <div class="container">
+    <h2>Secure Your Trading Future Today</h2>
+
+    <div class="pricing-wrap" role="region" aria-label="Special offer">
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-direction:column">
+        <div class="badge-limited">LIMITED TIME OFFER</div>
+        <div class="price-old">₹9,999</div>
+        <div class="price">₹499</div>
+        <div class="price-sub">Complete Course + Lifetime Access + Live Mentorship</div>
+
+        <ul class="features-list">
+          <li>✔ 6 Comprehensive Modules</li>
+          <li>✔ Live Trading Room Access</li>
+          <li>✔ 1-on-1 Mentorship Sessions</li>
+          <li>✔ Private Discord Community</li>
+          <li>✔ Lifetime Course Updates</li>
+          <li>✔ Mobile App Access</li>
+        </ul>
+
+        <a class="enroll-btn" href="#enroll">🎓 ENROLL NOW - SAVE ₹9500</a>
+      </div>
     </div>
   </div>
 </section>
