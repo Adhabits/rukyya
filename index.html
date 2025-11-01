@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>WiFi Money — Enroll / Callback</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>WiFi Money — Master Professional Trading</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0f1112;
@@ -13,72 +13,550 @@
     --muted:#a6b0b4;
     --card:#0d0e0f;
     --glass: rgba(255,255,255,0.02);
+    --glow: 0 12px 44px rgba(217,177,75,0.12);
     --radius:14px;
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:Inter,system-ui,Arial;background:linear-gradient(120deg,#0b0a09 0%, #111418 100%);color:#fff;min-height:100vh}
-  .wrap{max-width:1200px;margin:40px auto;padding:24px;display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:start}
-  @media(max-width:980px){ .wrap{grid-template-columns:1fr; padding:18px;} .right {order:2} .left{order:1} }
+  html,body{margin:0;height:100%;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#0b0c0d 0%, #0f1112 100%);color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 
-  /* Left column */
-  .left{padding:10px 6%;}
-  .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-  .brand .logo{width:62px;height:62px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.04)}
-  .brand .logo svg{width:36px;height:36px;fill:var(--accent)}
-  .brand .title{color:var(--muted);font-weight:700}
-  .big-h{font-family:Poppins,Inter;font-size:42px;line-height:1.05;margin:8px 0 18px;color:#fff}
-  .big-h .gold{color:var(--accent)}
-  .sub{color:var(--muted);max-width:640px;font-size:16px;margin-bottom:22px}
+  /* Global grid background */
+  .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(0deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size:80px 80px; opacity:.12; mix-blend-mode:overlay;}
 
-  .socials{display:flex;gap:14px;margin:22px 0 36px}
-  .socials a{width:54px;height:54px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#111;text-decoration:none;font-weight:800;box-shadow:0 10px 40px rgba(217,177,75,0.08)}
-  .socials a svg{width:18px;height:18px;fill:#111}
+  .container {max-width:1200px;margin:0 auto;padding:0 6%;}
 
-  .cta-row{display:flex;gap:14px;flex-wrap:wrap}
-  .cta-btn{background:linear-gradient(180deg,var(--accent),var(--accent-dark));padding:12px 18px;border-radius:40px;color:#111;font-weight:800;border:none;cursor:pointer;box-shadow:0 10px 36px rgba(217,177,75,0.12)}
-  .cta-ghost{background:transparent;border:2px solid rgba(217,177,75,0.12);color:var(--accent);padding:10px 16px;border-radius:40px;cursor:pointer;font-weight:700}
+  /* ---------- HERO ---------- */
+  header.hero{position:relative;z-index:2;padding:70px 0 30px;}
+  .hero-inner{display:flex;gap:36px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+  .left{flex:1 1 640px;min-width:260px}
+  .right{flex:0 0 420px;display:flex;align-items:center;justify-content:center;min-width:240px}
+  .logo-wrap{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+  .logo{width:78px;height:78px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.04)}
+  .logo svg{width:44px;height:44px;fill:var(--accent)}
+  .badge{font-family:Poppins,Inter;color:var(--accent);border:1px solid rgba(217,177,75,0.12);padding:8px 14px;border-radius:26px;font-weight:600;font-size:13px}
 
-  /* Right column / form card */
-  .right{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 18px 56px rgba(0,0,0,0.6)}
-  .form-row{display:flex;gap:12px}
-  .form-row .col{flex:1}
-  label{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
-  input[type="text"], input[type="email"], input[type="tel"]{
-    width:100%;padding:12px 14px;border-radius:8px;border:1px solid rgba(217,177,75,0.12);background:transparent;color:#fff;font-size:14px;outline:none;
+  .hero-h{font-family:Poppins,Inter;font-weight:900;font-size:64px;line-height:1;margin:6px 0 18px}
+  .hero-h .gold{color:var(--accent)}
+  .sub{color:var(--muted);max-width:760px;font-size:18px;line-height:1.7;margin-bottom:30px}
+
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:44px;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .22s ease,box-shadow .22s ease;box-shadow:0 8px 22px rgba(0,0,0,0.5)}
+  .btn-cta{background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111}
+  .btn-ghost{background:transparent;color:var(--accent);border:2px solid rgba(217,177,75,0.12);padding:12px 24px}
+  .btn:hover{transform:translateY(-4px)}
+
+  .stats{display:flex;gap:34px;align-items:flex-end;flex-wrap:wrap;margin-top:4px}
+  .stat{text-align:center}
+  .stat .num{color:var(--accent);font-weight:800;font-size:26px}
+  .stat .label{color:var(--muted);font-size:13px;margin-top:8px}
+
+  .video-frame{width:420px;max-width:45vw;height:360px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(217,177,75,0.06);box-shadow:0 20px 60px rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;position:relative}
+  .video-thumb{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;color:#fff}
+  .play-btn{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.05);cursor:pointer}
+  .play-btn svg{width:32px;height:32px;fill:var(--accent)}
+
+  .ticker{position:absolute;background:var(--card);border-radius:12px;padding:10px 12px;display:inline-block;border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 30px rgba(0,0,0,0.55);font-weight:700;width:86px;text-align:center;color:#e7e7e7;font-size:13px}
+  .ticker small{display:block;color:var(--muted);font-weight:600;font-size:12px}
+  .ticker .neg{color:#ff6b6b;font-weight:800;margin-top:4px;font-size:14px}
+  .ticker.t1{left:6%;top:18%}
+  .ticker.t2{right:6%;top:34%}
+  .ticker.t3{left:12%;bottom:28%}
+  .ticker.t4{right:18%;bottom:36%}
+
+  /* ---------- STOP LOSING ---------- */
+  .stop-losing-section{background:linear-gradient(180deg,#0f0f0f 0%, #121212 100%);text-align:center;padding:120px 0 100px}
+  .stop-heading{font-size:54px;font-weight:800;font-family:Poppins,Inter;margin-bottom:30px}
+  .stop-heading .highlight{color:var(--accent)}
+  .stop-subtext{font-size:19px;line-height:1.8;color:#c5c5c5;max-width:900px;margin:0 auto}
+
+  /* ---------- WHY CHOOSE (features) ---------- */
+  .why-section{text-align:center;padding:100px 0 120px;background:#0c0c0b}
+  .why-section h2{font-size:36px;font-weight:700;margin-bottom:60px;color:#fff}
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1200px;margin:0 auto;padding:0 6%}
+  .feature-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:36px;border-radius:18px;transition:transform .28s ease, box-shadow .28s ease;box-shadow:0 8px 30px rgba(0,0,0,0.45);border:1px solid rgba(217,177,75,0.04)}
+  .feature-card:hover{transform:translateY(-8px);box-shadow:var(--glow)}
+  .icon-circle{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+  .icon-circle svg{fill:#111;width:32px;height:32px}
+  .feature-card h3{font-size:20px;font-weight:700;margin-bottom:10px;color:#fff}
+  .feature-card p{font-size:15px;color:#bbb;line-height:1.6}
+
+  /* ---------- 7-DAY BOOTCAMP (course schedule) ---------- */
+  .bootcamp-section{padding:80px 0 60px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
+  .bootcamp-section h2{font-size:34px;color:#f6f2e6;margin-bottom:28px}
+  .bootcamp-grid{max-width:1200px;margin:0 auto;padding:0 6%;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .day-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:22px 20px;min-height:220px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45);position:relative}
+  .day-pill{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--card);padding:6px 14px;border-radius:20px;font-weight:700;color:var(--accent);border:1px solid rgba(217,177,75,0.12);font-size:13px}
+  .day-card h4{margin-top:18px;font-size:15px;font-weight:700;color:#fff}
+  .day-card ul{margin:12px 0 0;padding-left:16px;color:#cfcfcf;line-height:1.6;font-size:14px}
+  .day-card ul li{margin-bottom:8px}
+
+  /* ---------- BONUSES ---------- */
+  .bonus-section{padding:80px 0 100px;background:linear-gradient(180deg,#0c0d0c 0%, #0b0b0b 100%);text-align:center}
+  .bonus-section h2{font-size:34px;color:#f6f2e6;margin-bottom:12px}
+  .bonus-section .lead{color:#bfbfbf;max-width:860px;margin:12px auto 40px;font-size:15px;line-height:1.7}
+  .bonus-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:0 6%}
+  .bonus-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:30px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45);display:flex;flex-direction:column;align-items:center;min-height:200px}
+  .bonus-icon{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+  .bonus-card h4{font-size:16px;margin-bottom:8px}
+  .bonus-price{color:var(--accent);font-weight:800;margin-bottom:10px}
+  .bonus-desc{color:#cfcfcf;font-size:13px;text-align:center;line-height:1.6}
+
+  .bonus-cta{max-width:360px;margin:48px auto 0;background:linear-gradient(180deg,#0b0b0b,#101010);padding:26px;border-radius:14px;border:1px solid rgba(217,177,75,0.08);box-shadow:0 20px 60px rgba(217,177,75,0.06)}
+  .bonus-cta .ttl{font-weight:800;font-size:20px;color:#fff;margin-bottom:6px}
+  .bonus-cta .val{font-weight:900;color:var(--accent);font-size:26px;margin-bottom:8px}
+  .bonus-cta p{color:#c5c5c5;font-size:13px;margin-bottom:12px}
+  .claim-btn{display:inline-block;padding:12px 22px;border-radius:40px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);transition:transform .18s}
+  .claim-btn:hover{transform:translateY(-3px)}
+
+  /* ---------- ABOUT US ---------- */
+  .about-section{padding:80px 0 40px;background:linear-gradient(180deg,#0f0f0f 0%, #0d0d0d 100%);text-align:center}
+  .about-section h2{font-size:34px;color:var(--accent);margin-bottom:18px}
+  .about-section p{color:#cfcfcf;max-width:900px;margin:0 auto 18px;line-height:1.8}
+  .stats-row{display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+  .mini-card{border:1px solid rgba(217,177,75,0.08);padding:18px 24px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));min-width:130px}
+  .mini-card .k{font-weight:800;color:var(--accent);font-size:20px}
+  .mini-card .t{color:var(--muted);font-size:13px;margin-top:6px}
+
+  .mission{margin:28px auto 6px;max-width:1000px;border-left:4px solid var(--accent);padding:18px;background:linear-gradient(90deg, rgba(217,177,75,0.03), transparent);color:#d9d7c5;border-radius:8px}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials{padding:70px 0 60px;text-align:center;background:linear-gradient(180deg,#0c0b0b 0%, #0b0b0b 100%)}
+  .testimonials h2{font-size:32px;color:var(--accent);margin-bottom:24px}
+  .test-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0 6%}
+  .test-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45)}
+  .stars{color:var(--accent);margin-bottom:10px}
+  .quote{font-size:14px;color:#d0d0d0;line-height:1.7;margin-bottom:14px;font-style:italic}
+  .author{font-weight:800;color:#fff;font-size:14px}
+  .role{color:var(--muted);font-size:12px}
+
+  /* ---------- PRICING CARD ---------- */
+  .pricing-section{padding:80px 0 120px;text-align:center;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%)}
+  .pricing-section h2{font-size:34px;color:var(--accent);margin-bottom:18px}
+  .pricing-wrap{max-width:360px;margin:28px auto 0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow)}
+  .badge-limited{position:relative;display:inline-block;background:var(--accent);color:#111;padding:6px 12px;border-radius:18px;font-weight:800;margin-bottom:8px;font-size:12px}
+  .price-old{color:var(--muted);text-decoration:line-through;font-size:14px}
+  .price{font-size:44px;font-weight:900;color:var(--accent);margin:6px 0}
+  .price-sub{color:#cfcfcf;font-size:13px;margin-bottom:12px}
+  .features-list{text-align:left;margin:14px 0 18px;padding-left:16px;color:#cfcfcf;line-height:1.7}
+  .features-list li{margin-bottom:8px}
+  .enroll-btn{display:inline-block;padding:12px 20px;border-radius:30px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);margin-top:12px}
+
+  /* ---------- INLINE FORM SECTION (hero-style) ---------- */
+  .lead-section{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:start;padding:60px 0}
+  @media(max-width:980px){ .lead-section{grid-template-columns:1fr; } .lead-left{order:1} .lead-right{order:2} }
+  .lead-left .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .lead-left .big-h{font-family:Poppins,Inter;font-size:44px;line-height:1.05;margin:8px 0 18px;color:#fff}
+  .lead-left .sub{color:var(--muted);max-width:640px;font-size:16px;margin-bottom:22px}
+  .socials-row{display:flex;gap:14px;margin-top:18px}
+  .socials-row a{width:54px;height:54px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#111;text-decoration:none;font-weight:800;box-shadow:0 10px 40px rgba(217,177,75,0.08)}
+
+  .lead-form{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 18px 56px rgba(0,0,0,0.6)}
+  .lead-form label{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
+  .lead-form input[type="text"], .lead-form input[type="email"], .lead-form input[type="tel"]{width:100%;padding:12px 14px;border-radius:8px;border:1px solid rgba(217,177,75,0.12);background:transparent;color:#fff;font-size:14px;outline:none;margin-bottom:12px}
+  .lead-form .radio-group{margin-top:6px;margin-bottom:12px;color:var(--muted)}
+
+  .lead-form .submit-row{display:flex;gap:12px;align-items:center;margin-top:8px}
+  .lead-form .submit-btn{flex:1;background:linear-gradient(180deg,var(--accent),var(--accent-dark));padding:12px 16px;border-radius:40px;color:#111;font-weight:800;border:none;cursor:pointer}
+  .lead-form .call-btn{background:transparent;border:2px solid rgba(217,177,75,0.12);color:var(--accent);padding:10px 14px;border-radius:12px;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
+
+  /* ---------- FAQ (corrected) ---------- */
+  .faq-section{padding:80px 0 120px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
+  .faq-section h2{font-size:44px;color:var(--accent);margin-bottom:28px}
+  .faq-wrap{max-width:1000px;margin:0 auto;padding:0 6%;}
+  .accordion-item{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border-radius:14px;border:2px solid rgba(217,177,75,0.18);margin-bottom:18px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.45)}
+  .accordion-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 22px;cursor:pointer}
+  .accordion-header button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px}
+  .q-text{font-weight:700;color:var(--accent);font-size:18px;text-align:left}
+  .icon-round{width:40px;height:40px;border-radius:999px;background:linear-gradient(180deg,#1a1a1a,#101010);display:flex;align-items:center;justify-content:center;border:2px solid rgba(217,177,75,0.18);color:var(--accent);font-weight:900}
+  .panel{padding:0 22px;color:#d0d0d0;text-align:left;line-height:1.8;background:linear-gradient(180deg, rgba(217,177,75,0.01), transparent)}
+  .panel-inner{padding:18px 0;margin:0}
+
+  /* active states */
+  .accordion-item[aria-expanded="true"] .q-text{color:#fff}
+  .accordion-item[aria-expanded="true"] .icon-round{background:var(--accent);color:#111;border-color:rgba(0,0,0,0.08)}
+  .accordion-item[aria-expanded="true"]{box-shadow:var(--glow)}
+
+  /* collapse animation handled by max-height transitions */
+  .panel-collapsed{max-height:0;overflow:hidden;transition:max-height .36s cubic-bezier(.2,.9,.2,1)}
+  .panel-open{transition:max-height .36s cubic-bezier(.2,.9,.2,1);overflow:hidden}
+
+  /* ---------- Animations & small JS helpers ---------- */
+  .fade-up{opacity:0;transform:translateY(16px);animation:fadeUp .7s cubic-bezier(.2,.9,.2,1) forwards}
+  .fade-delay-1{animation-delay:.12s}
+  .fade-delay-2{animation-delay:.28s}
+  .fade-delay-3{animation-delay:.42s}
+  @keyframes fadeUp{to{opacity:1;transform:none}}
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:1100px){
+    .features-grid{grid-template-columns:repeat(2,1fr)}
+    .bootcamp-grid{grid-template-columns:repeat(2,1fr)}
+    .bonus-grid{grid-template-columns:repeat(2,1fr)}
+    .test-grid{grid-template-columns:repeat(2,1fr)}
+    .hero-h{font-size:52px}
+    .faq-section h2{font-size:36px}
   }
-  .radio-group{margin-top:10px;margin-bottom:16px;color:var(--muted)}
-  .radio-group label{display:flex;align-items:center;gap:10px;cursor:pointer;margin-bottom:6px}
-  .radio-group input[type="radio"]{accent-color:var(--accent);width:16px;height:16px}
-
-  .submit-row{display:flex;gap:12px;align-items:center;margin-top:12px}
-  .submit-btn{flex:1;background:linear-gradient(180deg,var(--accent),var(--accent-dark));padding:12px 16px;border-radius:40px;color:#111;font-weight:800;border:none;cursor:pointer}
-  .call-btn{background:transparent;border:2px solid rgba(217,177,75,0.12);color:var(--accent);padding:10px 14px;border-radius:12px;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
-
-  .note{color:var(--muted);font-size:13px;margin-top:12px}
-
-  /* success overlay */
-  .success{margin-top:16px;padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(15,17,18,0.6),rgba(15,17,18,0.4));border:1px solid rgba(217,177,75,0.08);display:none}
-  .success.show{display:block}
-  .success p{margin:0;color:#dbe0d0}
-
-  /* small helper */
-  .small{font-size:13px;color:var(--muted)}
-  .src-badge{display:inline-block;background:rgba(217,177,75,0.06);color:var(--accent);padding:6px 10px;border-radius:12px;font-weight:700;margin-left:10px}
-
-  /* subtle responsive tweaks */
-  @media(max-width:520px){
-    .big-h{font-size:28px}
-    .socials a{width:44px;height:44px}
-    .wrap{margin:18px auto;padding:16px}
-    .right{padding:18px}
+  @media(max-width:800px){
+    .hero-inner{flex-direction:column;align-items:flex-start}
+    .right{order:2;width:100%;margin-top:20px}
+    .hero-h{font-size:42px}
+    .video-frame{width:100%;height:240px}
+    .features-grid{grid-template-columns:1fr}
+    .bootcamp-grid{grid-template-columns:1fr}
+    .bonus-grid{grid-template-columns:1fr}
+    .test-grid{grid-template-columns:1fr}
+    .stop-heading{font-size:34px}
+    .about-section h2{font-size:28px}
+  }
+  @media(max-width:480px){
+    .hero-h{font-size:30px}
+    .stop-heading{font-size:28px}
+    .stop-subtext{font-size:15px}
+    .cta-row{gap:10px}
+    .btn{padding:10px 16px}
+    .day-card{min-height:unset;padding:16px}
+    .bonus-card{min-height:unset;padding:18px}
+    .pricing-wrap{padding:18px}
+    .faq-section h2{font-size:26px}
+    .q-text{font-size:16px}
+    .lead-left .big-h{font-size:28px}
   }
 </style>
 </head>
 <body>
 
-<div class="wrap" role="main" aria-labelledby="lead-h">
-  <!-- LEFT COLUMN -->
-  <div class="left">
+<div class="grid-bg" aria-hidden="true"></div>
+
+<!-- HERO -->
+<header class="hero container fade-up fade-delay-1" role="banner">
+  <div class="hero-inner">
+    <div class="left">
+      <div class="logo-wrap">
+        <div class="logo" aria-hidden="true">
+          <!-- placeholder SVG logo -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 3c3.866 0 7.1 1.866 9.001 4.712l-1.6 1.1C18.9 6.7 15.7 5 12 5S5.1 6.7 4.599 8.812L3 7.7C4.901 4.866 8.134 3 12 3zm0 4a8.957 8.957 0 0 1 6.364 2.636l-1.414 1.414A6.96 6.96 0 0 0 12 9a6.96 6.96 0 0 0-4.95 2.05L5.636 9.636A8.957 8.957 0 0 1 12 7zM7 13a5 5 0 1 1 10 0 5 5 0 0 1-10 0z"/>
+          </svg>
+        </div>
+        <div style="display:flex;flex-direction:column;">
+          <div style="display:flex;gap:10px;align-items:center;">
+            <div class="badge">#1 Trading Course 2025</div>
+          </div>
+          <div style="color:var(--muted);font-size:13px;margin-top:8px">WIFI MONEY</div>
+        </div>
+      </div>
+
+      <h1 class="hero-h"><span>Master </span><span class="gold">Professional Trading</span><br>Build Wealth from Anywhere</h1>
+
+      <p class="sub">Transform from beginner to profitable trader with our comprehensive course. Learn proven strategies used by Wall Street professionals.</p>
+
+      <div class="cta-row">
+        <button class="btn btn-cta" id="hero-enroll" data-src="enroll">🎓 ENROLL IN COURSE</button>
+        <button class="btn btn-ghost" id="hero-curr" data-src="curriculum">▶ VIEW CURRICULUM</button>
+      </div>
+
+      <div class="stats" aria-hidden="true">
+        <div class="stat"><div class="num">15,000+</div><div class="label">Students Enrolled</div></div>
+        <div class="stat"><div class="num">4.9/5</div><div class="label">Course Rating</div></div>
+        <div class="stat"><div class="num">89%</div><div class="label">Success Rate</div></div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="video-frame floaty" aria-hidden="true">
+        <div class="video-thumb">
+          <div style="font-weight:800;font-size:16px;color:var(--accent)">Course Preview</div>
+          <div style="color:var(--muted);font-size:13px;margin-top:8px;text-align:center;max-width:240px">12 modules • Live trading sessions • Proven strategies</div>
+          <div style="position:absolute;bottom:20px"><div class="play-btn" title="Play preview"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticker t1 fade-delay-2"><small>EURUSD</small><div class="neg">-0.3%</div></div>
+    <div class="ticker t2 fade-delay-3"><small>BTCUSD</small><div class="neg">-4.6%</div></div>
+    <div class="ticker t3 fade-delay-1"><small>AAPL</small><div class="neg">-2.4%</div></div>
+  </div>
+</header>
+
+<!-- STOP LOSING -->
+<section class="stop-losing-section fade-up fade-delay-2">
+  <div class="container">
+    <h2 class="stop-heading">Stop <span class="highlight">Losing Money</span> in the Markets</h2>
+    <p class="stop-subtext">
+      95% of retail traders lose money because they lack proper education, proven strategies, and risk management skills.
+      Don't be part of that statistic.<br><br>
+      Our comprehensive trading course gives you everything you need to trade profitably and consistently.
+    </p>
+  </div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section class="why-section fade-up fade-delay-3">
+  <div class="container">
+    <h2>Why Choose Our Trading Course?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M4 5h16v2H4zM4 10h16v2H4zM4 15h10v2H4z"/></svg></div>
+        <h3>Professional Strategies</h3>
+        <p>Learn the exact strategies used by institutional traders and hedge funds to generate consistent profits in any market condition.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z"/></svg></div>
+        <h3>Risk Management Mastery</h3>
+        <p>Master advanced risk management techniques that protect your capital and ensure long-term trading success.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 3.3-2.1 6.1-5 7v6h-4v-6c-2.9-.9-5-3.7-5-7a7 7 0 017-7z"/></svg></div>
+        <h3>Trading Psychology</h3>
+        <p>Develop the mental discipline and emotional control required to make rational decisions under pressure.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M17 10.5V6c0-1.1-.9-2-2-2H5C3.9 4 3 4.9 3 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-4.5l4 4V6.5l-4 4z"/></svg></div>
+        <h3>Live Trading Sessions</h3>
+        <p>Watch real trades unfold in live market conditions and learn to apply strategies in real-time scenarios.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7-DAY BOOTCAMP -->
+<section class="bootcamp-section fade-up">
+  <div class="container">
+    <h2 style="text-align:center;margin-bottom:34px;color:#f6f2e6">7-Day Intensive Trading <span style="color:var(--accent)">Bootcamp</span></h2>
+
+    <div class="bootcamp-grid">
+      <div class="day-card">
+        <div class="day-pill">Day 1</div>
+        <h4>Foundation & Market Basics</h4>
+        <ul>
+          <li>Forex vs Stocks comparison</li>
+          <li>Global Trading Sessions overview</li>
+          <li>Why Forex Wins for beginners</li>
+          <li>Market fundamentals and structure</li>
+          <li>Getting started mindset</li>
+        </ul>
+      </div>
+
+      <div class="day-card">
+        <div class="day-pill">Day 2</div>
+        <h4>Core Concepts to Trade Confidently</h4>
+        <ul>
+          <li>Lot Size calculation and management</li>
+          <li>Understanding Spread mechanics</li>
+          <li>Leverage principles and applications</li>
+          <li>Margin requirements and safety</li>
+          <li>Stop Loss and Order Types mastery</li>
+        </ul>
+      </div>
+
+      <div class="day-card">
+        <div class="day-pill">Day 3</div>
+        <h4>Live Trading Walkthrough + Platform Basics</h4>
+        <ul>
+          <li>MT5 platform comprehensive setup</li>
+          <li>Order Placement step-by-step guide</li>
+          <li>Risk Management in live action</li>
+          <li>Platform tools and features</li>
+          <li>Real-time trading demonstration</li>
+        </ul>
+      </div>
+
+      <div class="day-card">
+        <div class="day-pill">Day 4</div>
+        <h4>Chart Analysis & Indicators</h4>
+        <ul>
+          <li>Candlesticks patterns and reading</li>
+          <li>Chart Types and their applications</li>
+          <li>Trend Analysis identification</li>
+          <li>Perfect Entries & Exits timing</li>
+          <li>Technical indicators integration</li>
+        </ul>
+      </div>
+
+      <div class="day-card">
+        <div class="day-pill">Day 5</div>
+        <h4>Strategy Day – 21+ Proven Forex Setups</h4>
+        <ul>
+          <li>Double Top/Bottom pattern strategies</li>
+          <li>Support-Resistance level trading</li>
+          <li>Supply & Demand zone identification</li>
+          <li>Multiple high-probability setups</li>
+          <li>Strategy backtesting and validation</li>
+        </ul>
+      </div>
+
+      <div class="day-card">
+        <div class="day-pill">Day 6</div>
+        <h4>Fundamental & Sentiment Analysis</h4>
+        <ul>
+          <li>Major News Events impact analysis</li>
+          <li>NFP and economic calendar mastery</li>
+          <li>Impactful Reports interpretation</li>
+          <li>Sentiment Triggers identification</li>
+          <li>News trading strategies and timing</li>
+        </ul>
+      </div>
+
+      <div class="day-card">
+        <div class="day-pill">Day 7</div>
+        <h4>Go Live + Broker Account Setup</h4>
+        <ul>
+          <li>Transition from demo to live trading</li>
+          <li>Broker account setup walkthrough</li>
+          <li>Real trade execution with guidance</li>
+          <li>Exclusive bonuses and offers</li>
+          <li>Ongoing support and community access</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BONUSES -->
+<section class="bonus-section fade-up">
+  <div class="container">
+    <h2>Exclusive Bonuses for First 50 Participants</h2>
+    <p class="lead">Join the 7-Day Live Forex bootcamp and unlock exclusive tools, templates, and expert support designed to fast-track your success — available only to the first 50 confirmed joinees.</p>
+
+    <div class="bonus-grid">
+      <div class="bonus-card">
+        <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M5 4h14v2H5zM5 8h14v2H5zM5 12h14v2H5z" fill="#111"/></svg></div>
+        <h4>Ready to Use Strategy Templates</h4>
+        <div class="bonus-price">₹2,000/-</div>
+        <div class="bonus-desc">Professional trading templates that you can implement immediately without any guesswork or setup time.</div>
+      </div>
+
+      <div class="bonus-card">
+        <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z" fill="#111"/></svg></div>
+        <h4>Live Demo Account Setup Support</h4>
+        <div class="bonus-price">₹1,500/-</div>
+        <div class="bonus-desc">Personal assistance in setting up your demo trading account with optimal configurations for learning.</div>
+      </div>
+
+      <div class="bonus-card">
+        <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M12 2a7 7 0 017 7c0 3.3-2.1 6.1-5 7v6h-4v-6c-2.9-.9-5-3.7-5-7a7 7 0 017-7z" fill="#111"/></svg></div>
+        <h4>Lifetime Telegram Support Group</h4>
+        <div class="bonus-price">₹3,000/-</div>
+        <div class="bonus-desc">Access to our exclusive Telegram community for ongoing support, trade discussions, and market updates.</div>
+      </div>
+
+      <div class="bonus-card">
+        <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M17 10.5V6c0-1.1-.9-2-2-2H5C3.9 4 3 4.9 3 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-4.5l4 4V6.5l-4 4z" fill="#111"/></svg></div>
+        <h4>Class Recordings (All 7 Days)</h4>
+        <div class="bonus-price">₹2,000/-</div>
+        <div class="bonus-desc">Complete recordings of all live sessions so you can revisit any concept or strategy whenever needed.</div>
+      </div>
+
+      <div class="bonus-card">
+        <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M12 2a2 2 0 110 4 2 2 0 010-4zm-6 8h12v2H6zm0 4h12v2H6z" fill="#111"/></svg></div>
+        <h4>Beginner Friendly Trading Checklist</h4>
+        <div class="bonus-price">₹1,500/-</div>
+        <div class="bonus-desc">Comprehensive checklist to ensure you never miss critical steps in your trading routine and analysis.</div>
+      </div>
+    </div>
+
+    <div class="bonus-cta" role="region" aria-label="Total Bonus">
+      <div class="ttl">Total Bonus Value:</div>
+      <div class="val">₹10,000/-</div>
+      <p>All bonuses included FREE with your course enrollment</p>
+      <a class="claim-btn" href="#claim">🎁 CLAIM YOUR BONUSES NOW</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section fade-up">
+  <div class="container">
+    <h2>About Us</h2>
+    <p>WiFi Money is an education-first platform dedicated to empowering individuals with the right knowledge, tools, consultation, and mentorship to succeed in the financial markets — especially in Forex trading.</p>
+    <p>We don't just teach theory. We provide practical, actionable training, real-time trade analysis, expert consultation, and hand-holding support that helps traders build skill, confidence, and consistent income.</p>
+
+    <div class="stats-row" role="list" aria-label="Key stats">
+      <div class="mini-card" role="listitem">
+        <div class="k">50+</div>
+        <div class="t">Expert Mentors</div>
+      </div>
+      <div class="mini-card" role="listitem">
+        <div class="k">20,000+</div>
+        <div class="t">Empowered Individuals</div>
+      </div>
+      <div class="mini-card" role="listitem">
+        <div class="k">100%</div>
+        <div class="t">Transparent</div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <strong>Our mission is simple:</strong> To make financial market education accessible, transparent, and profitable — without the fluff, hype, or fake promises.
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials fade-up">
+  <div class="container">
+    <h2>Student Success Stories</h2>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <div class="quote">"This course completely transformed my trading approach. I went from losing ₹8,000 in my first year to making ₹20,000 profit in just 6 months after completing WiFiMoney."</div>
+        <div class="author">Tanishka Chauhan</div>
+        <div class="role">Software Engineer — Full-time Trader</div>
+      </div>
+
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <div class="quote">"The risk management module alone saved me from bankruptcy. Now I trade with confidence, knowing exactly how to protect my capital."</div>
+        <div class="author">Rahul Tiwari</div>
+        <div class="role">Business Owner — Profitable Trader</div>
+      </div>
+
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <div class="quote">"The live trading sessions are pure gold. Watching the instructor trade in real-time and explaining every decision taught me more than years of YouTube videos."</div>
+        <div class="author">Michael Rodriguez</div>
+        <div class="role">Financial Analyst — Independent Trader</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING / CTA -->
+<section class="pricing-section fade-up">
+  <div class="container">
+    <h2>Secure Your Trading Future Today</h2>
+
+    <div class="pricing-wrap" role="region" aria-label="Special offer">
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-direction:column">
+        <div class="badge-limited">LIMITED TIME OFFER</div>
+        <div class="price-old">₹9,999</div>
+        <div class="price">₹499</div>
+        <div class="price-sub">Complete Course + Lifetime Access + Live Mentorship</div>
+
+        <ul class="features-list">
+          <li>✔ 6 Comprehensive Modules</li>
+          <li>✔ Live Trading Room Access</li>
+          <li>✔ 1-on-1 Mentorship Sessions</li>
+          <li>✔ Private Discord Community</li>
+          <li>✔ Lifetime Course Updates</li>
+          <li>✔ Mobile App Access</li>
+        </ul>
+
+        <a class="enroll-btn" id="pricing-enroll" href="#lead-form">🎓 ENROLL NOW - SAVE ₹9500</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD / FORM SECTION (final integrated form as requested) -->
+<section class="lead-section container fade-up" id="lead-form" aria-labelledby="lead-h">
+  <div class="lead-left">
     <div class="brand" aria-hidden="true">
       <div class="logo" title="WiFi Money">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3c3.866 0 7.1 1.866 9.001 4.712l-1.6 1.1C18.9 6.7 15.7 5 12 5S5.1 6.7 4.599 8.812L3 7.7C4.901 4.866 8.134 3 12 3z"/></svg>
@@ -88,19 +566,17 @@
       </div>
     </div>
 
-    <h1 id="lead-h" class="big-h">Ready to Transform Your <span class="gold">Financial Future?</span></h1>
+    <h2 id="lead-h" class="big-h">Ready to Transform Your <span class="gold">Financial Future?</span></h2>
 
-    <p class="sub">Join thousands of successful traders who've mastered the markets with WiFiMoney. Mentorship by <strong>Rukyya Mam</strong> available for every enrollee.</p>
+    <p class="sub">Join thousands of successful traders who've mastered the markets with WiFiMoney. Mentorship by <strong>Rukyya Mam</strong> is included.</p>
 
-    <div class="cta-row" aria-hidden="false">
-      <!-- CTA buttons set a "source" and open/scroll to the form -->
-      <button class="cta-btn" data-source="enroll" type="button" id="cta-enroll">ENROLL NOW</button>
-      <button class="cta-ghost" data-source="callback" type="button" id="cta-callback">BOOK CALLBACK</button>
-      <!-- small badge to show which CTA used (updates on click) -->
+    <div class="cta-row" style="margin-bottom:8px">
+      <button class="cta-btn" id="cta-enroll" data-source="enroll" type="button">ENROLL NOW</button>
+      <button class="cta-ghost" id="cta-callback" data-source="callback" type="button">BOOK CALLBACK</button>
       <span class="src-badge" id="cta-badge" style="display:none">Selected: <span id="cta-selected"></span></span>
     </div>
 
-    <div class="socials" aria-hidden="true">
+    <div class="socials-row" aria-hidden="true">
       <a href="#" title="Facebook"><svg viewBox="0 0 24 24"><path d="M14 2h3v4h-3v14h-5V6H7V2h3V0h4z"/></svg></a>
       <a href="#" title="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9c-.6.3-1.2.5-1.9.6.7-.4 1.2-1.1 1.5-1.9-.6.4-1.3.6-2.1.8C18.8 4 18.1 4 17.5 4c-1.9 0-3.3 1.8-2.8 3.6C11.2 7.4 8 5.7 5.6 3c-.9 1.5-.5 3.4 1 4.3-.5 0-1-.2-1.5-.4v.1c0 1.7 1.3 3.2 3 3.5-.4.1-.8.1-1.2.1-.3 0-.6 0-.9-.1.6 2 2.5 3.4 4.7 3.5-1.6 1.3-3.6 2-5.7 2-.4 0-.8 0-1.2-.1 2 1.3 4.4 2 7 2 8.4 0 13-7.1 13-13.2v-.6c.9-.6 1.7-1.3 2.3-2.1-.8.4-1.6.7-2.5.8z"/></svg></a>
       <a href="#" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 7a5 5 0 100 10 5 5 0 000-10zm7-1a2 2 0 11-4 0 2 2 0 014 0zM4 5v14c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2z"/></svg></a>
@@ -109,31 +585,26 @@
     </div>
   </div>
 
-  <!-- RIGHT COLUMN FORM -->
-  <aside class="right" aria-labelledby="form-h">
-    <h3 id="form-h" style="margin:0 0 14px;color:var(--accent);font-family:Poppins,Inter;">Secure Your Spot — Quick Form</h3>
+  <div class="lead-right">
+    <form id="leadForm" class="lead-form" autocomplete="off" novalidate>
+      <h3 style="margin:0 0 12px;color:var(--accent);font-family:Poppins,Inter;">Secure Your Spot — Quick Form</h3>
 
-    <form id="enrollForm" autocomplete="off" novalidate>
-      <div class="form-row" style="margin-bottom:12px">
-        <div class="col">
-          <label for="fname">First Name *</label>
-          <input id="fname" name="firstName" type="text" placeholder="First Name" required />
+      <div style="display:flex;gap:10px;margin-bottom:12px">
+        <div style="flex:1">
+          <label for="l_fname">First Name *</label>
+          <input id="l_fname" name="firstName" type="text" placeholder="First Name" required />
         </div>
-        <div class="col">
-          <label for="lname">Last Name *</label>
-          <input id="lname" name="lastName" type="text" placeholder="Last Name" required />
+        <div style="flex:1">
+          <label for="l_lname">Last Name *</label>
+          <input id="l_lname" name="lastName" type="text" placeholder="Last Name" required />
         </div>
       </div>
 
-      <div style="margin-bottom:12px">
-        <label for="phone">Phone *</label>
-        <input id="phone" name="phone" type="tel" placeholder="Enter mobile number (e.g. 9876543210)" required inputmode="tel" />
-      </div>
+      <label for="l_phone">Phone *</label>
+      <input id="l_phone" name="phone" type="tel" placeholder="9876543210" required inputmode="tel" />
 
-      <div style="margin-bottom:12px">
-        <label for="email">Email *</label>
-        <input id="email" name="email" type="email" placeholder="Email" required />
-      </div>
+      <label for="l_email">Email *</label>
+      <input id="l_email" name="email" type="email" placeholder="name@example.com" required />
 
       <div class="radio-group" role="radiogroup" aria-label="Currently trading?">
         <div style="font-weight:700;margin-bottom:6px;color:var(--muted)">Are you currently trading in Forex/Stock Market?</div>
@@ -141,126 +612,280 @@
         <label><input type="radio" name="trading" value="No" checked /> No</label>
       </div>
 
-      <!-- hidden fields -->
       <input type="hidden" name="mentor" value="Rukyya Mam" />
-      <input type="hidden" name="source" id="form-source" value="direct"/>
+      <input type="hidden" name="source" id="lead-source" value="direct"/>
 
-      <div class="submit-row">
-        <button type="submit" class="submit-btn" id="submitBtn">ENROLL NOW - SAVE ₹9500/-</button>
-        <a class="call-btn" id="callBtn" href="tel:+917249960757"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="opacity:.9"><path d="M6.6 10.8a15.05 15.05 0 006.6 6.6l2.2-2.2a1 1 0 01.9-.25c1 .3 2 .5 2.9.5a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h2.7a1 1 0 011 1c0 1 .2 2 .5 2.9.1.3 0 .7-.2.9L6.6 10.8z" fill="#d9b14b"/></svg> Call</a>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button type="submit" class="submit-btn" id="leadSubmit">ENROLL NOW - SAVE ₹9500/-</button>
+        <a class="call-btn" id="leadCall" href="tel:+917249960757"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="opacity:.9"><path d="M6.6 10.8a15.05 15.05 0 006.6 6.6l2.2-2.2a1 1 0 01.9-.25c1 .3 2 .5 2.9.5a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h2.7a1 1 0 011 1c0 1 .2 2 .5 2.9.1.3 0 .7-.2.9L6.6 10.8z" fill="#d9b14b"/></svg> Call</a>
       </div>
 
-      <div class="note">After submitting you'll be redirected to WhatsApp to complete booking. No backend — WhatsApp connects directly to <strong>Rukyya Mam</strong>.</div>
+      <div class="note" style="margin-top:12px">After submitting you'll be redirected to WhatsApp to complete booking. WhatsApp will open a message to <strong>Rukyya Mam</strong> at <strong>+91 72499 60757</strong>.</div>
 
+      <div class="success" id="leadSuccess" role="status" aria-live="polite" style="display:none">
+        <p id="leadSuccessText">We opened WhatsApp to complete your booking — if WhatsApp didn't open, click the button below to message directly.</p>
+        <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+          <a id="leadWhats" class="claim-btn" style="background:linear-gradient(180deg,var(--accent),var(--accent-dark));padding:10px 14px;border-radius:12px;color:#111;text-decoration:none;font-weight:800" href="#" target="_blank" rel="noopener">Message on WhatsApp</a>
+          <a id="leadCallDirect" class="call-btn" href="tel:+917249960757">📞 Call +91 72499 60757</a>
+        </div>
+      </div>
     </form>
+  </div>
+</section>
 
-    <div class="success" id="successBox" role="status" aria-live="polite">
-      <p id="successText">We opened WhatsApp to complete your booking — if WhatsApp didn't open, click the button below to message directly.</p>
-      <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
-        <a id="whLink" class="claim-btn" style="background:linear-gradient(180deg,var(--accent),var(--accent-dark));padding:10px 14px;border-radius:12px;color:#111;text-decoration:none;font-weight:800" href="#" target="_blank" rel="noopener">Message on WhatsApp</a>
-        <a id="callDirect" class="call-btn" href="tel:+917249960757">📞 Call +91 72499 60757</a>
+<!-- FAQ -->
+<section class="faq-section fade-up">
+  <div class="container">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-wrap" role="list">
+
+      <!-- Item 1 (open by default) -->
+      <div class="accordion-item" role="listitem" aria-expanded="true">
+        <div class="accordion-header">
+          <button aria-controls="panel1" aria-expanded="true" type="button">
+            <div class="q-text">Do I need prior trading experience to enroll?</div>
+            <div class="icon-round" aria-hidden="true">−</div>
+          </button>
+        </div>
+        <div id="panel1" class="panel panel-open" aria-hidden="false">
+          <div class="panel-inner">
+            <p>No prior experience required! Our course is designed for complete beginners. We start with the fundamentals and progressively build to advanced strategies. Many of our most successful students started with zero trading knowledge.</p>
+          </div>
+        </div>
       </div>
+
+      <!-- Item 2 -->
+      <div class="accordion-item" role="listitem" aria-expanded="false">
+        <div class="accordion-header">
+          <button aria-controls="panel2" aria-expanded="false" type="button">
+            <div class="q-text">How much capital do I need to start trading?</div>
+            <div class="icon-round" aria-hidden="true">+</div>
+          </button>
+        </div>
+        <div id="panel2" class="panel panel-collapsed" aria-hidden="true">
+          <div class="panel-inner">
+            <p>You can start learning with our demo accounts, then begin live trading with as little as $500–$1000. We teach proper risk management so you can grow your account systematically while protecting your capital.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="accordion-item" role="listitem" aria-expanded="false">
+        <div class="accordion-header">
+          <button aria-controls="panel3" aria-expanded="false" type="button">
+            <div class="q-text">How long does it take to complete the course?</div>
+            <div class="icon-round" aria-hidden="true">+</div>
+          </button>
+        </div>
+        <div id="panel3" class="panel panel-collapsed" aria-hidden="true">
+          <div class="panel-inner">
+            <p>The core curriculum can be completed in 6–8 weeks studying 1–2 hours per day. However, you have lifetime access, so you can learn at your own pace and revisit materials anytime.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="accordion-item" role="listitem" aria-expanded="false">
+        <div class="accordion-header">
+          <button aria-controls="panel4" aria-expanded="false" type="button">
+            <div class="q-text">Is there ongoing support after course completion?</div>
+            <div class="icon-round" aria-hidden="true">+</div>
+          </button>
+        </div>
+        <div id="panel4" class="panel panel-collapsed" aria-hidden="true">
+          <div class="panel-inner">
+            <p>Absolutely! You get lifetime access to our private Discord community, monthly live Q&A sessions, and ongoing mentorship opportunities. Our support doesn't end when you finish the course.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="accordion-item" role="listitem" aria-expanded="false">
+        <div class="accordion-header">
+          <button aria-controls="panel5" aria-expanded="false" type="button">
+            <div class="q-text">What makes this course different from free YouTube content?</div>
+            <div class="icon-round" aria-hidden="true">+</div>
+          </button>
+        </div>
+        <div id="panel5" class="panel panel-collapsed" aria-hidden="true">
+          <div class="panel-inner">
+            <p>Our course provides a structured, step-by-step learning path with real mentorship, live trading examples, and a proven system. You get personalized feedback, access to professional tools, and accountability that free content can't provide.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </aside>
-</div>
+  </div>
+</section>
 
 <script>
+  /* Respect reduce motion */
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.fade-up').forEach(el => { el.style.animation = 'none'; el.style.opacity = 1; el.style.transform = 'none'; });
+  }
+
+  /* Accordion logic - independent toggles (multiple open) */
   (function(){
-    // constants
-    const whatsappNumber = '917249960757'; // +91 7249960757 -> wa.me/91xxxxxxxxxx
-    const form = document.getElementById('enrollForm');
-    const ctaEnroll = document.getElementById('cta-enroll');
-    const ctaCallback = document.getElementById('cta-callback');
-    const badge = document.getElementById('cta-badge');
-    const selectedLabel = document.getElementById('cta-selected');
-    const formSource = document.getElementById('form-source');
-    const successBox = document.getElementById('successBox');
-    const whLink = document.getElementById('whLink');
+    const items = document.querySelectorAll('.accordion-item');
+    items.forEach(item => {
+      const btn = item.querySelector('.accordion-header button');
+      const panel = item.querySelector('.panel');
+      const icon = item.querySelector('.icon-round');
+      const inner = panel.querySelector('.panel-inner');
 
-    // helper: smooth scroll to form and focus first field
-    function openFormWithSource(source){
-      formSource.value = source || 'direct';
-      badge.style.display = 'inline-block';
-      selectedLabel.textContent = source;
-      // scroll into view and focus
-      const rect = form.getBoundingClientRect();
-      const topOffset = window.scrollY + rect.top - 24;
-      window.scrollTo({top: topOffset, behavior: 'smooth'});
-      setTimeout(()=>{ document.getElementById('fname').focus(); }, 550);
-    }
-
-    // CTA buttons
-    ctaEnroll.addEventListener('click', function(){ openFormWithSource('enroll'); });
-    ctaCallback.addEventListener('click', function(){ openFormWithSource('callback'); });
-
-    // small validation
-    function validate(data){
-      if(!data.firstName || !data.lastName) return 'Please enter your full name.';
-      if(!/^\d{10,15}$/.test(data.phone.replace(/\D/g,''))) return 'Please enter a valid phone (digits only).';
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return 'Please enter a valid email.';
-      return null;
-    }
-
-    // build WhatsApp message and open
-    function openWhatsAppMessage(data){
-      const mentor = data.mentor || 'Rukyya Mam';
-      const message =
-`Hi ${mentor},%0A%0AI would like to enroll.%0A%0AName: ${encodeURIComponent(data.firstName + ' ' + data.lastName)}%0APhone: ${encodeURIComponent(data.phone)}%0AEmail: ${encodeURIComponent(data.email)}%0ACurrently trading: ${encodeURIComponent(data.trading)}%0ASource: ${encodeURIComponent(data.source)}%0A%0APlease contact me to proceed.`;
-      // wa.me link
-      const waUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
-      // open in new tab/window
-      window.open(waUrl, '_blank');
-      // set direct link in success box for fallback
-      whLink.href = waUrl;
-      successBox.classList.add('show');
-    }
-
-    // handle submit
-    form.addEventListener('submit', function(ev){
-      ev.preventDefault();
-      const fd = new FormData(form);
-      const data = {
-        firstName: fd.get('firstName')?.trim(),
-        lastName: fd.get('lastName')?.trim(),
-        phone: fd.get('phone')?.trim(),
-        email: fd.get('email')?.trim(),
-        trading: fd.get('trading') || 'No',
-        mentor: fd.get('mentor') || 'Rukyya Mam',
-        source: fd.get('source') || 'direct'
-      };
-
-      // validate
-      const err = validate(data);
-      if(err){
-        alert(err);
-        return;
+      // initialize panels based on aria-expanded
+      const isOpen = item.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        panel.style.maxHeight = inner.scrollHeight + 'px';
+        panel.classList.remove('panel-collapsed'); panel.classList.add('panel-open');
+        panel.setAttribute('aria-hidden','false');
+        icon.textContent = '−';
+        btn.setAttribute('aria-expanded','true');
+      } else {
+        panel.style.maxHeight = '0px';
+        panel.classList.remove('panel-open'); panel.classList.add('panel-collapsed');
+        panel.setAttribute('aria-hidden','true');
+        icon.textContent = '+';
+        btn.setAttribute('aria-expanded','false');
       }
 
-      // nice small UX: show a quick spinner on button
-      const btn = document.getElementById('submitBtn');
-      const oldText = btn.innerHTML;
-      btn.disabled = true;
-      btn.innerHTML = 'Opening WhatsApp...';
+      // toggle handler
+      btn.addEventListener('click', () => {
+        const currentlyOpen = item.getAttribute('aria-expanded') === 'true';
+        if (!currentlyOpen) {
+          item.setAttribute('aria-expanded','true');
+          panel.classList.remove('panel-collapsed'); panel.classList.add('panel-open');
+          panel.style.maxHeight = inner.scrollHeight + 'px';
+          panel.setAttribute('aria-hidden','false');
+          icon.textContent = '−';
+          btn.setAttribute('aria-expanded','true');
+        } else {
+          item.setAttribute('aria-expanded','false');
+          panel.classList.remove('panel-open'); panel.classList.add('panel-collapsed');
+          panel.style.maxHeight = '0px';
+          panel.setAttribute('aria-hidden','true');
+          icon.textContent = '+';
+          btn.setAttribute('aria-expanded','false');
+        }
+      });
 
-      // open WhatsApp after tiny delay
-      setTimeout(()=>{
-        openWhatsAppMessage(data);
-        btn.disabled = false;
-        btn.innerHTML = oldText;
-      }, 700);
+      // update maxHeight on content resize
+      if (window.ResizeObserver && inner) {
+        const ro = new ResizeObserver(() => {
+          if (item.getAttribute('aria-expanded') === 'true') {
+            panel.style.maxHeight = inner.scrollHeight + 'px';
+          }
+        });
+        ro.observe(inner);
+      }
     });
+  })();
 
-    // If user wants to click "Message on WhatsApp" after success, link already set.
-    // Also update tel links to include +91
-    document.getElementById('callBtn').href = 'tel:+917249960757';
-    document.getElementById('callDirect').href = 'tel:+917249960757';
+  /* Parallax for hero right-side */
+  (function(){
+    const right = document.querySelector('.right') || document.querySelector('.video-frame');
+    document.addEventListener('mousemove', (e)=>{
+      if(!right) return;
+      const w = window.innerWidth, h = window.innerHeight;
+      const x = (e.clientX - w/2)/w;
+      const y = (e.clientY - h/2)/h;
+      right.style.transform = `translate3d(${x*8}px, ${y*8}px, 0)`;
+    });
+  })();
 
-    // Accessibility: allow Enter on CTA to open form
-    [ctaEnroll, ctaCallback].forEach(btn=>{
+  /* Form + CTA integration (both lead-form and lead-section) */
+  (function(){
+    const whatsappNumber = '917249960757'; // +91 7249960757
+    /* Hero/CTA buttons that scroll to lead form and set source */
+    const heroEnroll = document.getElementById('hero-enroll');
+    const heroCurr = document.getElementById('hero-curr');
+    const ctaEnroll = document.getElementById('cta-enroll');
+    const ctaCallback = document.getElementById('cta-callback');
+    const ctaBadge = document.getElementById('cta-badge');
+    const ctaSelected = document.getElementById('cta-selected');
+    const leadSource = document.getElementById('lead-source');
+    const leadForm = document.getElementById('leadForm');
+    const leadSubmit = document.getElementById('leadSubmit');
+    const leadSuccess = document.getElementById('leadSuccess');
+    const leadWhats = document.getElementById('leadWhats');
+
+    // helper: scroll to form
+    function scrollToForm(source){
+      if(source) leadSource.value = source;
+      if(ctaBadge){ ctaBadge.style.display='inline-block'; ctaSelected.textContent = source; }
+      const el = document.getElementById('lead-form');
+      if(el) { el.scrollIntoView({behavior:'smooth', block:'center'}); setTimeout(()=>{ document.getElementById('l_fname').focus(); }, 600); }
+    }
+
+    // connect CTAs
+    [heroEnroll, heroCurr, ctaEnroll, ctaCallback].forEach(btn=>{
+      if(!btn) return;
+      btn.addEventListener('click', ()=> {
+        const src = btn.dataset.src || btn.dataset.source || 'cta';
+        scrollToForm(src);
+      });
       btn.addEventListener('keydown', function(e){
         if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
       });
     });
+
+    // validation
+    function validate(fields){
+      if(!fields.firstName || !fields.lastName) return 'Please enter full name.';
+      const digits = fields.phone.replace(/\D/g,'');
+      if(!/^\d{10,15}$/.test(digits)) return 'Please enter a valid phone number (digits only).';
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) return 'Please enter a valid email.';
+      return null;
+    }
+
+    function openWhatsAppMessage(data){
+      const mentor = data.mentor || 'Rukyya Mam';
+      const name = `${data.firstName} ${data.lastName}`;
+      const msg = `Hi ${mentor},%0A%0AI would like to enroll.%0A%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(data.phone)}%0AEmail: ${encodeURIComponent(data.email)}%0ACurrently trading: ${encodeURIComponent(data.trading)}%0ASource: ${encodeURIComponent(data.source)}%0A%0APlease contact me to proceed.`;
+      const waUrl = `https://wa.me/${whatsappNumber}?text=${msg}`;
+      window.open(waUrl, '_blank');
+      if(leadWhats) leadWhats.href = waUrl;
+      if(leadSuccess) leadSuccess.style.display = 'block';
+    }
+
+    // handle lead form submit
+    if(leadForm){
+      leadForm.addEventListener('submit', function(ev){
+        ev.preventDefault();
+        const fd = new FormData(leadForm);
+        const data = {
+          firstName: (fd.get('firstName') || '').trim(),
+          lastName: (fd.get('lastName') || '').trim(),
+          phone: (fd.get('phone') || '').trim(),
+          email: (fd.get('email') || '').trim(),
+          trading: fd.get('trading') || 'No',
+          mentor: fd.get('mentor') || 'Rukyya Mam',
+          source: fd.get('source') || 'direct'
+        };
+        const err = validate(data);
+        if(err){ alert(err); return; }
+        // UX
+        const old = leadSubmit.innerHTML;
+        leadSubmit.disabled = true;
+        leadSubmit.innerHTML = 'Opening WhatsApp...';
+        setTimeout(()=>{
+          openWhatsAppMessage(data);
+          leadSubmit.disabled = false;
+          leadSubmit.innerHTML = old;
+        }, 700);
+      });
+    }
+
+    // also ensure tel links are correct
+    const telEls = document.querySelectorAll('a[href^="tel:"]');
+    telEls.forEach(a => a.href = 'tel:+917249960757');
+
+    // If there are any other "enroll" links, set scroll
+    const pricingEnroll = document.getElementById('pricing-enroll');
+    if(pricingEnroll){
+      pricingEnroll.addEventListener('click', (e) => { e.preventDefault(); scrollToForm('pricing'); });
+    }
 
   })();
 </script>
