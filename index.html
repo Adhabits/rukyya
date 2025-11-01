@@ -16,6 +16,7 @@
     --glow-strong: 0 36px 80px rgba(217,177,75,0.18);
     --glow-soft: 0 14px 40px rgba(217,177,75,0.08);
     --radius:16px;
+    --sheen-color: rgba(255,255,255,0.12);
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#0b0c0d 0%, #0f1112 100%);color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
@@ -50,12 +51,69 @@
   .btn:hover{transform:translateY(-4px)}
 
   .stats{display:flex;gap:34px;align-items:flex-end;flex-wrap:wrap;margin-top:4px}
-  .stat{text-align:center}
+  .stat{text-align:center;position:relative}
   .stat .num{color:var(--accent);font-weight:800;font-size:26px}
   .stat .label{color:var(--muted);font-size:13px;margin-top:8px}
 
-  .video-frame{width:420px;max-width:45vw;height:360px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow-strong);display:flex;align-items:center;justify-content:center;position:relative;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
-  .video-frame.floaty{transform:translateY(0)}
+  /* CARD BASE STYLING (shared) */
+  .card {
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:14px;
+    position:relative;
+    overflow:hidden;
+    transition:transform .28s, box-shadow .28s;
+    border:1px solid rgba(217,177,75,0.04);
+  }
+
+  /* colored bottom glow using pseudo element for nicer shadow */
+  .card::after{
+    content:"";
+    position:absolute;
+    left:12px;right:12px;bottom:-18px;height:36px;
+    background:linear-gradient(90deg, rgba(217,177,75,0.14), rgba(217,177,75,0.06));
+    filter:blur(22px);
+    z-index:0;
+    border-radius:10px;
+    transform-origin:center;
+    opacity:0.9;
+  }
+  .card .card-inner{position:relative;z-index:2}
+
+  /* sheen effect (sliding light) */
+  .card::before{
+    content:"";
+    position:absolute;
+    top:-10%;
+    left:-120%;
+    width:60%;
+    height:120%;
+    background:linear-gradient(90deg, rgba(255,255,255,0.00) 0%, var(--sheen-color) 50%, rgba(255,255,255,0.00) 100%);
+    transform:skewX(-18deg);
+    transition:transform .8s cubic-bezier(.2,.9,.2,1), left .8s;
+    z-index:3;
+    pointer-events:none;
+    mix-blend-mode:overlay;
+  }
+  .card:hover::before{ left:120%; transform:skewX(-18deg) translateX(0); transition: left .7s cubic-bezier(.2,.9,.2,1) }
+
+  /* specific card types */
+  .feature-card { padding:36px; border-radius:18px; box-shadow:0 18px 46px rgba(0,0,0,0.55); }
+  .day-card { padding:22px 20px; border-radius:14px; box-shadow:0 16px 40px rgba(0,0,0,0.55); }
+  .bonus-card { padding:30px; border-radius:14px; box-shadow:0 16px 40px rgba(0,0,0,0.55); }
+  .mini-card { padding:18px 24px; border-radius:12px; box-shadow:0 12px 30px rgba(0,0,0,0.45); }
+
+  /* animated glow pulse for cards (subtle) */
+  .pulse {
+    animation:glowPulse 6s infinite;
+    will-change:box-shadow, transform;
+  }
+  @keyframes glowPulse{
+    0%{box-shadow:0 16px 36px rgba(217,177,75,0.06); transform:translateY(0);}
+    50%{box-shadow:0 36px 120px rgba(217,177,75,0.10); transform:translateY(-6px);}
+    100%{box-shadow:0 16px 36px rgba(217,177,75,0.06); transform:translateY(0);}
+  }
+
+  .video-frame{width:420px;max-width:45vw;height:360px;border-radius:18px;overflow:hidden;border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow-strong);display:flex;align-items:center;justify-content:center;position:relative;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
   .video-thumb{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;color:#fff;position:relative}
   .play-btn{width:64px;height:64px;border-radius:50%;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.05);cursor:pointer;position:absolute;bottom:20px;left:50%;transform:translateX(-50%)}
   .play-btn svg{width:32px;height:32px;fill:var(--accent)}
@@ -68,17 +126,6 @@
   .ticker.t3{left:12%;bottom:28%}
   .ticker.t4{right:18%;bottom:36%}
 
-  /* animated glow pulse for cards */
-  .pulse {
-    animation:glowPulse 3.2s infinite;
-    will-change:box-shadow;
-  }
-  @keyframes glowPulse{
-    0%{box-shadow: 0 18px 56px rgba(217,177,75,0.06)}
-    50%{box-shadow: 0 36px 120px rgba(217,177,75,0.14)}
-    100%{box-shadow: 0 18px 56px rgba(217,177,75,0.06)}
-  }
-
   /* ---------- STOP LOSING ---------- */
   .stop-losing-section{background:linear-gradient(180deg,#0f0f0f 0%, #121212 100%);text-align:center;padding:120px 0 100px}
   .stop-heading{font-size:54px;font-weight:800;font-family:Poppins,Inter;margin-bottom:30px}
@@ -89,40 +136,28 @@
   .why-section{text-align:center;padding:100px 0 120px;background:#0c0c0b}
   .why-section h2{font-size:36px;font-weight:700;margin-bottom:60px;color:#fff}
   .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1200px;margin:0 auto;padding:0 6%}
-  .feature-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:36px;border-radius:18px;transition:transform .28s ease, box-shadow .28s ease;box-shadow:0 10px 36px rgba(0,0,0,0.45);border:1px solid rgba(217,177,75,0.04)}
-  .feature-card:hover{transform:translateY(-8px);box-shadow:var(--glow-soft)}
-  .icon-circle{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
-  .icon-circle svg{fill:#111;width:32px;height:32px}
-  .feature-card h3{font-size:20px;font-weight:700;margin-bottom:10px;color:#fff}
-  .feature-card p{font-size:15px;color:#bbb;line-height:1.6}
+  .feature-card .icon-circle{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+  .feature-card .icon-circle svg{fill:#111;width:32px;height:32px}
+  .feature-card h3{font-size:20px;font-weight:700;margin-bottom:10px;color:#fff;position:relative;z-index:2}
+  .feature-card p{font-size:15px;color:#bbb;line-height:1.6;position:relative;z-index:2}
 
   /* ---------- 7-DAY BOOTCAMP (course schedule) ---------- */
   .bootcamp-section{padding:80px 0 60px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
   .bootcamp-section h2{font-size:34px;color:#f6f2e6;margin-bottom:28px}
   .bootcamp-grid{max-width:1200px;margin:0 auto;padding:0 6%;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .day-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:22px 20px;min-height:220px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45);position:relative;transition:transform .28s,box-shadow .28s}
-  .day-card:hover{transform:translateY(-6px);box-shadow:var(--glow-soft)}
+  .day-card{border:1px solid rgba(217,177,75,0.06)}
   .day-pill{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--card);padding:6px 14px;border-radius:20px;font-weight:700;color:var(--accent);border:1px solid rgba(217,177,75,0.12);font-size:13px}
-  .day-card h4{margin-top:18px;font-size:15px;font-weight:700;color:#fff}
-  .day-card ul{margin:12px 0 0;padding-left:16px;color:#cfcfcf;line-height:1.6;font-size:14px}
-  .day-card ul li{margin-bottom:8px}
+  .day-card h4{margin-top:18px;font-size:15px;font-weight:700;color:#fff;position:relative;z-index:2}
+  .day-card ul{margin:12px 0 0;padding-left:16px;color:#cfcfcf;line-height:1.6;font-size:14px;position:relative;z-index:2}
 
   /* ---------- BONUSES ---------- */
   .bonus-section{padding:80px 0 100px;background:linear-gradient(180deg,#0c0d0c 0%, #0b0b0b 100%);text-align:center}
   .bonus-section h2{font-size:34px;color:#f6f2e6;margin-bottom:12px}
   .bonus-section .lead{color:#bfbfbf;max-width:860px;margin:12px auto 40px;font-size:15px;line-height:1.7}
   .bonus-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:0 6%}
-  .bonus-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:30px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45);display:flex;flex-direction:column;align-items:center;min-height:200px;transition:transform .22s,box-shadow .22s}
-  .bonus-card:hover{transform:translateY(-6px);box-shadow:var(--glow-soft)}
-  .bonus-icon{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
-  .bonus-card h4{font-size:16px;margin-bottom:8px}
-  .bonus-price{color:var(--accent);font-weight:800;margin-bottom:10px}
-  .bonus-desc{color:#cfcfcf;font-size:13px;text-align:center;line-height:1.6}
-
+  .bonus-card h4{font-size:16px;margin-bottom:8px;position:relative;z-index:2}
+  .bonus-card .bonus-desc{position:relative;z-index:2}
   .bonus-cta{max-width:360px;margin:48px auto 0;background:linear-gradient(180deg,#0b0b0b,#101010);padding:26px;border-radius:14px;border:1px solid rgba(217,177,75,0.08);box-shadow:0 20px 60px rgba(217,177,75,0.06)}
-  .bonus-cta .ttl{font-weight:800;font-size:20px;color:#fff;margin-bottom:6px}
-  .bonus-cta .val{font-weight:900;color:var(--accent);font-size:26px;margin-bottom:8px}
-  .bonus-cta p{color:#c5c5c5;font-size:13px;margin-bottom:12px}
   .claim-btn{display:inline-block;padding:12px 22px;border-radius:40px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);transition:transform .18s}
   .claim-btn:hover{transform:translateY(-3px)}
 
@@ -131,33 +166,18 @@
   .about-section h2{font-size:34px;color:var(--accent);margin-bottom:18px}
   .about-section p{color:#cfcfcf;max-width:900px;margin:0 auto 18px;line-height:1.8}
   .stats-row{display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap}
-  .mini-card{border:1px solid rgba(217,177,75,0.08);padding:18px 24px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));min-width:130px}
-  .mini-card .k{font-weight:800;color:var(--accent);font-size:20px}
-  .mini-card .t{color:var(--muted);font-size:13px;margin-top:6px}
+  .mini-card{border:1px solid rgba(217,177,75,0.08);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));min-width:130px}
 
   .mission{margin:28px auto 6px;max-width:1000px;border-left:4px solid var(--accent);padding:18px;background:linear-gradient(90deg, rgba(217,177,75,0.03), transparent);color:#d9d7c5;border-radius:8px}
 
   /* ---------- TESTIMONIALS ---------- */
   .testimonials{padding:70px 0 60px;text-align:center;background:linear-gradient(180deg,#0c0b0b 0%, #0b0b0b 100%)}
-  .testimonials h2{font-size:32px;color:var(--accent);margin-bottom:24px}
   .test-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0 6%}
-  .test-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45)}
-  .stars{color:var(--accent);margin-bottom:10px}
-  .quote{font-size:14px;color:#d0d0d0;line-height:1.7;margin-bottom:14px;font-style:italic}
-  .author{font-weight:800;color:#fff;font-size:14px}
-  .role{color:var(--muted);font-size:12px}
+  .test-card{padding:22px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45)}
 
   /* ---------- PRICING CARD ---------- */
   .pricing-section{padding:80px 0 120px;text-align:center;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%)}
-  .pricing-section h2{font-size:34px;color:var(--accent);margin-bottom:18px}
-  .pricing-wrap{max-width:360px;margin:28px auto 0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow-strong)}
-  .badge-limited{position:relative;display:inline-block;background:var(--accent);color:#111;padding:6px 12px;border-radius:18px;font-weight:800;margin-bottom:8px;font-size:12px}
-  .price-old{color:var(--muted);text-decoration:line-through;font-size:14px}
-  .price{font-size:44px;font-weight:900;color:var(--accent);margin:6px 0}
-  .price-sub{color:#cfcfcf;font-size:13px;margin-bottom:12px}
-  .features-list{text-align:left;margin:14px 0 18px;padding-left:16px;color:#cfcfcf;line-height:1.7}
-  .features-list li{margin-bottom:8px}
-  .enroll-btn{display:inline-block;padding:12px 20px;border-radius:30px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);margin-top:12px}
+  .pricing-wrap{max-width:360px;margin:28px auto 0;padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow-strong)}
 
   /* ---------- INLINE FORM SECTION (hero-style) ---------- */
   .lead-section{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:start;padding:60px 0}
@@ -165,32 +185,27 @@
   .lead-left .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
   .lead-left .big-h{font-family:Poppins,Inter;font-size:44px;line-height:1.05;margin:8px 0 18px;color:#fff}
   .lead-left .sub{color:var(--muted);max-width:640px;font-size:16px;margin-bottom:22px}
-  .lead-form{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 24px 68px rgba(0,0,0,0.6)}
+  .lead-form{padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 24px 68px rgba(0,0,0,0.6)}
   .lead-form label{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
   .lead-form input[type="text"], .lead-form input[type="email"], .lead-form input[type="tel"]{width:100%;padding:12px 14px;border-radius:8px;border:1px solid rgba(217,177,75,0.12);background:transparent;color:#fff;font-size:14px;outline:none;margin-bottom:12px}
-  .lead-form .radio-group{margin-top:6px;margin-bottom:12px;color:var(--muted)}
-
-  .lead-form .submit-row{display:flex;gap:12px;align-items:center;margin-top:8px}
   .lead-form .submit-btn{flex:1;background:linear-gradient(180deg,var(--accent),var(--accent-dark));padding:12px 16px;border-radius:40px;color:#111;font-weight:800;border:none;cursor:pointer;box-shadow:var(--glow-soft)}
   .lead-form .call-btn{background:transparent;border:2px solid rgba(217,177,75,0.12);color:var(--accent);padding:10px 14px;border-radius:12px;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
-
   .note{color:var(--muted);font-size:13px;margin-top:10px}
 
-  /* ---------- FAQ (moved up a bit, corrected and animated) ---------- */
+  /* ---------- FAQ (animated & stacked) ---------- */
   .faq-section{padding:40px 0 80px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
   .faq-section h2{font-size:44px;color:var(--accent);margin-bottom:18px}
   .faq-wrap{max-width:1000px;margin:0 auto;padding:0 6%;}
-  .accordion-item{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border-radius:14px;border:2px solid rgba(217,177,75,0.12);margin-bottom:14px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.45);transition:transform .24s,box-shadow .24s}
-  .accordion-item[aria-expanded="true"]{transform:translateY(-6px);box-shadow:var(--glow-strong)}
-  .accordion-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;cursor:pointer}
+  .accordion-item{margin-bottom:14px;overflow:visible;position:relative;z-index:1;transition:transform .24s,box-shadow .24s}
+  .accordion-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;cursor:pointer;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border:1px solid rgba(217,177,75,0.08)}
   .accordion-header button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px}
   .q-text{font-weight:700;color:var(--accent);font-size:18px;text-align:left}
   .icon-round{width:40px;height:40px;border-radius:999px;background:linear-gradient(180deg,#1a1a1a,#101010);display:flex;align-items:center;justify-content:center;border:2px solid rgba(217,177,75,0.18);color:var(--accent);font-weight:900;transition:transform .2s}
-  .accordion-item[aria-expanded="true"] .icon-round{transform:rotate(180deg); background:var(--accent); color:#111; border-color:rgba(0,0,0,0.08)}
-  .panel{padding:0 18px;color:#d0d0d0;text-align:left;line-height:1.8;background:linear-gradient(180deg, rgba(217,177,75,0.01), transparent)}
+  .accordion-item.open{transform:translateY(-8px);box-shadow:var(--glow-strong)}
+  .accordion-item.open .icon-round{transform:rotate(180deg); background:var(--accent); color:#111; border-color:rgba(0,0,0,0.08)}
+  .panel{padding:0 18px;color:#d0d0d0;text-align:left;line-height:1.8;background:linear-gradient(180deg, rgba(217,177,75,0.01), transparent);border-radius:0 0 12px 12px}
   .panel-inner{padding:16px 0;margin:0}
 
-  /* collapse animation handled by max-height transitions */
   .panel-collapsed{max-height:0;overflow:hidden;transition:max-height .36s cubic-bezier(.2,.9,.2,1)}
   .panel-open{transition:max-height .36s cubic-bezier(.2,.9,.2,1);overflow:hidden}
 
@@ -272,7 +287,7 @@
       </div>
 
       <div class="stats" aria-hidden="true">
-        <!-- these will animate on scroll -->
+        <!-- animated and sequential -->
         <div class="stat pulse card-strong">
           <div class="num" data-target="15000" data-duration="1500">0</div>
           <div class="label">Students Enrolled</div>
@@ -289,8 +304,8 @@
     </div>
 
     <div class="right">
-      <div class="video-frame floaty pulse" id="previewCard" aria-hidden="true">
-        <div class="video-thumb">
+      <div class="video-frame floaty pulse card" id="previewCard" aria-hidden="true">
+        <div class="video-thumb card-inner">
           <div style="font-weight:800;font-size:16px;color:var(--accent)">Course Preview</div>
           <div style="color:var(--muted);font-size:13px;margin-top:8px;text-align:center;max-width:240px">12 modules • Live trading sessions • Proven strategies</div>
           <div class="play-btn" title="Play preview"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg></div>
@@ -321,28 +336,28 @@
   <div class="container">
     <h2>Why Choose Our Trading Course?</h2>
     <div class="features-grid">
-      <div class="feature-card">
-        <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M4 5h16v2H4zM4 10h16v2H4zM4 15h10v2H4z"/></svg></div>
-        <h3>Professional Strategies</h3>
-        <p>Learn the exact strategies used by institutional traders and hedge funds to generate consistent profits in any market condition.</p>
+      <div class="feature-card card">
+        <div class="card-inner">
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M4 5h16v2H4zM4 10h16v2H4zM4 15h10v2H4z"/></svg></div>
+          <h3>Professional Strategies</h3>
+          <p>Learn the exact strategies used by institutional traders and hedge funds to generate consistent profits in any market condition.</p>
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z"/></svg></div>
-        <h3>Risk Management Mastery</h3>
-        <p>Master advanced risk management techniques that protect your capital and ensure long-term trading success.</p>
+      <div class="feature-card card">
+        <div class="card-inner">
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z"/></svg></div>
+          <h3>Risk Management Mastery</h3>
+          <p>Master advanced risk management techniques that protect your capital and ensure long-term trading success.</p>
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 3.3-2.1 6.1-5 7v6h-4v-6c-2.9-.9-5-3.7-5-7a7 7 0 017-7z"/></svg></div>
-        <h3>Trading Psychology</h3>
-        <p>Develop the mental discipline and emotional control required to make rational decisions under pressure.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M17 10.5V6c0-1.1-.9-2-2-2H5C3.9 4 3 4.9 3 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-4.5l4 4V6.5l-4 4z"/></svg></div>
-        <h3>Live Trading Sessions</h3>
-        <p>Watch real trades unfold in live market conditions and learn to apply strategies in real-time scenarios.</p>
+      <div class="feature-card card">
+        <div class="card-inner">
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 3.3-2.1 6.1-5 7v6h-4v-6c-2.9-.9-5-3.7-5-7a7 7 0 017-7z"/></svg></div>
+          <h3>Trading Psychology</h3>
+          <p>Develop the mental discipline and emotional control required to make rational decisions under pressure.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -354,88 +369,102 @@
     <h2 style="text-align:center;margin-bottom:34px;color:#f6f2e6">7-Day Intensive Trading <span style="color:var(--accent)">Bootcamp</span></h2>
 
     <div class="bootcamp-grid">
-      <div class="day-card">
-        <div class="day-pill">Day 1</div>
-        <h4>Foundation & Market Basics</h4>
-        <ul>
-          <li>Forex vs Stocks comparison</li>
-          <li>Global Trading Sessions overview</li>
-          <li>Why Forex Wins for beginners</li>
-          <li>Market fundamentals and structure</li>
-          <li>Getting started mindset</li>
-        </ul>
+      <div class="day-card card">
+        <div class="card-inner">
+          <div class="day-pill">Day 1</div>
+          <h4>Foundation & Market Basics</h4>
+          <ul>
+            <li>Forex vs Stocks comparison</li>
+            <li>Global Trading Sessions overview</li>
+            <li>Why Forex Wins for beginners</li>
+            <li>Market fundamentals and structure</li>
+            <li>Getting started mindset</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="day-card">
-        <div class="day-pill">Day 2</div>
-        <h4>Core Concepts to Trade Confidently</h4>
-        <ul>
-          <li>Lot Size calculation and management</li>
-          <li>Understanding Spread mechanics</li>
-          <li>Leverage principles and applications</li>
-          <li>Margin requirements and safety</li>
-          <li>Stop Loss and Order Types mastery</li>
-        </ul>
+      <div class="day-card card">
+        <div class="card-inner">
+          <div class="day-pill">Day 2</div>
+          <h4>Core Concepts to Trade Confidently</h4>
+          <ul>
+            <li>Lot Size calculation and management</li>
+            <li>Understanding Spread mechanics</li>
+            <li>Leverage principles and applications</li>
+            <li>Margin requirements and safety</li>
+            <li>Stop Loss and Order Types mastery</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="day-card">
-        <div class="day-pill">Day 3</div>
-        <h4>Live Trading Walkthrough + Platform Basics</h4>
-        <ul>
-          <li>MT5 platform comprehensive setup</li>
-          <li>Order Placement step-by-step guide</li>
-          <li>Risk Management in live action</li>
-          <li>Platform tools and features</li>
-          <li>Real-time trading demonstration</li>
-        </ul>
+      <div class="day-card card">
+        <div class="card-inner">
+          <div class="day-pill">Day 3</div>
+          <h4>Live Trading Walkthrough + Platform Basics</h4>
+          <ul>
+            <li>MT5 platform comprehensive setup</li>
+            <li>Order Placement step-by-step guide</li>
+            <li>Risk Management in live action</li>
+            <li>Platform tools and features</li>
+            <li>Real-time trading demonstration</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="day-card">
-        <div class="day-pill">Day 4</div>
-        <h4>Chart Analysis & Indicators</h4>
-        <ul>
-          <li>Candlesticks patterns and reading</li>
-          <li>Chart Types and their applications</li>
-          <li>Trend Analysis identification</li>
-          <li>Perfect Entries & Exits timing</li>
-          <li>Technical indicators integration</li>
-        </ul>
+      <div class="day-card card">
+        <div class="card-inner">
+          <div class="day-pill">Day 4</div>
+          <h4>Chart Analysis & Indicators</h4>
+          <ul>
+            <li>Candlesticks patterns and reading</li>
+            <li>Chart Types and their applications</li>
+            <li>Trend Analysis identification</li>
+            <li>Perfect Entries & Exits timing</li>
+            <li>Technical indicators integration</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="day-card">
-        <div class="day-pill">Day 5</div>
-        <h4>Strategy Day – 21+ Proven Forex Setups</h4>
-        <ul>
-          <li>Double Top/Bottom pattern strategies</li>
-          <li>Support-Resistance level trading</li>
-          <li>Supply & Demand zone identification</li>
-          <li>Multiple high-probability setups</li>
-          <li>Strategy backtesting and validation</li>
-        </ul>
+      <div class="day-card card">
+        <div class="card-inner">
+          <div class="day-pill">Day 5</div>
+          <h4>Strategy Day – 21+ Proven Forex Setups</h4>
+          <ul>
+            <li>Double Top/Bottom pattern strategies</li>
+            <li>Support-Resistance level trading</li>
+            <li>Supply & Demand zone identification</li>
+            <li>Multiple high-probability setups</li>
+            <li>Strategy backtesting and validation</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="day-card">
-        <div class="day-pill">Day 6</div>
-        <h4>Fundamental & Sentiment Analysis</h4>
-        <ul>
-          <li>Major News Events impact analysis</li>
-          <li>NFP and economic calendar mastery</li>
-          <li>Impactful Reports interpretation</li>
-          <li>Sentiment Triggers identification</li>
-          <li>News trading strategies and timing</li>
-        </ul>
+      <div class="day-card card">
+        <div class="card-inner">
+          <div class="day-pill">Day 6</div>
+          <h4>Fundamental & Sentiment Analysis</h4>
+          <ul>
+            <li>Major News Events impact analysis</li>
+            <li>NFP and economic calendar mastery</li>
+            <li>Impactful Reports interpretation</li>
+            <li>Sentiment Triggers identification</li>
+            <li>News trading strategies and timing</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="day-card">
-        <div class="day-pill">Day 7</div>
-        <h4>Go Live + Broker Account Setup</h4>
-        <ul>
-          <li>Transition from demo to live trading</li>
-          <li>Broker account setup walkthrough</li>
-          <li>Real trade execution with guidance</li>
-          <li>Exclusive bonuses and offers</li>
-          <li>Ongoing support and community access</li>
-        </ul>
+      <div class="day-card card">
+        <div class="card-inner">
+          <div class="day-pill">Day 7</div>
+          <h4>Go Live + Broker Account Setup</h4>
+          <ul>
+            <li>Transition from demo to live trading</li>
+            <li>Broker account setup walkthrough</li>
+            <li>Real trade execution with guidance</li>
+            <li>Exclusive bonuses and offers</li>
+            <li>Ongoing support and community access</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -448,39 +477,31 @@
     <p class="lead">Join the 7-Day Live Forex bootcamp and unlock exclusive tools, templates, and expert support designed to fast-track your success — available only to the first 50 confirmed joinees.</p>
 
     <div class="bonus-grid">
-      <div class="bonus-card">
-        <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M5 4h14v2H5zM5 8h14v2H5zM5 12h14v2H5z" fill="#111"/></svg></div>
-        <h4>Ready to Use Strategy Templates</h4>
-        <div class="bonus-price">₹2,000/-</div>
-        <div class="bonus-desc">Professional trading templates that you can implement immediately without any guesswork or setup time.</div>
+      <div class="bonus-card card">
+        <div class="card-inner">
+          <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M5 4h14v2H5zM5 8h14v2H5zM5 12h14v2H5z" fill="#111"/></svg></div>
+          <h4>Ready to Use Strategy Templates</h4>
+          <div class="bonus-price">₹2,000/-</div>
+          <div class="bonus-desc">Professional trading templates that you can implement immediately without any guesswork or setup time.</div>
+        </div>
       </div>
 
-      <div class="bonus-card">
-        <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z" fill="#111"/></svg></div>
-        <h4>Live Demo Account Setup Support</h4>
-        <div class="bonus-price">₹1,500/-</div>
-        <div class="bonus-desc">Personal assistance in setting up your demo trading account with optimal configurations for learning.</div>
+      <div class="bonus-card card">
+        <div class="card-inner">
+          <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z" fill="#111"/></svg></div>
+          <h4>Live Demo Account Setup Support</h4>
+          <div class="bonus-price">₹1,500/-</div>
+          <div class="bonus-desc">Personal assistance in setting up your demo trading account with optimal configurations for learning.</div>
+        </div>
       </div>
 
-      <div class="bonus-card">
-        <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M12 2a7 7 0 017 7c0 3.3-2.1 6.1-5 7v6h-4v-6c-2.9-.9-5-3.7-5-7a7 7 0 017-7z" fill="#111"/></svg></div>
-        <h4>Lifetime Telegram Support Group</h4>
-        <div class="bonus-price">₹3,000/-</div>
-        <div class="bonus-desc">Access to our exclusive Telegram community for ongoing support, trade discussions, and market updates.</div>
-      </div>
-
-      <div class="bonus-card">
-        <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M17 10.5V6c0-1.1-.9-2-2-2H5C3.9 4 3 4.9 3 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-4.5l4 4V6.5l-4 4z" fill="#111"/></svg></div>
-        <h4>Class Recordings (All 7 Days)</h4>
-        <div class="bonus-price">₹2,000/-</div>
-        <div class="bonus-desc">Complete recordings of all live sessions so you can revisit any concept or strategy whenever needed.</div>
-      </div>
-
-      <div class="bonus-card">
-        <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M12 2a2 2 0 110 4 2 2 0 010-4zm-6 8h12v2H6zm0 4h12v2H6z" fill="#111"/></svg></div>
-        <h4>Beginner Friendly Trading Checklist</h4>
-        <div class="bonus-price">₹1,500/-</div>
-        <div class="bonus-desc">Comprehensive checklist to ensure you never miss critical steps in your trading routine and analysis.</div>
+      <div class="bonus-card card">
+        <div class="card-inner">
+          <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M12 2a7 7 0 017 7c0 3.3-2.1 6.1-5 7v6h-4v-6c-2.9-.9-5-3.7-5-7a7 7 0 017-7z" fill="#111"/></svg></div>
+          <h4>Lifetime Telegram Support Group</h4>
+          <div class="bonus-price">₹3,000/-</div>
+          <div class="bonus-desc">Access to our exclusive Telegram community for ongoing support, trade discussions, and market updates.</div>
+        </div>
       </div>
     </div>
 
@@ -501,17 +522,23 @@
     <p>We don't just teach theory. We provide practical, actionable training, real-time trade analysis, expert consultation, and hand-holding support that helps traders build skill, confidence, and consistent income.</p>
 
     <div class="stats-row" role="list" aria-label="Key stats">
-      <div class="mini-card" role="listitem">
-        <div class="k">50+</div>
-        <div class="t">Expert Mentors</div>
+      <div class="mini-card card" role="listitem">
+        <div class="card-inner">
+          <div class="k">50+</div>
+          <div class="t">Expert Mentors</div>
+        </div>
       </div>
-      <div class="mini-card" role="listitem">
-        <div class="k">20,000+</div>
-        <div class="t">Empowered Individuals</div>
+      <div class="mini-card card" role="listitem">
+        <div class="card-inner">
+          <div class="k">20,000+</div>
+          <div class="t">Empowered Individuals</div>
+        </div>
       </div>
-      <div class="mini-card" role="listitem">
-        <div class="k">100%</div>
-        <div class="t">Transparent</div>
+      <div class="mini-card card" role="listitem">
+        <div class="card-inner">
+          <div class="k">100%</div>
+          <div class="t">Transparent</div>
+        </div>
       </div>
     </div>
 
@@ -526,25 +553,31 @@
   <div class="container">
     <h2>Student Success Stories</h2>
     <div class="test-grid">
-      <div class="test-card">
-        <div class="stars">★★★★★</div>
-        <div class="quote">"This course completely transformed my trading approach. I went from losing ₹8,000 in my first year to making ₹20,000 profit in just 6 months after completing WiFiMoney."</div>
-        <div class="author">Tanishka Chauhan</div>
-        <div class="role">Software Engineer — Full-time Trader</div>
+      <div class="test-card card">
+        <div class="card-inner">
+          <div class="stars">★★★★★</div>
+          <div class="quote">"This course completely transformed my trading approach. I went from losing ₹8,000 in my first year to making ₹20,000 profit in just 6 months after completing WiFiMoney."</div>
+          <div class="author">Tanishka Chauhan</div>
+          <div class="role">Software Engineer — Full-time Trader</div>
+        </div>
       </div>
 
-      <div class="test-card">
-        <div class="stars">★★★★★</div>
-        <div class="quote">"The risk management module alone saved me from bankruptcy. Now I trade with confidence, knowing exactly how to protect my capital."</div>
-        <div class="author">Rahul Tiwari</div>
-        <div class="role">Business Owner — Profitable Trader</div>
+      <div class="test-card card">
+        <div class="card-inner">
+          <div class="stars">★★★★★</div>
+          <div class="quote">"The risk management module alone saved me from bankruptcy. Now I trade with confidence, knowing exactly how to protect my capital."</div>
+          <div class="author">Rahul Tiwari</div>
+          <div class="role">Business Owner — Profitable Trader</div>
+        </div>
       </div>
 
-      <div class="test-card">
-        <div class="stars">★★★★★</div>
-        <div class="quote">"The live trading sessions are pure gold. Watching the instructor trade in real-time and explaining every decision taught me more than years of YouTube videos."</div>
-        <div class="author">Michael Rodriguez</div>
-        <div class="role">Financial Analyst — Independent Trader</div>
+      <div class="test-card card">
+        <div class="card-inner">
+          <div class="stars">★★★★★</div>
+          <div class="quote">"The live trading sessions are pure gold. Watching the instructor trade in real-time and explaining every decision taught me more than years of YouTube videos."</div>
+          <div class="author">Michael Rodriguez</div>
+          <div class="role">Financial Analyst — Independent Trader</div>
+        </div>
       </div>
     </div>
   </div>
@@ -555,8 +588,8 @@
   <div class="container">
     <h2>Secure Your Trading Future Today</h2>
 
-    <div class="pricing-wrap" role="region" aria-label="Special offer">
-      <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-direction:column">
+    <div class="pricing-wrap card" role="region" aria-label="Special offer">
+      <div class="card-inner" style="display:flex;align-items:center;justify-content:center;gap:12px;flex-direction:column">
         <div class="badge-limited">LIMITED TIME OFFER</div>
         <div class="price-old">₹9,999</div>
         <div class="price">₹499</div>
@@ -656,7 +689,7 @@
     <div class="faq-wrap" role="list">
 
       <!-- Item 1 (open by default) -->
-      <div class="accordion-item" role="listitem" aria-expanded="true">
+      <div class="accordion-item card" role="listitem" aria-expanded="true">
         <div class="accordion-header">
           <button aria-controls="panel1" aria-expanded="true" type="button">
             <div class="q-text">Do I need prior trading experience to enroll?</div>
@@ -671,7 +704,7 @@
       </div>
 
       <!-- Item 2 -->
-      <div class="accordion-item" role="listitem" aria-expanded="false">
+      <div class="accordion-item card" role="listitem" aria-expanded="false">
         <div class="accordion-header">
           <button aria-controls="panel2" aria-expanded="false" type="button">
             <div class="q-text">How much capital do I need to start trading?</div>
@@ -686,7 +719,7 @@
       </div>
 
       <!-- Item 3 -->
-      <div class="accordion-item" role="listitem" aria-expanded="false">
+      <div class="accordion-item card" role="listitem" aria-expanded="false">
         <div class="accordion-header">
           <button aria-controls="panel3" aria-expanded="false" type="button">
             <div class="q-text">How long does it take to complete the course?</div>
@@ -701,7 +734,7 @@
       </div>
 
       <!-- Item 4 -->
-      <div class="accordion-item" role="listitem" aria-expanded="false">
+      <div class="accordion-item card" role="listitem" aria-expanded="false">
         <div class="accordion-header">
           <button aria-controls="panel4" aria-expanded="false" type="button">
             <div class="q-text">Is there ongoing support after course completion?</div>
@@ -716,7 +749,7 @@
       </div>
 
       <!-- Item 5 -->
-      <div class="accordion-item" role="listitem" aria-expanded="false">
+      <div class="accordion-item card" role="listitem" aria-expanded="false">
         <div class="accordion-header">
           <button aria-controls="panel5" aria-expanded="false" type="button">
             <div class="q-text">What makes this course different from free YouTube content?</div>
@@ -737,33 +770,24 @@
 <script>
   /* Respect reduce motion */
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.fade-up, .pulse').forEach(el => { el.style.animation = 'none'; el.style.opacity = 1; el.style.transform = 'none'; });
+    document.querySelectorAll('.fade-up, .pulse, .card::before').forEach(el => { if(el.style) { el.style.animation = 'none'; el.style.opacity = 1; el.style.transform = 'none'; } });
   }
 
-  /* COUNT-UP animation for stats when visible */
+  /* COUNT-UP animation for stats when visible — sequential with small delays */
   (function(){
-    const nodes = document.querySelectorAll('.num[data-target]');
-    if(!nodes.length){
-      // also support older stat markup (if string numbers are present)
-      document.querySelectorAll('.stat .num').forEach(n=>{
-        if(!n.dataset.target && /^\d+$/.test(n.textContent.replace(/\D/g,''))){
-          n.dataset.target = n.textContent.replace(/\D/g,'');
-        }
-      });
-    }
-    const els = document.querySelectorAll('.num[data-target]');
+    const els = Array.from(document.querySelectorAll('.num[data-target]'));
     if(!els.length) return;
 
     function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
 
-    function animate(el){
+    function animate(el, duration){
       const raw = el.dataset.target;
       const decimals = parseInt(el.dataset.decimals || '0', 10);
-      const duration = parseInt(el.dataset.duration || '1400', 10);
+      const dur = parseInt(el.dataset.duration || String(duration || 1400), 10);
       const target = parseFloat(raw);
       const start = performance.now();
       function frame(now){
-        const p = Math.min((now - start) / duration, 1);
+        const p = Math.min((now - start) / dur, 1);
         const val = easeOutCubic(p) * target;
         el.textContent = (decimals ? val.toFixed(decimals) : Math.round(val)).toString();
         if(p < 1) requestAnimationFrame(frame);
@@ -774,25 +798,35 @@
     const io = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if(entry.isIntersecting){
-          animate(entry.target);
-          obs.unobserve(entry.target);
+          // animate sequentially based on index
+          const startIndex = els.indexOf(entry.target);
+          // if not found fallback to 0
+          const index = Math.max(0, startIndex);
+          // schedule animation for this and the ones after it with small stagger
+          for(let i = index; i < els.length; i++){
+            const delay = (i - index) * 180; // 180ms stagger
+            setTimeout(()=> animate(els[i]), delay);
+            // unobserve after scheduled
+            obs.unobserve(els[i]);
+          }
         }
       });
-    }, {threshold:0.6});
+    }, {threshold:0.55});
 
-    els.forEach(el=> io.observe(el));
+    els.forEach(el => io.observe(el));
   })();
 
-  /* Accordion logic - independent toggles (multiple open), with max-height animation */
+  /* Accordion logic with stacking & scroll into view */
   (function(){
-    const items = document.querySelectorAll('.accordion-item');
+    const items = Array.from(document.querySelectorAll('.accordion-item'));
+    let zCounter = 100; // starting z-index for stacking
     items.forEach(item => {
       const btn = item.querySelector('.accordion-header button');
       const panel = item.querySelector('.panel');
       const icon = item.querySelector('.icon-round');
       const inner = panel.querySelector('.panel-inner');
 
-      // initialize panels based on aria-expanded
+      // initialize panels
       const isOpen = item.getAttribute('aria-expanded') === 'true';
       if (isOpen) {
         panel.style.maxHeight = inner.scrollHeight + 'px';
@@ -800,6 +834,8 @@
         panel.setAttribute('aria-hidden','false');
         icon.textContent = '−';
         btn.setAttribute('aria-expanded','true');
+        item.classList.add('open');
+        item.style.zIndex = String(zCounter++);
       } else {
         panel.style.maxHeight = '0px';
         panel.classList.remove('panel-open'); panel.classList.add('panel-collapsed');
@@ -808,27 +844,36 @@
         btn.setAttribute('aria-expanded','false');
       }
 
-      // toggle handler
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', async () => {
         const currentlyOpen = item.getAttribute('aria-expanded') === 'true';
         if (!currentlyOpen) {
+          // open this
           item.setAttribute('aria-expanded','true');
           panel.classList.remove('panel-collapsed'); panel.classList.add('panel-open');
           panel.style.maxHeight = inner.scrollHeight + 'px';
           panel.setAttribute('aria-hidden','false');
           icon.textContent = '−';
           btn.setAttribute('aria-expanded','true');
+          item.classList.add('open');
+          // bring to front for stacking
+          item.style.zIndex = String(zCounter++);
+          // scroll to center the opened item for better effect
+          setTimeout(() => {
+            item.scrollIntoView({behavior:'smooth', block:'center'});
+          }, 120);
         } else {
+          // close this
           item.setAttribute('aria-expanded','false');
           panel.classList.remove('panel-open'); panel.classList.add('panel-collapsed');
           panel.style.maxHeight = '0px';
           panel.setAttribute('aria-hidden','true');
           icon.textContent = '+';
           btn.setAttribute('aria-expanded','false');
+          item.classList.remove('open');
         }
       });
 
-      // update maxHeight on content resize
+      // ensure panel height updates if content changes
       if (window.ResizeObserver && inner) {
         const ro = new ResizeObserver(() => {
           if (item.getAttribute('aria-expanded') === 'true') {
@@ -844,15 +889,13 @@
   (function(){
     const preview = document.getElementById('previewCard');
     if(preview){
-      // gentle float (CSS animation fallback)
       preview.style.animation = 'floaty 6s ease-in-out infinite';
-      // pointer parallax
-      document.addEventListener('mousemove', (e)=>{
+      document.addEventListener('mousemove', throttle((e)=>{
         const w = window.innerWidth, h = window.innerHeight;
         const x = (e.clientX - w/2)/w;
         const y = (e.clientY - h/2)/h;
-        preview.style.transform = `translate3d(${x*8}px, ${y*8}px, 0)`;
-      });
+        preview.style.transform = `translate3d(${x*10}px, ${y*10}px, 0)`;
+      }, 12));
     }
   })();
 
@@ -947,10 +990,16 @@
 
   })();
 
-  /* Small throttle helper */
+  /* Simple throttle */
   function throttle(fn, wait){
-    let t = 0;
-    return function(...a){ const now = Date.now(); if(now - t > wait){ t = now; fn(...a); } };
+    let last = 0;
+    return function(...args){
+      const now = Date.now();
+      if(now - last >= (wait || 50)){
+        last = now;
+        fn.apply(this, args);
+      }
+    };
   }
 </script>
 
