@@ -13,22 +13,23 @@
     --muted:#a6b0b4;
     --card:#0d0e0f;
     --glass: rgba(255,255,255,0.02);
-    --glow: 0 18px 48px rgba(217,177,75,0.12);
-    --radius:14px;
+    --glow-strong: 0 30px 80px rgba(217,177,75,0.16);
+    --glow-soft: 0 14px 40px rgba(217,177,75,0.08);
+    --radius:16px;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;height:100%;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#0b0c0d 0%, #0f1112 100%);color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#0b0c0d 0%, #0f1112 100%);color:#fff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; overflow-x:hidden}
 
-  .container{max-width:1200px;margin:0 auto;padding:0 6%;}
+  .container{max-width:1200px;margin:0 auto;padding:0 6%;position:relative;z-index:2}
 
-  /* subtle page grid */
-  .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(0deg, rgba(255,255,255,0.02) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);background-size:80px 80px;opacity:.08;mix-blend-mode:overlay}
+  /* Grid bg */
+  .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(0deg, rgba(255,255,255,0.02) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);background-size:80px 80px;opacity:.08}
 
-  /* HERO */
-  header.hero{position:relative;z-index:2;padding:60px 0 20px}
-  .hero-inner{display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap}
+  /* ---------- HERO ---------- */
+  header.hero{padding:64px 0 20px}
+  .hero-inner{display:flex;gap:36px;align-items:flex-start;flex-wrap:wrap}
   .left{flex:1 1 640px;min-width:260px}
-  .right{flex:0 0 420px;min-width:240px}
+  .right{flex:0 0 460px;min-width:260px;display:flex;justify-content:center;align-items:flex-start}
 
   .logo-wrap{display:flex;gap:12px;align-items:center;margin-bottom:12px}
   .logo{width:68px;height:68px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.04)}
@@ -36,102 +37,105 @@
 
   .badge{font-family:Poppins,Inter;color:var(--accent);padding:6px 12px;border-radius:20px;font-weight:700;font-size:13px;border:1px solid rgba(217,177,75,0.08)}
 
-  .hero-h{font-family:Poppins,Inter;font-weight:900;font-size:52px;line-height:1;margin:6px 0 12px}
+  .hero-h{font-family:Poppins,Inter;font-weight:900;font-size:56px;line-height:1;margin:6px 0 12px;animation:fadeUp .6s .08s both}
   .hero-h .gold{color:var(--accent)}
-  .sub{color:var(--muted);max-width:760px;font-size:16px;line-height:1.6;margin-bottom:22px}
+  .sub{color:var(--muted);max-width:760px;font-size:16px;line-height:1.6;margin-bottom:22px;opacity:.95;animation:fadeUp .6s .14s both}
 
   .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-  .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:40px;font-weight:800;cursor:pointer;text-decoration:none;border:none}
-  .btn-cta{background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:44px;font-weight:800;cursor:pointer;text-decoration:none;border:none;transform:translateZ(0);transition:transform .25s ease,box-shadow .25s ease}
+  .btn-cta{background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;box-shadow:var(--glow-soft)}
   .btn-ghost{background:transparent;color:var(--accent);border:2px solid rgba(217,177,75,0.12)}
 
-  /* CARD GLASS + ACCENT SHADOW everywhere */
-  .card {
+  /* Right preview card — bigger animated shadow and floating */
+  .preview-card{
+    width:420px;max-width:92%;border-radius:20px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(217,177,75,0.06);
+    box-shadow:var(--glow-strong);transform:translateY(0);transition:transform .45s cubic-bezier(.2,.9,.2,1);
+    position:relative;overflow:hidden
+  }
+  .preview-thumb{height:260px;border-radius:12px;background:#0c0d0e;display:flex;align-items:center;justify-content:center;color:#ddd;font-weight:800}
+  .preview-play{width:76px;height:76px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:900;font-size:20px;box-shadow:0 18px 50px rgba(217,177,75,0.16)}
+  .preview-meta{margin-top:12px;color:var(--muted);font-size:13px;text-align:center}
+
+  /* accent boxes with stronger glow/shadow (as requested) */
+  .card-strong {
     background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     border-radius:14px;
     border:1px solid rgba(217,177,75,0.06);
-    box-shadow: 0 18px 48px rgba(0,0,0,0.6), 0 10px 30px rgba(217,177,75,0.06);
+    box-shadow: 0 36px 80px rgba(217,177,75,0.18), 0 12px 30px rgba(217,177,75,0.08);
     transition:transform .28s,box-shadow .28s;
   }
-  .card:hover{transform:translateY(-6px);box-shadow:var(--glow)}
+  .card-strong:hover{transform:translateY(-10px)}
 
-  /* FEATURES / DAY CARDS / BONUS / TESTIMONIALS all use .card */
-  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:16px}
-  .feature-card{padding:28px;text-align:center}
+  /* ---------- STATS with count up ---------- */
+  .stats{display:flex;gap:26px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .stat{min-width:120px;text-align:center;padding:14px;border-radius:12px}
+  .stat .num{color:var(--accent);font-weight:900;font-size:34px;display:block}
+  .stat .label{color:var(--muted);font-size:13px;margin-top:6px}
+
+  /* ---------- FEATURES / BOOTCAMP / BONUSES ---------- */
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:22px}
+  .feature-card{padding:24px;text-align:center}
   .icon-circle{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24)}
   .feature-card h3{font-size:18px;margin:6px 0}
   .feature-card p{color:#cfcfcf;font-size:14px;line-height:1.6}
 
-  /* DAY CARDS */
-  .bootcamp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-  .day-card{padding:18px;min-height:200px;position:relative}
-  .day-pill{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--card);padding:6px 12px;border-radius:20px;font-weight:800;color:var(--accent);border:1px solid rgba(217,177,75,0.12)}
+  .bootcamp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:14px}
+  .day-card{padding:18px;min-height:200px;border-radius:12px}
+  .day-pill{position:relative;display:inline-block;background:var(--card);padding:6px 12px;border-radius:20px;font-weight:800;color:var(--accent);border:1px solid rgba(217,177,75,0.12);margin-bottom:8px}
 
-  /* BONUS / TESTIMONIALS */
-  .bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-  .bonus-card{padding:22px;min-height:180px;text-align:center}
-  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-  .test-card{padding:18px;min-height:150px}
+  .bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:14px}
+  .bonus-card{padding:18px;border-radius:12px;text-align:center}
 
-  /* PRICING */
-  .pricing-wrap{padding:24px;text-align:center}
+  /* ---------- PRICING ---------- */
+  .pricing-wrap{padding:24px;text-align:center;border-radius:14px}
 
-  /* STATS (with count up) */
-  .stats{display:flex;gap:26px;align-items:center;margin-top:10px;flex-wrap:wrap}
-  .stat{min-width:110px;text-align:center}
-  .stat .num{color:var(--accent);font-weight:900;font-size:28px;display:block}
-  .stat .label{color:var(--muted);font-size:13px;margin-top:6px}
-
-  /* LEAD / FORM SECTION (left + right) */
-  .lead-section{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start;padding:40px 0}
+  /* ---------- LEAD / FORM ---------- */
+  .lead-section{display:grid;grid-template-columns:1fr 440px;gap:28px;align-items:start;padding:40px 0}
   @media(max-width:980px){ .lead-section{grid-template-columns:1fr} .lead-right{order:2} .lead-left{order:1} }
-
-  .lead-form{padding:22px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 16px 50px rgba(0,0,0,0.6);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+  .lead-form{padding:22px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 26px 60px rgba(0,0,0,0.6);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
   .lead-form label{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
-  .lead-form input[type="text"], .lead-form input[type="email"], .lead-form input[type="tel"]{width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(217,177,75,0.12);background:transparent;color:#fff;font-size:14px;margin-bottom:10px}
+  .lead-form input[type="text"], .lead-form input[type="email"], .lead-form input[type="tel"]{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(217,177,75,0.12);background:transparent;color:#fff;font-size:14px;margin-bottom:10px}
 
   .radio-group label{display:flex;align-items:center;gap:8px;color:var(--muted);margin-bottom:6px}
   .radio-group input{accent-color:var(--accent)}
 
   .submit-row{display:flex;gap:10px}
-  .submit-btn{flex:1;padding:12px 14px;border-radius:40px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));border:none;color:#111;font-weight:800;cursor:pointer}
-  .call-btn{padding:10px 12px;border-radius:10px;border:2px solid rgba(217,177,75,0.12);background:transparent;color:var(--accent);display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+  .submit-btn{flex:1;padding:12px 14px;border-radius:40px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));border:none;color:#111;font-weight:800;cursor:pointer;box-shadow:0 18px 46px rgba(217,177,75,0.12)}
+  .call-btn{padding:10px 14px;border-radius:12px;border:2px solid rgba(217,177,75,0.12);background:transparent;color:var(--accent);display:inline-flex;align-items:center;gap:8px;text-decoration:none}
 
   .note{color:var(--muted);font-size:13px;margin-top:10px}
 
-  /* FAQ */
-  .faq-section{padding:48px 0 100px;position:relative}
+  /* ---------- FAQ (stacking sticky headers + animated panels) ---------- */
+  .faq-section{padding:40px 0 100px}
   .faq-wrap{max-width:1000px;margin:0 auto;padding:0 6%}
-  .accordion-item{margin-bottom:12px;border-radius:12px;overflow:visible}
+  .accordion-item{margin-bottom:12px;position:relative}
   .accordion-header{
-    display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;cursor:pointer;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border:1px solid rgba(217,177,75,0.06);border-radius:12px;position:relative;z-index:1;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;cursor:pointer;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border:1px solid rgba(217,177,75,0.06);border-radius:12px;position:relative;z-index:1;transition:transform .22s,box-shadow .22s;
   }
-  /* make headers sticky inside faq-wrap so stacked effect happens */
-  .accordion-header.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0; /* sticks to top of faq-wrap area */
-  }
+  /* sticky headers inside the faq-wrap for stacking effect */
+  .accordion-header.sticky { position:-webkit-sticky; position:sticky; top:0; }
+  .accordion-header.card-sticky { box-shadow:var(--glow-soft); background:linear-gradient(180deg, rgba(12,12,12,0.98), rgba(10,10,10,0.96)); }
+
   .q-text{font-weight:800;color:var(--accent);font-size:16px}
   .icon-round{width:38px;height:38px;border-radius:999px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(217,177,75,0.18);color:var(--accent);font-weight:900;background:linear-gradient(180deg,#101010,#0b0b0b)}
-  .panel{background:linear-gradient(180deg, rgba(217,177,75,0.01), transparent);padding:0 18px;border-left:3px solid rgba(217,177,75,0.06);border-right:3px solid rgba(217,177,75,0.02);overflow:hidden}
+  .panel{background:linear-gradient(180deg, rgba(217,177,75,0.01), transparent);padding:0 18px;border-left:3px solid rgba(217,177,75,0.06);border-right:3px solid rgba(217,177,75,0.02);overflow:hidden;border-radius:0 0 12px 12px}
   .panel-inner{padding:14px 0;color:#dcd8c7;line-height:1.7}
 
-  /* collapsed/open */
   .panel-collapsed{max-height:0;transition:max-height .36s cubic-bezier(.2,.9,.2,1);overflow:hidden}
   .panel-open{transition:max-height .36s cubic-bezier(.2,.9,.2,1);overflow:hidden}
 
-  /* accent shadow under boxes (the visual change you asked) */
-  .accent-shadow { box-shadow: 0 18px 40px rgba(217,177,75,0.06), 0 6px 18px rgba(217,177,75,0.05); }
+  /* ---------- util & animation ---------- */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .fade-in{opacity:0;transform:translateY(10px);animation:fadeUp .6s .08s both}
 
-  /* small responsiveness */
-  @media(max-width:1100px){ .features-grid{grid-template-columns:repeat(2,1fr)} .bootcamp-grid{grid-template-columns:repeat(2,1fr)} .bonus-grid{grid-template-columns:repeat(2,1fr)} .test-grid{grid-template-columns:repeat(2,1fr)} .hero-h{font-size:40px} }
-  @media(max-width:800px){ .hero-inner{flex-direction:column} .right{width:100%;margin-top:18px} .hero-h{font-size:34px} .lead-section{grid-template-columns:1fr} }
-  @media(max-width:480px){ .hero-h{font-size:26px} .stat .num{font-size:22px} .accordion-header{padding:12px} }
+  /* responsive */
+  @media(max-width:1100px){ .features-grid{grid-template-columns:repeat(2,1fr)} .bootcamp-grid{grid-template-columns:repeat(2,1fr)} .bonus-grid{grid-template-columns:repeat(2,1fr)} .hero-h{font-size:46px} }
+  @media(max-width:800px){ .hero-inner{flex-direction:column} .right{order:2;width:100%;margin-top:18px} .hero-h{font-size:34px} .lead-section{grid-template-columns:1fr} .preview-card{width:100%} }
+  @media(max-width:480px){ .hero-h{font-size:26px} .stat .num{font-size:22px} .accordion-header{padding:12px} .lead-form{padding:16px} }
 
-  /* small visual helpers */
-  a { color: inherit; }
-  button { font: inherit; }
+  /* remove anchor default focus outline and replace with custom */
+  :focus{outline:none}
+  .focus-ring{box-shadow:0 0 0 4px rgba(217,177,75,0.12);border-radius:8px}
 </style>
 </head>
 <body>
@@ -162,123 +166,122 @@
           <button class="btn btn-ghost" id="hero-curr" data-src="curriculum">▶ VIEW CURRICULUM</button>
         </div>
 
-        <div class="stats" aria-hidden="true">
-          <div class="stat card accent-shadow">
-            <span class="num" data-target="15000">0</span>
+        <div class="stats" aria-hidden="true" style="margin-top:22px">
+          <div class="stat card-strong">
+            <span class="num" data-target="15000" data-duration="1400">0</span>
             <span class="label">Students Enrolled</span>
           </div>
-          <div class="stat card accent-shadow">
-            <span class="num" data-target="4.9" data-decimals="1">0</span>
+          <div class="stat card-strong">
+            <span class="num" data-target="4.9" data-decimals="1" data-duration="1200">0</span>
             <span class="label">Course Rating</span>
           </div>
-          <div class="stat card accent-shadow">
-            <span class="num" data-target="89">0</span>
+          <div class="stat card-strong">
+            <span class="num" data-target="89" data-duration="1200">0</span>
             <span class="label">Success Rate (%)</span>
           </div>
         </div>
       </div>
 
-      <div class="right card accent-shadow" aria-hidden="true" style="padding:18px;">
-        <div style="font-weight:800;font-size:16px;color:var(--accent)">Course Preview</div>
-        <div style="color:var(--muted);font-size:13px;margin-top:10px">12 modules • Live trading sessions • Proven strategies</div>
-        <div style="height:12px"></div>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <div style="flex:1;background:#0e0f10;border-radius:10px;padding:8px;color:#ddd;font-size:13px">Preview video thumbnail (replace with real)</div>
-          <div style="width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:900">▶</div>
+      <div class="right">
+        <div class="preview-card fade-in" id="previewCard" role="img" aria-label="Course preview">
+          <div class="preview-thumb" id="previewThumb">
+            Preview Video Thumbnail
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;margin-top:12px;gap:12px">
+            <div class="preview-play" aria-hidden="true">▶</div>
+            <div class="preview-meta">12 modules • Live trading sessions • Proven strategies</div>
+          </div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- WHY / FEATURES -->
-  <section style="padding:36px 0">
+  <!-- FEATURES -->
+  <section style="padding:32px 0">
     <div class="features-grid">
-      <div class="feature-card card accent-shadow">
+      <div class="feature-card card-strong">
         <div class="icon-circle"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M4 5h16v2H4zM4 10h16v2H4zM4 15h10v2H4z"/></svg></div>
         <h3>Professional Strategies</h3>
-        <p>Learn institutional-level setups and rules for consistent performance.</p>
+        <p>Learn institutional setups, high-probability entries and exit rules.</p>
       </div>
-
-      <div class="feature-card card accent-shadow">
+      <div class="feature-card card-strong">
         <div class="icon-circle"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z"/></svg></div>
         <h3>Risk Management</h3>
-        <p>Protect capital with proven position management and sizing rules.</p>
+        <p>Position sizing, stop logic and capital protection — trade without fear.</p>
       </div>
-
-      <div class="feature-card card accent-shadow">
+      <div class="feature-card card-strong">
         <div class="icon-circle"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M12 2a7 7 0 017 7c0 3.3-2.1 6.1-5 7v6h-4v-6c-2.9-.9-5-3.7-5-7a7 7 0 017-7z"/></svg></div>
         <h3>Trading Psychology</h3>
-        <p>Build the mental edge: discipline, routine and process for every trade.</p>
+        <p>Emotional control, routines and processes to execute perfectly.</p>
       </div>
     </div>
   </section>
 
-  <!-- 7-DAY BOOTCAMP -->
-  <section style="padding:22px 0">
+  <!-- BOOTCAMP -->
+  <section style="padding:20px 0">
     <h2 style="color:var(--accent);margin-bottom:12px">7-Day Intensive Bootcamp</h2>
     <div class="bootcamp-grid">
-      <div class="day-card card accent-shadow">
+      <div class="day-card card-strong">
         <div class="day-pill">Day 1</div>
-        <h4 style="margin-top:22px">Foundation & Market Basics</h4>
+        <h4 style="margin-top:18px">Foundation & Market Basics</h4>
         <ul style="color:#d1d1d1;margin-top:8px">
-          <li>Market structure, sessions, basics</li>
-          <li>Demo account walkthrough</li>
+          <li>Market structure & demo setup</li>
+          <li>Trading mindset</li>
         </ul>
       </div>
-      <div class="day-card card accent-shadow">
+      <div class="day-card card-strong">
         <div class="day-pill">Day 2</div>
-        <h4 style="margin-top:22px">Core Concepts</h4>
+        <h4 style="margin-top:18px">Core Concepts</h4>
         <ul style="color:#d1d1d1;margin-top:8px">
-          <li>Lot sizing, leverage, risk</li>
+          <li>Leverage, lot sizing, risk</li>
         </ul>
       </div>
-      <div class="day-card card accent-shadow">
+      <div class="day-card card-strong">
         <div class="day-pill">Day 3</div>
-        <h4 style="margin-top:22px">Live Platform Walkthrough</h4>
+        <h4 style="margin-top:18px">Live Platform</h4>
         <ul style="color:#d1d1d1;margin-top:8px">
-          <li>Orders, stops, entries, exits</li>
+          <li>Orders, stops, live demo</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- BONUSES -->
-  <section style="padding:22px 0">
+  <!-- BONUSES & PRICING -->
+  <section style="padding:20px 0">
     <h2 style="color:var(--accent);margin-bottom:8px">Bonuses</h2>
     <div class="bonus-grid">
-      <div class="bonus-card card accent-shadow">
+      <div class="bonus-card card-strong">
         <h4>Strategy Templates</h4>
-        <p style="color:#d1d1d1">Ready-to-use templates.</p>
+        <p style="color:#d1d1d1">Plug-and-play setups for instant implementation.</p>
       </div>
-      <div class="bonus-card card accent-shadow">
-        <h4>Demo Setup Support</h4>
-        <p style="color:#d1d1d1">We set it up with you.</p>
+      <div class="bonus-card card-strong">
+        <h4>Demo Setup Help</h4>
+        <p style="color:#d1d1d1">We help configure your demo account step-by-step.</p>
       </div>
-      <div class="bonus-card card accent-shadow">
-        <h4>Lifetime Group Access</h4>
-        <p style="color:#d1d1d1">Community & live Q&A.</p>
+      <div class="bonus-card card-strong">
+        <h4>Lifetime Community</h4>
+        <p style="color:#d1d1d1">Ongoing support & monthly live Q&A sessions.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:18px">
+      <div class="pricing-wrap card-strong" style="display:inline-block;padding:20px 26px">
+        <div style="font-weight:900;color:var(--accent);font-size:20px;margin-bottom:6px">LIMITED OFFER</div>
+        <div style="font-size:36px;font-weight:900;color:var(--accent)">₹499</div>
+        <div style="color:#d1d1d1;margin-top:6px">Complete course + lifetime access</div>
+        <div style="margin-top:12px">
+          <button id="pricing-enroll" class="btn btn-cta">🎓 ENROLL NOW</button>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PRICING -->
-  <section style="padding:22px 0;text-align:center">
-    <div class="pricing-wrap card accent-shadow" style="display:inline-block">
-      <div style="font-weight:800;color:var(--accent);margin-bottom:6px">LIMITED OFFER</div>
-      <div style="font-size:36px;font-weight:900;color:var(--accent)">₹499</div>
-      <div style="color:#d1d1d1">Complete course + lifetime access</div>
-      <div style="margin-top:12px">
-        <a id="pricing-enroll" class="btn btn-cta" href="#lead-form" style="text-decoration:none">🎓 ENROLL NOW</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- LEAD / FORM SECTION (final) -->
+  <!-- LEAD / FORM SECTION -->
   <section class="lead-section" id="lead-form" aria-labelledby="lead-h">
     <div class="lead-left">
       <div style="margin-bottom:6px"><div class="badge">#1 Trading Course 2025</div></div>
       <h2 id="lead-h" style="font-size:30px;margin:8px 0">Ready to Transform Your <span class="gold">Financial Future?</span></h2>
-      <p class="sub">Mentorship by <strong>Rukyya Mam</strong> included. Fill the quick form to connect directly via WhatsApp to +91 72499 60757.</p>
+      <p class="sub">Mentorship by <strong>Rukyya Mam</strong> included. Fill the quick form to connect directly via WhatsApp to <strong>+91 72499 60757</strong>.</p>
 
       <div style="margin-top:14px">
         <button class="btn btn-cta" id="cta-enroll" data-source="enroll" type="button">ENROLL NOW</button>
@@ -327,7 +330,7 @@
         <div class="success" id="leadSuccess" role="status" aria-live="polite" style="display:none;margin-top:12px">
           <p id="leadSuccessText">We opened WhatsApp to complete booking — if not, use the button below.</p>
           <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
-            <a id="leadWhats" class="claim-btn" style="background:linear-gradient(180deg,var(--accent),var(--accent-dark));padding:8px 12px;border-radius:12px;color:#111;text-decoration:none;font-weight:800" href="#" target="_blank" rel="noopener">Message on WhatsApp</a>
+            <a id="leadWhats" class="btn btn-cta" style="padding:8px 12px;border-radius:12px;color:#111;text-decoration:none;font-weight:800" href="#" target="_blank" rel="noopener">Message on WhatsApp</a>
             <a id="leadCallDirect" class="call-btn" href="tel:+917249960757">📞 Call +91 72499 60757</a>
           </div>
         </div>
@@ -340,31 +343,31 @@
     <h2 id="faq-h" style="text-align:center;color:var(--accent);margin-bottom:18px">Frequently Asked Questions</h2>
     <div class="faq-wrap" id="faqWrap" role="list">
       <div class="accordion-item" role="listitem" aria-expanded="true">
-        <div class="accordion-header sticky card" role="button" tabindex="0" aria-controls="panel1" aria-expanded="true">
+        <div class="accordion-header sticky card-strong" role="button" tabindex="0" aria-controls="panel1" aria-expanded="true">
           <div class="q-text">Do I need prior trading experience to enroll?</div>
           <div class="icon-round" aria-hidden="true">−</div>
         </div>
         <div id="panel1" class="panel panel-open" aria-hidden="false">
           <div class="panel-inner">
-            <p>No prior experience required! We start from the basics and guide you to advanced strategies. Most students begin at zero and progress step-by-step.</p>
+            <p>No prior experience required! We start from fundamentals and advance to institutional strategies. Most students begin from zero and progress step-by-step.</p>
           </div>
         </div>
       </div>
 
       <div class="accordion-item" role="listitem" aria-expanded="false">
-        <div class="accordion-header sticky card" role="button" tabindex="0" aria-controls="panel2" aria-expanded="false">
+        <div class="accordion-header sticky card-strong" role="button" tabindex="0" aria-controls="panel2" aria-expanded="false">
           <div class="q-text">How much capital do I need to start trading?</div>
           <div class="icon-round" aria-hidden="true">+</div>
         </div>
         <div id="panel2" class="panel panel-collapsed" aria-hidden="true">
           <div class="panel-inner">
-            <p>You can learn on demo accounts first and start live trading with as little as $500-$1000. We emphasise strict risk management.</p>
+            <p>You can learn on demo accounts and start live with $500–$1000. We teach strict risk management to protect capital.</p>
           </div>
         </div>
       </div>
 
       <div class="accordion-item" role="listitem" aria-expanded="false">
-        <div class="accordion-header sticky card" role="button" tabindex="0" aria-controls="panel3" aria-expanded="false">
+        <div class="accordion-header sticky card-strong" role="button" tabindex="0" aria-controls="panel3" aria-expanded="false">
           <div class="q-text">How long does the course take?</div>
           <div class="icon-round" aria-hidden="true">+</div>
         </div>
@@ -376,13 +379,13 @@
       </div>
 
       <div class="accordion-item" role="listitem" aria-expanded="false">
-        <div class="accordion-header sticky card" role="button" tabindex="0" aria-controls="panel4" aria-expanded="false">
+        <div class="accordion-header sticky card-strong" role="button" tabindex="0" aria-controls="panel4" aria-expanded="false">
           <div class="q-text">Do I get support after completion?</div>
           <div class="icon-round" aria-hidden="true">+</div>
         </div>
         <div id="panel4" class="panel panel-collapsed" aria-hidden="true">
           <div class="panel-inner">
-            <p>Yes — lifetime access to our community, monthly Q&As and continued mentorship opportunities.</p>
+            <p>Yes — lifetime community access, monthly Q&As and continued mentorship opportunities.</p>
           </div>
         </div>
       </div>
@@ -395,79 +398,74 @@
 <script>
 /* Respect reduced motion */
 if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  document.querySelectorAll('.card, .panel, .feature-card').forEach(el => el.style.transition = 'none');
+  document.querySelectorAll('*').forEach(el => el.style.transition = 'none');
 }
 
-/* COUNT-UP for stats when in view */
+/* COUNT-UP animation (animates when visible) */
 (function(){
-  const nums = document.querySelectorAll('.num[data-target]');
-  if(!nums.length) return;
+  const nodes = document.querySelectorAll('.num[data-target]');
+  if(!nodes.length) return;
 
-  function animateCount(el){
-    const targetRaw = el.dataset.target;
+  const defaultDuration = 1400;
+  function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+
+  function animate(el){
+    const raw = el.dataset.target;
     const decimals = parseInt(el.dataset.decimals || '0', 10);
-    const target = parseFloat(targetRaw);
-    const duration = 1400; // ms
+    const duration = parseInt(el.dataset.duration || defaultDuration, 10);
+    const target = parseFloat(raw);
     const start = performance.now();
     const from = 0;
 
-    function step(ts){
-      const p = Math.min((ts - start) / duration, 1);
-      const val = from + (target - from) * easeOutQuad(p);
-      el.textContent = (decimals ? val.toFixed(decimals) : Math.round(val)).toString();
-      if(p < 1) requestAnimationFrame(step);
+    function frame(now){
+      const p = Math.min((now - start) / duration, 1);
+      const eased = easeOutCubic(p);
+      const value = from + (target - from) * eased;
+      el.textContent = (decimals ? value.toFixed(decimals) : Math.round(value)).toString();
+      if(p < 1) requestAnimationFrame(frame);
     }
-    requestAnimationFrame(step);
+    requestAnimationFrame(frame);
   }
-  function easeOutQuad(t){ return t*(2-t); }
 
-  const io = new IntersectionObserver((entries, obs)=>{
-    entries.forEach(entry=>{
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
       if(entry.isIntersecting){
-        const el = entry.target;
-        animateCount(el);
-        obs.unobserve(el);
+        animate(entry.target);
+        obs.unobserve(entry.target);
       }
     });
-  }, {threshold: 0.6});
-
-  nums.forEach(n => io.observe(n));
+  }, {threshold:0.6});
+  nodes.forEach(n => io.observe(n));
 })();
 
-/* Accordion behaviour: independent toggles + sticky headers stacking */
+/* Accordion logic - independent toggles + sticky stacking effect */
 (function(){
   const faqWrap = document.getElementById('faqWrap');
+  if(!faqWrap) return;
   const items = faqWrap.querySelectorAll('.accordion-item');
-  items.forEach((item, index) => {
+
+  items.forEach((item, i) => {
     const header = item.querySelector('.accordion-header');
     const panel = item.querySelector('.panel');
     const inner = panel.querySelector('.panel-inner');
     const icon = header.querySelector('.icon-round');
 
-    // make header sticky by adding class (visual)
-    header.classList.add('sticky', 'card');
-
-    // initialise open state
+    // initialise
     const open = item.getAttribute('aria-expanded') === 'true';
     if(open){
       panel.style.maxHeight = inner.scrollHeight + 'px';
       panel.classList.remove('panel-collapsed'); panel.classList.add('panel-open');
-      panel.setAttribute('aria-hidden','false');
-      icon.textContent = '−';
+      panel.setAttribute('aria-hidden','false'); icon.textContent = '−';
       header.setAttribute('aria-expanded','true');
     } else {
       panel.style.maxHeight = '0px';
       panel.classList.remove('panel-open'); panel.classList.add('panel-collapsed');
-      panel.setAttribute('aria-hidden','true');
-      icon.textContent = '+';
+      panel.setAttribute('aria-hidden','true'); icon.textContent = '+';
       header.setAttribute('aria-expanded','false');
     }
 
-    // click + keyboard
-    header.addEventListener('click', toggle);
-    header.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
-    });
+    // make header sticky class applied for visual effect (browser handles stacking)
+    header.classList.add('sticky');
 
     function toggle(){
       const isOpen = item.getAttribute('aria-expanded') === 'true';
@@ -486,11 +484,17 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
         icon.textContent = '+';
         header.setAttribute('aria-expanded','false');
       }
+      // adjust stacking z-index order after toggle
+      updateHeaderZ();
     }
 
-    // watch content changes to update maxHeight if open
+    header.addEventListener('click', toggle);
+    header.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+
     if(window.ResizeObserver && inner){
-      const ro = new ResizeObserver(()=> {
+      const ro = new ResizeObserver(() => {
         if(item.getAttribute('aria-expanded') === 'true'){
           panel.style.maxHeight = inner.scrollHeight + 'px';
         }
@@ -499,24 +503,20 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
     }
   });
 
-  // Stacking effect: as headers become sticky they should stack in natural order.
-  // Browser handles stacking of multiple position:sticky elements; to ensure visual stacking order,
-  // increase z-index progressively on scroll based on position.
   const headers = faqWrap.querySelectorAll('.accordion-header');
   function updateHeaderZ(){
-    headers.forEach((h, i) => {
-      // compute distance from top of faqWrap
+    const wrapTop = faqWrap.getBoundingClientRect().top;
+    headers.forEach((h, idx) => {
       const r = h.getBoundingClientRect();
-      const wrapTop = faqWrap.getBoundingClientRect().top;
-      // if header is at or above wrap top, give higher z-index so it overlays newer ones
-      const z = (r.top <= wrapTop + 1) ? 1000 + (headers.length - i) : 100 + i;
+      // if header is sticky at top, give higher z to those higher in document order so they stack nicely
+      const z = (r.top <= wrapTop + 1) ? 1000 + (headers.length - idx) : 100 + idx;
       h.style.zIndex = z;
-      // also ensure background is solid when sticky to avoid ghosting
-      if(r.top <= wrapTop + 1) h.style.background = 'linear-gradient(180deg, rgba(15,15,15,0.98), rgba(12,12,12,0.96))';
-      else h.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01))';
+      if(r.top <= wrapTop + 1) { h.classList.add('card-sticky'); h.style.background = 'linear-gradient(180deg, rgba(12,12,12,0.98), rgba(10,10,10,0.96))'; }
+      else { h.classList.remove('card-sticky'); h.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01))'; }
     });
   }
-  document.addEventListener('scroll', throttle(updateHeaderZ, 40));
+
+  document.addEventListener('scroll', throttle(updateHeaderZ, 30));
   window.addEventListener('resize', throttle(updateHeaderZ, 120));
   updateHeaderZ();
 
@@ -526,7 +526,21 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
   }
 })();
 
-/* HERO + FORM CTA + WhatsApp integration + simple validation */
+/* HERO preview float animation */
+(function(){
+  const preview = document.getElementById('previewCard');
+  if(!preview) return;
+  let t = 0;
+  function float(){
+    t += 0.02;
+    const y = Math.sin(t) * 6;
+    preview.style.transform = `translateY(${y}px)`;
+    requestAnimationFrame(float);
+  }
+  requestAnimationFrame(float);
+})();
+
+/* Form, CTAs, and WhatsApp integration with validation */
 (function(){
   const whatsappNumber = '917249960757'; // +91 7249960757
   const heroEnroll = document.getElementById('hero-enroll');
@@ -540,15 +554,16 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
   const leadSubmit = document.getElementById('leadSubmit');
   const leadSuccess = document.getElementById('leadSuccess');
   const leadWhats = document.getElementById('leadWhats');
+  const pricingEnroll = document.getElementById('pricing-enroll');
 
   function scrollToForm(source){
     if(source) leadSource.value = source;
     if(ctaBadge){ ctaBadge.style.display='inline-block'; ctaSelected.textContent = source; }
     const el = document.getElementById('lead-form');
-    if(el) { el.scrollIntoView({behavior:'smooth', block:'center'}); setTimeout(()=>{ document.getElementById('l_fname').focus(); }, 550); }
+    if(el) { el.scrollIntoView({behavior:'smooth', block:'center'}); setTimeout(()=>{ const f = document.getElementById('l_fname'); if(f) f.focus(); }, 600); }
   }
 
-  [heroEnroll, heroCurr, ctaEnroll, ctaCallback].forEach(btn=>{
+  [heroEnroll, heroCurr, ctaEnroll, ctaCallback, pricingEnroll].forEach(btn=>{
     if(!btn) return;
     btn.addEventListener('click', ()=> {
       const src = btn.dataset.src || btn.dataset.source || 'cta';
@@ -596,22 +611,23 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
     });
   }
 
-  // Make tel links correct
+  // ensure tel links have correct format
   document.querySelectorAll('a[href^="tel:"]').forEach(a => a.href = 'tel:+917249960757');
 
-})();
-
-/* small parallax effect for right preview */
-(function(){
-  const right = document.querySelector('.right');
-  if(!right) return;
-  document.addEventListener('mousemove', (e)=>{
-    const w = window.innerWidth, h = window.innerHeight;
-    const x = (e.clientX - w/2)/w;
-    const y = (e.clientY - h/2)/h;
-    right.style.transform = `translate3d(${x*6}px, ${y*6}px, 0)`;
+  // Accessibility: keyboard open for CTAs
+  [heroEnroll, heroCurr, ctaEnroll, ctaCallback, pricingEnroll].forEach(btn=>{
+    if(!btn) return;
+    btn.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+    });
   });
 })();
+
+/* small throttle helper included earlier */
+function throttle(fn, wait){
+  let t = 0;
+  return function(...a){ const now = Date.now(); if(now - t > wait){ t = now; fn(...a); } };
+}
 </script>
 
 </body>
