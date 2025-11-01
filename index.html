@@ -16,6 +16,7 @@
     --glow-strong: 0 36px 80px rgba(217,177,75,0.18);
     --glow-soft: 0 14px 40px rgba(217,177,75,0.08);
     --radius:16px;
+    --white-glow: rgba(255,255,255,0.06);
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#0b0c0d 0%, #0f1112 100%);color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
@@ -43,6 +44,7 @@
   transform:translateX(-140%);
   transition:transform .9s cubic-bezier(.2,.9,.2,1);
   mix-blend-mode:overlay;
+  opacity:0.9;
 }
 .card-shine:hover::before{
   transform:translateX(140%);
@@ -67,36 +69,34 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
 .btn-cta{background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111}
 .btn-ghost{background:transparent;color:var(--accent);border:2px solid rgba(217,177,75,0.12);padding:12px 24px}
 .btn:hover{transform:translateY(-4px)}
+.btn.active{filter:brightness(1.06); box-shadow:0 18px 60px rgba(0,0,0,0.55); transform:translateY(-4px) scale(1.01);}
 
+/* stats */
 .stats{display:flex;gap:34px;align-items:flex-end;flex-wrap:wrap;margin-top:4px}
 .stat{text-align:center}
 .stat .num{color:var(--accent);font-weight:800;font-size:26px}
 .stat .label{color:var(--muted);font-size:13px;margin-top:8px}
 
+/* video frame */
 .video-frame{width:420px;max-width:45vw;height:360px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow-strong);display:flex;align-items:center;justify-content:center;position:relative;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
 .video-frame.floaty{transform:translateY(0)}
 .video-thumb{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;color:#fff;position:relative}
 .play-btn{width:64px;height:64px;border-radius:50%;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.05);cursor:pointer;position:absolute;bottom:20px;left:50%;transform:translateX(-50%)}
 .play-btn svg{width:32px;height:32px;fill:var(--accent)}
 
-.ticker{position:absolute;background:var(--card);border-radius:12px;padding:10px 12px;display:inline-block;border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 30px rgba(0,0,0,0.55);font-weight:700;width:86px;text-align:center;color:#e7e7e7;font-size:13px}
+/* tickers */
+.ticker{position:absolute;background:var(--card);border-radius:12px;padding:10px 12px;display:inline-block;border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 30px rgba(0,0,0,0.55);font-weight:700;width:86px;text-align:center;color:#e7e7e7;font-size:13px;transition:transform .32s,box-shadow .32s}
 .ticker small{display:block;color:var(--muted);font-weight:600;font-size:12px}
 .ticker .neg{color:#ff6b6b;font-weight:800;margin-top:4px;font-size:14px}
+.ticker .pos{color:#6fe08b;font-weight:800;margin-top:4px;font-size:14px}
 .ticker.t1{left:6%;top:18%}
 .ticker.t2{right:6%;top:34%}
 .ticker.t3{left:12%;bottom:28%}
 .ticker.t4{right:18%;bottom:36%}
 
 /* animated glow pulse for cards */
-.pulse {
-  animation:glowPulse 3.2s infinite;
-  will-change:box-shadow;
-}
-@keyframes glowPulse{
-  0%{box-shadow: 0 18px 56px rgba(217,177,75,0.06)}
-  50%{box-shadow: 0 36px 120px rgba(217,177,75,0.14)}
-  100%{box-shadow: 0 18px 56px rgba(217,177,75,0.06)}
-}
+.pulse { animation:glowPulse 3.2s infinite; will-change:box-shadow; }
+@keyframes glowPulse { 0%{box-shadow: 0 18px 56px rgba(217,177,75,0.06)} 50%{box-shadow: 0 36px 120px rgba(217,177,75,0.14)} 100%{box-shadow: 0 18px 56px rgba(217,177,75,0.06)} }
 
 /* ---------- STOP LOSING ---------- */
 .stop-losing-section{background:linear-gradient(180deg,#0f0f0f 0%, #121212 100%);text-align:center;padding:120px 0 100px}
@@ -108,12 +108,16 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
 .why-section{text-align:center;padding:100px 0 120px;background:#0c0c0b}
 .why-section h2{font-size:36px;font-weight:700;margin-bottom:60px;color:#fff}
 .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1200px;margin:0 auto;padding:0 6%}
-.feature-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:36px;border-radius:18px;transition:transform .28s ease, box-shadow .28s ease;box-shadow:0 10px 36px rgba(0,0,0,0.45);border:1px solid rgba(217,177,75,0.04)}
+.feature-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:36px;border-radius:18px;transition:transform .28s ease, box-shadow .28s ease;box-shadow:0 10px 36px rgba(0,0,0,0.45);border:1px solid rgba(217,177,75,0.04);position:relative;z-index:1;overflow:visible}
 .feature-card:hover{transform:translateY(-8px);box-shadow:var(--glow-soft)}
 .icon-circle{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
 .icon-circle svg{fill:#111;width:32px;height:32px}
 .feature-card h3{font-size:20px;font-weight:700;margin-bottom:10px;color:#fff}
 .feature-card p{font-size:15px;color:#bbb;line-height:1.6}
+/* feature glow & stacked */
+.feature-card.glow{animation:featurePulse 2.2s ease-in-out infinite}
+@keyframes featurePulse{0%{box-shadow:0 8px 28px rgba(0,0,0,0.45);transform:none}50%{box-shadow:0 80px 220px rgba(255,255,255,0.06);transform:translateY(-8px)}100%{box-shadow:0 8px 28px rgba(0,0,0,0.45);transform:none}}
+.feature-card.stacked{transform:translateY(-24px) scale(1.02); z-index:250; box-shadow:0 100px 260px rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.06)}
 
 /* ---------- 7-DAY BOOTCAMP (course schedule) ---------- */
 .bootcamp-section{padding:80px 0 60px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
@@ -125,6 +129,8 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
 .day-card h4{margin-top:18px;font-size:15px;font-weight:700;color:#fff}
 .day-card ul{margin:12px 0 0;padding-left:16px;color:#cfcfcf;line-height:1.6;font-size:14px}
 .day-card ul li{margin-bottom:8px}
+/* day stacked */
+.day-card.stacked{transform:translateY(-30px) scale(1.03); z-index:300; box-shadow:0 140px 320px rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.06)}
 
 /* ---------- BONUSES ---------- */
 .bonus-section{padding:80px 0 100px;background:linear-gradient(180deg,#0c0d0c 0%, #0b0b0b 100%);text-align:center}
@@ -220,7 +226,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
 .fade-delay-3{animation-delay:.42s}
 @keyframes fadeUp{to{opacity:1;transform:none}}
 
-@keyframes floaty { 0% { transform: translateY(0); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0); } }
+@keyframes floaty { 0% { transform: translateY(0); } 50% { transform:translateY(-8px); } 100% { transform: translateY(0); } }
 
 /* responsive */
 @media(max-width:1100px){
@@ -242,6 +248,12 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
   .test-grid{grid-template-columns:1fr}
   .stop-heading{font-size:34px}
   .about-section h2{font-size:28px}
+  /* hide tickers & icons & sheen on mobile */
+  .ticker{display:none}
+  .icon-round{display:none}
+  .card-shine::before{display:none}
+  .feature-card.glow{animation:none}
+  .day-card.glow{box-shadow:none; transform:none}
 }
 @media(max-width:480px){
   .hero-h{font-size:30px}
@@ -255,6 +267,8 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
   .faq-section h2{font-size:26px}
   .q-text{font-size:16px}
   .lead-left .big-h{font-size:28px}
+  /* hide overlay text on video-thumb on phone */
+  .video-thumb > div:nth-child(1), .video-thumb > div:nth-child(2), .play-btn{ display:none; }
 }
 </style>
 </head>
@@ -313,13 +327,16 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
           <div style="font-weight:800;font-size:16px;color:var(--accent)">Course Preview</div>
           <div style="color:var(--muted);font-size:13px;margin-top:8px;text-align:center;max-width:240px">12 modules • Live trading sessions • Proven strategies</div>
           <div class="play-btn" title="Play preview"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg></div>
+          <!-- If you prefer an image here instead of text, replace the inner content above with:
+               <img src="https://sanishtech.com/i/6906245b32391-1762010203.jpg" alt="Course preview" style="width:100%;height:100%;object-fit:cover;">
+               I left it as in your original code but mobile hides the text overlay (see CSS). -->
         </div>
       </div>
     </div>
 
-    <div class="ticker t1 fade-delay-2"><small>EURUSD</small><div class="neg">-0.3%</div></div>
-    <div class="ticker t2 fade-delay-3"><small>BTCUSD</small><div class="neg">-4.6%</div></div>
-    <div class="ticker t3 fade-delay-1"><small>AAPL</small><div class="neg">-2.4%</div></div>
+    <div class="ticker t1 fade-delay-2"><small>EURUSD</small><div class="neg" id="tick-eur">-0.3%</div></div>
+    <div class="ticker t2 fade-delay-3"><small>BTCUSD</small><div class="neg" id="tick-btc">-4.6%</div></div>
+    <div class="ticker t3 fade-delay-1"><small>AAPL</small><div class="neg" id="tick-aapl">-2.4%</div></div>
   </div>
 </header>
 
@@ -339,26 +356,26 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
 <section class="why-section fade-up fade-delay-3">
   <div class="container">
     <h2>Why Choose Our Trading Course?</h2>
-    <div class="features-grid">
-      <div class="feature-card card-shine">
+    <div class="features-grid" id="featuresGrid">
+      <div class="feature-card card-shine glow" tabindex="0" data-index="1">
         <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M4 5h16v2H4zM4 10h16v2H4zM4 15h10v2H4z"/></svg></div>
         <h3>Professional Strategies</h3>
         <p>Learn the exact strategies used by institutional traders and hedge funds to generate consistent profits in any market condition.</p>
       </div>
 
-      <div class="feature-card card-shine">
+      <div class="feature-card card-shine glow" tabindex="0" data-index="2">
         <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z"/></svg></div>
         <h3>Risk Management Mastery</h3>
         <p>Master advanced risk management techniques that protect your capital and ensure long-term trading success.</p>
       </div>
 
-      <div class="feature-card card-shine">
+      <div class="feature-card card-shine glow" tabindex="0" data-index="3">
         <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 3.3-2.1 6.1-5 7v6h-4v-6c-2.9-.9-5-3.7-5-7a7 7 0 017-7z"/></svg></div>
         <h3>Trading Psychology</h3>
         <p>Develop the mental discipline and emotional control required to make rational decisions under pressure.</p>
       </div>
 
-      <div class="feature-card card-shine">
+      <div class="feature-card card-shine glow" tabindex="0" data-index="4">
         <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M17 10.5V6c0-1.1-.9-2-2-2H5C3.9 4 3 4.9 3 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-4.5l4 4V6.5l-4 4z"/></svg></div>
         <h3>Live Trading Sessions</h3>
         <p>Watch real trades unfold in live market conditions and learn to apply strategies in real-time scenarios.</p>
@@ -372,8 +389,8 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
   <div class="container">
     <h2 style="text-align:center;margin-bottom:34px;color:#f6f2e6">7-Day Intensive Trading <span style="color:var(--accent)">Bootcamp</span></h2>
 
-    <div class="bootcamp-grid">
-      <div class="day-card card-shine">
+    <div class="bootcamp-grid" id="bootcampGrid">
+      <div class="day-card card-shine" tabindex="0">
         <div class="day-pill">Day 1</div>
         <h4>Foundation & Market Basics</h4>
         <ul>
@@ -385,7 +402,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </ul>
       </div>
 
-      <div class="day-card card-shine">
+      <div class="day-card card-shine" tabindex="0">
         <div class="day-pill">Day 2</div>
         <h4>Core Concepts to Trade Confidently</h4>
         <ul>
@@ -397,7 +414,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </ul>
       </div>
 
-      <div class="day-card card-shine">
+      <div class="day-card card-shine" tabindex="0">
         <div class="day-pill">Day 3</div>
         <h4>Live Trading Walkthrough + Platform Basics</h4>
         <ul>
@@ -409,7 +426,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </ul>
       </div>
 
-      <div class="day-card card-shine">
+      <div class="day-card card-shine" tabindex="0">
         <div class="day-pill">Day 4</div>
         <h4>Chart Analysis & Indicators</h4>
         <ul>
@@ -421,7 +438,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </ul>
       </div>
 
-      <div class="day-card card-shine">
+      <div class="day-card card-shine" tabindex="0">
         <div class="day-pill">Day 5</div>
         <h4>Strategy Day – 21+ Proven Forex Setups</h4>
         <ul>
@@ -433,7 +450,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </ul>
       </div>
 
-      <div class="day-card card-shine">
+      <div class="day-card card-shine" tabindex="0">
         <div class="day-pill">Day 6</div>
         <h4>Fundamental & Sentiment Analysis</h4>
         <ul>
@@ -445,7 +462,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </ul>
       </div>
 
-      <div class="day-card card-shine">
+      <div class="day-card card-shine" tabindex="0">
         <div class="day-pill">Day 7</div>
         <h4>Go Live + Broker Account Setup</h4>
         <ul>
@@ -503,11 +520,11 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
       </div>
     </div>
 
-    <div class="bonus-cta" role="region" aria-label="Total Bonus">
-      <div class="ttl">Total Bonus Value:</div>
-      <div class="val">₹10,000/-</div>
-      <p>All bonuses included FREE with your course enrollment</p>
-      <a class="claim-btn" href="#claim">🎁 CLAIM YOUR BONUSES NOW</a>
+    <div class="bonus-cta card-shine" role="region" aria-label="Total Bonus" style="max-width:420px;margin:48px auto 0;">
+      <div class="ttl" style="font-weight:800;font-size:20px;color:#fff;margin-bottom:6px">Total Bonus Value:</div>
+      <div class="val" style="font-weight:900;color:var(--accent);font-size:26px;margin-bottom:8px">₹10,000/-</div>
+      <p style="color:#c5c5c5;font-size:13px;margin-bottom:12px">All bonuses included FREE with your course enrollment</p>
+      <a class="claim-btn" href="#lead-form">🎁 CLAIM YOUR BONUSES NOW</a>
     </div>
   </div>
 </section>
@@ -534,7 +551,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
       </div>
     </div>
 
-    <div class="mission">
+    <div class="mission card-shine" style="margin-top:22px">
       <strong>Our mission is simple:</strong> To make financial market education accessible, transparent, and profitable — without the fluff, hype, or fake promises.
     </div>
   </div>
@@ -590,7 +607,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
           <li>✔ Mobile App Access</li>
         </ul>
 
-        <a class="enroll-btn" id="pricing-enroll" href="#lead-form">🎓 ENROLL NOW - SAVE ₹9500</a>
+        <a class="enroll-btn btn" id="pricing-enroll" href="#lead-form">🎓 ENROLL NOW - SAVE ₹9500</a>
       </div>
     </div>
   </div>
@@ -714,7 +731,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </div>
         <div id="panel3" class="panel panel-collapsed" aria-hidden="true">
           <div class="panel-inner">
-            <p>The core curriculum can be completed in 6–8 weeks studying 1–2 hours per day. However, you have lifetime access, so you can learn at your own pace and revisit materials anytime.</p>
+            <p>The core curriculum can be completed in 6-8 weeks studying 1-2 hours per day. However, you have lifetime access, so you can learn at your own pace and revisit materials anytime.</p>
           </div>
         </div>
       </div>
@@ -756,8 +773,8 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
 <script>
   /* Respect reduce motion */
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.fade-up, .pulse, .card-shine::before').forEach(el => { if(el.style) el.style.animation = 'none'; });
-    document.querySelectorAll('.fade-up').forEach(el=>{ el.style.opacity=1; el.style.transform='none';});
+    document.querySelectorAll('.fade-up, .pulse').forEach(el => { el.style.animation = 'none'; el.style.opacity = 1; el.style.transform = 'none'; });
+    document.querySelectorAll('.card-shine::before').forEach(()=>{/* noop: pseudo cannot be styled here */});
   }
 
   /* COUNT-UP animation for stats when visible */
@@ -794,7 +811,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
     els.forEach(el=> io.observe(el));
   })();
 
-  /* Accordion logic - independent toggles, with lift & z-index */
+  /* Accordion logic - independent toggles (multiple open), with max-height animation */
   (function(){
     const items = document.querySelectorAll('.accordion-item');
     items.forEach(item => {
@@ -809,13 +826,13 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         panel.style.maxHeight = inner.scrollHeight + 'px';
         panel.classList.remove('panel-collapsed'); panel.classList.add('panel-open');
         panel.setAttribute('aria-hidden','false');
-        icon.textContent = '−';
+        if(icon) icon.textContent = '−';
         btn.setAttribute('aria-expanded','true');
       } else {
         panel.style.maxHeight = '0px';
         panel.classList.remove('panel-open'); panel.classList.add('panel-collapsed');
         panel.setAttribute('aria-hidden','true');
-        icon.textContent = '+';
+        if(icon) icon.textContent = '+';
         btn.setAttribute('aria-expanded','false');
       }
 
@@ -827,16 +844,21 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
           panel.classList.remove('panel-collapsed'); panel.classList.add('panel-open');
           panel.style.maxHeight = inner.scrollHeight + 'px';
           panel.setAttribute('aria-hidden','false');
-          icon.textContent = '−';
+          if(icon) icon.textContent = '−';
           btn.setAttribute('aria-expanded','true');
         } else {
           item.setAttribute('aria-expanded','false');
           panel.classList.remove('panel-open'); panel.classList.add('panel-collapsed');
           panel.style.maxHeight = '0px';
           panel.setAttribute('aria-hidden','true');
-          icon.textContent = '+';
+          if(icon) icon.textContent = '+';
           btn.setAttribute('aria-expanded','false');
         }
+      });
+
+      // keyboard accessibility
+      btn.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
       });
 
       // update maxHeight on content resize
@@ -855,10 +877,12 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
   (function(){
     const preview = document.getElementById('previewCard');
     if(preview){
-      // gentle float
+      // gentle float (CSS animation fallback)
       preview.style.animation = 'floaty 6s ease-in-out infinite';
       // pointer parallax
       document.addEventListener('mousemove', (e)=>{
+        // disable parallax on very small screens to avoid layout issues
+        if(window.innerWidth < 900) return;
         const w = window.innerWidth, h = window.innerHeight;
         const x = (e.clientX - w/2)/w;
         const y = (e.clientY - h/2)/h;
@@ -888,12 +912,16 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
       if(source) leadSource.value = source;
       if(ctaBadge){ ctaBadge.style.display='inline-block'; ctaSelected.textContent = source; }
       const el = document.getElementById('lead-form');
-      if(el) { el.scrollIntoView({behavior:'smooth', block:'center'}); setTimeout(()=>{ document.getElementById('l_fname').focus(); }, 600); }
+      if(el) { el.scrollIntoView({behavior:'smooth', block:'center'}); setTimeout(()=>{ const f=document.getElementById('l_fname'); if(f) f.focus(); }, 600); }
     }
 
     [heroEnroll, heroCurr, ctaEnroll, ctaCallback].forEach(btn=>{
       if(!btn) return;
       btn.addEventListener('click', ()=> {
+        // visual active state
+        document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+
         const src = btn.dataset.src || btn.dataset.source || 'cta';
         scrollToForm(src);
       });
@@ -905,6 +933,8 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
     if(pricingEnroll){
       pricingEnroll.addEventListener('click', function(e){
         e.preventDefault();
+        document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+        pricingEnroll.classList.add('active');
         scrollToForm('pricing');
       });
     }
@@ -958,11 +988,74 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
 
   })();
 
-  /* Small throttle helper */
+  /* Tickers: simulate drifting +/- numbers and color change */
+  (function(){
+    function rndDelta(){ return (Math.random()*1.2 - 0.6); }
+    const tickers = [
+      {id:'tick-eur', value:-0.3},
+      {id:'tick-btc', value:-4.6},
+      {id:'tick-aapl', value:-2.4}
+    ];
+    tickers.forEach(t=>{
+      const el = document.getElementById(t.id);
+      if(!el) return;
+      el.textContent = (t.value>=0?'+':'') + t.value.toFixed(1) + '%';
+      el.classList.add(t.value>=0 ? 'pos' : 'neg');
+      setInterval(()=>{
+        t.value = Math.max(-9.9, Math.min(9.9, t.value + rndDelta()));
+        const v = Math.round(t.value*10)/10;
+        el.textContent = (v>=0?'+':'') + v.toFixed(1) + '%';
+        el.classList.remove('pos','neg');
+        el.classList.add(v>=0 ? 'pos' : 'neg');
+        el.parentElement.style.transform = 'translateY(-6px) scale(1.02)';
+        setTimeout(()=> el.parentElement.style.transform = '', 260);
+      }, 3000 + Math.random()*2200);
+    });
+  })();
+
+  /* Feature & Bootcamp card stacking behavior: choose center card and lift it */
+  (function(){
+    function applyStacking(selector, stackedClass){
+      const cards = Array.from(document.querySelectorAll(selector));
+      if(!cards.length) return;
+
+      function updateBest(){
+        let best=null, bestDist=Infinity;
+        cards.forEach(c=>{
+          const r = c.getBoundingClientRect();
+          const center = r.top + r.height/2;
+          const d = Math.abs(center - window.innerHeight/2);
+          if(d < bestDist){ bestDist = d; best = c; }
+        });
+        cards.forEach(c => c.classList.remove(stackedClass));
+        if(best) best.classList.add(stackedClass);
+      }
+
+      // initial and on scroll/resize
+      updateBest();
+      window.addEventListener('scroll', throttle(updateBest, 120));
+      window.addEventListener('resize', throttle(updateBest, 220));
+
+      // also add hover / focus glow
+      cards.forEach(c=>{
+        c.addEventListener('mouseenter', ()=> { c.classList.add('glow'); c.style.zIndex=200; });
+        c.addEventListener('mouseleave', ()=> { c.classList.remove('glow'); c.style.zIndex=''; });
+        c.addEventListener('focus', ()=> { c.classList.add('glow'); c.style.zIndex=200; }, true);
+        c.addEventListener('blur', ()=> { c.classList.remove('glow'); c.style.zIndex=''; }, true);
+      });
+    }
+    applyStacking('.feature-card', 'stacked');
+    applyStacking('.day-card', 'stacked');
+  })();
+
+  /* small throttle helper */
   function throttle(fn, wait){
     let t = 0;
     return function(...a){ const now = Date.now(); if(now - t > wait){ t = now; fn(...a); } };
   }
+
+  /* Accessibility: ensure stacked classes set on load */
+  window.addEventListener('load', ()=>{ window.dispatchEvent(new Event('scroll')); });
 </script>
 
 </body>
