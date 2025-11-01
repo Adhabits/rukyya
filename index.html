@@ -12,13 +12,17 @@
     --accent-dark:#b88f33;
     --muted:#a6b0b4;
     --card:#0d0e0f;
+    --glass: rgba(255,255,255,0.02);
+    --glow-strong: 0 36px 80px rgba(217,177,75,0.18);
+    --glow-soft: 0 14px 40px rgba(217,177,75,0.08);
     --radius:16px;
-    --white-sheen-color: rgba(255,255,255,0.14);
+    --white-glow-small: 0 10px 36px rgba(255,255,255,0.03);
+    --white-glow-large: 0 40px 120px rgba(255,255,255,0.06);
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#0b0c0d 0%, #0f1112 100%);color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 
-  /* GRID BACKGROUND */
+  /* grid background */
   .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
     background-image:
       linear-gradient(0deg, rgba(255,255,255,0.02) 1px, transparent 1px),
@@ -26,49 +30,6 @@
     background-size:80px 80px; opacity:.12; mix-blend-mode:overlay;}
 
   .container {max-width:1200px;margin:0 auto;padding:0 6%;position:relative;z-index:2}
-
-  /* GENERAL SHEEN (applies to sections) */
-  .section {
-    position:relative;
-    overflow:visible;
-  }
-  /* sheen pseudo layer */
-  .sheen {
-    pointer-events:none;
-    position:absolute;
-    inset: -6% -6%;
-    z-index:6;
-    overflow:visible;
-  }
-  .sheen .bar {
-    position:absolute;
-    left:-40%;
-    top: -30%;
-    width:30%;
-    height:160%;
-    transform:rotate(-22deg) translateX(0);
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.00) 10%, rgba(255,255,255,0.20) 50%, rgba(255,255,255,0.03) 80%, transparent 100%);
-    filter:blur(20px) saturate(1.1);
-    opacity:0;
-    transition:opacity .36s ease;
-    will-change:transform, opacity;
-  }
-  /* on hover or active, show sheen */
-  .section:hover .sheen .bar,
-  .section.sheen-play .sheen .bar {
-    opacity:1;
-    animation: slideSheen 900ms linear forwards;
-  }
-  /* slide animation */
-  @keyframes slideSheen {
-    from { transform: translateX(0) rotate(-22deg); }
-    to { transform: translateX(220%) rotate(-22deg); }
-  }
-
-  /* reduce motion: disable heavy sheen/animation */
-  @media (prefers-reduced-motion: reduce) {
-    .section .sheen .bar { animation:none !important; opacity:0; }
-  }
 
   /* ---------- HERO ---------- */
   header.hero{position:relative;z-index:2;padding:60px 0 30px;}
@@ -88,7 +49,7 @@
   .btn-cta{background:linear-gradient(90deg,var(--accent),#7ca1ff);color:#111}
   .btn-ghost{background:transparent;color:var(--accent);border:2px solid rgba(217,177,75,0.12);padding:12px 24px}
   .btn:active{transform:translateY(1px)}
-  .btn.active{filter:brightness(1.06); box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+  .btn.active{filter:brightness(1.06); box-shadow:var(--glow-soft);}
 
   .stats{display:flex;gap:34px;align-items:flex-end;flex-wrap:wrap;margin-top:6px}
   .stat{text-align:center}
@@ -123,13 +84,15 @@
   .why-section{text-align:center;padding:80px 0 90px;background:#0c0c0b}
   .why-section h2{font-size:28px;font-weight:700;margin-bottom:40px;color:#fff}
   .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1200px;margin:0 auto;padding:0 6%}
+  /* CARD base */
   .feature-card{
     background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
     padding:30px 28px;border-radius:18px;transition:transform .32s cubic-bezier(.2,.9,.2,1), box-shadow .32s, z-index .01s;
     border:1px solid rgba(217,177,75,0.04);position:relative;z-index:1;overflow:visible;
-    box-shadow: 0 10px 28px rgba(0,0,0,0.5), 0 6px 24px rgba(255,255,255,0.01);
+    /* subtle default white glow so there's always a soft border */
+    box-shadow: 0 10px 28px rgba(0,0,0,0.5), var(--white-glow-small);
   }
-  .feature-card:focus{outline:none; box-shadow: 0 12px 32px rgba(255,255,255,0.03), 0 12px 32px rgba(0,0,0,0.6); transform: translateY(-6px); }
+  .feature-card:focus{outline:none; box-shadow: var(--white-glow-small), 0 12px 32px rgba(0,0,0,0.6); transform: translateY(-6px); }
   .feature-card:hover{transform:translateY(-8px);}
 
   .icon-circle{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
@@ -137,25 +100,27 @@
   .feature-card h3{font-size:20px;font-weight:700;margin-bottom:10px;color:#fff}
   .feature-card p{font-size:15px;color:#bbb;line-height:1.6}
 
-  /* white glow pulse (gentle) and stacked behavior */
+  /* white glow pulse every 2s (gentle) */
   .feature-card.glow { animation: whitePulse 2s ease-in-out infinite; }
   @keyframes whitePulse {
     0% { box-shadow: 0 10px 28px rgba(0,0,0,0.5), rgba(255,255,255,0.00) 0 0 0; transform: translateY(0); }
-    50% { box-shadow: 0 40px 120px rgba(255,255,255,0.06); transform: translateY(-6px); }
+    50% { box-shadow: var(--white-glow-large); transform: translateY(-6px); }
     100% { box-shadow: 0 10px 28px rgba(0,0,0,0.5), rgba(255,255,255,0.00) 0 0 0; transform: translateY(0); }
   }
+
+  /* stacked state: prominent white shadow, lift more and increase z-index */
   .feature-card.stacked{
     transform: translateY(-18px) scale(1.02);
-    box-shadow: 0 60px 160px rgba(255,255,255,0.06);
+    box-shadow: var(--white-glow-large);
     border-color: rgba(217,177,75,0.12);
   }
 
-  /* ---------- 7-DAY BOOTCAMP ---------- */
+  /* ---------- 7-DAY BOOTCAMP (course schedule) ---------- */
   .bootcamp-section{padding:70px 0 60px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
   .bootcamp-section h2{font-size:34px;color:#f6f2e6;margin-bottom:28px}
   .bootcamp-grid{max-width:1200px;margin:0 auto;padding:0 6%;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
   .day-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:22px 20px;min-height:220px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45);position:relative;transition:transform .28s,box-shadow .28s}
-  .day-card:hover{transform:translateY(-6px);box-shadow:0 28px 80px rgba(255,255,255,0.03)}
+  .day-card:hover{transform:translateY(-6px);box-shadow:var(--glow-soft)}
   .day-pill{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--card);padding:6px 14px;border-radius:20px;font-weight:700;color:var(--accent);border:1px solid rgba(217,177,75,0.12);font-size:13px}
   .day-card h4{margin-top:18px;font-size:15px;font-weight:700;color:#fff}
   .day-card ul{margin:12px 0 0;padding-left:16px;color:#cfcfcf;line-height:1.6;font-size:14px}
@@ -167,28 +132,98 @@
   .bonus-section .lead{color:#bfbfbf;max-width:860px;margin:12px auto 40px;font-size:15px;line-height:1.7}
   .bonus-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:0 6%}
   .bonus-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:30px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45);display:flex;flex-direction:column;align-items:center;min-height:200px;transition:transform .22s,box-shadow .22s}
-  .bonus-card:hover{transform:translateY(-6px);box-shadow:0 28px 80px rgba(255,255,255,0.03)}
+  .bonus-card:hover{transform:translateY(-6px);box-shadow:var(--glow-soft)}
   .bonus-icon{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
   .bonus-card h4{font-size:16px;margin-bottom:8px}
   .bonus-price{color:var(--accent);font-weight:800;margin-bottom:10px}
   .bonus-desc{color:#cfcfcf;font-size:13px;text-align:center;line-height:1.6}
 
   .bonus-cta{max-width:360px;margin:48px auto 0;background:linear-gradient(180deg,#0b0b0b,#101010);padding:26px;border-radius:14px;border:1px solid rgba(217,177,75,0.08);box-shadow:0 20px 60px rgba(217,177,75,0.06)}
+  .bonus-cta .ttl{font-weight:800;font-size:20px;color:#fff;margin-bottom:6px}
+  .bonus-cta .val{font-weight:900;color:var(--accent);font-size:26px;margin-bottom:8px}
   .claim-btn{display:inline-block;padding:12px 22px;border-radius:40px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);transition:transform .18s}
   .claim-btn:hover{transform:translateY(-3px)}
 
-  /* ---------- ABOUT / TESTIMONIALS / PRICING / LEAD / FAQ same base styles apply ---------- */
-  .about-section, .testimonials, .pricing-section, .lead-section, .faq-section { position:relative; }
+  /* ---------- ABOUT US ---------- */
+  .about-section{padding:80px 0 40px;background:linear-gradient(180deg,#0f0f0f 0%, #0d0d0d 100%);text-align:center}
+  .about-section h2{font-size:34px;color:var(--accent);margin-bottom:18px}
+  .about-section p{color:#cfcfcf;max-width:900px;margin:0 auto 18px;line-height:1.8}
+  .stats-row{display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+  .mini-card{border:1px solid rgba(217,177,75,0.08);padding:18px 24px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));min-width:130px}
+  .mini-card .k{font-weight:800;color:var(--accent);font-size:20px}
+  .mini-card .t{color:var(--muted);font-size:13px;margin-top:6px}
 
-  /* IMAGE PREVIEW */
-  .image-preview{width:420px;max-width:45vw;height:360px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(217,177,75,0.06);box-shadow:0 36px 80px rgba(217,177,75,0.08);display:flex;align-items:center;justify-content:center;position:relative;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
-  .image-preview img{width:100%;height:100%;object-fit:cover;display:block}
+  .mission{margin:28px auto 6px;max-width:1000px;border-left:4px solid var(--accent);padding:18px;background:linear-gradient(90deg, rgba(217,177,75,0.03), transparent);color:#d9d7c5;border-radius:8px}
 
-  /* responsive */
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials{padding:70px 0 60px;text-align:center;background:linear-gradient(180deg,#0c0b0b 0%, #0b0b0b 100%)}
+  .testimonials h2{font-size:32px;color:var(--accent);margin-bottom:24px}
+  .test-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0 6%}
+  .test-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45)}
+  .stars{color:var(--accent);margin-bottom:10px}
+  .quote{font-size:14px;color:#d0d0d0;line-height:1.7;margin-bottom:14px;font-style:italic}
+  .author{font-weight:800;color:#fff;font-size:14px}
+  .role{color:var(--muted);font-size:12px}
+
+  /* ---------- PRICING CARD ---------- */
+  .pricing-section{padding:80px 0 120px;text-align:center;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%)}
+  .pricing-section h2{font-size:34px;color:var(--accent);margin-bottom:18px}
+  .pricing-wrap{max-width:360px;margin:28px auto 0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow-strong)}
+  .badge-limited{position:relative;display:inline-block;background:var(--accent);color:#111;padding:6px 12px;border-radius:18px;font-weight:800;margin-bottom:8px;font-size:12px}
+  .price-old{color:var(--muted);text-decoration:line-through;font-size:14px}
+  .price{font-size:44px;font-weight:900;color:var(--accent);margin:6px 0}
+  .price-sub{color:#cfcfcf;font-size:13px;margin-bottom:12px}
+  .features-list{text-align:left;margin:14px 0 18px;padding-left:16px;color:#cfcfcf;line-height:1.7}
+  .features-list li{margin-bottom:8px}
+  .enroll-btn{display:inline-block;padding:12px 20px;border-radius:30px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);margin-top:12px}
+
+  /* ---------- INLINE FORM SECTION (hero-style) ---------- */
+  .lead-section{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:start;padding:60px 0}
+  @media(max-width:980px){ .lead-section{grid-template-columns:1fr; } .lead-left{order:1} .lead-right{order:2} }
+  .lead-left .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .lead-left .big-h{font-family:Poppins,Inter;font-size:44px;line-height:1.05;margin:8px 0 18px;color:#fff}
+  .lead-left .sub{color:var(--muted);max-width:640px;font-size:16px;margin-bottom:22px}
+  .lead-form{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 24px 68px rgba(0,0,0,0.6)}
+  .lead-form label{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
+  .lead-form input[type="text"], .lead-form input[type="email"], .lead-form input[type="tel"]{width:100%;padding:12px 14px;border-radius:8px;border:1px solid rgba(217,177,75,0.12);background:transparent;color:#fff;font-size:14px;outline:none;margin-bottom:12px}
+  .lead-form .radio-group{margin-top:6px;margin-bottom:12px;color:var(--muted)}
+
+  .lead-form .submit-row{display:flex;gap:12px;align-items:center;margin-top:8px}
+  .lead-form .submit-btn{flex:1;background:linear-gradient(180deg,var(--accent),var(--accent-dark));padding:12px 16px;border-radius:40px;color:#111;font-weight:800;border:none;cursor:pointer;box-shadow:var(--glow-soft)}
+  .lead-form .call-btn{background:transparent;border:2px solid rgba(217,177,75,0.12);color:var(--accent);padding:10px 14px;border-radius:12px;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
+
+  .note{color:var(--muted);font-size:13px;margin-top:10px}
+
+  /* ---------- FAQ ---------- */
+  .faq-section{padding:40px 0 80px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
+  .faq-section h2{font-size:44px;color:var(--accent);margin-bottom:18px}
+  .faq-wrap{max-width:1000px;margin:0 auto;padding:0 6%;}
+  .accordion-item{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border-radius:14px;border:2px solid rgba(217,177,75,0.12);margin-bottom:14px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.45);transition:transform .24s,box-shadow .24s}
+  .accordion-item[aria-expanded="true"]{transform:translateY(-6px);box-shadow:var(--glow-strong)}
+  .accordion-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;cursor:pointer}
+  .accordion-header button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px}
+  .q-text{font-weight:700;color:var(--accent);font-size:18px;text-align:left}
+  .icon-round{width:40px;height:40px;border-radius:999px;background:linear-gradient(180deg,#1a1a1a,#101010);display:flex;align-items:center;justify-content:center;border:2px solid rgba(217,177,75,0.18);color:var(--accent);font-weight:900;transition:transform .2s}
+  .accordion-item[aria-expanded="true"] .icon-round{transform:rotate(180deg); background:var(--accent); color:#111; border-color:rgba(0,0,0,0.08)}
+  .panel{padding:0 18px;color:#d0d0d0;text-align:left;line-height:1.8;background:linear-gradient(180deg, rgba(217,177,75,0.01), transparent)}
+  .panel-inner{padding:16px 0;margin:0}
+  .panel-collapsed{max-height:0;overflow:hidden;transition:max-height .36s cubic-bezier(.2,.9,.2,1)}
+  .panel-open{transition:max-height .36s cubic-bezier(.2,.9,.2,1);overflow:hidden}
+
+  /* ---------- small helpers & responsive ---------- */
+  .fade-up{opacity:0;transform:translateY(16px);animation:fadeUp .7s cubic-bezier(.2,.9,.2,1) forwards}
+  .fade-delay-1{animation-delay:.12s}
+  .fade-delay-2{animation-delay:.28s}
+  .fade-delay-3{animation-delay:.42s}
+  @keyframes fadeUp{to{opacity:1;transform:none}}
+
+  @keyframes floaty { 0% { transform: translateY(0); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0); } }
+
   @media(max-width:1100px){
     .features-grid{grid-template-columns:repeat(2,1fr)}
     .bootcamp-grid{grid-template-columns:repeat(2,1fr)}
     .bonus-grid{grid-template-columns:repeat(2,1fr)}
+    .test-grid{grid-template-columns:repeat(2,1fr)}
     .hero-h{font-size:52px}
     .faq-section h2{font-size:36px}
   }
@@ -205,8 +240,8 @@
     .about-section h2{font-size:28px}
     /* hide tickers on mobile */
     .ticker{display:none}
-    /* hide sheen pulses on mobile for perf */
-    .sheen .bar { display:none !important; }
+    /* hide accordion icons on mobile if requested */
+    .accordion-header .icon-round{display:none}
   }
   @media(max-width:480px){
     .hero-h{font-size:30px}
@@ -221,6 +256,10 @@
     .q-text{font-size:16px}
     .lead-left .big-h{font-size:28px}
   }
+
+  /* small visual polish for image preview card */
+  .image-preview{width:420px;max-width:45vw;height:360px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow-strong);display:flex;align-items:center;justify-content:center;position:relative;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
+  .image-preview img{width:100%;height:100%;object-fit:cover;display:block}
 </style>
 </head>
 <body>
@@ -228,10 +267,8 @@
 <div class="grid-bg" aria-hidden="true"></div>
 
 <!-- HERO -->
-<header class="hero section fade-up fade-delay-1" role="banner" id="hero">
-  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
-
-  <div class="hero-inner container">
+<header class="hero container fade-up fade-delay-1" role="banner">
+  <div class="hero-inner">
     <div class="left" aria-labelledby="hero-heading">
       <div class="logo-wrap">
         <div class="logo" aria-hidden="true">
@@ -270,13 +307,14 @@
     </div>
 
     <div class="right">
-      <!-- IMAGE PREVIEW (replaces video). No text overlay as requested. -->
+      <!-- IMAGE PREVIEW (replaces video) -->
       <div class="image-preview pulse" id="previewCard" aria-hidden="true">
+        <!-- user-provided image (no text overlay) -->
         <img alt="Course preview" src="https://sanishtech.com/i/6906245b32391-1762010203.jpg">
       </div>
     </div>
 
-    <!-- tickers - animate values via JS, hidden on mobile per request -->
+    <!-- tickers - these animate values via JS -->
     <div class="ticker t1 bob" id="tick-eur"><small>EURUSD</small><div class="val neg">-0.3%</div></div>
     <div class="ticker t2 bob" id="tick-btc"><small>BTCUSD</small><div class="val pos">+2.4%</div></div>
     <div class="ticker t3 bob" id="tick-aapl"><small>AAPL</small><div class="val neg">-2.4%</div></div>
@@ -284,22 +322,19 @@
 </header>
 
 <!-- STOP LOSING -->
-<section class="stop-losing-section section fade-up fade-delay-2" id="stop">
-  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
-
+<section class="stop-losing-section fade-up fade-delay-2">
   <div class="container">
     <h2 class="stop-heading">Stop <span class="highlight">Losing Money</span> in the Markets</h2>
     <p class="stop-subtext">
       95% of retail traders lose money because they lack proper education, proven strategies, and risk management skills.
-      Don't be part of that statistic. Our comprehensive trading course gives you everything you need to trade profitably and consistently.
+      Don't be part of that statistic.<br><br>
+      Our comprehensive trading course gives you everything you need to trade profitably and consistently.
     </p>
   </div>
 </section>
 
 <!-- WHY CHOOSE -->
-<section class="why-section section fade-up fade-delay-3" id="why">
-  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
-
+<section class="why-section fade-up fade-delay-3" id="why">
   <div class="container">
     <h2>Why Choose Our Trading Course?</h2>
     <div class="features-grid" id="featuresGrid">
@@ -331,9 +366,7 @@
 </section>
 
 <!-- 7-DAY BOOTCAMP -->
-<section class="bootcamp-section section fade-up" id="bootcamp">
-  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
-
+<section class="bootcamp-section fade-up" id="bootcamp">
   <div class="container">
     <h2 style="text-align:center;margin-bottom:34px;color:#f6f2e6">7-Day Intensive Trading <span style="color:var(--accent)">Bootcamp</span></h2>
 
@@ -356,9 +389,7 @@
 </section>
 
 <!-- BONUSES -->
-<section class="bonus-section section fade-up">
-  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
-
+<section class="bonus-section fade-up">
   <div class="container">
     <h2>Exclusive Bonuses for First 50 Participants</h2>
     <p class="lead">Join the 7-Day Live Forex bootcamp and unlock exclusive tools, templates, and expert support designed to fast-track your success — available only to the first 50 confirmed joinees.</p>
@@ -385,9 +416,7 @@
 </section>
 
 <!-- ABOUT -->
-<section class="about-section section fade-up">
-  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
-
+<section class="about-section fade-up">
   <div class="container">
     <h2>About Us</h2>
     <p>We are an education-first platform dedicated to empowering individuals with the right knowledge, tools, consultation, and mentorship to succeed in the financial markets.</p>
@@ -406,9 +435,7 @@
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testimonials section fade-up">
-  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
-
+<section class="testimonials fade-up">
   <div class="container">
     <h2>Student Success Stories</h2>
     <div class="test-grid">
@@ -422,9 +449,7 @@
 </section>
 
 <!-- PRICING / CTA -->
-<section class="pricing-section section fade-up">
-  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
-
+<section class="pricing-section fade-up">
   <div class="container">
     <h2>Secure Your Trading Future Today</h2>
 
@@ -450,10 +475,8 @@
   </div>
 </section>
 
-<!-- LEAD / FORM SECTION -->
-<section class="lead-section section container fade-up" id="lead-form" aria-labelledby="lead-h">
-  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
-
+<!-- LEAD / FORM SECTION (final integrated form) -->
+<section class="lead-section container fade-up" id="lead-form" aria-labelledby="lead-h">
   <div class="lead-left">
     <div class="brand" aria-hidden="true">
       <div class="logo" title="Course">
@@ -521,13 +544,13 @@
 </section>
 
 <!-- FAQ -->
-<section class="faq-section section fade-up">
-  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
-
+<section class="faq-section fade-up">
   <div class="container">
     <h2>Frequently Asked Questions</h2>
 
     <div class="faq-wrap" role="list">
+
+      <!-- Item 1 (open by default) -->
       <div class="accordion-item" role="listitem" aria-expanded="true">
         <div class="accordion-header">
           <button aria-controls="panel1" aria-expanded="true" type="button">
@@ -537,11 +560,12 @@
         </div>
         <div id="panel1" class="panel panel-open" aria-hidden="false">
           <div class="panel-inner">
-            <p>No prior experience required! Our course is designed for complete beginners. We start with fundamentals and progressively build to advanced strategies.</p>
+            <p>No prior experience required! Our course is designed for complete beginners. We start with the fundamentals and progressively build to advanced strategies. Many of our most successful students started with zero trading knowledge.</p>
           </div>
         </div>
       </div>
 
+      <!-- Item 2 -->
       <div class="accordion-item" role="listitem" aria-expanded="false">
         <div class="accordion-header">
           <button aria-controls="panel2" aria-expanded="false" type="button">
@@ -551,11 +575,12 @@
         </div>
         <div id="panel2" class="panel panel-collapsed" aria-hidden="true">
           <div class="panel-inner">
-            <p>You can begin with demo accounts and then go live with as little as $500–$1000. We teach safe risk management to protect your capital.</p>
+            <p>You can start learning with our demo accounts, then begin live trading with as little as $500–$1000. We teach proper risk management so you can grow your account systematically while protecting your capital.</p>
           </div>
         </div>
       </div>
 
+      <!-- Item 3 -->
       <div class="accordion-item" role="listitem" aria-expanded="false">
         <div class="accordion-header">
           <button aria-controls="panel3" aria-expanded="false" type="button">
@@ -565,10 +590,41 @@
         </div>
         <div id="panel3" class="panel panel-collapsed" aria-hidden="true">
           <div class="panel-inner">
-            <p>The core curriculum can be completed in 6–8 weeks studying 1–2 hours per day. You have lifetime access to revisit content anytime.</p>
+            <p>The core curriculum can be completed in 6–8 weeks studying 1–2 hours per day. However, you have lifetime access, so you can learn at your own pace and revisit materials anytime.</p>
           </div>
         </div>
       </div>
+
+      <!-- Item 4 -->
+      <div class="accordion-item" role="listitem" aria-expanded="false">
+        <div class="accordion-header">
+          <button aria-controls="panel4" aria-expanded="false" type="button">
+            <div class="q-text">Is there ongoing support after course completion?</div>
+            <div class="icon-round" aria-hidden="true">+</div>
+          </button>
+        </div>
+        <div id="panel4" class="panel panel-collapsed" aria-hidden="true">
+          <div class="panel-inner">
+            <p>Absolutely! You get lifetime access to our private community, monthly live Q&A sessions, and ongoing mentorship opportunities. Our support doesn't end when you finish the course.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="accordion-item" role="listitem" aria-expanded="false">
+        <div class="accordion-header">
+          <button aria-controls="panel5" aria-expanded="false" type="button">
+            <div class="q-text">What makes this course different from free YouTube content?</div>
+            <div class="icon-round" aria-hidden="true">+</div>
+          </button>
+        </div>
+        <div id="panel5" class="panel panel-collapsed" aria-hidden="true">
+          <div class="panel-inner">
+            <p>Our course provides a structured, step-by-step learning path with real mentorship, live trading examples, and a proven system. You get personalized feedback, access to professional tools, and accountability that free content can't provide.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -576,10 +632,10 @@
 <script>
 /* Respect reduced motion */
 if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  document.querySelectorAll('.fade-up, .pulse, .glow, .bob, .sheen .bar').forEach(el => { el.style.animation = 'none'; el.style.opacity = 1; el.style.transform = 'none'; });
+  document.querySelectorAll('.fade-up, .pulse, .glow, .bob').forEach(el => { el.style.animation = 'none'; el.style.opacity = 1; el.style.transform = 'none'; });
 }
 
-/* COUNT-UP for stats */
+/* COUNT-UP animation for stats when visible */
 (function(){
   const els = document.querySelectorAll('.num[data-target]');
   if(!els.length) return;
@@ -663,40 +719,76 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
   });
 })();
 
-/* Feature card stacking + glow */
+/* Feature card glow pulse + robust stacking on scroll */
 (function(){
   const cards = Array.from(document.querySelectorAll('.feature-card'));
   if(!cards.length) return;
+
+  // give each card a stable base z-index (so stacking order predictable)
   cards.forEach((c, i) => {
     c.dataset.baseIndex = 10 + i;
     c.style.zIndex = c.dataset.baseIndex;
   });
+
+  // IntersectionObserver to detect when a card is near the center of viewport
+  // rootMargin tuned to center area; threshold tiny because we use rootMargin for range
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const el = entry.target;
       const idx = Number(el.dataset.index || 0);
+      // Check vertical center proximity:
+      // entry.boundingClientRect gives metrics; we can calc distance to viewport center
       const rect = entry.boundingClientRect;
       const viewportCenter = window.innerHeight / 2;
       const cardCenter = rect.top + rect.height / 2;
       const distance = Math.abs(viewportCenter - cardCenter);
+
+      // If within 160px of center -> stack it
       if (distance < 160) {
+        // Add stacked class and increase z-index so it appears above others
         el.classList.add('stacked');
+        // put on top: base + 100 + idx (so later cards can be above)
         el.style.zIndex = 100 + idx;
+        // stop passive glow animation so stacked box-shadow shows strongly (keep transform)
+        // (we keep glow class for subtle movement but stacked overrides box-shadow)
       } else {
+        // remove stacking
         el.classList.remove('stacked');
         el.style.zIndex = el.dataset.baseIndex;
       }
     });
-  }, { root: null, rootMargin: '-30% 0px -30% 0px', threshold: [0] });
-  cards.forEach(c => io.observe(c));
-  cards.forEach((c, i) => {
-    c.addEventListener('mouseenter', () => { c.classList.add('stacked'); c.style.zIndex = 100 + i; });
-    c.addEventListener('mouseleave', () => { c.classList.remove('stacked'); c.style.zIndex = c.dataset.baseIndex; });
-    c.addEventListener('keydown', e => { if (e.key === 'Enter') { c.classList.toggle('stacked'); c.style.zIndex = c.classList.contains('stacked') ? (100 + i) : c.dataset.baseIndex; setTimeout(()=> { c.classList.remove('stacked'); c.style.zIndex = c.dataset.baseIndex; }, 900); }});
+  }, {
+    root: null,
+    rootMargin: ' -30% 0px -30% 0px', // target center vertical band
+    threshold: [0]
   });
+
+  // Observe all cards
+  cards.forEach(c => io.observe(c));
+
+  // keyboard/hover triggers for accessibility
+  cards.forEach((c, i) => {
+    c.addEventListener('mouseenter', () => {
+      c.classList.add('stacked'); c.style.zIndex = 100 + i;
+    });
+    c.addEventListener('mouseleave', () => {
+      // let observer decide correct zIndex; if not near center revert to base
+      c.classList.remove('stacked');
+      c.style.zIndex = c.dataset.baseIndex;
+    });
+    c.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        c.classList.toggle('stacked');
+        c.style.zIndex = c.classList.contains('stacked') ? (100 + i) : c.dataset.baseIndex;
+        setTimeout(()=> { c.classList.remove('stacked'); c.style.zIndex = c.dataset.baseIndex; }, 900);
+      }
+    });
+  });
+
+  // Ensure animation (glow) continues but while stacked the stacked box-shadow is dominant.
 })();
 
-/* Hero preview parallax */
+/* Hero preview parallax float */
 (function(){
   const preview = document.getElementById('previewCard');
   if(preview){
@@ -710,17 +802,21 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
   }
 })();
 
-/* TICKERS: simulate live +/- changes; mobile hidden */
+/* TICKERS: simulate live +/- changes (random) and color switch.
+   On mobile these are hidden via CSS (per request). */
 (function(){
   const nums = {
     eur: {el: document.getElementById('tick-eur'), value: -0.3},
     btc: {el: document.getElementById('tick-btc'), value: 2.4},
     aapl:{el: document.getElementById('tick-aapl'), value: -2.4}
   };
-  function format(v){ return (v>0?'+':'') + v.toFixed(1) + '%'; }
+  function format(v){
+    return (v>0?'+':'') + v.toFixed(1) + '%';
+  }
   function updateOne(key){
     const o = nums[key];
     if(!o || !o.el) return;
+    // random delta -0.6..+0.6
     const delta = (Math.random() * 1.2) - 0.6;
     o.value = Math.max(-9.9, Math.min(9.9, o.value + delta));
     const valRounded = Math.round(o.value*10)/10;
@@ -730,9 +826,11 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
       valElm.classList.remove('pos','neg');
       valElm.classList.add(valRounded >= 0 ? 'pos' : 'neg');
     }
+    // small pop animation trigger
     o.el.style.transform = 'translateY(-6px)';
     setTimeout(()=> o.el.style.transform = '', 300);
   }
+  // initial set
   Object.keys(nums).forEach(k=>{
     const o = nums[k];
     const el = o.el;
@@ -747,7 +845,7 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
   setInterval(()=> updateOne('aapl'), 4200 + Math.random()*800);
 })();
 
-/* CTA buttons, form -> WhatsApp handling */
+/* CTA buttons: toggle active state and scroll to form */
 (function(){
   const heroEnroll = document.getElementById('hero-enroll');
   const heroCurr = document.getElementById('hero-curr');
@@ -773,17 +871,25 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
   [heroEnroll, heroCurr, ctaEnroll, ctaCallback].forEach(btn=>{
     if(!btn) return;
     btn.addEventListener('click', ()=> {
+      // toggle active visual
       document.querySelectorAll('.btn').forEach(b=> b.classList.remove('active'));
       btn.classList.add('active');
       const src = btn.dataset.src || btn.dataset.source || 'cta';
       scrollToForm(src);
     });
-    btn.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+    btn.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+    });
   });
   if(pricingEnroll){
-    pricingEnroll.addEventListener('click', function(e){ e.preventDefault(); document.querySelectorAll('.btn').forEach(b=> b.classList.remove('active')); scrollToForm('pricing'); });
+    pricingEnroll.addEventListener('click', function(e){
+      e.preventDefault();
+      document.querySelectorAll('.btn').forEach(b=> b.classList.remove('active'));
+      scrollToForm('pricing');
+    });
   }
 
+  /* Simple validation */
   function validate(fields){
     if(!fields.firstName || !fields.lastName) return 'Please enter full name.';
     const digits = (fields.phone || '').replace(/\D/g,'');
@@ -827,49 +933,9 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
       }, 700);
     });
   }
+
+  // ensure tel links are correct
   document.querySelectorAll('a[href^="tel:"]').forEach(a => a.href = 'tel:+917249960757');
-})();
-
-/* SHEEN CONTROL: auto pulse per section and on hover; disabled on small screens */
-(function(){
-  const sections = document.querySelectorAll('.section');
-  // only enable shimmer for wide screens to avoid mobile perf issues
-  function isDesktop(){ return window.innerWidth > 800; }
-
-  // Play sheen on a section (adds class which triggers CSS animation)
-  function playSheen(el){
-    if(!isDesktop()) return;
-    // ensure bar restart by forcing reflow
-    el.classList.remove('sheen-play');
-    void el.offsetWidth;
-    el.classList.add('sheen-play');
-    // remove after animation ends so hover can retrigger naturally
-    setTimeout(()=> { el.classList.remove('sheen-play'); }, 1200);
-  }
-
-  // periodic auto-pulse: cycle sections every ~3.8s
-  let idx = 0;
-  const autoInterval = setInterval(()=>{
-    if(!isDesktop()) return;
-    const s = sections[idx % sections.length];
-    playSheen(s);
-    idx++;
-  }, 3800);
-
-  // also trigger sheen on mousemove over section (gentle)
-  sections.forEach(sec => {
-    sec.addEventListener('mouseenter', ()=> { if(isDesktop()) playSheen(sec); });
-    // allow keyboard focus to show sheen
-    sec.addEventListener('focusin', ()=> { if(isDesktop()) playSheen(sec); });
-  });
-
-  // pause auto pulse on small screens or tab visibility
-  window.addEventListener('resize', ()=> {
-    if(!isDesktop()) { sections.forEach(s => s.classList.remove('sheen-play')); }
-  });
-  document.addEventListener('visibilitychange', ()=> {
-    if(document.hidden) clearInterval(autoInterval);
-  });
 })();
 
 /* Accessibility small helpers */
