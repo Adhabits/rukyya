@@ -5,386 +5,147 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>WiFi Money — Master Professional Trading</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
 <style>
-  /* ---------- Reset & base ---------- */
   :root{
     --bg:#0f1112;
     --grid: rgba(255,200,80,0.03);
-    --accent:#d9b14b;         /* gold */
+    --accent:#d9b14b;
     --accent-dark:#b88f33;
     --muted:#a6b0b4;
     --card:#121416;
     --glass: rgba(255,255,255,0.03);
   }
   *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-  body{
-    background: radial-gradient(1200px 600px at 10% 30%, rgba(255,216,123,0.03), transparent 8%),
-                radial-gradient(900px 500px at 90% 70%, rgba(0,0,0,0.3), transparent 20%),
-                linear-gradient(180deg,#0b0c0d 0%, #0f1112 100%);
-    color:#fff;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    overflow-x:hidden;
-  }
+  html,body{margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:#fff;overflow-x:hidden;}
 
-  /* ---------- background grid ---------- */
-  .grid-bg{
-    position:fixed; inset:0; z-index:0; pointer-events:none;
-    background-image:
-      linear-gradient(0deg, rgba(255,255,255,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size: 80px 80px, 80px 80px;
-    opacity:0.12;
-    mix-blend-mode:overlay;
-    transform:translateZ(0);
-    filter:contrast(90%);
-  }
+  /* Background Grid */
+  .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(0deg,rgba(255,255,255,0.02)1px,transparent 1px),
+                     linear-gradient(90deg,rgba(255,255,255,0.02)1px,transparent 1px);
+    background-size:80px 80px;
+    opacity:.12;}
 
-  /* subtle vignette */
-  .vignette{position:fixed; inset:0; background: radial-gradient(ellipse at center, rgba(255,255,255,0.02) 0%, transparent 25%); z-index:0; pointer-events:none;}
-
-  /* container */
-  .hero{
-    position:relative; z-index:2; padding:56px 6% 80px;
-    display:flex; align-items:center; justify-content:space-between; gap:28px;
-    min-height:76vh;
-  }
-  .hero-inner{width:100%; max-width:1320px; margin:0 auto; display:flex; gap:28px; align-items:center;}
-  .left{flex:1 1 640px; padding-right:12px;}
-  .right{flex:0 0 480px; display:flex; align-items:center; justify-content:center;}
-
-  /* logo & badge */
-  .logo-wrap{display:flex; align-items:center; gap:12px; margin-bottom:18px; opacity:0.95}
-  .logo{
-    display:inline-flex; align-items:center; justify-content:center;
-    width:78px; height:78px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    box-shadow:0 6px 18px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
-    border:1px solid rgba(255,255,255,0.04);
-  }
-  .logo svg{width:44px; height:44px; fill:var(--accent);}
-  .badge{
-    font-family:Poppins, Inter;
-    color:var(--accent);
-    border:1px solid rgba(217,177,75,0.12);
-    padding:8px 14px; border-radius:26px; font-weight:600; font-size:13px;
-    display:inline-flex; gap:10px; align-items:center;
-  }
-
-  /* heading */
-  .hero-h{
-    font-weight:900;
-    font-family:Poppins, Inter;
-    line-height:1;
-    font-size:64px;
-    letter-spacing:-1px;
-    margin:6px 0 18px;
-  }
+  /* HERO SECTION */
+  .hero{position:relative;z-index:2;padding:70px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+  .hero-inner{max-width:1200px;margin:0 auto;width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:40px;}
+  .left{flex:1 1 580px;}
+  .hero-h{font-family:Poppins,sans-serif;font-weight:900;font-size:64px;line-height:1.1;margin:12px 0;}
   .hero-h .gold{color:var(--accent);}
-  .sub{color:var(--muted); max-width:760px; font-size:18px; line-height:1.7; margin-bottom:30px;}
+  .sub{color:var(--muted);font-size:18px;max-width:640px;line-height:1.6;margin-bottom:36px;}
+  .cta-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:36px;}
+  .btn{display:inline-flex;align-items:center;padding:16px 28px;border-radius:50px;font-weight:700;text-decoration:none;cursor:pointer;transition:.3s;}
+  .btn-cta{background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;}
+  .btn-ghost{border:2px solid rgba(217,177,75,0.2);color:var(--accent);}
+  .btn:hover{transform:translateY(-3px);}
+  .stats{display:flex;gap:28px;flex-wrap:wrap;}
+  .stat{text-align:center;}
+  .num{color:var(--accent);font-weight:800;font-size:24px;}
+  .label{color:var(--muted);font-size:13px;}
+  .video-frame{width:420px;max-width:45vw;height:320px;border-radius:18px;overflow:hidden;background:#111;display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(0,0,0,.5);}
+  .play-btn{width:64px;height:64px;border-radius:50%;border:2px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05);}
+  .play-btn svg{fill:var(--accent);width:30px;height:30px;}
+  .ticker{position:absolute;background:rgba(255,255,255,.03);border-radius:12px;padding:10px 14px;font-size:13px;border:1px solid rgba(255,255,255,.04);}
+  .ticker small{color:var(--muted);}
+  .ticker .neg{color:#ff6b6b;font-weight:700;}
+  .t1{left:6%;top:18%;}.t2{right:6%;top:34%;}.t3{left:12%;bottom:28%;}
 
-  /* CTAs */
-  .cta-row{display:flex; gap:18px; align-items:center; margin-bottom:36px; flex-wrap:wrap;}
-  .btn{
-    display:inline-flex; align-items:center; gap:12px; padding:16px 28px; border-radius:46px; font-weight:700; cursor:pointer;
-    border:none; outline:none; text-decoration:none;
-    transition:transform .22s ease, box-shadow .22s ease;
-    box-shadow:0 8px 22px rgba(0,0,0,0.5);
-  }
-  .btn-cta{background:linear-gradient(180deg,var(--accent),var(--accent-dark)); color:#111;}
-  .btn-ghost{background:transparent; color:var(--accent); border:2px solid rgba(217,177,75,0.13); padding:14px 28px;}
+  /* Stop Losing Money Section */
+  .stop-losing-section{text-align:center;padding:120px 6% 100px;background:linear-gradient(180deg,#0f0f0f 0%,#121212 100%);}
+  .stop-heading{font-size:54px;font-weight:800;font-family:Poppins,sans-serif;margin-bottom:30px;}
+  .stop-heading .highlight{color:var(--accent);}
+  .stop-subtext{font-size:19px;line-height:1.8;color:#c5c5c5;max-width:900px;margin:0 auto;}
 
-  .btn:hover{transform:translateY(-4px)}
-  .btn-ghost:hover{background:rgba(255,255,255,0.02)}
+  /* WHY CHOOSE SECTION */
+  .why-section{text-align:center;padding:100px 6% 120px;background:#0c0c0b;}
+  .why-section h2{font-size:36px;font-weight:700;margin-bottom:60px;color:#fff;}
+  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;max-width:1100px;margin:0 auto;}
+  .feature-card{background:rgba(255,255,255,0.03);padding:40px 30px;border-radius:18px;transition:.3s;box-shadow:0 0 20px rgba(0,0,0,.3);}
+  .feature-card:hover{transform:translateY(-6px);background:rgba(255,255,255,0.05);}
+  .icon-circle{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+  .icon-circle svg{fill:#111;width:32px;height:32px;}
+  .feature-card h3{font-size:20px;font-weight:700;margin-bottom:10px;color:#fff;}
+  .feature-card p{font-size:15px;color:#bbb;line-height:1.6;}
 
-  /* stats */
-  .stats{display:flex; gap:34px; align-items:flex-end; margin-top:6px; flex-wrap:wrap;}
-  .stat{
-    text-align:center;
-  }
-  .stat .num{color:var(--accent); font-weight:800; font-size:26px;}
-  .stat .label{color:var(--muted); font-size:13px; margin-top:8px;}
+  /* Animation */
+  .fade-up{opacity:0;transform:translateY(20px);animation:fadeUp .8s ease forwards;}
+  @keyframes fadeUp{to{opacity:1;transform:none}}
 
-  /* floating ticker badges */
-  .ticker{
-    position:absolute; background:var(--card); border-radius:12px; padding:10px 12px; display:inline-block;
-    border:1px solid rgba(255,255,255,0.04); box-shadow:0 8px 30px rgba(0,0,0,0.55);
-    font-weight:700; width:86px; text-align:center; color:#e7e7e7; font-size:13px;
+  /* Responsive */
+  @media(max-width:900px){
+    .hero-h{font-size:46px;}
+    .stop-heading{font-size:42px;}
   }
-  .ticker small{display:block; color:var(--muted); font-weight:600; font-size:12px}
-  .ticker .neg{color:#ff6b6b; font-weight:800; margin-top:4px; font-size:14px}
-
-  .ticker.t1{left:6%; top:18%;}
-  .ticker.t2{right:6%; top:34%;}
-  .ticker.t3{left:12%; bottom:28%;}
-  .ticker.t4{right:18%; bottom:36%;}
-
-  /* right side video frame */
-  .video-frame{
-    width:420px; max-width:45vw; height:360px; border-radius:18px; overflow:hidden;
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border:1px solid rgba(217,177,75,0.06);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    display:flex; align-items:center; justify-content:center; position:relative;
+  @media(max-width:600px){
+    .hero-h{font-size:34px;}
+    .stop-heading{font-size:30px;}
+    .stop-subtext{font-size:15px;}
   }
-  .video-thumb{
-    width:100%; height:100%; display:block; object-fit:cover;
-    background:linear-gradient(180deg, rgba(15,15,15,0.6), rgba(0,0,0,0.45));
-    color:#fff; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px; padding:18px;
-  }
-  .play-btn{
-    width:64px;height:64px;border-radius:999px;background:rgba(255,255,255,0.06); display:flex;align-items:center;justify-content:center;
-    border:2px solid rgba(255,255,255,0.05); cursor:pointer;
-  }
-  .play-btn svg{width:32px;height:32px; fill:var(--accent)}
-
-  /* small responsive adjustments */
-  @media (max-width:1100px){
-    .hero-inner{padding:0 6px}
-    .hero-h{font-size:52px}
-    .right{flex-basis:380px}
-    .video-frame{width:360px;height:300px}
-  }
-  @media (max-width:860px){
-    .hero{padding:40px 6%}
-    .hero-inner{flex-direction:column; align-items:flex-start}
-    .right{width:100%; display:flex; margin-top:20px; order:2;}
-    .left{width:100%}
-    .hero-h{font-size:38px}
-    .video-frame{width:100%; height:220px; border-radius:14px;}
-    .ticker.t1{left:4%; top:8%}
-    .ticker.t2{right:4%; top:12%}
-    .ticker.t3{left:4%; bottom:6%}
-    .ticker.t4{right:6%; bottom:12%}
-  }
-  @media (max-width:420px){
-    .hero-h{font-size:30px}
-    .sub{font-size:15px}
-    .btn{padding:12px 18px}
-    .logo{width:56px;height:56px}
-    .badge{font-size:12px;padding:6px 12px}
-    .stats{gap:18px}
-  }
-
-  /* ---------- Animations ---------- */
-  .fade-up{opacity:0; transform:translateY(18px); animation:fadeUp .9s cubic-bezier(.2,.9,.2,1) forwards;}
-  .fade-delay-1{animation-delay:.12s}
-  .fade-delay-2{animation-delay:.28s}
-  .fade-delay-3{animation-delay:.42s}
-  .floaty{animation:floaty 6s ease-in-out infinite;}
-  @keyframes fadeUp{
-    to{opacity:1; transform:none}
-  }
-  @keyframes floaty{
-    0%{transform:translateY(0px)}
-    50%{transform:translateY(-10px)}
-    100%{transform:translateY(0px)}
-  }
-
-  /* subtle focus outline */
-  .btn:focus{box-shadow:0 0 0 4px rgba(217,177,75,0.12); outline:none}
-
-  /* accessibility */
-  a{color:inherit}
-  small{font-size:12px}
 </style>
 </head>
 <body>
 
-<div class="grid-bg" aria-hidden="true"></div>
-<div class="vignette" aria-hidden="true"></div>
+<div class="grid-bg"></div>
 
-<header class="hero" role="banner">
+<!-- HERO SECTION -->
+<header class="hero fade-up">
   <div class="hero-inner">
-
     <div class="left">
-      <div class="logo-wrap fade-up fade-delay-1" style="display:flex;align-items:center;">
-        <div class="logo" aria-hidden="true">
-          <!-- simple wifi-money svg logo -->
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 3c3.866 0 7.1 1.866 9.001 4.712l-1.6 1.1C18.9 6.7 15.7 5 12 5S5.1 6.7 4.599 8.812L3 7.7C4.901 4.866 8.134 3 12 3zm0 4a8.957 8.957 0 0 1 6.364 2.636l-1.414 1.414A6.96 6.96 0 0 0 12 9a6.96 6.96 0 0 0-4.95 2.05L5.636 9.636A8.957 8.957 0 0 1 12 7zM7 13a5 5 0 1 1 10 0 5 5 0 0 1-10 0z"/>
-          </svg>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:4px;">
-          <div style="display:flex;gap:10px;align-items:center;">
-            <div class="badge">#1 Trading Course 2025</div>
-          </div>
-          <div style="color:var(--muted); font-size:13px; margin-top:6px;">WIFI MONEY</div>
-        </div>
+      <h1 class="hero-h">Master <span class="gold">Professional Trading</span><br>Build Wealth from Anywhere</h1>
+      <p class="sub">Transform from beginner to profitable trader with our comprehensive course. Learn proven strategies used by Wall Street professionals.</p>
+      <div class="cta-row">
+        <a href="#" class="btn btn-cta">🎓 ENROLL IN COURSE</a>
+        <a href="#" class="btn btn-ghost">▶ VIEW CURRICULUM</a>
       </div>
-
-      <h1 class="hero-h fade-up fade-delay-2">
-        <span>Master </span><span class="gold">Professional Trading</span><br>
-        <span>Build Wealth from Anywhere</span>
-      </h1>
-
-      <p class="sub fade-up fade-delay-3">
-        Transform from beginner to profitable trader with our comprehensive course. Learn proven strategies used by Wall Street professionals.
-      </p>
-
-      <div class="cta-row fade-up" style="animation-delay:.56s;">
-        <a class="btn btn-cta" href="#enroll" role="button" aria-label="Enroll in course">
-          <!-- graduation cap -->
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="margin-right:6px">
-            <path d="M12 2 1 8l11 6 9-4.909V17h2V8L12 2z" fill="currentColor" />
-          </svg>
-          ENROLL IN COURSE
-        </a>
-
-        <a class="btn btn-ghost" href="#curriculum" role="button" aria-label="View curriculum">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right:6px">
-            <path d="M10 17l5-5-5-5v10z" fill="currentColor"/>
-          </svg>
-          VIEW CURRICULUM
-        </a>
-      </div>
-
-      <div class="stats fade-up" style="animation-delay:.7s;">
-        <div class="stat" style="min-width:120px">
-          <div class="num">15,000+</div>
-          <div class="label">Students Enrolled</div>
-        </div>
-        <div class="stat" style="min-width:120px">
-          <div class="num">4.9/5</div>
-          <div class="label">Course Rating</div>
-        </div>
-        <div class="stat" style="min-width:120px">
-          <div class="num">89%</div>
-          <div class="label">Success Rate</div>
-        </div>
+      <div class="stats">
+        <div class="stat"><div class="num">15,000+</div><div class="label">Students Enrolled</div></div>
+        <div class="stat"><div class="num">4.9/5</div><div class="label">Course Rating</div></div>
+        <div class="stat"><div class="num">89%</div><div class="label">Success Rate</div></div>
       </div>
     </div>
-
-    <div class="right fade-up" style="animation-delay:.9s;">
-
-      <div class="video-frame floaty" aria-hidden="true">
-        <div class="video-thumb" role="img" aria-label="Course preview video">
-          <!-- Use your thumbnail or embed video later -->
-          <div style="font-weight:800; font-size:16px; color:var(--accent);">Course Preview</div>
-          <div style="color:var(--muted); font-size:13px; margin-top:6px; text-align:center; max-width:240px;">
-            12 modules • Live trading sessions • Proven strategies
-          </div>
-
-          <div style="position:absolute; bottom:22px;">
-            <div class="play-btn" title="Play preview">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z" /></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Floating tickers (decorative) -->
-    <div class="ticker t1 fade-up" style="animation-delay:1.0s;">
-      <small>EURUSD</small>
-      <div class="neg">-0.3%</div>
-    </div>
-
-    <div class="ticker t2 fade-up" style="animation-delay:1.12s;">
-      <small>BTCUSD</small>
-      <div class="neg">-4.6%</div>
-    </div>
-
-    <div class="ticker t3 fade-up" style="animation-delay:1.2s;">
-      <small>AAPL</small>
-      <div class="neg">-2.4%</div>
-    </div>
-
-    <div class="ticker t4 fade-up" style="animation-delay:1.28s;">
-      <small>SP500</small>
-      <div class="neg">-1.1%</div>
-    </div>
-
+    <div class="video-frame"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+    <div class="ticker t1"><small>EURUSD</small><div class="neg">-0.3%</div></div>
+    <div class="ticker t2"><small>BTCUSD</small><div class="neg">-4.6%</div></div>
+    <div class="ticker t3"><small>AAPL</small><div class="neg">-2.4%</div></div>
   </div>
 </header>
 
-<script>
-  <section class="stop-losing-section fade-up" style="animation-delay:1.2s;">
-  <div class="container">
-    <h2 class="stop-heading">
-      Stop <span class="highlight">Losing Money</span> in the Markets
-    </h2>
-    <p class="stop-subtext">
-      95% of retail traders lose money because they lack proper education, proven strategies, and risk management skills.
-      Don't be part of that statistic.<br><br>
-      Our comprehensive trading course gives you everything you need to trade profitably and consistently.
-    </p>
-  </div>
+<!-- STOP LOSING MONEY SECTION -->
+<section class="stop-losing-section fade-up">
+  <h2 class="stop-heading">Stop <span class="highlight">Losing Money</span> in the Markets</h2>
+  <p class="stop-subtext">
+    95% of retail traders lose money because they lack proper education, proven strategies, and risk management skills.
+    Don't be part of that statistic.<br><br>
+    Our comprehensive trading course gives you everything you need to trade profitably and consistently.
+  </p>
 </section>
 
-<style>
-  .stop-losing-section {
-    background: linear-gradient(180deg, #0f0f0f 0%, #121212 100%);
-    text-align: center;
-    padding: 120px 6% 100px;
-    position: relative;
-    z-index: 2;
-  }
-  .stop-heading {
-    font-size: 54px;
-    font-weight: 800;
-    font-family: 'Poppins', sans-serif;
-    color: #fff;
-    margin-bottom: 30px;
-    line-height: 1.2;
-  }
-  .stop-heading .highlight {
-    color: #d9b14b;
-  }
-  .stop-subtext {
-    font-size: 19px;
-    line-height: 1.8;
-    color: #c5c5c5;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  /* Responsive tweaks */
-  @media (max-width:900px) {
-    .stop-heading {
-      font-size: 42px;
-    }
-    .stop-subtext {
-      font-size: 17px;
-      padding: 0 8px;
-    }
-  }
-  @media (max-width:600px) {
-    .stop-heading {
-      font-size: 32px;
-    }
-    .stop-subtext {
-      font-size: 15px;
-      line-height: 1.7;
-    }
-  }
-</style>
-  // small JS to add slight parallax on mouse move and enable keyboard focus ring
-  (function(){
-    const hero = document.querySelector('.hero-inner');
-    document.addEventListener('mousemove', (e)=>{
-      const w = window.innerWidth, h = window.innerHeight;
-      const x = (e.clientX - w/2) / w;
-      const y = (e.clientY - h/2) / h;
-      const right = document.querySelector('.right');
-      if(right) right.style.transform = `translate3d(${x * 6}px, ${y * 6}px, 0)`;
-      // subtle shift for logo
-      const logos = document.querySelectorAll('.logo, .badge');
-      logos.forEach((el, i) => {
-        el.style.transform = `translate3d(${x*(i+1)*2}px, ${y*(i+1)*2}px, 0)`;
-      });
-    });
-
-    // simple reduce motion respect
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if(prefersReduced.matches){
-      document.querySelectorAll('.fade-up, .floaty').forEach(el=>{
-        el.style.animation = 'none'; el.style.opacity = 1; el.style.transform = 'none';
-      });
-    }
-  })();
-</script>
+<!-- WHY CHOOSE SECTION -->
+<section class="why-section fade-up">
+  <h2>Why Choose Our Trading Course?</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M4 5h16v2H4zM4 10h16v2H4zM4 15h10v2H4z"/></svg></div>
+      <h3>Professional Strategies</h3>
+      <p>Learn the exact strategies used by institutional traders and hedge funds to generate consistent profits in any market condition.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z"/></svg></div>
+      <h3>Risk Management Mastery</h3>
+      <p>Master advanced risk management techniques that protect your capital and ensure long-term trading success.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 3.3-2.1 6.1-5 7v6h-4v-6c-2.9-.9-5-3.7-5-7a7 7 0 017-7z"/></svg></div>
+      <h3>Trading Psychology</h3>
+      <p>Develop the mental discipline and emotional control required to make rational decisions under pressure.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M17 10.5V6c0-1.1-.9-2-2-2H5C3.9 4 3 4.9 3 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-4.5l4 4V6.5l-4 4z"/></svg></div>
+      <h3>Live Trading Sessions</h3>
+      <p>Watch real trades unfold in live market conditions and learn to apply strategies in real-time scenarios.</p>
+    </div>
+  </div>
+</section>
 
 </body>
 </html>
