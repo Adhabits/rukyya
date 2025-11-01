@@ -144,7 +144,7 @@
   .features-list li{margin-bottom:8px}
   .enroll-btn{display:inline-block;padding:12px 20px;border-radius:30px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);margin-top:12px}
 
-  /* ---------- FAQ ---------- */
+  /* ---------- FAQ (corrected) ---------- */
   .faq-section{padding:80px 0 120px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
   .faq-section h2{font-size:44px;color:var(--accent);margin-bottom:28px}
   .faq-wrap{max-width:1000px;margin:0 auto;padding:0 6%;}
@@ -153,17 +153,17 @@
   .accordion-header button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px}
   .q-text{font-weight:700;color:var(--accent);font-size:18px;text-align:left}
   .icon-round{width:40px;height:40px;border-radius:999px;background:linear-gradient(180deg,#1a1a1a,#101010);display:flex;align-items:center;justify-content:center;border:2px solid rgba(217,177,75,0.18);color:var(--accent);font-weight:900}
-  .panel{padding:18px 22px;color:#d0d0d0;text-align:left;line-height:1.8;border-top:1px solid rgba(217,177,75,0.03);background:linear-gradient(180deg, rgba(217,177,75,0.01), transparent)}
-  .panel p{margin:0}
+  .panel{padding:0 22px;color:#d0d0d0;text-align:left;line-height:1.8;background:linear-gradient(180deg, rgba(217,177,75,0.01), transparent)}
+  .panel-inner{padding:18px 0;margin:0}
 
   /* active states */
   .accordion-item[aria-expanded="true"] .q-text{color:#fff}
   .accordion-item[aria-expanded="true"] .icon-round{background:var(--accent);color:#111;border-color:rgba(0,0,0,0.08)}
   .accordion-item[aria-expanded="true"]{box-shadow:var(--glow)}
 
-  /* collapse animation */
+  /* collapse animation handled by max-height transitions */
   .panel-collapsed{max-height:0;overflow:hidden;transition:max-height .36s cubic-bezier(.2,.9,.2,1)}
-  .panel-open{transition:max-height .36s cubic-bezier(.2,.9,.2,1)}
+  .panel-open{transition:max-height .36s cubic-bezier(.2,.9,.2,1);overflow:hidden}
 
   /* ---------- Animations & small JS helpers ---------- */
   .fade-up{opacity:0;transform:translateY(16px);animation:fadeUp .7s cubic-bezier(.2,.9,.2,1) forwards}
@@ -545,65 +545,75 @@
       <!-- Item 1 (open by default) -->
       <div class="accordion-item" role="listitem" aria-expanded="true">
         <div class="accordion-header">
-          <button aria-controls="panel1" aria-expanded="true">
+          <button aria-controls="panel1" aria-expanded="true" type="button">
             <div class="q-text">Do I need prior trading experience to enroll?</div>
             <div class="icon-round" aria-hidden="true">−</div>
           </button>
         </div>
-        <div id="panel1" class="panel panel-open">
-          <p>No prior experience required! Our course is designed for complete beginners. We start with the fundamentals and progressively build to advanced strategies. Many of our most successful students started with zero trading knowledge.</p>
+        <div id="panel1" class="panel panel-open" aria-hidden="false">
+          <div class="panel-inner">
+            <p>No prior experience required! Our course is designed for complete beginners. We start with the fundamentals and progressively build to advanced strategies. Many of our most successful students started with zero trading knowledge.</p>
+          </div>
         </div>
       </div>
 
       <!-- Item 2 -->
       <div class="accordion-item" role="listitem" aria-expanded="false">
         <div class="accordion-header">
-          <button aria-controls="panel2" aria-expanded="false">
+          <button aria-controls="panel2" aria-expanded="false" type="button">
             <div class="q-text">How much capital do I need to start trading?</div>
             <div class="icon-round" aria-hidden="true">+</div>
           </button>
         </div>
-        <div id="panel2" class="panel panel-collapsed">
-          <p>You can start learning with our demo accounts, then begin live trading with as little as $500–$1000. We teach proper risk management so you can grow your account systematically while protecting your capital.</p>
+        <div id="panel2" class="panel panel-collapsed" aria-hidden="true">
+          <div class="panel-inner">
+            <p>You can start learning with our demo accounts, then begin live trading with as little as $500–$1000. We teach proper risk management so you can grow your account systematically while protecting your capital.</p>
+          </div>
         </div>
       </div>
 
       <!-- Item 3 -->
       <div class="accordion-item" role="listitem" aria-expanded="false">
         <div class="accordion-header">
-          <button aria-controls="panel3" aria-expanded="false">
+          <button aria-controls="panel3" aria-expanded="false" type="button">
             <div class="q-text">How long does it take to complete the course?</div>
             <div class="icon-round" aria-hidden="true">+</div>
           </button>
         </div>
-        <div id="panel3" class="panel panel-collapsed">
-          <p>The core curriculum can be completed in 6–8 weeks studying 1–2 hours per day. However, you have lifetime access, so you can learn at your own pace and revisit materials anytime.</p>
+        <div id="panel3" class="panel panel-collapsed" aria-hidden="true">
+          <div class="panel-inner">
+            <p>The core curriculum can be completed in 6–8 weeks studying 1–2 hours per day. However, you have lifetime access, so you can learn at your own pace and revisit materials anytime.</p>
+          </div>
         </div>
       </div>
 
       <!-- Item 4 -->
       <div class="accordion-item" role="listitem" aria-expanded="false">
         <div class="accordion-header">
-          <button aria-controls="panel4" aria-expanded="false">
+          <button aria-controls="panel4" aria-expanded="false" type="button">
             <div class="q-text">Is there ongoing support after course completion?</div>
             <div class="icon-round" aria-hidden="true">+</div>
           </button>
         </div>
-        <div id="panel4" class="panel panel-collapsed">
-          <p>Absolutely! You get lifetime access to our private Discord community, monthly live Q&A sessions, and ongoing mentorship opportunities. Our support doesn't end when you finish the course.</p>
+        <div id="panel4" class="panel panel-collapsed" aria-hidden="true">
+          <div class="panel-inner">
+            <p>Absolutely! You get lifetime access to our private Discord community, monthly live Q&A sessions, and ongoing mentorship opportunities. Our support doesn't end when you finish the course.</p>
+          </div>
         </div>
       </div>
 
       <!-- Item 5 -->
       <div class="accordion-item" role="listitem" aria-expanded="false">
         <div class="accordion-header">
-          <button aria-controls="panel5" aria-expanded="false">
+          <button aria-controls="panel5" aria-expanded="false" type="button">
             <div class="q-text">What makes this course different from free YouTube content?</div>
             <div class="icon-round" aria-hidden="true">+</div>
           </button>
         </div>
-        <div id="panel5" class="panel panel-collapsed">
-          <p>Our course provides a structured, step-by-step learning path with real mentorship, live trading examples, and a proven system. You get personalized feedback, access to professional tools, and accountability that free content can't provide.</p>
+        <div id="panel5" class="panel panel-collapsed" aria-hidden="true">
+          <div class="panel-inner">
+            <p>Our course provides a structured, step-by-step learning path with real mentorship, live trading examples, and a proven system. You get personalized feedback, access to professional tools, and accountability that free content can't provide.</p>
+          </div>
         </div>
       </div>
 
@@ -617,7 +627,7 @@
     document.querySelectorAll('.fade-up').forEach(el => { el.style.animation = 'none'; el.style.opacity = 1; el.style.transform = 'none'; });
   }
 
-  // Accordion logic
+  // Accordion logic - MULTIPLE items can be open (independent toggles)
   (function(){
     const items = document.querySelectorAll('.accordion-item');
     items.forEach(item => {
@@ -625,45 +635,56 @@
       const panel = item.querySelector('.panel');
       const icon = item.querySelector('.icon-round');
 
-      // initialize panels
-      if (item.getAttribute('aria-expanded') === 'true') {
+      // initialize each panel using its aria-expanded
+      const isOpen = item.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
         panel.style.maxHeight = panel.scrollHeight + 'px';
         panel.classList.remove('panel-collapsed'); panel.classList.add('panel-open');
+        panel.setAttribute('aria-hidden','false');
         icon.textContent = '−';
         btn.setAttribute('aria-expanded','true');
       } else {
         panel.style.maxHeight = '0px';
         panel.classList.remove('panel-open'); panel.classList.add('panel-collapsed');
+        panel.setAttribute('aria-hidden','true');
         icon.textContent = '+';
         btn.setAttribute('aria-expanded','false');
       }
 
+      // toggle on click (independent)
       btn.addEventListener('click', (e)=>{
-        const isOpen = item.getAttribute('aria-expanded') === 'true';
-        // close all items (optional: keep multiple open if you prefer)
-        items.forEach(it => {
-          it.setAttribute('aria-expanded','false');
-          it.querySelector('.panel').style.maxHeight = '0px';
-          it.querySelector('.panel').classList.remove('panel-open'); it.querySelector('.panel').classList.add('panel-collapsed');
-          const ic = it.querySelector('.icon-round'); if(ic) ic.textContent = '+';
-          const b = it.querySelector('.accordion-header button'); if(b) b.setAttribute('aria-expanded','false');
-        });
-
-        // toggle clicked
-        if (!isOpen) {
+        const currentlyOpen = item.getAttribute('aria-expanded') === 'true';
+        if (!currentlyOpen) {
+          // open this item
           item.setAttribute('aria-expanded','true');
-          panel.style.maxHeight = panel.scrollHeight + 'px';
           panel.classList.remove('panel-collapsed'); panel.classList.add('panel-open');
+          // set maxHeight to scrollHeight to animate open
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          panel.setAttribute('aria-hidden','false');
           icon.textContent = '−';
           btn.setAttribute('aria-expanded','true');
         } else {
+          // close this item
           item.setAttribute('aria-expanded','false');
-          panel.style.maxHeight = '0px';
           panel.classList.remove('panel-open'); panel.classList.add('panel-collapsed');
+          panel.style.maxHeight = '0px';
+          panel.setAttribute('aria-hidden','true');
           icon.textContent = '+';
           btn.setAttribute('aria-expanded','false');
         }
       });
+
+      // if content inside panel changes height after open (images, etc.), keep maxHeight updated
+      // observe for size changes to panel-inner and update maxHeight if open
+      const inner = panel.querySelector('.panel-inner');
+      if (window.ResizeObserver && inner) {
+        const ro = new ResizeObserver(() => {
+          if (item.getAttribute('aria-expanded') === 'true') {
+            panel.style.maxHeight = inner.scrollHeight + 'px';
+          }
+        });
+        ro.observe(inner);
+      }
     });
   })();
 
