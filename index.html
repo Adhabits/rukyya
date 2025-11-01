@@ -3,311 +3,327 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Learn Trading with Rukyaa Mam — Mobile Friendly</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
+<title>WiFi Money — Master Professional Trading</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg1:#060b23; --bg2:#101936; --text:#f3f5fa; --muted:#9bb2d4;
-  --accent1:#06b6d4; --accent2:#ff6aa2; --accent3:#9b5cff;
-  --card:rgba(255,255,255,0.04); --btn-glow:0 0 16px rgba(255,106,162,.5);
-  --maxw:1150px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  background:linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 60%);
-  color:var(--text);line-height:1.45;-webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-.container{max-width:var(--maxw);margin:0 auto;padding:0 18px}
+  /* ---------- Reset & base ---------- */
+  :root{
+    --bg:#0f1112;
+    --grid: rgba(255,200,80,0.03);
+    --accent:#d9b14b;         /* gold */
+    --accent-dark:#b88f33;
+    --muted:#a6b0b4;
+    --card:#121416;
+    --glass: rgba(255,255,255,0.03);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+  body{
+    background: radial-gradient(1200px 600px at 10% 30%, rgba(255,216,123,0.03), transparent 8%),
+                radial-gradient(900px 500px at 90% 70%, rgba(0,0,0,0.3), transparent 20%),
+                linear-gradient(180deg,#0b0c0d 0%, #0f1112 100%);
+    color:#fff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
 
-/* Header */
-header{padding:20px 0;text-align:center;font-family:Poppins}
-header h1{font-weight:800;font-size:clamp(22px,4.6vw,36px)}
-header p{color:var(--muted);margin-top:8px;font-size:14px}
+  /* ---------- background grid ---------- */
+  .grid-bg{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(0deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 80px 80px, 80px 80px;
+    opacity:0.12;
+    mix-blend-mode:overlay;
+    transform:translateZ(0);
+    filter:contrast(90%);
+  }
 
-/* Buttons */
-.btn{display:inline-block;padding:12px 18px;border-radius:12px;font-weight:800;border:none;cursor:pointer;font-family:Poppins}
-.btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent3));color:#06101a;box-shadow:var(--btn-glow)}
-.btn-secondary{background:transparent;border:1px solid rgba(255,255,255,0.12);color:var(--text)}
-.btn:active{transform:translateY(1px)}
+  /* subtle vignette */
+  .vignette{position:fixed; inset:0; background: radial-gradient(ellipse at center, rgba(255,255,255,0.02) 0%, transparent 25%); z-index:0; pointer-events:none;}
 
-/* HERO */
-.hero{padding:40px 0 28px}
-.hero-grid{display:grid;grid-template-columns:1fr 520px;gap:28px;align-items:center}
-@media (max-width:980px){
-  .hero-grid{grid-template-columns:1fr;gap:18px}
-  .hero{padding:28px 0}
-}
-.hero-text h2{font-family:Poppins;font-weight:800;font-size:clamp(22px,5.2vw,36px);line-height:1.02;margin-bottom:12px}
-.hero-text p.lead{color:var(--muted);margin-bottom:18px;font-size:15px}
-.hero-text .kpis{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
-.kpi{background:var(--card);padding:10px 12px;border-radius:12px;font-weight:700;color:var(--text);font-size:14px}
+  /* container */
+  .hero{
+    position:relative; z-index:2; padding:56px 6% 80px;
+    display:flex; align-items:center; justify-content:space-between; gap:28px;
+    min-height:76vh;
+  }
+  .hero-inner{width:100%; max-width:1320px; margin:0 auto; display:flex; gap:28px; align-items:center;}
+  .left{flex:1 1 640px; padding-right:12px;}
+  .right{flex:0 0 480px; display:flex; align-items:center; justify-content:center;}
 
-/* HERO VISUAL - responsive */
-.hero-visual{display:flex;justify-content:center;align-items:center}
-.visual-card{width:100%;max-width:520px;border-radius:16px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04)}
-.visual-card img{display:block;width:100%;height:auto;border-radius:12px;object-fit:cover;}
+  /* logo & badge */
+  .logo-wrap{display:flex; align-items:center; gap:12px; margin-bottom:18px; opacity:0.95}
+  .logo{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:78px; height:78px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    box-shadow:0 6px 18px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+    border:1px solid rgba(255,255,255,0.04);
+  }
+  .logo svg{width:44px; height:44px; fill:var(--accent);}
+  .badge{
+    font-family:Poppins, Inter;
+    color:var(--accent);
+    border:1px solid rgba(217,177,75,0.12);
+    padding:8px 14px; border-radius:26px; font-weight:600; font-size:13px;
+    display:inline-flex; gap:10px; align-items:center;
+  }
 
-/* FEATURES */
-.features{padding:36px 0}
-.features h3{font-family:Poppins;font-size:20px;text-align:center}
-.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px}
-.feature{background:var(--card);padding:16px;border-radius:12px;text-align:center}
-.feature .icon{font-size:28px;margin-bottom:8px;color:var(--accent1)}
-.feature h4{font-weight:700;margin-bottom:6px;color:var(--text)}
-.feature p{color:var(--muted);font-size:14px}
+  /* heading */
+  .hero-h{
+    font-weight:900;
+    font-family:Poppins, Inter;
+    line-height:1;
+    font-size:64px;
+    letter-spacing:-1px;
+    margin:6px 0 18px;
+  }
+  .hero-h .gold{color:var(--accent);}
+  .sub{color:var(--muted); max-width:760px; font-size:18px; line-height:1.7; margin-bottom:30px;}
 
-/* MENTOR */
-.mentor{display:grid;grid-template-columns:280px 1fr;gap:18px;align-items:center;padding:28px 0}
-@media (max-width:900px){.mentor{grid-template-columns:1fr;text-align:center}}
-.mentor img{width:100%;height:auto;border-radius:12px;object-fit:cover;border:1px solid rgba(255,255,255,0.04)}
-.mentor h3{font-family:Poppins;margin:0 0 8px;font-size:20px}
-.mentor p{color:var(--muted)}
+  /* CTAs */
+  .cta-row{display:flex; gap:18px; align-items:center; margin-bottom:36px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:12px; padding:16px 28px; border-radius:46px; font-weight:700; cursor:pointer;
+    border:none; outline:none; text-decoration:none;
+    transition:transform .22s ease, box-shadow .22s ease;
+    box-shadow:0 8px 22px rgba(0,0,0,0.5);
+  }
+  .btn-cta{background:linear-gradient(180deg,var(--accent),var(--accent-dark)); color:#111;}
+  .btn-ghost{background:transparent; color:var(--accent); border:2px solid rgba(217,177,75,0.13); padding:14px 28px;}
 
-/* TESTIMONIALS */
-.testimonials{padding:30px 0;text-align:center}
-.test-strip{display:flex;gap:12px;overflow:hidden;padding:12px 0}
-.test-strip img{width:180px;border-radius:12px;flex:0 0 auto;box-shadow:0 12px 30px rgba(0,0,0,0.4)}
-@media (max-width:520px){ .test-strip img{width:140px} }
+  .btn:hover{transform:translateY(-4px)}
+  .btn-ghost:hover{background:rgba(255,255,255,0.02)}
 
-/* FAQ */
-.faq{padding:32px 0}
-.faq h3{font-family:Poppins;text-align:center;font-size:20px;margin-bottom:12px}
-.q{background:var(--card);padding:12px;border-radius:10px;margin-bottom:10px}
-.q strong{color:var(--accent1)}
-.q p{color:var(--muted);margin-top:8px;font-size:14px}
+  /* stats */
+  .stats{display:flex; gap:34px; align-items:flex-end; margin-top:6px; flex-wrap:wrap;}
+  .stat{
+    text-align:center;
+  }
+  .stat .num{color:var(--accent); font-weight:800; font-size:26px;}
+  .stat .label{color:var(--muted); font-size:13px; margin-top:8px;}
 
-/* popup form */
-.popup{position:fixed;inset:0;background:linear-gradient(rgba(2,6,23,0.6),rgba(2,6,23,0.8));display:none;align-items:center;justify-content:center;z-index:220;padding:18px}
-.popup.active{display:flex}
-.form-box{width:100%;max-width:420px;background:#071028;border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.04)}
-.form-box h4{font-family:Poppins;margin:0 0 8px}
-label{display:block;margin-top:10px;color:var(--muted);font-size:13px}
-input,select{width:100%;padding:10px;border-radius:10px;border:none;background:rgba(255,255,255,0.04);color:var(--text);margin-top:6px;outline:none}
-.submit-btn{margin-top:14px;background:linear-gradient(90deg,var(--accent1),var(--accent3));color:#06101a;padding:12px;border-radius:10px;border:none;font-weight:800;width:100%}
-.close-btn{width:100%;margin-top:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:10px;color:var(--muted);cursor:pointer}
+  /* floating ticker badges */
+  .ticker{
+    position:absolute; background:var(--card); border-radius:12px; padding:10px 12px; display:inline-block;
+    border:1px solid rgba(255,255,255,0.04); box-shadow:0 8px 30px rgba(0,0,0,0.55);
+    font-weight:700; width:86px; text-align:center; color:#e7e7e7; font-size:13px;
+  }
+  .ticker small{display:block; color:var(--muted); font-weight:600; font-size:12px}
+  .ticker .neg{color:#ff6b6b; font-weight:800; margin-top:4px; font-size:14px}
 
-/* mobile friendly tweaks */
-@media(max-width:520px){
-  .btn{width:100%;padding:14px 12px;border-radius:12px}
-  .kpi{font-size:13px;padding:10px}
-  .hero-text{padding:0 6px}
-  .visual-card{max-width:420px}
-  .form-box{padding:14px}
-  .feature-grid{gap:12px}
-}
+  .ticker.t1{left:6%; top:18%;}
+  .ticker.t2{right:6%; top:34%;}
+  .ticker.t3{left:12%; bottom:28%;}
+  .ticker.t4{right:18%; bottom:36%;}
 
-/* small reveal */
-.reveal{opacity:0;transform:translateY(10px);transition:all .6s ease}
-.reveal.on{opacity:1;transform:none}
+  /* right side video frame */
+  .video-frame{
+    width:420px; max-width:45vw; height:360px; border-radius:18px; overflow:hidden;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(217,177,75,0.06);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .video-thumb{
+    width:100%; height:100%; display:block; object-fit:cover;
+    background:linear-gradient(180deg, rgba(15,15,15,0.6), rgba(0,0,0,0.45));
+    color:#fff; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px; padding:18px;
+  }
+  .play-btn{
+    width:64px;height:64px;border-radius:999px;background:rgba(255,255,255,0.06); display:flex;align-items:center;justify-content:center;
+    border:2px solid rgba(255,255,255,0.05); cursor:pointer;
+  }
+  .play-btn svg{width:32px;height:32px; fill:var(--accent)}
+
+  /* small responsive adjustments */
+  @media (max-width:1100px){
+    .hero-inner{padding:0 6px}
+    .hero-h{font-size:52px}
+    .right{flex-basis:380px}
+    .video-frame{width:360px;height:300px}
+  }
+  @media (max-width:860px){
+    .hero{padding:40px 6%}
+    .hero-inner{flex-direction:column; align-items:flex-start}
+    .right{width:100%; display:flex; margin-top:20px; order:2;}
+    .left{width:100%}
+    .hero-h{font-size:38px}
+    .video-frame{width:100%; height:220px; border-radius:14px;}
+    .ticker.t1{left:4%; top:8%}
+    .ticker.t2{right:4%; top:12%}
+    .ticker.t3{left:4%; bottom:6%}
+    .ticker.t4{right:6%; bottom:12%}
+  }
+  @media (max-width:420px){
+    .hero-h{font-size:30px}
+    .sub{font-size:15px}
+    .btn{padding:12px 18px}
+    .logo{width:56px;height:56px}
+    .badge{font-size:12px;padding:6px 12px}
+    .stats{gap:18px}
+  }
+
+  /* ---------- Animations ---------- */
+  .fade-up{opacity:0; transform:translateY(18px); animation:fadeUp .9s cubic-bezier(.2,.9,.2,1) forwards;}
+  .fade-delay-1{animation-delay:.12s}
+  .fade-delay-2{animation-delay:.28s}
+  .fade-delay-3{animation-delay:.42s}
+  .floaty{animation:floaty 6s ease-in-out infinite;}
+  @keyframes fadeUp{
+    to{opacity:1; transform:none}
+  }
+  @keyframes floaty{
+    0%{transform:translateY(0px)}
+    50%{transform:translateY(-10px)}
+    100%{transform:translateY(0px)}
+  }
+
+  /* subtle focus outline */
+  .btn:focus{box-shadow:0 0 0 4px rgba(217,177,75,0.12); outline:none}
+
+  /* accessibility */
+  a{color:inherit}
+  small{font-size:12px}
 </style>
 </head>
 <body>
 
-<header class="container">
-  <h1>She Mastered <span style="color:var(--accent2)">Trading</span> — Now Empowers 1000+ Women</h1>
-  <p>Learn with <strong>Rukyaa Mam</strong> — simple, phone-first trading lessons that help homemakers & girls earn confidently.</p>
+<div class="grid-bg" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="hero" role="banner">
+  <div class="hero-inner">
+
+    <div class="left">
+      <div class="logo-wrap fade-up fade-delay-1" style="display:flex;align-items:center;">
+        <div class="logo" aria-hidden="true">
+          <!-- simple wifi-money svg logo -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 3c3.866 0 7.1 1.866 9.001 4.712l-1.6 1.1C18.9 6.7 15.7 5 12 5S5.1 6.7 4.599 8.812L3 7.7C4.901 4.866 8.134 3 12 3zm0 4a8.957 8.957 0 0 1 6.364 2.636l-1.414 1.414A6.96 6.96 0 0 0 12 9a6.96 6.96 0 0 0-4.95 2.05L5.636 9.636A8.957 8.957 0 0 1 12 7zM7 13a5 5 0 1 1 10 0 5 5 0 0 1-10 0z"/>
+          </svg>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <div style="display:flex;gap:10px;align-items:center;">
+            <div class="badge">#1 Trading Course 2025</div>
+          </div>
+          <div style="color:var(--muted); font-size:13px; margin-top:6px;">WIFI MONEY</div>
+        </div>
+      </div>
+
+      <h1 class="hero-h fade-up fade-delay-2">
+        <span>Master </span><span class="gold">Professional Trading</span><br>
+        <span>Build Wealth from Anywhere</span>
+      </h1>
+
+      <p class="sub fade-up fade-delay-3">
+        Transform from beginner to profitable trader with our comprehensive course. Learn proven strategies used by Wall Street professionals.
+      </p>
+
+      <div class="cta-row fade-up" style="animation-delay:.56s;">
+        <a class="btn btn-cta" href="#enroll" role="button" aria-label="Enroll in course">
+          <!-- graduation cap -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="margin-right:6px">
+            <path d="M12 2 1 8l11 6 9-4.909V17h2V8L12 2z" fill="currentColor" />
+          </svg>
+          ENROLL IN COURSE
+        </a>
+
+        <a class="btn btn-ghost" href="#curriculum" role="button" aria-label="View curriculum">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right:6px">
+            <path d="M10 17l5-5-5-5v10z" fill="currentColor"/>
+          </svg>
+          VIEW CURRICULUM
+        </a>
+      </div>
+
+      <div class="stats fade-up" style="animation-delay:.7s;">
+        <div class="stat" style="min-width:120px">
+          <div class="num">15,000+</div>
+          <div class="label">Students Enrolled</div>
+        </div>
+        <div class="stat" style="min-width:120px">
+          <div class="num">4.9/5</div>
+          <div class="label">Course Rating</div>
+        </div>
+        <div class="stat" style="min-width:120px">
+          <div class="num">89%</div>
+          <div class="label">Success Rate</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right fade-up" style="animation-delay:.9s;">
+
+      <div class="video-frame floaty" aria-hidden="true">
+        <div class="video-thumb" role="img" aria-label="Course preview video">
+          <!-- Use your thumbnail or embed video later -->
+          <div style="font-weight:800; font-size:16px; color:var(--accent);">Course Preview</div>
+          <div style="color:var(--muted); font-size:13px; margin-top:6px; text-align:center; max-width:240px;">
+            12 modules • Live trading sessions • Proven strategies
+          </div>
+
+          <div style="position:absolute; bottom:22px;">
+            <div class="play-btn" title="Play preview">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z" /></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Floating tickers (decorative) -->
+    <div class="ticker t1 fade-up" style="animation-delay:1.0s;">
+      <small>EURUSD</small>
+      <div class="neg">-0.3%</div>
+    </div>
+
+    <div class="ticker t2 fade-up" style="animation-delay:1.12s;">
+      <small>BTCUSD</small>
+      <div class="neg">-4.6%</div>
+    </div>
+
+    <div class="ticker t3 fade-up" style="animation-delay:1.2s;">
+      <small>AAPL</small>
+      <div class="neg">-2.4%</div>
+    </div>
+
+    <div class="ticker t4 fade-up" style="animation-delay:1.28s;">
+      <small>SP500</small>
+      <div class="neg">-1.1%</div>
+    </div>
+
+  </div>
 </header>
 
-<!-- HERO -->
-<section class="hero container">
-  <div class="hero-text reveal on">
-    <h2>Transform your financial future with practical trading lessons</h2>
-    <p class="lead">Step-by-step mentorship, risk control, and simple trade setups — built for beginners and busy schedules.</p>
-
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
-      <button class="btn btn-primary openForm">Join Free Session</button>
-      <button class="btn btn-secondary openForm">Message Rukyaa Mam</button>
-    </div>
-
-    <div class="kpis" style="margin-top:14px">
-      <div class="kpi">3+ Years Experience</div>
-      <div class="kpi">1000+ Women Trained</div>
-      <div class="kpi">Phone-Friendly Lessons</div>
-    </div>
-  </div>
-
-  <!-- HERE: replaced with user's imghippo direct link -->
-  <div class="hero-visual reveal on">
-    <div class="visual-card">
-      <!-- Direct image from Imghippo - optimized in size by service -->
-      <img src="https://i.imghippo.com/files/Lquu7989zAk.webp"
-           alt="Rukyaa Mam - Trading"
-           loading="lazy"
-           width="1200" height="800"
-           style="max-width:100%;height:auto;">
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="features container">
-  <h3>What You'll Learn</h3>
-  <div class="feature-grid">
-    <div class="feature reveal on">
-      <div class="icon">📈</div>
-      <h4>Charts Made Simple</h4>
-      <p>Read charts & spot setups without technical overload.</p>
-    </div>
-    <div class="feature reveal on">
-      <div class="icon">🛡️</div>
-      <h4>Smart Risk Rules</h4>
-      <p>Position sizing & stop-loss methods to protect capital.</p>
-    </div>
-    <div class="feature reveal on">
-      <div class="icon">📲</div>
-      <h4>Phone-first System</h4>
-      <p>Trade from your phone and learn with short practical lessons.</p>
-    </div>
-  </div>
-</section>
-
-<!-- MENTOR -->
-<section class="mentor container reveal on">
-  <img src="https://i.postimg.cc/Gm7QK2yD/rukyaa-mam.jpg" alt="Rukyaa Mam">
-  <div>
-    <h3>Meet Rukyaa Mam</h3>
-    <p>Rukyaa Mam is a practical trader focused on simple, repeatable trade setups and teaching emotional control — especially for women balancing home & work.</p>
-    <div style="margin-top:12px">
-      <button class="btn btn-primary openForm">Start Learning</button>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials container">
-  <h3>Student Results</h3>
-  <div class="test-strip" id="testRow" aria-hidden="false">
-    <!-- using the same imghippo image (user wanted image used) plus other screenshots -->
-    <img src="https://i.imghippo.com/files/Lquu7989zAk.webp" alt="student result 1">
-    <img src="https://i.postimg.cc/G3qpbnVx/Rukkaya-appi-finel.jpg" alt="student result 2">
-    <img src="https://i.postimg.cc/LXSzFFwM/Farheen-mam.jpg" alt="student result 3">
-    <img src="https://i.postimg.cc/vBDGBcp7/Firdous-finel.jpg" alt="student result 4">
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="faq container">
-  <h3>Frequently Asked by Women</h3>
-  <div class="q reveal on"><strong>Q: I'm a housewife — can I start trading?</strong><p>Yes. Lessons are phone-friendly and paced for busy schedules. Many women learn part-time and grow over time.</p></div>
-  <div class="q reveal on"><strong>Q: Will I be taught live?</strong><p>Rukyaa Mam provides live guidance and WhatsApp mentorship for practical doubt solving.</p></div>
-  <div class="q reveal on"><strong>Q: How much capital is required?</strong><p>Start small — the program emphasizes risk control and starting with comfortable amounts.</p></div>
-  <div class="q reveal on"><strong>Q: Is this safe for women beginners?</strong><p>Yes — training focuses on low-risk setups, discipline, and psychological coaching to avoid impulsive mistakes.</p></div>
-</section>
-
-<footer class="container">
-  <p style="color:var(--muted)">© 2025 Learn Trading with Rukyaa Mam • All rights reserved</p>
-</footer>
-
-<!-- POPUP FORM (mobile-friendly) -->
-<div class="popup" id="popup">
-  <div class="form-box" role="dialog" aria-modal="true" aria-labelledby="formTitle">
-    <h4 id="formTitle">Join Free Session with Rukyaa Mam</h4>
-    <form id="leadForm" onsubmit="return false;">
-      <label for="fname">Full name</label>
-      <input id="fname" name="name" type="text" required placeholder="Your name">
-
-      <label for="fphone">Phone number</label>
-      <input id="fphone" name="phone" type="tel" maxlength="10" required placeholder="10-digit mobile">
-
-      <label for="fprofession">Occupation</label>
-      <select id="fprofession" name="profession">
-        <option>Housewife</option>
-        <option>Student</option>
-        <option>Working Professional</option>
-        <option>Other</option>
-      </select>
-
-      <label for="fcity">City (optional)</label>
-      <input id="fcity" name="city" type="text" placeholder="City">
-
-      <button class="submit-btn" id="submitLead">Send & Open WhatsApp</button>
-      <button class="close-btn" id="closePopup" type="button">Cancel</button>
-    </form>
-  </div>
-</div>
-
 <script>
-/* open / close popup */
-const popup = document.getElementById('popup');
-document.querySelectorAll('.openForm').forEach(b=>b.addEventListener('click', ()=> popup.classList.add('active')));
-document.getElementById('closePopup').addEventListener('click', ()=> popup.classList.remove('active'));
-
-/* save to Google Sheet (placeholder) + send to WhatsApp */
-const WHATSAPP_TO = "917249960757";        // +91 7249960757 (as requested)
-const SCRIPT_URL = "YOUR_SCRIPT_URL_HERE"; // <-- replace with your Google Apps Script URL
-
-function saveToSheet(params){
-  if(!SCRIPT_URL) return;
-  try{
-    // use Beacon if available
-    if(navigator.sendBeacon){
-      const blob = new Blob([params.toString()], {type:'application/x-www-form-urlencoded'});
-      navigator.sendBeacon(SCRIPT_URL, blob);
-    } else {
-      fetch(SCRIPT_URL, {method:'POST', body: params, mode:'no-cors', keepalive:true}).catch(()=>{});
-    }
-  }catch(e){}
-}
-
-document.getElementById('submitLead').addEventListener('click', function(e){
-  e.preventDefault();
-  const name = document.getElementById('fname').value.trim();
-  const phone = document.getElementById('fphone').value.trim();
-  const profession = document.getElementById('fprofession').value;
-  const city = document.getElementById('fcity').value.trim();
-
-  if(!name || !phone){ alert('Please enter name and phone'); return; }
-  if(!/^\d{10}$/.test(phone)){ alert('Enter a valid 10-digit phone number'); return; }
-
-  // prepare params for sheet
-  const params = new URLSearchParams({ name, phone, profession, city, source: 'rukyaa_landing' });
-  saveToSheet(params);
-
-  // open WhatsApp with formatted message
-  const msg = `Hello Rukyaa Mam, I want to learn trading and join your mentorship.\nName: ${name}\nPhone: ${phone}\nProfession: ${profession}\nCity: ${city || 'Not provided'}\n\nPlease guide me.`;
-  const url = `https://wa.me/${WHATSAPP_TO}?text=${encodeURIComponent(msg)}`;
-  window.open(url, '_blank');
-
-  // feedback + close
-  this.disabled = true;
-  this.textContent = 'Opening WhatsApp...';
-  setTimeout(()=>{ this.disabled=false; this.textContent='Send & Open WhatsApp'; popup.classList.remove('active'); }, 1200);
-});
-
-/* testimonials auto-scroll (touch friendly) */
-(function(){
-  const row = document.getElementById('testRow');
-  if(!row) return;
-  let pos = 0;
-  let max = Math.max(0, row.scrollWidth - row.clientWidth);
-  window.addEventListener('resize', ()=> { max = Math.max(0, row.scrollWidth - row.clientWidth); pos = 0; row.scrollLeft = 0; });
-  let t = setInterval(()=>{
-    pos += 200;
-    if(pos > max) pos = 0;
-    row.scrollTo({left: pos, behavior: 'smooth'});
-  }, 2800);
-  // pause on touch/hover
-  row.addEventListener('mouseenter', ()=> clearInterval(t));
-  row.addEventListener('mouseleave', ()=> { t = setInterval(()=>{ pos += 200; if(pos>max) pos=0; row.scrollTo({left:pos,behavior:'smooth'}); }, 2800); });
-  row.addEventListener('touchstart', ()=> clearInterval(t));
-  row.addEventListener('touchend', ()=> { t = setInterval(()=>{ pos += 200; if(pos>max) pos=0; row.scrollTo({left:pos,behavior:'smooth'}); }, 2800); });
-})();
-
-/* reveal on scroll simple */
-(function(){
-  const els = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries, obs)=>{
-    entries.forEach(en=>{
-      if(en.isIntersecting){ en.target.classList.add('on'); obs.unobserve(en.target); }
+  // small JS to add slight parallax on mouse move and enable keyboard focus ring
+  (function(){
+    const hero = document.querySelector('.hero-inner');
+    document.addEventListener('mousemove', (e)=>{
+      const w = window.innerWidth, h = window.innerHeight;
+      const x = (e.clientX - w/2) / w;
+      const y = (e.clientY - h/2) / h;
+      const right = document.querySelector('.right');
+      if(right) right.style.transform = `translate3d(${x * 6}px, ${y * 6}px, 0)`;
+      // subtle shift for logo
+      const logos = document.querySelectorAll('.logo, .badge');
+      logos.forEach((el, i) => {
+        el.style.transform = `translate3d(${x*(i+1)*2}px, ${y*(i+1)*2}px, 0)`;
+      });
     });
-  }, {threshold: .18});
-  els.forEach(e=> io.observe(e));
-})();
+
+    // simple reduce motion respect
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if(prefersReduced.matches){
+      document.querySelectorAll('.fade-up, .floaty').forEach(el=>{
+        el.style.animation = 'none'; el.style.opacity = 1; el.style.transform = 'none';
+      });
+    }
+  })();
 </script>
 
 </body>
