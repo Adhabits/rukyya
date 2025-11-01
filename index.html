@@ -16,7 +16,8 @@
     --glow-strong: 0 36px 80px rgba(217,177,75,0.18);
     --glow-soft: 0 14px 40px rgba(217,177,75,0.08);
     --radius:16px;
-    --white-glow: 0 16px 48px rgba(255,255,255,0.06);
+    --white-glow-small: 0 10px 36px rgba(255,255,255,0.03);
+    --white-glow-large: 0 40px 120px rgba(255,255,255,0.06);
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#0b0c0d 0%, #0f1112 100%);color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
@@ -83,23 +84,36 @@
   .why-section{text-align:center;padding:80px 0 90px;background:#0c0c0b}
   .why-section h2{font-size:28px;font-weight:700;margin-bottom:40px;color:#fff}
   .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1200px;margin:0 auto;padding:0 6%}
-  .feature-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:36px;border-radius:18px;transition:transform .28s ease, box-shadow .28s ease;box-shadow:0 10px 36px rgba(0,0,0,0.45);border:1px solid rgba(217,177,75,0.04);position:relative;z-index:1}
-  .feature-card:hover{transform:translateY(-10px);box-shadow:var(--white-glow)}
+  /* CARD base */
+  .feature-card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
+    padding:30px 28px;border-radius:18px;transition:transform .32s cubic-bezier(.2,.9,.2,1), box-shadow .32s, z-index .01s;
+    border:1px solid rgba(217,177,75,0.04);position:relative;z-index:1;overflow:visible;
+    /* subtle default white glow so there's always a soft border */
+    box-shadow: 0 10px 28px rgba(0,0,0,0.5), var(--white-glow-small);
+  }
+  .feature-card:focus{outline:none; box-shadow: var(--white-glow-small), 0 12px 32px rgba(0,0,0,0.6); transform: translateY(-6px); }
+  .feature-card:hover{transform:translateY(-8px);}
+
   .icon-circle{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
   .icon-circle svg{fill:#111;width:32px;height:32px}
   .feature-card h3{font-size:20px;font-weight:700;margin-bottom:10px;color:#fff}
   .feature-card p{font-size:15px;color:#bbb;line-height:1.6}
 
-  /* white glow pulse controlled by class */
+  /* white glow pulse every 2s (gentle) */
   .feature-card.glow { animation: whitePulse 2s ease-in-out infinite; }
   @keyframes whitePulse {
-    0% { box-shadow: 0 6px 20px rgba(255,255,255,0.00); transform: translateY(0); }
-    50% { box-shadow: 0 28px 80px rgba(255,255,255,0.04); transform: translateY(-6px); }
-    100% { box-shadow: 0 6px 20px rgba(255,255,255,0.00); transform: translateY(0); }
+    0% { box-shadow: 0 10px 28px rgba(0,0,0,0.5), rgba(255,255,255,0.00) 0 0 0; transform: translateY(0); }
+    50% { box-shadow: var(--white-glow-large); transform: translateY(-6px); }
+    100% { box-shadow: 0 10px 28px rgba(0,0,0,0.5), rgba(255,255,255,0.00) 0 0 0; transform: translateY(0); }
   }
 
-  /* when card is stacked (scroll effect) */
-  .feature-card.stacked{ transform: translateY(-12px) scale(1.01); z-index:5; box-shadow: 0 40px 120px rgba(0,0,0,0.6);}
+  /* stacked state: prominent white shadow, lift more and increase z-index */
+  .feature-card.stacked{
+    transform: translateY(-18px) scale(1.02);
+    box-shadow: var(--white-glow-large);
+    border-color: rgba(217,177,75,0.12);
+  }
 
   /* ---------- 7-DAY BOOTCAMP (course schedule) ---------- */
   .bootcamp-section{padding:70px 0 60px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
@@ -217,7 +231,7 @@
     .hero-inner{flex-direction:column;align-items:flex-start}
     .right{order:2;width:100%;margin-top:20px}
     .hero-h{font-size:42px}
-    .video-frame{width:100%;height:240px}
+    .image-preview{width:320px;height:220px}
     .features-grid{grid-template-columns:1fr}
     .bootcamp-grid{grid-template-columns:1fr}
     .bonus-grid{grid-template-columns:1fr}
@@ -258,10 +272,7 @@
     <div class="left" aria-labelledby="hero-heading">
       <div class="logo-wrap">
         <div class="logo" aria-hidden="true">
-          <!-- small placeholder logo -->
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 3c3.866 0 7.1 1.866 9.001 4.712l-1.6 1.1C18.9 6.7 15.7 5 12 5S5.1 6.7 4.599 8.812L3 7.7C4.901 4.866 8.134 3 12 3z" fill="currentColor"/>
-          </svg>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3c3.866 0 7.1 1.866 9.001 4.712l-1.6 1.1C18.9 6.7 15.7 5 12 5S5.1 6.7 4.599 8.812L3 7.7C4.901 4.866 8.134 3 12 3z" fill="currentColor"/></svg>
         </div>
         <div style="display:flex;flex-direction:column;">
           <div style="display:flex;gap:10px;align-items:center;">
@@ -327,25 +338,25 @@
   <div class="container">
     <h2>Why Choose Our Trading Course?</h2>
     <div class="features-grid" id="featuresGrid">
-      <div class="feature-card glow" tabindex="0">
+      <div class="feature-card glow" tabindex="0" data-index="1">
         <div class="icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 5h16v2H4zM4 10h16v2H4zM4 15h10v2H4z"/></svg></div>
         <h3>Professional Strategies</h3>
-        <p>Learn the exact strategies used by institutional traders and hedge funds to generate consistent profits in any market condition.</p>
+        <p>Learn the exact strategies used by experienced traders to generate consistent profits in any market condition.</p>
       </div>
 
-      <div class="feature-card glow" tabindex="0">
+      <div class="feature-card glow" tabindex="0" data-index="2">
         <div class="icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z"/></svg></div>
         <h3>Risk Management Mastery</h3>
         <p>Master advanced risk management techniques that protect your capital and ensure long-term trading success.</p>
       </div>
 
-      <div class="feature-card glow" tabindex="0">
+      <div class="feature-card glow" tabindex="0" data-index="3">
         <div class="icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 3.3-2.1 6.1-5 7v6h-4v-6c-2.9-.9-5-3.7-5-7a7 7 0 017-7z"/></svg></div>
         <h3>Trading Psychology</h3>
         <p>Develop the mental discipline and emotional control required to make rational decisions under pressure.</p>
       </div>
 
-      <div class="feature-card glow" tabindex="0">
+      <div class="feature-card glow" tabindex="0" data-index="4">
         <div class="icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 10.5V6c0-1.1-.9-2-2-2H5C3.9 4 3 4.9 3 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-4.5l4 4V6.5l-4 4z"/></svg></div>
         <h3>Live Trading Sessions</h3>
         <p>Watch real trades unfold in live market conditions and learn to apply strategies in real-time scenarios.</p>
@@ -708,26 +719,73 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
   });
 })();
 
-/* Feature card glow pulse + stacking on scroll */
+/* Feature card glow pulse + robust stacking on scroll */
 (function(){
-  const cards = document.querySelectorAll('.feature-card');
-  // add small stacking behavior - when a card is intersecting strongly, give it 'stacked' to raise it
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(en => {
-      if(en.isIntersecting && en.intersectionRatio > 0.55){
-        en.target.classList.add('stacked');
-        // remove stacked after a moment to allow others to stack as user scrolls
-        setTimeout(()=>{ en.target.classList.remove('stacked'); }, 1200);
+  const cards = Array.from(document.querySelectorAll('.feature-card'));
+  if(!cards.length) return;
+
+  // give each card a stable base z-index (so stacking order predictable)
+  cards.forEach((c, i) => {
+    c.dataset.baseIndex = 10 + i;
+    c.style.zIndex = c.dataset.baseIndex;
+  });
+
+  // IntersectionObserver to detect when a card is near the center of viewport
+  // rootMargin tuned to center area; threshold tiny because we use rootMargin for range
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const el = entry.target;
+      const idx = Number(el.dataset.index || 0);
+      // Check vertical center proximity:
+      // entry.boundingClientRect gives metrics; we can calc distance to viewport center
+      const rect = entry.boundingClientRect;
+      const viewportCenter = window.innerHeight / 2;
+      const cardCenter = rect.top + rect.height / 2;
+      const distance = Math.abs(viewportCenter - cardCenter);
+
+      // If within 160px of center -> stack it
+      if (distance < 160) {
+        // Add stacked class and increase z-index so it appears above others
+        el.classList.add('stacked');
+        // put on top: base + 100 + idx (so later cards can be above)
+        el.style.zIndex = 100 + idx;
+        // stop passive glow animation so stacked box-shadow shows strongly (keep transform)
+        // (we keep glow class for subtle movement but stacked overrides box-shadow)
+      } else {
+        // remove stacking
+        el.classList.remove('stacked');
+        el.style.zIndex = el.dataset.baseIndex;
       }
     });
-  }, {threshold:[0.25,0.55,0.85]});
-  cards.forEach(c=> {
-    // ensure white glow pulse every 2s: class 'glow' is already present in markup
-    io.observe(c);
-    // hover also toggles stronger shadow
-    c.addEventListener('mouseenter', ()=> c.classList.add('stacked'));
-    c.addEventListener('mouseleave', ()=> c.classList.remove('stacked'));
+  }, {
+    root: null,
+    rootMargin: ' -30% 0px -30% 0px', // target center vertical band
+    threshold: [0]
   });
+
+  // Observe all cards
+  cards.forEach(c => io.observe(c));
+
+  // keyboard/hover triggers for accessibility
+  cards.forEach((c, i) => {
+    c.addEventListener('mouseenter', () => {
+      c.classList.add('stacked'); c.style.zIndex = 100 + i;
+    });
+    c.addEventListener('mouseleave', () => {
+      // let observer decide correct zIndex; if not near center revert to base
+      c.classList.remove('stacked');
+      c.style.zIndex = c.dataset.baseIndex;
+    });
+    c.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        c.classList.toggle('stacked');
+        c.style.zIndex = c.classList.contains('stacked') ? (100 + i) : c.dataset.baseIndex;
+        setTimeout(()=> { c.classList.remove('stacked'); c.style.zIndex = c.dataset.baseIndex; }, 900);
+      }
+    });
+  });
+
+  // Ensure animation (glow) continues but while stacked the stacked box-shadow is dominant.
 })();
 
 /* Hero preview parallax float */
@@ -758,12 +816,11 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
   function updateOne(key){
     const o = nums[key];
     if(!o || !o.el) return;
-    // random delta -0.0..0.9
-    const delta = (Math.random() * 1.1) - 0.55; // can go + or -
+    // random delta -0.6..+0.6
+    const delta = (Math.random() * 1.2) - 0.6;
     o.value = Math.max(-9.9, Math.min(9.9, o.value + delta));
-    // round to 1 decimal
     const valRounded = Math.round(o.value*10)/10;
-    const valElm = o.el.querySelector('.val') || o.el.querySelector('.val');
+    const valElm = o.el.querySelector('.val');
     if(valElm){
       valElm.textContent = format(valRounded);
       valElm.classList.remove('pos','neg');
@@ -783,8 +840,6 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
       valElm.classList.add(o.value>=0 ? 'pos' : 'neg');
     }
   });
-
-  // update periodically, different intervals to look "live"
   setInterval(()=> updateOne('eur'), 3200 + Math.random()*900);
   setInterval(()=> updateOne('btc'), 2400 + Math.random()*1400);
   setInterval(()=> updateOne('aapl'), 4200 + Math.random()*800);
@@ -885,7 +940,6 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
 
 /* Accessibility small helpers */
 (function(){
-  // allow pressing Enter on feature-card to focus hover effect (keyboard users)
   document.querySelectorAll('.feature-card').forEach(fc => {
     fc.addEventListener('keydown', e => { if(e.key === 'Enter') { fc.classList.add('stacked'); setTimeout(()=> fc.classList.remove('stacked'), 800); }});
   });
