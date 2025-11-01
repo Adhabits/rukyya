@@ -10,54 +10,51 @@
     --bg:#0f1112;
     --accent:#d9b14b;
     --accent-dark:#b88f33;
-    --muted:#a6b0b4;
+    --muted:#9da6aa;
     --card:#0d0e0f;
-    --glass: rgba(255,255,255,0.02);
-    --glow-strong: 0 36px 80px rgba(217,177,75,0.18);
-    --glow-soft: 0 14px 40px rgba(217,177,75,0.08);
     --radius:16px;
-    --white-glow-small: 0 10px 36px rgba(255,255,255,0.03);
-    --white-glow-large: 0 40px 120px rgba(255,255,255,0.06);
+    --white-glow: rgba(255,255,255,0.08);
   }
   *{box-sizing:border-box}
-  html,body{margin:0;height:100%;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#0b0c0d 0%, #0f1112 100%);color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  html,body{margin:0;height:100%;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#0b0c0d 0%, #0f1112 100%);color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 
-  /* grid background */
+  .container{max-width:1200px;margin:0 auto;padding:0 6%;position:relative;z-index:2}
   .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
     background-image:
       linear-gradient(0deg, rgba(255,255,255,0.02) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size:80px 80px; opacity:.12; mix-blend-mode:overlay;}
+    background-size:80px 80px; opacity:.12; mix-blend-mode:overlay}
 
-  .container {max-width:1200px;margin:0 auto;padding:0 6%;position:relative;z-index:2}
+  /* SHEEN: moving white bar for each section */
+  .section{position:relative;overflow:visible}
+  .sheen{pointer-events:none;position:absolute;inset:-12% -6%;z-index:6;overflow:visible}
+  .sheen .bar{position:absolute;left:-40%;top:-30%;width:28%;height:160%;transform:rotate(-22deg);background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.00) 10%, rgba(255,255,255,0.20) 48%, rgba(255,255,255,0.03) 85%, transparent 100%);filter:blur(18px) saturate(1.2);opacity:0;transition:opacity .36s ease}
+  .section:hover .sheen .bar, .section.sheen-play .sheen .bar{opacity:1;animation:slideSheen 900ms linear forwards}
+  @keyframes slideSheen{from{transform:translateX(0) rotate(-22deg)} to{transform:translateX(220%) rotate(-22deg)}}
+  @media (prefers-reduced-motion: reduce){ .section .sheen .bar { animation:none !important; opacity:0 } }
 
-  /* ---------- HERO ---------- */
-  header.hero{position:relative;z-index:2;padding:60px 0 30px;}
-  .hero-inner{display:flex;gap:36px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+  /* HERO */
+  header.hero{position:relative;z-index:2;padding:60px 0 30px}
+  .hero-inner{display:flex;gap:36px;align-items:center;justify-content:space-between;flex-wrap:wrap}
   .left{flex:1 1 640px;min-width:260px}
   .right{flex:0 0 420px;display:flex;align-items:center;justify-content:center;min-width:240px;will-change:transform}
-  .logo-wrap{display:flex;gap:12px;align-items:center;margin-bottom:8px}
   .logo{width:78px;height:78px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.04)}
   .badge{font-family:Poppins,Inter;color:var(--accent);border:1px solid rgba(217,177,75,0.12);padding:8px 14px;border-radius:26px;font-weight:600;font-size:13px}
-
   .hero-h{font-family:Poppins,Inter;font-weight:900;font-size:64px;line-height:1;margin:6px 0 18px}
   .hero-h .gold{color:var(--accent)}
   .sub{color:var(--muted);max-width:760px;font-size:18px;line-height:1.7;margin-bottom:20px}
 
   .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px}
-  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:44px;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .22s ease,box-shadow .22s ease,opacity .18s,filter .18s;box-shadow:0 8px 22px rgba(0,0,0,0.5)}
-  .btn-cta{background:linear-gradient(90deg,var(--accent),#7ca1ff);color:#111}
-  .btn-ghost{background:transparent;color:var(--accent);border:2px solid rgba(217,177,75,0.12);padding:12px 24px}
-  .btn:active{transform:translateY(1px)}
-  .btn.active{filter:brightness(1.06); box-shadow:var(--glow-soft);}
+  .btn{display:inline-flex;align-items:center;gap:12px;padding:14px 30px;border-radius:44px;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .22s ease,box-shadow .22s ease,filter .18s;box-shadow:0 8px 22px rgba(0,0,0,0.5)}
+  .btn-cta{background:linear-gradient(90deg,var(--accent),#6c8bff);color:#111}
+  .btn-ghost{background:transparent;color:var(--accent);border:2px solid rgba(217,177,75,0.12);padding:12px 26px}
+  .btn.active{filter:brightness(1.06); box-shadow:0 18px 60px rgba(0,0,0,0.6)}
 
-  .stats{display:flex;gap:34px;align-items:flex-end;flex-wrap:wrap;margin-top:6px}
-  .stat{text-align:center}
-  .stat .num{color:var(--accent);font-weight:800;font-size:26px}
-  .stat .label{color:var(--muted);font-size:13px;margin-top:8px}
+  .image-preview{width:420px;max-width:45vw;height:360px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(217,177,75,0.06);box-shadow:0 36px 80px rgba(217,177,75,0.08);display:flex;align-items:center;justify-content:center;position:relative;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
+  .image-preview img{width:100%;height:100%;object-fit:cover;display:block}
 
-  /* tickers */
-  .ticker{position:absolute;background:var(--card);border-radius:12px;padding:10px 12px;display:inline-block;border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 30px rgba(0,0,0,0.55);font-weight:700;width:100px;text-align:center;color:#e7e7e7;font-size:13px;transition:transform .32s,box-shadow .32s}
+  /* TICKERS */
+  .ticker{position:absolute;background:var(--card);border-radius:12px;padding:10px 12px;display:inline-block;border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 30px rgba(0,0,0,0.55);font-weight:700;width:110px;text-align:center;color:#e7e7e7;font-size:13px;transition:transform .32s,box-shadow .32s}
   .ticker small{display:block;color:var(--muted);font-weight:600;font-size:12px}
   .ticker .val{font-weight:800;margin-top:4px;font-size:15px}
   .ticker .pos{color:#6fe08b}
@@ -65,168 +62,75 @@
   .ticker.t1{left:6%;top:10%}
   .ticker.t2{right:6%;top:24%}
   .ticker.t3{left:12%;bottom:22%}
+  @keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+  .ticker.bob{animation:bob 3.6s ease-in-out infinite}
 
-  /* bobbing animation */
-  @keyframes bob {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-    100% { transform: translateY(0); }
-  }
-  .ticker.bob { animation: bob 3.6s ease-in-out infinite; }
-
-  /* ---------- STOP LOSING ---------- */
+  /* STOP LOSING */
   .stop-losing-section{background:linear-gradient(180deg,#0f0f0f 0%, #121212 100%);text-align:center;padding:90px 0 80px}
   .stop-heading{font-size:50px;font-weight:800;font-family:Poppins,Inter;margin-bottom:18px}
   .stop-heading .highlight{color:var(--accent)}
   .stop-subtext{font-size:19px;line-height:1.8;color:#c5c5c5;max-width:900px;margin:0 auto}
 
-  /* ---------- WHY CHOOSE (features) ---------- */
+  /* WHY CHOOSE */
   .why-section{text-align:center;padding:80px 0 90px;background:#0c0c0b}
   .why-section h2{font-size:28px;font-weight:700;margin-bottom:40px;color:#fff}
   .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1200px;margin:0 auto;padding:0 6%}
-  /* CARD base */
-  .feature-card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
-    padding:30px 28px;border-radius:18px;transition:transform .32s cubic-bezier(.2,.9,.2,1), box-shadow .32s, z-index .01s;
-    border:1px solid rgba(217,177,75,0.04);position:relative;z-index:1;overflow:visible;
-    /* subtle default white glow so there's always a soft border */
-    box-shadow: 0 10px 28px rgba(0,0,0,0.5), var(--white-glow-small);
-  }
-  .feature-card:focus{outline:none; box-shadow: var(--white-glow-small), 0 12px 32px rgba(0,0,0,0.6); transform: translateY(-6px); }
-  .feature-card:hover{transform:translateY(-8px);}
-
-  .icon-circle{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
-  .icon-circle svg{fill:#111;width:32px;height:32px}
+  .feature-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:30px 28px;border-radius:18px;transition:transform .32s cubic-bezier(.2,.9,.2,1), box-shadow .32s; border:1px solid rgba(217,177,75,0.04);position:relative;z-index:1;overflow:visible;box-shadow:0 10px 28px rgba(0,0,0,0.5)}
+  .feature-card .icon-circle{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
   .feature-card h3{font-size:20px;font-weight:700;margin-bottom:10px;color:#fff}
   .feature-card p{font-size:15px;color:#bbb;line-height:1.6}
-
-  /* white glow pulse every 2s (gentle) */
-  .feature-card.glow { animation: whitePulse 2s ease-in-out infinite; }
-  @keyframes whitePulse {
-    0% { box-shadow: 0 10px 28px rgba(0,0,0,0.5), rgba(255,255,255,0.00) 0 0 0; transform: translateY(0); }
-    50% { box-shadow: var(--white-glow-large); transform: translateY(-6px); }
-    100% { box-shadow: 0 10px 28px rgba(0,0,0,0.5), rgba(255,255,255,0.00) 0 0 0; transform: translateY(0); }
+  /* pulsing white glow for feature cards (every 2s) */
+  .feature-card.glow{animation:featurePulse 2.2s ease-in-out infinite; box-shadow:0 24px 80px rgba(255,255,255,0.02)}
+  @keyframes featurePulse{
+    0%{box-shadow:0 8px 28px rgba(0,0,0,0.45);transform:none}
+    50%{box-shadow:0 80px 220px rgba(255,255,255,0.06);transform:translateY(-8px)}
+    100%{box-shadow:0 8px 28px rgba(0,0,0,0.45);transform:none}
   }
+  /* stacked class when in center */
+  .feature-card.stacked{transform:translateY(-24px) scale(1.02); z-index:250; box-shadow:0 100px 260px rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.06)}
 
-  /* stacked state: prominent white shadow, lift more and increase z-index */
-  .feature-card.stacked{
-    transform: translateY(-18px) scale(1.02);
-    box-shadow: var(--white-glow-large);
-    border-color: rgba(217,177,75,0.12);
-  }
-
-  /* ---------- 7-DAY BOOTCAMP (course schedule) ---------- */
+  /* BOOTCAMP */
   .bootcamp-section{padding:70px 0 60px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
   .bootcamp-section h2{font-size:34px;color:#f6f2e6;margin-bottom:28px}
   .bootcamp-grid{max-width:1200px;margin:0 auto;padding:0 6%;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .day-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:22px 20px;min-height:220px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45);position:relative;transition:transform .28s,box-shadow .28s}
-  .day-card:hover{transform:translateY(-6px);box-shadow:var(--glow-soft)}
+  .day-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:22px 20px;min-height:220px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45);position:relative;transition:transform .28s,box-shadow .28s,filter .28s, z-index .01s;will-change:transform,box-shadow}
+  .day-card:focus{outline:none}
+  .day-card:hover, .day-card:focus-within { transform: translateY(-8px); box-shadow: 0 60px 160px var(--white-glow), 0 12px 30px rgba(0,0,0,0.55); border-color: rgba(217,177,75,0.12)}
+  .day-card.glow { box-shadow: 0 100px 260px rgba(255,255,255,0.08), 0 12px 40px rgba(0,0,0,0.55); transform: translateY(-12px); z-index:200; border-color: rgba(255,255,255,0.06)}
+  .day-card.stacked{transform:translateY(-30px) scale(1.03); z-index:300; box-shadow:0 140px 320px rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.06)}
   .day-pill{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--card);padding:6px 14px;border-radius:20px;font-weight:700;color:var(--accent);border:1px solid rgba(217,177,75,0.12);font-size:13px}
   .day-card h4{margin-top:18px;font-size:15px;font-weight:700;color:#fff}
   .day-card ul{margin:12px 0 0;padding-left:16px;color:#cfcfcf;line-height:1.6;font-size:14px}
   .day-card ul li{margin-bottom:8px}
 
-  /* ---------- BONUSES ---------- */
+  /* BONUSES */
   .bonus-section{padding:80px 0 80px;background:linear-gradient(180deg,#0c0d0c 0%, #0b0b0b 100%);text-align:center}
-  .bonus-section h2{font-size:32px;color:#f6f2e6;margin-bottom:12px}
-  .bonus-section .lead{color:#bfbfbf;max-width:860px;margin:12px auto 40px;font-size:15px;line-height:1.7}
   .bonus-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:0 6%}
   .bonus-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:30px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45);display:flex;flex-direction:column;align-items:center;min-height:200px;transition:transform .22s,box-shadow .22s}
-  .bonus-card:hover{transform:translateY(-6px);box-shadow:var(--glow-soft)}
-  .bonus-icon{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
-  .bonus-card h4{font-size:16px;margin-bottom:8px}
-  .bonus-price{color:var(--accent);font-weight:800;margin-bottom:10px}
-  .bonus-desc{color:#cfcfcf;font-size:13px;text-align:center;line-height:1.6}
+  .bonus-card:hover{transform:translateY(-6px);box-shadow:0 28px 80px rgba(255,255,255,0.03)}
 
-  .bonus-cta{max-width:360px;margin:48px auto 0;background:linear-gradient(180deg,#0b0b0b,#101010);padding:26px;border-radius:14px;border:1px solid rgba(217,177,75,0.08);box-shadow:0 20px 60px rgba(217,177,75,0.06)}
-  .bonus-cta .ttl{font-weight:800;font-size:20px;color:#fff;margin-bottom:6px}
-  .bonus-cta .val{font-weight:900;color:var(--accent);font-size:26px;margin-bottom:8px}
-  .claim-btn{display:inline-block;padding:12px 22px;border-radius:40px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);transition:transform .18s}
-  .claim-btn:hover{transform:translateY(-3px)}
-
-  /* ---------- ABOUT US ---------- */
-  .about-section{padding:80px 0 40px;background:linear-gradient(180deg,#0f0f0f 0%, #0d0d0d 100%);text-align:center}
-  .about-section h2{font-size:34px;color:var(--accent);margin-bottom:18px}
-  .about-section p{color:#cfcfcf;max-width:900px;margin:0 auto 18px;line-height:1.8}
-  .stats-row{display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap}
-  .mini-card{border:1px solid rgba(217,177,75,0.08);padding:18px 24px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));min-width:130px}
-  .mini-card .k{font-weight:800;color:var(--accent);font-size:20px}
-  .mini-card .t{color:var(--muted);font-size:13px;margin-top:6px}
-
-  .mission{margin:28px auto 6px;max-width:1000px;border-left:4px solid var(--accent);padding:18px;background:linear-gradient(90deg, rgba(217,177,75,0.03), transparent);color:#d9d7c5;border-radius:8px}
-
-  /* ---------- TESTIMONIALS ---------- */
-  .testimonials{padding:70px 0 60px;text-align:center;background:linear-gradient(180deg,#0c0b0b 0%, #0b0b0b 100%)}
-  .testimonials h2{font-size:32px;color:var(--accent);margin-bottom:24px}
-  .test-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0 6%}
-  .test-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45)}
-  .stars{color:var(--accent);margin-bottom:10px}
-  .quote{font-size:14px;color:#d0d0d0;line-height:1.7;margin-bottom:14px;font-style:italic}
-  .author{font-weight:800;color:#fff;font-size:14px}
-  .role{color:var(--muted);font-size:12px}
-
-  /* ---------- PRICING CARD ---------- */
-  .pricing-section{padding:80px 0 120px;text-align:center;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%)}
-  .pricing-section h2{font-size:34px;color:var(--accent);margin-bottom:18px}
-  .pricing-wrap{max-width:360px;margin:28px auto 0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow-strong)}
-  .badge-limited{position:relative;display:inline-block;background:var(--accent);color:#111;padding:6px 12px;border-radius:18px;font-weight:800;margin-bottom:8px;font-size:12px}
-  .price-old{color:var(--muted);text-decoration:line-through;font-size:14px}
-  .price{font-size:44px;font-weight:900;color:var(--accent);margin:6px 0}
-  .price-sub{color:#cfcfcf;font-size:13px;margin-bottom:12px}
-  .features-list{text-align:left;margin:14px 0 18px;padding-left:16px;color:#cfcfcf;line-height:1.7}
-  .features-list li{margin-bottom:8px}
-  .enroll-btn{display:inline-block;padding:12px 20px;border-radius:30px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);margin-top:12px}
-
-  /* ---------- INLINE FORM SECTION (hero-style) ---------- */
+  /* OTHER SECTIONS */
+  .about-section, .testimonials, .pricing-section, .lead-section, .faq-section { position:relative; }
   .lead-section{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:start;padding:60px 0}
-  @media(max-width:980px){ .lead-section{grid-template-columns:1fr; } .lead-left{order:1} .lead-right{order:2} }
-  .lead-left .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-  .lead-left .big-h{font-family:Poppins,Inter;font-size:44px;line-height:1.05;margin:8px 0 18px;color:#fff}
-  .lead-left .sub{color:var(--muted);max-width:640px;font-size:16px;margin-bottom:22px}
+  @media(max-width:980px){ .lead-section{grid-template-columns:1fr;} .lead-left{order:1} .lead-right{order:2} }
+
   .lead-form{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 24px 68px rgba(0,0,0,0.6)}
   .lead-form label{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
   .lead-form input[type="text"], .lead-form input[type="email"], .lead-form input[type="tel"]{width:100%;padding:12px 14px;border-radius:8px;border:1px solid rgba(217,177,75,0.12);background:transparent;color:#fff;font-size:14px;outline:none;margin-bottom:12px}
-  .lead-form .radio-group{margin-top:6px;margin-bottom:12px;color:var(--muted)}
 
-  .lead-form .submit-row{display:flex;gap:12px;align-items:center;margin-top:8px}
-  .lead-form .submit-btn{flex:1;background:linear-gradient(180deg,var(--accent),var(--accent-dark));padding:12px 16px;border-radius:40px;color:#111;font-weight:800;border:none;cursor:pointer;box-shadow:var(--glow-soft)}
-  .lead-form .call-btn{background:transparent;border:2px solid rgba(217,177,75,0.12);color:var(--accent);padding:10px 14px;border-radius:12px;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
-
-  .note{color:var(--muted);font-size:13px;margin-top:10px}
-
-  /* ---------- FAQ ---------- */
+  /* FAQ / Accordion */
   .faq-section{padding:40px 0 80px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
-  .faq-section h2{font-size:44px;color:var(--accent);margin-bottom:18px}
-  .faq-wrap{max-width:1000px;margin:0 auto;padding:0 6%;}
+  .faq-wrap{max-width:1000px;margin:0 auto;padding:0 6%}
   .accordion-item{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border-radius:14px;border:2px solid rgba(217,177,75,0.12);margin-bottom:14px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.45);transition:transform .24s,box-shadow .24s}
-  .accordion-item[aria-expanded="true"]{transform:translateY(-6px);box-shadow:var(--glow-strong)}
+  .accordion-item[aria-expanded="true"]{transform:translateY(-6px);box-shadow:0 36px 120px rgba(217,177,75,0.12)}
   .accordion-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;cursor:pointer}
-  .accordion-header button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px}
-  .q-text{font-weight:700;color:var(--accent);font-size:18px;text-align:left}
   .icon-round{width:40px;height:40px;border-radius:999px;background:linear-gradient(180deg,#1a1a1a,#101010);display:flex;align-items:center;justify-content:center;border:2px solid rgba(217,177,75,0.18);color:var(--accent);font-weight:900;transition:transform .2s}
-  .accordion-item[aria-expanded="true"] .icon-round{transform:rotate(180deg); background:var(--accent); color:#111; border-color:rgba(0,0,0,0.08)}
   .panel{padding:0 18px;color:#d0d0d0;text-align:left;line-height:1.8;background:linear-gradient(180deg, rgba(217,177,75,0.01), transparent)}
-  .panel-inner{padding:16px 0;margin:0}
   .panel-collapsed{max-height:0;overflow:hidden;transition:max-height .36s cubic-bezier(.2,.9,.2,1)}
   .panel-open{transition:max-height .36s cubic-bezier(.2,.9,.2,1);overflow:hidden}
 
-  /* ---------- small helpers & responsive ---------- */
-  .fade-up{opacity:0;transform:translateY(16px);animation:fadeUp .7s cubic-bezier(.2,.9,.2,1) forwards}
-  .fade-delay-1{animation-delay:.12s}
-  .fade-delay-2{animation-delay:.28s}
-  .fade-delay-3{animation-delay:.42s}
-  @keyframes fadeUp{to{opacity:1;transform:none}}
-
-  @keyframes floaty { 0% { transform: translateY(0); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0); } }
-
-  @media(max-width:1100px){
-    .features-grid{grid-template-columns:repeat(2,1fr)}
-    .bootcamp-grid{grid-template-columns:repeat(2,1fr)}
-    .bonus-grid{grid-template-columns:repeat(2,1fr)}
-    .test-grid{grid-template-columns:repeat(2,1fr)}
-    .hero-h{font-size:52px}
-    .faq-section h2{font-size:36px}
-  }
+  /* Responsive */
+  @media(max-width:1100px){ .features-grid{grid-template-columns:repeat(2,1fr)} .bootcamp-grid{grid-template-columns:repeat(2,1fr)} .bonus-grid{grid-template-columns:repeat(2,1fr)} .hero-h{font-size:52px} }
   @media(max-width:800px){
     .hero-inner{flex-direction:column;align-items:flex-start}
     .right{order:2;width:100%;margin-top:20px}
@@ -238,10 +142,9 @@
     .test-grid{grid-template-columns:1fr}
     .stop-heading{font-size:34px}
     .about-section h2{font-size:28px}
-    /* hide tickers on mobile */
-    .ticker{display:none}
-    /* hide accordion icons on mobile if requested */
-    .accordion-header .icon-round{display:none}
+    .ticker{display:none} /* hide tickers on mobile */
+    .sheen .bar{display:none !important} /* no sheen on mobile */
+    .icon-round{display:none} /* hide plus/minus circle on mobile */
   }
   @media(max-width:480px){
     .hero-h{font-size:30px}
@@ -256,10 +159,6 @@
     .q-text{font-size:16px}
     .lead-left .big-h{font-size:28px}
   }
-
-  /* small visual polish for image preview card */
-  .image-preview{width:420px;max-width:45vw;height:360px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow-strong);display:flex;align-items:center;justify-content:center;position:relative;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
-  .image-preview img{width:100%;height:100%;object-fit:cover;display:block}
 </style>
 </head>
 <body>
@@ -267,22 +166,18 @@
 <div class="grid-bg" aria-hidden="true"></div>
 
 <!-- HERO -->
-<header class="hero container fade-up fade-delay-1" role="banner">
-  <div class="hero-inner">
+<header class="hero section fade-up fade-delay-1" role="banner" id="hero">
+  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
+  <div class="hero-inner container">
     <div class="left" aria-labelledby="hero-heading">
-      <div class="logo-wrap">
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
         <div class="logo" aria-hidden="true">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3c3.866 0 7.1 1.866 9.001 4.712l-1.6 1.1C18.9 6.7 15.7 5 12 5S5.1 6.7 4.599 8.812L3 7.7C4.901 4.866 8.134 3 12 3z" fill="currentColor"/></svg>
+          <svg viewBox="0 0 24 24" width="44" height="44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3c3.866 0 7.1 1.866 9.001 4.712l-1.6 1.1C18.9 6.7 15.7 5 12 5S5.1 6.7 4.599 8.812L3 7.7C4.901 4.866 8.134 3 12 3z" fill="currentColor"/></svg>
         </div>
-        <div style="display:flex;flex-direction:column;">
-          <div style="display:flex;gap:10px;align-items:center;">
-            <div class="badge">#1 Trading Course 2025</div>
-          </div>
-        </div>
+        <div style="display:flex;flex-direction:column;"><div class="badge">#1 Trading Course 2025</div></div>
       </div>
 
       <h1 id="hero-heading" class="hero-h"><span>Master </span><span class="gold">Professional Trading</span><br>Build Wealth from Anywhere</h1>
-
       <p class="sub">Transform from beginner to profitable trader with our comprehensive course. Learn proven strategies used by professionals.</p>
 
       <div class="cta-row">
@@ -291,30 +186,19 @@
       </div>
 
       <div class="stats" aria-hidden="true">
-        <div class="stat pulse card-strong">
-          <div class="num" data-target="15000" data-duration="1500">0</div>
-          <div class="label">Students Enrolled</div>
-        </div>
-        <div class="stat pulse card-strong">
-          <div class="num" data-target="4.9" data-decimals="1" data-duration="1200">0</div>
-          <div class="label">Course Rating</div>
-        </div>
-        <div class="stat pulse card-strong">
-          <div class="num" data-target="89" data-duration="1200">0</div>
-          <div class="label">Success Rate</div>
-        </div>
+        <div class="stat pulse card-strong"><div class="num" data-target="15000" data-duration="1500">0</div><div class="label">Students Enrolled</div></div>
+        <div class="stat pulse card-strong"><div class="num" data-target="4.9" data-decimals="1" data-duration="1200">0</div><div class="label">Course Rating</div></div>
+        <div class="stat pulse card-strong"><div class="num" data-target="89" data-duration="1200">0</div><div class="label">Success Rate</div></div>
       </div>
     </div>
 
     <div class="right">
-      <!-- IMAGE PREVIEW (replaces video) -->
       <div class="image-preview pulse" id="previewCard" aria-hidden="true">
-        <!-- user-provided image (no text overlay) -->
+        <!-- image only, NO overlay text -->
         <img alt="Course preview" src="https://sanishtech.com/i/6906245b32391-1762010203.jpg">
       </div>
     </div>
 
-    <!-- tickers - these animate values via JS -->
     <div class="ticker t1 bob" id="tick-eur"><small>EURUSD</small><div class="val neg">-0.3%</div></div>
     <div class="ticker t2 bob" id="tick-btc"><small>BTCUSD</small><div class="val pos">+2.4%</div></div>
     <div class="ticker t3 bob" id="tick-aapl"><small>AAPL</small><div class="val neg">-2.4%</div></div>
@@ -322,24 +206,22 @@
 </header>
 
 <!-- STOP LOSING -->
-<section class="stop-losing-section fade-up fade-delay-2">
+<section class="stop-losing-section section fade-up fade-delay-2" id="stop">
+  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
   <div class="container">
     <h2 class="stop-heading">Stop <span class="highlight">Losing Money</span> in the Markets</h2>
-    <p class="stop-subtext">
-      95% of retail traders lose money because they lack proper education, proven strategies, and risk management skills.
-      Don't be part of that statistic.<br><br>
-      Our comprehensive trading course gives you everything you need to trade profitably and consistently.
-    </p>
+    <p class="stop-subtext">95% of retail traders lose money because they lack proper education, proven strategies, and risk management skills. Don't be part of that statistic.</p>
   </div>
 </section>
 
 <!-- WHY CHOOSE -->
-<section class="why-section fade-up fade-delay-3" id="why">
+<section class="why-section section fade-up fade-delay-3" id="why">
+  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
   <div class="container">
     <h2>Why Choose Our Trading Course?</h2>
     <div class="features-grid" id="featuresGrid">
       <div class="feature-card glow" tabindex="0" data-index="1">
-        <div class="icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 5h16v2H4zM4 10h16v2H4zM4 15h10v2H4z"/></svg></div>
+        <div class="icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v2H4zM4 10h16v2H4zM4 15h10v2H4z"/></svg></div>
         <h3>Professional Strategies</h3>
         <p>Learn the exact strategies used by experienced traders to generate consistent profits in any market condition.</p>
       </div>
@@ -347,7 +229,7 @@
       <div class="feature-card glow" tabindex="0" data-index="2">
         <div class="icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z"/></svg></div>
         <h3>Risk Management Mastery</h3>
-        <p>Master advanced risk management techniques that protect your capital and ensure long-term trading success.</p>
+        <p>Master advanced risk management techniques that protect your capital and ensure long-term success.</p>
       </div>
 
       <div class="feature-card glow" tabindex="0" data-index="3">
@@ -366,148 +248,102 @@
 </section>
 
 <!-- 7-DAY BOOTCAMP -->
-<section class="bootcamp-section fade-up" id="bootcamp">
+<section class="bootcamp-section section fade-up" id="bootcamp">
+  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
   <div class="container">
     <h2 style="text-align:center;margin-bottom:34px;color:#f6f2e6">7-Day Intensive Trading <span style="color:var(--accent)">Bootcamp</span></h2>
+    <div class="bootcamp-grid" id="bootcampGrid">
+      <div class="day-card" tabindex="0"><div class="day-pill">Day 1</div><h4>Foundation & Market Basics</h4><ul><li>Forex vs Stocks comparison</li><li>Global Trading Sessions overview</li><li>Why Forex Wins for beginners</li><li>Market fundamentals and structure</li><li>Getting started mindset</li></ul></div>
 
-    <div class="bootcamp-grid">
-      <div class="day-card"><div class="day-pill">Day 1</div><h4>Foundation & Market Basics</h4><ul><li>Forex vs Stocks comparison</li><li>Global Trading Sessions overview</li><li>Why Forex Wins for beginners</li><li>Market fundamentals and structure</li><li>Getting started mindset</li></ul></div>
+      <div class="day-card" tabindex="0"><div class="day-pill">Day 2</div><h4>Core Concepts to Trade Confidently</h4><ul><li>Lot Size calculation and management</li><li>Understanding Spread mechanics</li><li>Leverage principles and applications</li><li>Margin requirements and safety</li><li>Stop Loss and Order Types mastery</li></ul></div>
 
-      <div class="day-card"><div class="day-pill">Day 2</div><h4>Core Concepts to Trade Confidently</h4><ul><li>Lot Size calculation and management</li><li>Understanding Spread mechanics</li><li>Leverage principles and applications</li><li>Margin requirements and safety</li><li>Stop Loss and Order Types mastery</li></ul></div>
+      <div class="day-card" tabindex="0"><div class="day-pill">Day 3</div><h4>Live Trading Walkthrough + Platform Basics</h4><ul><li>MT5 platform comprehensive setup</li><li>Order Placement step-by-step guide</li><li>Risk Management in live action</li><li>Platform tools and features</li><li>Real-time trading demonstration</li></ul></div>
 
-      <div class="day-card"><div class="day-pill">Day 3</div><h4>Live Trading Walkthrough + Platform Basics</h4><ul><li>MT5 platform comprehensive setup</li><li>Order Placement step-by-step guide</li><li>Risk Management in live action</li><li>Platform tools and features</li><li>Real-time trading demonstration</li></ul></div>
+      <div class="day-card" tabindex="0"><div class="day-pill">Day 4</div><h4>Chart Analysis & Indicators</h4><ul><li>Candlesticks patterns and reading</li><li>Chart Types and their applications</li><li>Trend Analysis identification</li><li>Perfect Entries & Exits timing</li><li>Technical indicators integration</li></ul></div>
 
-      <div class="day-card"><div class="day-pill">Day 4</div><h4>Chart Analysis & Indicators</h4><ul><li>Candlesticks patterns and reading</li><li>Chart Types and their applications</li><li>Trend Analysis identification</li><li>Perfect Entries & Exits timing</li><li>Technical indicators integration</li></ul></div>
+      <div class="day-card" tabindex="0"><div class="day-pill">Day 5</div><h4>Strategy Day – 21+ Proven Forex Setups</h4><ul><li>Double Top/Bottom pattern strategies</li><li>Support-Resistance level trading</li><li>Supply & Demand zone identification</li><li>Multiple high-probability setups</li><li>Strategy backtesting and validation</li></ul></div>
 
-      <div class="day-card"><div class="day-pill">Day 5</div><h4>Strategy Day – 21+ Proven Forex Setups</h4><ul><li>Double Top/Bottom pattern strategies</li><li>Support-Resistance level trading</li><li>Supply & Demand zone identification</li><li>Multiple high-probability setups</li><li>Strategy backtesting and validation</li></ul></div>
+      <div class="day-card" tabindex="0"><div class="day-pill">Day 6</div><h4>Fundamental & Sentiment Analysis</h4><ul><li>Major News Events impact analysis</li><li>NFP and economic calendar mastery</li><li>Impactful Reports interpretation</li><li>Sentiment Triggers identification</li><li>News trading strategies and timing</li></ul></div>
 
-      <div class="day-card"><div class="day-pill">Day 6</div><h4>Fundamental & Sentiment Analysis</h4><ul><li>Major News Events impact analysis</li><li>NFP and economic calendar mastery</li><li>Impactful Reports interpretation</li><li>Sentiment Triggers identification</li><li>News trading strategies and timing</li></ul></div>
-
-      <div class="day-card"><div class="day-pill">Day 7</div><h4>Go Live + Broker Account Setup</h4><ul><li>Transition from demo to live trading</li><li>Broker account setup walkthrough</li><li>Real trade execution with guidance</li><li>Exclusive bonuses and offers</li><li>Ongoing support and community access</li></ul></div>
+      <div class="day-card" tabindex="0"><div class="day-pill">Day 7</div><h4>Go Live + Broker Account Setup</h4><ul><li>Transition from demo to live trading</li><li>Broker account setup walkthrough</li><li>Real trade execution with guidance</li><li>Exclusive bonuses and offers</li><li>Ongoing support and community access</li></ul></div>
     </div>
   </div>
 </section>
 
 <!-- BONUSES -->
-<section class="bonus-section fade-up">
+<section class="bonus-section section fade-up">
+  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
   <div class="container">
     <h2>Exclusive Bonuses for First 50 Participants</h2>
     <p class="lead">Join the 7-Day Live Forex bootcamp and unlock exclusive tools, templates, and expert support designed to fast-track your success — available only to the first 50 confirmed joinees.</p>
-
     <div class="bonus-grid">
-      <div class="bonus-card"><div class="bonus-icon"><svg viewBox="0 0 24 24"><path d="M5 4h14v2H5zM5 8h14v2H5zM5 12h14v2H5z" fill="#111"/></svg></div><h4>Ready to Use Strategy Templates</h4><div class="bonus-price">₹2,000/-</div><div class="bonus-desc">Professional templates ready to implement.</div></div>
-
-      <div class="bonus-card"><div class="bonus-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z" fill="#111"/></svg></div><h4>Live Demo Account Setup Support</h4><div class="bonus-price">₹1,500/-</div><div class="bonus-desc">Hands-on demo setup assistance.</div></div>
-
-      <div class="bonus-card"><div class="bonus-icon"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 3.3-2.1 6.1-5 7v6h-4v-6c-2.9-.9-5-3.7-5-7a7 7 0 017-7z" fill="#111"/></svg></div><h4>Lifetime Telegram Support Group</h4><div class="bonus-price">₹3,000/-</div><div class="bonus-desc">Ongoing support and community access.</div></div>
-
-      <div class="bonus-card"><div class="bonus-icon"><svg viewBox="0 0 24 24"><path d="M17 10.5V6c0-1.1-.9-2-2-2H5C3.9 4 3 4.9 3 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-4.5l4 4V6.5l-4 4z" fill="#111"/></svg></div><h4>Class Recordings (All 7 Days)</h4><div class="bonus-price">₹2,000/-</div><div class="bonus-desc">All live session recordings included.</div></div>
-
-      <div class="bonus-card"><div class="bonus-icon"><svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 110 4 2 2 0 010-4zm-6 8h12v2H6zm0 4h12v2H6z" fill="#111"/></svg></div><h4>Beginner Friendly Trading Checklist</h4><div class="bonus-price">₹1,500/-</div><div class="bonus-desc">Step-by-step checklist for trades.</div></div>
+      <div class="bonus-card"><div class="bonus-icon"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M5 4h14v2H5zM5 8h14v2H5zM5 12h14v2H5z" fill="#111"/></svg></div><h4>Ready to Use Strategy Templates</h4><div class="bonus-price">₹2,000/-</div><div class="bonus-desc">Professional templates ready to implement.</div></div>
+      <div class="bonus-card"><div class="bonus-icon"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z" fill="#111"/></svg></div><h4>Live Demo Account Setup Support</h4><div class="bonus-price">₹1,500/-</div><div class="bonus-desc">Hands-on demo setup assistance.</div></div>
+      <div class="bonus-card"><div class="bonus-icon"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M12 2a7 7 0 017 7c0 3.3-2.1 6.1-5 7v6h-4v-6c-2.9-.9-5-3.7-5-7a7 7 0 017-7z" fill="#111"/></svg></div><h4>Lifetime Telegram Support Group</h4><div class="bonus-price">₹3,000/-</div><div class="bonus-desc">Ongoing support and community access.</div></div>
+      <div class="bonus-card"><div class="bonus-icon"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M17 10.5V6c0-1.1-.9-2-2-2H5C3.9 4 3 4.9 3 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-4.5l4 4V6.5l-4 4z" fill="#111"/></svg></div><h4>Class Recordings (All 7 Days)</h4><div class="bonus-price">₹2,000/-</div><div class="bonus-desc">All live session recordings included.</div></div>
+      <div class="bonus-card"><div class="bonus-icon"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M12 2a2 2 0 110 4 2 2 0 010-4zm-6 8h12v2H6zm0 4h12v2H6z" fill="#111"/></svg></div><h4>Beginner Friendly Trading Checklist</h4><div class="bonus-price">₹1,500/-</div><div class="bonus-desc">Step-by-step checklist for trades.</div></div>
     </div>
-
-    <div class="bonus-cta" role="region" aria-label="Total Bonus">
-      <div class="ttl">Total Bonus Value:</div>
-      <div class="val">₹10,000/-</div>
-      <p>All bonuses included FREE with your course enrollment</p>
-      <a class="claim-btn" href="#lead-form">🎁 CLAIM YOUR BONUSES NOW</a>
+    <div class="bonus-cta" role="region" aria-label="Total Bonus" style="max-width:360px;margin:40px auto 0;background:linear-gradient(180deg,#0b0b0b,#101010);padding:26px;border-radius:14px;border:1px solid rgba(217,177,75,0.08);box-shadow:0 20px 60px rgba(217,177,75,0.06)">
+      <div class="ttl" style="font-weight:800;font-size:18px;color:#fff;margin-bottom:6px">Total Bonus Value:</div>
+      <div class="val" style="font-weight:900;color:var(--accent);font-size:22px;margin-bottom:8px">₹10,000/-</div>
+      <p style="color:#c5c5c5;font-size:13px;margin-bottom:12px">All bonuses included FREE with your course enrollment</p>
+      <a class="claim-btn" href="#lead-form" style="display:inline-block;padding:12px 22px;border-radius:40px;background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14)">🎁 CLAIM YOUR BONUSES NOW</a>
     </div>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section class="about-section fade-up">
+<section class="about-section section fade-up">
+  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
   <div class="container">
-    <h2>About Us</h2>
-    <p>We are an education-first platform dedicated to empowering individuals with the right knowledge, tools, consultation, and mentorship to succeed in the financial markets.</p>
-    <p>We provide practical, actionable training, real-time trade analysis, expert consultation, and hand-holding support that helps traders build skill, confidence, and consistent income.</p>
-
-    <div class="stats-row" role="list" aria-label="Key stats">
-      <div class="mini-card" role="listitem"><div class="k">50+</div><div class="t">Expert Mentors</div></div>
-      <div class="mini-card" role="listitem"><div class="k">20,000+</div><div class="t">Empowered Individuals</div></div>
-      <div class="mini-card" role="listitem"><div class="k">100%</div><div class="t">Transparent</div></div>
-    </div>
-
-    <div class="mission">
-      <strong>Our mission is simple:</strong> To make financial market education accessible, transparent, and profitable — without the fluff, hype, or fake promises.
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials fade-up">
-  <div class="container">
-    <h2>Student Success Stories</h2>
-    <div class="test-grid">
-      <div class="test-card"><div class="stars">★★★★★</div><div class="quote">"This course completely transformed my trading approach. I went from losing ₹8,000 in my first year to making ₹20,000 profit in just 6 months."</div><div class="author">Tanishka Chauhan</div><div class="role">Software Engineer — Full-time Trader</div></div>
-
-      <div class="test-card"><div class="stars">★★★★★</div><div class="quote">"The risk management module alone saved me from bankruptcy. Now I trade with confidence."</div><div class="author">Rahul Tiwari</div><div class="role">Business Owner — Profitable Trader</div></div>
-
-      <div class="test-card"><div class="stars">★★★★★</div><div class="quote">"The live trading sessions are pure gold. Watching the instructor trade in real-time taught me more than years of YouTube videos."</div><div class="author">Michael Rodriguez</div><div class="role">Financial Analyst — Independent Trader</div></div>
+    <h2 style="font-size:34px;color:var(--accent);margin-bottom:18px">About Us</h2>
+    <p style="color:#cfcfcf;max-width:900px;margin:0 auto 18px;line-height:1.8">We are an education-first platform dedicated to empowering individuals with the right knowledge, tools, consultation, and mentorship to succeed in financial markets.</p>
+    <div style="display:flex;gap:20px;justify-content:center;margin-top:22px;flex-wrap:wrap">
+      <div style="border:1px solid rgba(217,177,75,0.08);padding:18px 24px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));min-width:120px;text-align:center">
+        <div style="font-weight:800;color:var(--accent);font-size:20px">50+</div>
+        <div style="color:var(--muted);font-size:13px;margin-top:6px">Expert Mentors</div>
+      </div>
+      <div style="border:1px solid rgba(217,177,75,0.08);padding:18px 24px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));min-width:120px;text-align:center">
+        <div style="font-weight:800;color:var(--accent);font-size:20px">20,000+</div>
+        <div style="color:var(--muted);font-size:13px;margin-top:6px">Empowered Individuals</div>
+      </div>
+      <div style="border:1px solid rgba(217,177,75,0.08);padding:18px 24px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));min-width:120px;text-align:center">
+        <div style="font-weight:800;color:var(--accent);font-size:20px">100%</div>
+        <div style="color:var(--muted);font-size:13px;margin-top:6px">Transparent</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- PRICING / CTA -->
-<section class="pricing-section fade-up">
+<section class="pricing-section section fade-up">
+  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
   <div class="container">
-    <h2>Secure Your Trading Future Today</h2>
-
-    <div class="pricing-wrap" role="region" aria-label="Special offer">
+    <h2 style="text-align:center;margin-bottom:12px;color:#f6f2e6">Secure Your Trading Future Today</h2>
+    <div style="max-width:360px;margin:28px auto 0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 24px 68px rgba(0,0,0,0.6);">
       <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-direction:column">
-        <div class="badge-limited">LIMITED TIME OFFER</div>
-        <div class="price-old">₹9,999</div>
-        <div class="price">₹499</div>
-        <div class="price-sub">Complete Course + Lifetime Access + Live Mentorship</div>
-
-        <ul class="features-list">
-          <li>✔ 6 Comprehensive Modules</li>
-          <li>✔ Live Trading Room Access</li>
-          <li>✔ 1-on-1 Mentorship Sessions</li>
-          <li>✔ Private Discord Community</li>
-          <li>✔ Lifetime Course Updates</li>
-          <li>✔ Mobile App Access</li>
-        </ul>
-
-        <a class="enroll-btn" id="pricing-enroll" href="#lead-form">🎓 ENROLL NOW - SAVE ₹9500</a>
+        <div style="font-weight:900;color:var(--accent);font-size:44px;margin-bottom:6px">₹499</div>
+        <div style="color:#cfcfcf;font-size:13px;margin-bottom:12px">Complete Course + Lifetime Access + Live Mentorship</div>
+        <a class="btn btn-cta" id="pricing-enroll" href="#lead-form">🎓 ENROLL NOW - SAVE ₹9500</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LEAD / FORM SECTION (final integrated form) -->
-<section class="lead-section container fade-up" id="lead-form" aria-labelledby="lead-h">
-  <div class="lead-left">
-    <div class="brand" aria-hidden="true">
-      <div class="logo" title="Course">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3c3.866 0 7.1 1.866 9.001 4.712l-1.6 1.1C18.9 6.7 15.7 5 12 5S5.1 6.7 4.599 8.812L3 7.7C4.901 4.866 8.134 3 12 3z"/></svg>
-      </div>
-    </div>
-
-    <h2 id="lead-h" class="big-h">Ready to Transform Your <span class="gold">Financial Future?</span></h2>
-
-    <p class="sub">Join thousands of successful traders who've mastered the markets. Mentorship by <strong>Rukyya Mam</strong> is included.</p>
-
-    <div class="cta-row" style="margin-bottom:8px">
-      <button class="btn btn-cta" id="cta-enroll" data-source="enroll" type="button">ENROLL NOW</button>
-      <button class="btn btn-ghost" id="cta-callback" data-source="callback" type="button">BOOK CALLBACK</button>
-      <span class="src-badge" id="cta-badge" style="display:none">Selected: <span id="cta-selected"></span></span>
-    </div>
+<!-- LEAD / FORM -->
+<section class="lead-section section container fade-up" id="lead-form" aria-labelledby="lead-h">
+  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
+  <div class="lead-left" style="padding-right:18px">
+    <h2 id="lead-h" style="font-size:32px;color:var(--accent);margin-bottom:8px">Ready to Transform Your Financial Future?</h2>
+    <p style="color:var(--muted);max-width:620px">Join with mentorship by <strong>Rukyya Mam</strong>. Fill the quick form and you'll be redirected to WhatsApp to complete booking.</p>
   </div>
 
   <div class="lead-right">
     <form id="leadForm" class="lead-form" autocomplete="off" novalidate>
       <h3 style="margin:0 0 12px;color:var(--accent);font-family:Poppins,Inter;">Secure Your Spot — Quick Form</h3>
-
       <div style="display:flex;gap:10px;margin-bottom:12px">
-        <div style="flex:1">
-          <label for="l_fname">First Name *</label>
-          <input id="l_fname" name="firstName" type="text" placeholder="First Name" required />
-        </div>
-        <div style="flex:1">
-          <label for="l_lname">Last Name *</label>
-          <input id="l_lname" name="lastName" type="text" placeholder="Last Name" required />
-        </div>
+        <div style="flex:1"><label for="l_fname">First Name *</label><input id="l_fname" name="firstName" type="text" placeholder="First Name" required /></div>
+        <div style="flex:1"><label for="l_lname">Last Name *</label><input id="l_lname" name="lastName" type="text" placeholder="Last Name" required /></div>
       </div>
 
       <label for="l_phone">Phone *</label>
@@ -516,111 +352,89 @@
       <label for="l_email">Email *</label>
       <input id="l_email" name="email" type="email" placeholder="name@example.com" required />
 
-      <div class="radio-group" role="radiogroup" aria-label="Currently trading?">
-        <div style="font-weight:700;margin-bottom:6px;color:var(--muted)">Are you currently trading in Forex/Stock Market?</div>
-        <label style="margin-right:12px"><input type="radio" name="trading" value="Yes" /> Yes</label>
-        <label><input type="radio" name="trading" value="No" checked /> No</label>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+        <button type="submit" class="submit-btn" id="leadSubmit" style="padding:12px 18px;border-radius:40px;background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#111;border:none;font-weight:800;">ENROLL NOW - SAVE ₹9500/-</button>
+        <a class="call-btn" href="tel:+917249960757" style="display:inline-flex;align-items:center;padding:10px 14px;border-radius:12px;border:2px solid rgba(217,177,75,0.12);color:var(--accent);text-decoration:none;">📞 Call</a>
       </div>
 
+      <div style="margin-top:12px;color:var(--muted);font-size:13px">After submitting you'll be redirected to WhatsApp to message <strong>Rukyya Mam</strong> at <strong>+91 72499 60757</strong>.</div>
       <input type="hidden" name="mentor" value="Rukyya Mam" />
-      <input type="hidden" name="source" id="lead-source" value="direct"/>
-
-      <div style="display:flex;gap:10px;align-items:center">
-        <button type="submit" class="submit-btn" id="leadSubmit">ENROLL NOW - SAVE ₹9500/-</button>
-        <a class="call-btn" id="leadCall" href="tel:+917249960757"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="opacity:.9"><path d="M6.6 10.8a15.05 15.05 0 006.6 6.6l2.2-2.2a1 1 0 01.9-.25c1 .3 2 .5 2.9.5a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h2.7a1 1 0 011 1c0 1 .2 2 .5 2.9.1.3 0 .7-.2.9L6.6 10.8z" fill="#d9b14b"/></svg> Call</a>
-      </div>
-
-      <div class="note" style="margin-top:12px">After submitting you'll be redirected to WhatsApp to complete booking. WhatsApp will open a message to <strong>Rukyya Mam</strong> at <strong>+91 72499 60757</strong>.</div>
-
-      <div class="success" id="leadSuccess" role="status" aria-live="polite" style="display:none">
-        <p id="leadSuccessText">We opened WhatsApp to complete your booking — if WhatsApp didn't open, click the button below to message directly.</p>
-        <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
-          <a id="leadWhats" class="claim-btn" style="background:linear-gradient(180deg,var(--accent),var(--accent-dark));padding:10px 14px;border-radius:12px;color:#111;text-decoration:none;font-weight:800" href="#" target="_blank" rel="noopener">Message on WhatsApp</a>
-          <a id="leadCallDirect" class="call-btn" href="tel:+917249960757">📞 Call +91 72499 60757</a>
-        </div>
-      </div>
     </form>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="faq-section fade-up">
+<section class="faq-section section fade-up">
+  <div class="sheen" aria-hidden="true"><div class="bar"></div></div>
   <div class="container">
-    <h2>Frequently Asked Questions</h2>
-
+    <h2 style="font-size:44px;color:var(--accent);margin-bottom:18px">Frequently Asked Questions</h2>
     <div class="faq-wrap" role="list">
-
-      <!-- Item 1 (open by default) -->
       <div class="accordion-item" role="listitem" aria-expanded="true">
         <div class="accordion-header">
           <button aria-controls="panel1" aria-expanded="true" type="button">
-            <div class="q-text">Do I need prior trading experience to enroll?</div>
+            <div class="q-text" style="font-weight:700;color:var(--accent);text-align:left">Do I need prior trading experience to enroll?</div>
             <div class="icon-round" aria-hidden="true">−</div>
           </button>
         </div>
         <div id="panel1" class="panel panel-open" aria-hidden="false">
           <div class="panel-inner">
-            <p>No prior experience required! Our course is designed for complete beginners. We start with the fundamentals and progressively build to advanced strategies. Many of our most successful students started with zero trading knowledge.</p>
+            <p>No prior experience required! Our course is designed for complete beginners. We start with fundamentals and build to advanced strategies.</p>
           </div>
         </div>
       </div>
 
-      <!-- Item 2 -->
       <div class="accordion-item" role="listitem" aria-expanded="false">
         <div class="accordion-header">
           <button aria-controls="panel2" aria-expanded="false" type="button">
-            <div class="q-text">How much capital do I need to start trading?</div>
+            <div class="q-text" style="font-weight:700;color:var(--accent);text-align:left">How much capital do I need to start trading?</div>
             <div class="icon-round" aria-hidden="true">+</div>
           </button>
         </div>
         <div id="panel2" class="panel panel-collapsed" aria-hidden="true">
           <div class="panel-inner">
-            <p>You can start learning with our demo accounts, then begin live trading with as little as $500–$1000. We teach proper risk management so you can grow your account systematically while protecting your capital.</p>
+            <p>You can start learning with our demo accounts, then begin live trading with as little as $500–$1000. We teach proper risk management to protect capital.</p>
           </div>
         </div>
       </div>
 
-      <!-- Item 3 -->
       <div class="accordion-item" role="listitem" aria-expanded="false">
         <div class="accordion-header">
           <button aria-controls="panel3" aria-expanded="false" type="button">
-            <div class="q-text">How long does it take to complete the course?</div>
+            <div class="q-text" style="font-weight:700;color:var(--accent);text-align:left">How long does it take to complete the course?</div>
             <div class="icon-round" aria-hidden="true">+</div>
           </button>
         </div>
         <div id="panel3" class="panel panel-collapsed" aria-hidden="true">
           <div class="panel-inner">
-            <p>The core curriculum can be completed in 6–8 weeks studying 1–2 hours per day. However, you have lifetime access, so you can learn at your own pace and revisit materials anytime.</p>
+            <p>The core curriculum can be completed in 6–8 weeks studying 1–2 hours per day. Lifetime access means you can learn at your pace.</p>
           </div>
         </div>
       </div>
 
-      <!-- Item 4 -->
       <div class="accordion-item" role="listitem" aria-expanded="false">
         <div class="accordion-header">
           <button aria-controls="panel4" aria-expanded="false" type="button">
-            <div class="q-text">Is there ongoing support after course completion?</div>
+            <div class="q-text" style="font-weight:700;color:var(--accent);text-align:left">Is there ongoing support after course completion?</div>
             <div class="icon-round" aria-hidden="true">+</div>
           </button>
         </div>
         <div id="panel4" class="panel panel-collapsed" aria-hidden="true">
           <div class="panel-inner">
-            <p>Absolutely! You get lifetime access to our private community, monthly live Q&A sessions, and ongoing mentorship opportunities. Our support doesn't end when you finish the course.</p>
+            <p>Yes — lifetime access to community, monthly live Q&A, and ongoing mentorship opportunities for graduates.</p>
           </div>
         </div>
       </div>
 
-      <!-- Item 5 -->
       <div class="accordion-item" role="listitem" aria-expanded="false">
         <div class="accordion-header">
           <button aria-controls="panel5" aria-expanded="false" type="button">
-            <div class="q-text">What makes this course different from free YouTube content?</div>
+            <div class="q-text" style="font-weight:700;color:var(--accent);text-align:left">What makes this course different from free YouTube content?</div>
             <div class="icon-round" aria-hidden="true">+</div>
           </button>
         </div>
         <div id="panel5" class="panel panel-collapsed" aria-hidden="true">
           <div class="panel-inner">
-            <p>Our course provides a structured, step-by-step learning path with real mentorship, live trading examples, and a proven system. You get personalized feedback, access to professional tools, and accountability that free content can't provide.</p>
+            <p>Structured curriculum, live mentorship, real-time trading demos, personalized feedback, and accountability — things free videos can't provide.</p>
           </div>
         </div>
       </div>
@@ -630,12 +444,12 @@
 </section>
 
 <script>
-/* Respect reduced motion */
+/* ===== respects reduced motion ===== */
 if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  document.querySelectorAll('.fade-up, .pulse, .glow, .bob').forEach(el => { el.style.animation = 'none'; el.style.opacity = 1; el.style.transform = 'none'; });
+  document.querySelectorAll('.fade-up, .pulse, .glow, .bob, .sheen .bar, .feature-card.glow').forEach(el => { el.style.animation = 'none'; el.style.opacity = 1; el.style.transform = 'none'; });
 }
 
-/* COUNT-UP animation for stats when visible */
+/* ===== simple count-up for numbers ===== */
 (function(){
   const els = document.querySelectorAll('.num[data-target]');
   if(!els.length) return;
@@ -655,169 +469,48 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
     requestAnimationFrame(frame);
   }
   const io = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        animate(entry.target);
-        obs.unobserve(entry.target);
-      }
-    });
+    entries.forEach(entry => { if(entry.isIntersecting){ animate(entry.target); obs.unobserve(entry.target); } });
   }, {threshold:0.6});
   els.forEach(el=> io.observe(el));
 })();
 
-/* Accordion logic */
+/* ===== accordion logic ===== */
 (function(){
   const items = document.querySelectorAll('.accordion-item');
   items.forEach(item => {
     const btn = item.querySelector('.accordion-header button');
     const panel = item.querySelector('.panel');
-    const icon = item.querySelector('.icon-round');
     const inner = panel.querySelector('.panel-inner');
-
+    const icon = item.querySelector('.icon-round');
     const isOpen = item.getAttribute('aria-expanded') === 'true';
-    if (isOpen) {
-      panel.style.maxHeight = inner.scrollHeight + 'px';
-      panel.classList.remove('panel-collapsed'); panel.classList.add('panel-open');
-      panel.setAttribute('aria-hidden','false');
-      if(icon) icon.textContent = '−';
-      btn.setAttribute('aria-expanded','true');
-    } else {
-      panel.style.maxHeight = '0px';
-      panel.classList.remove('panel-open'); panel.classList.add('panel-collapsed');
-      panel.setAttribute('aria-hidden','true');
-      if(icon) icon.textContent = '+';
-      btn.setAttribute('aria-expanded','false');
-    }
+    if (isOpen) { panel.style.maxHeight = inner.scrollHeight + 'px'; panel.classList.add('panel-open'); panel.setAttribute('aria-hidden','false'); if(icon) icon.textContent='−'; btn.setAttribute('aria-expanded','true'); }
+    else { panel.style.maxHeight='0px'; panel.classList.add('panel-collapsed'); panel.setAttribute('aria-hidden','true'); if(icon) icon.textContent='+'; btn.setAttribute('aria-expanded','false'); }
 
     btn.addEventListener('click', () => {
-      const currentlyOpen = item.getAttribute('aria-expanded') === 'true';
-      if (!currentlyOpen) {
-        item.setAttribute('aria-expanded','true');
-        panel.classList.remove('panel-collapsed'); panel.classList.add('panel-open');
-        panel.style.maxHeight = inner.scrollHeight + 'px';
-        panel.setAttribute('aria-hidden','false');
-        if(icon) icon.textContent = '−';
-        btn.setAttribute('aria-expanded','true');
-      } else {
-        item.setAttribute('aria-expanded','false');
-        panel.classList.remove('panel-open'); panel.classList.add('panel-collapsed');
-        panel.style.maxHeight = '0px';
-        panel.setAttribute('aria-hidden','true');
-        if(icon) icon.textContent = '+';
-        btn.setAttribute('aria-expanded','false');
-      }
+      const opened = item.getAttribute('aria-expanded') === 'true';
+      if(opened){ item.setAttribute('aria-expanded','false'); panel.style.maxHeight='0px'; panel.setAttribute('aria-hidden','true'); if(icon) icon.textContent='+'; btn.setAttribute('aria-expanded','false'); }
+      else { item.setAttribute('aria-expanded','true'); panel.style.maxHeight = inner.scrollHeight + 'px'; panel.setAttribute('aria-hidden','false'); if(icon) icon.textContent='−'; btn.setAttribute('aria-expanded','true'); }
     });
 
-    if (window.ResizeObserver && inner) {
-      const ro = new ResizeObserver(() => {
-        if (item.getAttribute('aria-expanded') === 'true') {
-          panel.style.maxHeight = inner.scrollHeight + 'px';
-        }
-      });
+    if(window.ResizeObserver && inner){
+      const ro = new ResizeObserver(()=> { if(item.getAttribute('aria-expanded')==='true') panel.style.maxHeight = inner.scrollHeight + 'px'; });
       ro.observe(inner);
     }
   });
 })();
 
-/* Feature card glow pulse + robust stacking on scroll */
-(function(){
-  const cards = Array.from(document.querySelectorAll('.feature-card'));
-  if(!cards.length) return;
-
-  // give each card a stable base z-index (so stacking order predictable)
-  cards.forEach((c, i) => {
-    c.dataset.baseIndex = 10 + i;
-    c.style.zIndex = c.dataset.baseIndex;
-  });
-
-  // IntersectionObserver to detect when a card is near the center of viewport
-  // rootMargin tuned to center area; threshold tiny because we use rootMargin for range
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const el = entry.target;
-      const idx = Number(el.dataset.index || 0);
-      // Check vertical center proximity:
-      // entry.boundingClientRect gives metrics; we can calc distance to viewport center
-      const rect = entry.boundingClientRect;
-      const viewportCenter = window.innerHeight / 2;
-      const cardCenter = rect.top + rect.height / 2;
-      const distance = Math.abs(viewportCenter - cardCenter);
-
-      // If within 160px of center -> stack it
-      if (distance < 160) {
-        // Add stacked class and increase z-index so it appears above others
-        el.classList.add('stacked');
-        // put on top: base + 100 + idx (so later cards can be above)
-        el.style.zIndex = 100 + idx;
-        // stop passive glow animation so stacked box-shadow shows strongly (keep transform)
-        // (we keep glow class for subtle movement but stacked overrides box-shadow)
-      } else {
-        // remove stacking
-        el.classList.remove('stacked');
-        el.style.zIndex = el.dataset.baseIndex;
-      }
-    });
-  }, {
-    root: null,
-    rootMargin: ' -30% 0px -30% 0px', // target center vertical band
-    threshold: [0]
-  });
-
-  // Observe all cards
-  cards.forEach(c => io.observe(c));
-
-  // keyboard/hover triggers for accessibility
-  cards.forEach((c, i) => {
-    c.addEventListener('mouseenter', () => {
-      c.classList.add('stacked'); c.style.zIndex = 100 + i;
-    });
-    c.addEventListener('mouseleave', () => {
-      // let observer decide correct zIndex; if not near center revert to base
-      c.classList.remove('stacked');
-      c.style.zIndex = c.dataset.baseIndex;
-    });
-    c.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        c.classList.toggle('stacked');
-        c.style.zIndex = c.classList.contains('stacked') ? (100 + i) : c.dataset.baseIndex;
-        setTimeout(()=> { c.classList.remove('stacked'); c.style.zIndex = c.dataset.baseIndex; }, 900);
-      }
-    });
-  });
-
-  // Ensure animation (glow) continues but while stacked the stacked box-shadow is dominant.
-})();
-
-/* Hero preview parallax float */
-(function(){
-  const preview = document.getElementById('previewCard');
-  if(preview){
-    preview.style.animation = 'floaty 6s ease-in-out infinite';
-    document.addEventListener('mousemove', (e)=>{
-      const w = window.innerWidth, h = window.innerHeight;
-      const x = (e.clientX - w/2)/w;
-      const y = (e.clientY - h/2)/h;
-      preview.style.transform = `translate3d(${x*8}px, ${y*8}px, 0)`;
-    });
-  }
-})();
-
-/* TICKERS: simulate live +/- changes (random) and color switch.
-   On mobile these are hidden via CSS (per request). */
+/* ===== tickers: simulate random +/- and bob effect ===== */
 (function(){
   const nums = {
-    eur: {el: document.getElementById('tick-eur'), value: -0.3},
+    eur: {el: document.getElementById('tick-eur'), value: -0.7},
     btc: {el: document.getElementById('tick-btc'), value: 2.4},
-    aapl:{el: document.getElementById('tick-aapl'), value: -2.4}
+    aapl:{el: document.getElementById('tick-aapl'), value: -1.6}
   };
-  function format(v){
-    return (v>0?'+':'') + v.toFixed(1) + '%';
-  }
+  function format(v){ return (v>0?'+':'') + v.toFixed(1) + '%'; }
   function updateOne(key){
     const o = nums[key];
     if(!o || !o.el) return;
-    // random delta -0.6..+0.6
-    const delta = (Math.random() * 1.2) - 0.6;
+    const delta = (Math.random() * 1.4) - 0.7; // random drift
     o.value = Math.max(-9.9, Math.min(9.9, o.value + delta));
     const valRounded = Math.round(o.value*10)/10;
     const valElm = o.el.querySelector('.val');
@@ -826,124 +519,178 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
       valElm.classList.remove('pos','neg');
       valElm.classList.add(valRounded >= 0 ? 'pos' : 'neg');
     }
-    // small pop animation trigger
-    o.el.style.transform = 'translateY(-6px)';
+    // slight pop when updating
+    o.el.style.transform = 'translateY(-8px) scale(1.02)';
     setTimeout(()=> o.el.style.transform = '', 300);
   }
-  // initial set
-  Object.keys(nums).forEach(k=>{
-    const o = nums[k];
-    const el = o.el;
-    const valElm = el.querySelector('.val');
-    if(valElm){
-      valElm.textContent = (o.value>=0?'+':'') + o.value.toFixed(1)+'%';
-      valElm.classList.add(o.value>=0 ? 'pos' : 'neg');
-    }
-  });
   setInterval(()=> updateOne('eur'), 3200 + Math.random()*900);
   setInterval(()=> updateOne('btc'), 2400 + Math.random()*1400);
   setInterval(()=> updateOne('aapl'), 4200 + Math.random()*800);
 })();
 
-/* CTA buttons: toggle active state and scroll to form */
+/* ===== CTA buttons: scroll to form + active state ===== */
 (function(){
   const heroEnroll = document.getElementById('hero-enroll');
   const heroCurr = document.getElementById('hero-curr');
-  const ctaEnroll = document.getElementById('cta-enroll');
-  const ctaCallback = document.getElementById('cta-callback');
-  const ctaBadge = document.getElementById('cta-badge');
-  const ctaSelected = document.getElementById('cta-selected');
-  const leadSource = document.getElementById('lead-source');
+  const pricingEnroll = document.getElementById('pricing-enroll');
+  const leads = [heroEnroll, heroCurr, pricingEnroll].filter(Boolean);
+  function scrollToForm(){ const el=document.getElementById('lead-form'); if(el) el.scrollIntoView({behavior:'smooth', block:'center'}); }
+  leads.forEach(btn=>{
+    btn.addEventListener('click', ()=> {
+      document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      scrollToForm();
+    });
+    btn.addEventListener('keydown', e => { if(e.key==='Enter' || e.key===' ') { e.preventDefault(); btn.click(); }});
+  });
+})();
+
+/* ===== form submit -> WhatsApp ===== */
+(function(){
   const leadForm = document.getElementById('leadForm');
   const leadSubmit = document.getElementById('leadSubmit');
-  const leadSuccess = document.getElementById('leadSuccess');
-  const leadWhats = document.getElementById('leadWhats');
-  const pricingEnroll = document.getElementById('pricing-enroll');
   const whatsappNumber = '917249960757';
+  if(!leadForm) return;
 
-  function scrollToForm(source){
-    if(source) leadSource.value = source;
-    if(ctaBadge){ ctaBadge.style.display='inline-block'; ctaSelected.textContent = source; }
-    const el = document.getElementById('lead-form');
-    if(el) { el.scrollIntoView({behavior:'smooth', block:'center'}); setTimeout(()=>{ document.getElementById('l_fname').focus(); }, 600); }
-  }
-
-  [heroEnroll, heroCurr, ctaEnroll, ctaCallback].forEach(btn=>{
-    if(!btn) return;
-    btn.addEventListener('click', ()=> {
-      // toggle active visual
-      document.querySelectorAll('.btn').forEach(b=> b.classList.remove('active'));
-      btn.classList.add('active');
-      const src = btn.dataset.src || btn.dataset.source || 'cta';
-      scrollToForm(src);
-    });
-    btn.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
-    });
-  });
-  if(pricingEnroll){
-    pricingEnroll.addEventListener('click', function(e){
-      e.preventDefault();
-      document.querySelectorAll('.btn').forEach(b=> b.classList.remove('active'));
-      scrollToForm('pricing');
-    });
-  }
-
-  /* Simple validation */
   function validate(fields){
     if(!fields.firstName || !fields.lastName) return 'Please enter full name.';
     const digits = (fields.phone || '').replace(/\D/g,'');
-    if(!/^\d{10,15}$/.test(digits)) return 'Please enter a valid phone number (digits only).';
+    if(!/^\d{10,15}$/.test(digits)) return 'Please enter a valid phone number.';
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) return 'Please enter a valid email.';
     return null;
   }
-
   function openWhatsAppMessage(data){
     const mentor = data.mentor || 'Rukyya Mam';
     const name = `${data.firstName} ${data.lastName}`;
-    const msg = `Hi ${mentor},%0A%0AI would like to enroll.%0A%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(data.phone)}%0AEmail: ${encodeURIComponent(data.email)}%0ACurrently trading: ${encodeURIComponent(data.trading)}%0ASource: ${encodeURIComponent(data.source)}%0A%0APlease contact me to proceed.`;
+    const msg = `Hi ${mentor},%0A%0AI would like to enroll.%0A%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(data.phone)}%0AEmail: ${encodeURIComponent(data.email)}%0A%0APlease contact me.`;
     const waUrl = `https://wa.me/${whatsappNumber}?text=${msg}`;
     window.open(waUrl, '_blank');
-    if(leadWhats) leadWhats.href = waUrl;
-    if(leadSuccess) leadSuccess.style.display = 'block';
   }
 
-  if(leadForm){
-    leadForm.addEventListener('submit', function(ev){
-      ev.preventDefault();
-      const fd = new FormData(leadForm);
-      const data = {
-        firstName: (fd.get('firstName') || '').trim(),
-        lastName: (fd.get('lastName') || '').trim(),
-        phone: (fd.get('phone') || '').trim(),
-        email: (fd.get('email') || '').trim(),
-        trading: fd.get('trading') || 'No',
-        mentor: fd.get('mentor') || 'Rukyya Mam',
-        source: fd.get('source') || 'direct'
-      };
-      const err = validate(data);
-      if(err){ alert(err); return; }
-      const old = leadSubmit.innerHTML;
-      leadSubmit.disabled = true;
-      leadSubmit.innerHTML = 'Opening WhatsApp...';
-      setTimeout(()=>{
-        openWhatsAppMessage(data);
-        leadSubmit.disabled = false;
-        leadSubmit.innerHTML = old;
-      }, 700);
-    });
-  }
-
-  // ensure tel links are correct
-  document.querySelectorAll('a[href^="tel:"]').forEach(a => a.href = 'tel:+917249960757');
-})();
-
-/* Accessibility small helpers */
-(function(){
-  document.querySelectorAll('.feature-card').forEach(fc => {
-    fc.addEventListener('keydown', e => { if(e.key === 'Enter') { fc.classList.add('stacked'); setTimeout(()=> fc.classList.remove('stacked'), 800); }});
+  leadForm.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    const fd = new FormData(leadForm);
+    const data = {
+      firstName: (fd.get('firstName') || '').trim(),
+      lastName: (fd.get('lastName') || '').trim(),
+      phone: (fd.get('phone') || '').trim(),
+      email: (fd.get('email') || '').trim(),
+      mentor: (fd.get('mentor') || 'Rukyya Mam')
+    };
+    const err = validate(data);
+    if(err){ alert(err); return; }
+    const old = leadSubmit.innerHTML;
+    leadSubmit.disabled = true;
+    leadSubmit.innerHTML = 'Opening WhatsApp...';
+    setTimeout(()=> { openWhatsAppMessage(data); leadSubmit.disabled=false; leadSubmit.innerHTML=old; }, 700);
   });
 })();
+
+/* ===== SHEEN auto-pulse & hover (desktop only) ===== */
+(function(){
+  const sections = document.querySelectorAll('.section');
+  function isDesktop(){ return window.innerWidth > 800; }
+  function playSheen(el){
+    if(!isDesktop()) return;
+    el.classList.remove('sheen-play');
+    void el.offsetWidth;
+    el.classList.add('sheen-play');
+    setTimeout(()=> el.classList.remove('sheen-play'), 1200);
+  }
+  let idx=0;
+  const interval = setInterval(()=>{ if(!isDesktop()) return; const s = sections[idx % sections.length]; if(s) playSheen(s); idx++; }, 3800);
+  sections.forEach(s => { s.addEventListener('mouseenter', ()=> playSheen(s)); s.addEventListener('focusin', ()=> playSheen(s)); });
+  window.addEventListener('resize', ()=> { if(!isDesktop()) sections.forEach(s=>s.classList.remove('sheen-play')); });
+  document.addEventListener('visibilitychange', ()=> { if(document.hidden) clearInterval(interval); });
+})();
+
+/* ===== FEATURE CARDS: pulse already via CSS class 'glow' (applies by default). Add stacked behavior when centered in viewport ===== */
+(function(){
+  const featureCards = Array.from(document.querySelectorAll('.feature-card'));
+  if(featureCards.length){
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if(en.isIntersecting){
+          // determine which card is closest to center of viewport
+          const visible = featureCards.filter(c => c.getBoundingClientRect().top < window.innerHeight && c.getBoundingClientRect().bottom > 0);
+          // choose card with center nearest viewport center
+          let best = null; let bestDist = Infinity;
+          visible.forEach(c => {
+            const rect = c.getBoundingClientRect();
+            const center = rect.top + rect.height/2;
+            const dist = Math.abs(center - (window.innerHeight/2));
+            if(dist < bestDist){ bestDist = dist; best = c; }
+          });
+          featureCards.forEach(c => c.classList.remove('stacked'));
+          if(best) best.classList.add('stacked');
+        }
+      });
+    }, {threshold: [0.15, 0.45, 0.65]});
+    featureCards.forEach(c => obs.observe(c));
+    // also update on scroll/resize for smoothness
+    window.addEventListener('scroll', throttle(()=>{
+      featureCards.forEach(c => c.classList.remove('stacked'));
+      let best=null,bestD=Infinity;
+      featureCards.forEach(c=>{
+        const r=c.getBoundingClientRect();
+        const center=r.top + r.height/2;
+        const d=Math.abs(center - window.innerHeight/2);
+        if(d<bestD){bestD=d;best=c;}
+      });
+      if(best) best.classList.add('stacked');
+    }, 120));
+  }
+})();
+
+/* ===== BOOTCAMP CARDS: stacked on center similarly + hover/focus glow ===== */
+(function(){
+  const dayCards = Array.from(document.querySelectorAll('.day-card'));
+  if(dayCards.length){
+    // hover/focus listeners for white glow
+    dayCards.forEach(card => {
+      card.addEventListener('mouseenter', ()=> { card.classList.add('glow'); card.style.zIndex=200; });
+      card.addEventListener('mouseleave', ()=> { card.classList.remove('glow'); card.style.zIndex=''; });
+      card.addEventListener('focus', ()=> { card.classList.add('glow'); card.style.zIndex=200; }, true);
+      card.addEventListener('blur', ()=> { card.classList.remove('glow'); card.style.zIndex=''; }, true);
+      card.addEventListener('keydown', (e)=> { if(e.key==='Enter' || e.key===' '){ e.preventDefault(); card.classList.add('glow'); card.style.zIndex=200; setTimeout(()=>{ card.classList.remove('glow'); card.style.zIndex=''; }, 900); }});
+    });
+
+    const obs = new IntersectionObserver((entries) => {
+      // same logic as features: find best center card
+      let best=null,bestD=Infinity;
+      dayCards.forEach(c=>{
+        const r=c.getBoundingClientRect();
+        const center = r.top + r.height/2;
+        const d = Math.abs(center - window.innerHeight/2);
+        if(d<bestD){ bestD=d; best=c; }
+      });
+      dayCards.forEach(c=> c.classList.remove('stacked'));
+      if(best) best.classList.add('stacked');
+    }, {threshold:[0.2,0.45,0.7]});
+    dayCards.forEach(c=> obs.observe(c));
+
+    window.addEventListener('scroll', throttle(()=>{
+      let best=null,bestD=Infinity;
+      dayCards.forEach(c=>{
+        const r=c.getBoundingClientRect();
+        const center=r.top + r.height/2;
+        const d=Math.abs(center - window.innerHeight/2);
+        if(d<bestD){ bestD=d; best=c; }
+      });
+      dayCards.forEach(c=> c.classList.remove('stacked'));
+      if(best) best.classList.add('stacked');
+    }, 120));
+  }
+})();
+
+/* ===== small throttle helper ===== */
+function throttle(fn, wait){
+  let t = 0;
+  return function(...a){ const now = Date.now(); if(now - t > wait){ t = now; fn(...a); } };
+}
+
+/* ===== accessibility: ensure stacked classes set on load ===== */
+window.addEventListener('load', ()=>{ window.dispatchEvent(new Event('scroll')); });
 </script>
 
 </body>
