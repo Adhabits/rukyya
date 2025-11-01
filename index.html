@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>WiFi Money — Master Professional Trading</title>
+<title>Master Professional Trading — Landing</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -16,11 +16,13 @@
     --glow-strong: 0 36px 80px rgba(217,177,75,0.18);
     --glow-soft: 0 14px 40px rgba(217,177,75,0.08);
     --radius:16px;
+    --plus-color: #3ef379;
+    --minus-color: #ff6b6b;
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#0b0c0d 0%, #0f1112 100%);color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 
-  /* Global grid background */
+  /* grid */
   .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
     background-image:
       linear-gradient(0deg, rgba(255,255,255,0.02) 1px, transparent 1px),
@@ -29,233 +31,227 @@
 
   .container {max-width:1200px;margin:0 auto;padding:0 6%;position:relative;z-index:2}
 
-/* ---------- SHINE EFFECT (used by cards & sections) ---------- */
-.card-shine {
-  position:relative;
-  overflow:hidden;
-}
-.card-shine::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.06) 45%, rgba(255,255,255,0) 100%);
-  transform:translateX(-140%);
-  transition:transform .9s cubic-bezier(.2,.9,.2,1);
-  mix-blend-mode:overlay;
-}
-.card-shine:hover::before{
-  transform:translateX(140%);
-}
+  /* ---------- HERO ---------- */
+  header.hero{position:relative;z-index:2;padding:60px 0 30px;}
+  .hero-inner{display:flex;gap:36px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+  .left{flex:1 1 640px;min-width:260px}
+  .right{flex:0 0 420px;display:flex;align-items:center;justify-content:center;min-width:240px;will-change:transform}
+  .logo-wrap{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+  .logo{width:78px;height:78px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.04)}
+  .logo svg{width:44px;height:44px;fill:var(--accent)}
+  .badge{font-family:Poppins,Inter;color:var(--accent);border:1px solid rgba(217,177,75,0.12);padding:8px 14px;border-radius:26px;font-weight:600;font-size:13px}
 
-/* ---------- HERO ---------- */
-header.hero{position:relative;z-index:2;padding:70px 0 30px;}
-.hero-inner{display:flex;gap:36px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
-.left{flex:1 1 640px;min-width:260px}
-.right{flex:0 0 420px;display:flex;align-items:center;justify-content:center;min-width:240px;will-change:transform}
-.logo-wrap{display:flex;gap:12px;align-items:center;margin-bottom:14px}
-.logo{width:78px;height:78px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.04)}
-.logo svg{width:44px;height:44px;fill:var(--accent)}
-.badge{font-family:Poppins,Inter;color:var(--accent);border:1px solid rgba(217,177,75,0.12);padding:8px 14px;border-radius:26px;font-weight:600;font-size:13px}
+  .hero-h{font-family:Poppins,Inter;font-weight:900;font-size:64px;line-height:1;margin:6px 0 18px}
+  .hero-h .gold{color:var(--accent)}
+  .sub{color:var(--muted);max-width:760px;font-size:18px;line-height:1.7;margin-bottom:30px}
 
-.hero-h{font-family:Poppins,Inter;font-weight:900;font-size:64px;line-height:1;margin:6px 0 18px}
-.hero-h .gold{color:var(--accent)}
-.sub{color:var(--muted);max-width:760px;font-size:18px;line-height:1.7;margin-bottom:30px}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:44px;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .22s ease,box-shadow .22s ease;box-shadow:0 8px 22px rgba(0,0,0,0.5)}
+  .btn-cta{background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111}
+  .btn-ghost{background:transparent;color:var(--accent);border:2px solid rgba(217,177,75,0.12);padding:12px 24px}
+  .btn:hover{transform:translateY(-4px)}
 
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:44px;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .22s ease,box-shadow .22s ease;box-shadow:0 8px 22px rgba(0,0,0,0.5)}
-.btn-cta{background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111}
-.btn-ghost{background:transparent;color:var(--accent);border:2px solid rgba(217,177,75,0.12);padding:12px 24px}
-.btn:hover{transform:translateY(-4px)}
+  .stats{display:flex;gap:34px;align-items:flex-end;flex-wrap:wrap;margin-top:4px}
+  .stat{text-align:center}
+  .stat .num{color:var(--accent);font-weight:800;font-size:26px}
+  .stat .label{color:var(--muted);font-size:13px;margin-top:8px}
 
-.stats{display:flex;gap:34px;align-items:flex-end;flex-wrap:wrap;margin-top:4px}
-.stat{text-align:center}
-.stat .num{color:var(--accent);font-weight:800;font-size:26px}
-.stat .label{color:var(--muted);font-size:13px;margin-top:8px}
+  .video-frame{width:420px;max-width:45vw;height:360px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow-strong);display:flex;align-items:center;justify-content:center;position:relative;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
+  .video-frame.floaty{transform:translateY(0)}
+  .video-thumb{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;color:#fff;position:relative}
+  .play-btn{width:64px;height:64px;border-radius:50%;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.05);cursor:pointer;position:absolute;bottom:20px;left:50%;transform:translateX(-50%)}
+  .play-btn svg{width:32px;height:32px;fill:var(--accent)}
 
-.video-frame{width:420px;max-width:45vw;height:360px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow-strong);display:flex;align-items:center;justify-content:center;position:relative;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
-.video-frame.floaty{transform:translateY(0)}
-.video-thumb{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;color:#fff;position:relative}
-.play-btn{width:64px;height:64px;border-radius:50%;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.05);cursor:pointer;position:absolute;bottom:20px;left:50%;transform:translateX(-50%)}
-.play-btn svg{width:32px;height:32px;fill:var(--accent)}
+  /* tickers */
+  .ticker{position:absolute;background:var(--card);border-radius:12px;padding:12px 14px;display:inline-block;border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 30px rgba(0,0,0,0.55);font-weight:700;width:auto;text-align:center;color:#e7e7e7;font-size:13px;cursor:default;transition:transform .28s,box-shadow .28s}
+  .ticker small{display:block;color:var(--muted);font-weight:600;font-size:12px}
+  .ticker .val{font-weight:800;margin-top:6px;font-size:16px;display:block}
+  .ticker.t1{left:6%;top:16%}
+  .ticker.t2{right:6%;top:34%}
+  .ticker.t3{left:12%;bottom:28%}
+  .ticker.t4{right:18%;bottom:36%}
 
-.ticker{position:absolute;background:var(--card);border-radius:12px;padding:10px 12px;display:inline-block;border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 30px rgba(0,0,0,0.55);font-weight:700;width:86px;text-align:center;color:#e7e7e7;font-size:13px}
-.ticker small{display:block;color:var(--muted);font-weight:600;font-size:12px}
-.ticker .neg{color:#ff6b6b;font-weight:800;margin-top:4px;font-size:14px}
-.ticker.t1{left:6%;top:18%}
-.ticker.t2{right:6%;top:34%}
-.ticker.t3{left:12%;bottom:28%}
-.ticker.t4{right:18%;bottom:36%}
+  /* animation for floating tickers */
+  @keyframes gentleFloat {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+  }
+  .ticker.float { animation: gentleFloat 4s ease-in-out infinite; will-change:transform; }
 
-/* animated glow pulse for cards */
-.pulse {
-  animation:glowPulse 3.2s infinite;
-  will-change:box-shadow;
-}
-@keyframes glowPulse{
-  0%{box-shadow: 0 18px 56px rgba(217,177,75,0.06)}
-  50%{box-shadow: 0 36px 120px rgba(217,177,75,0.14)}
-  100%{box-shadow: 0 18px 56px rgba(217,177,75,0.06)}
-}
+  /* animated glow pulse for cards */
+  .pulse {
+    animation:glowPulse 3.2s infinite;
+    will-change:box-shadow;
+  }
+  @keyframes glowPulse{
+    0%{box-shadow: 0 18px 56px rgba(217,177,75,0.06)}
+    50%{box-shadow: 0 36px 120px rgba(217,177,75,0.14)}
+    100%{box-shadow: 0 18px 56px rgba(217,177,75,0.06)}
+  }
 
-/* ---------- STOP LOSING ---------- */
-.stop-losing-section{background:linear-gradient(180deg,#0f0f0f 0%, #121212 100%);text-align:center;padding:120px 0 100px}
-.stop-heading{font-size:54px;font-weight:800;font-family:Poppins,Inter;margin-bottom:30px}
-.stop-heading .highlight{color:var(--accent)}
-.stop-subtext{font-size:19px;line-height:1.8;color:#c5c5c5;max-width:900px;margin:0 auto}
+  /* ---------- STOP LOSING ---------- */
+  .stop-losing-section{background:linear-gradient(180deg,#0f0f0f 0%, #121212 100%);text-align:center;padding:120px 0 100px}
+  .stop-heading{font-size:54px;font-weight:800;font-family:Poppins,Inter;margin-bottom:30px}
+  .stop-heading .highlight{color:var(--accent)}
+  .stop-subtext{font-size:19px;line-height:1.8;color:#c5c5c5;max-width:900px;margin:0 auto}
 
-/* ---------- WHY CHOOSE (features) ---------- */
-.why-section{text-align:center;padding:100px 0 120px;background:#0c0c0b}
-.why-section h2{font-size:36px;font-weight:700;margin-bottom:60px;color:#fff}
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1200px;margin:0 auto;padding:0 6%}
-.feature-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:36px;border-radius:18px;transition:transform .28s ease, box-shadow .28s ease;box-shadow:0 10px 36px rgba(0,0,0,0.45);border:1px solid rgba(217,177,75,0.04)}
-.feature-card:hover{transform:translateY(-8px);box-shadow:var(--glow-soft)}
-.icon-circle{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
-.icon-circle svg{fill:#111;width:32px;height:32px}
-.feature-card h3{font-size:20px;font-weight:700;margin-bottom:10px;color:#fff}
-.feature-card p{font-size:15px;color:#bbb;line-height:1.6}
+  /* ---------- WHY CHOOSE (features) ---------- */
+  .why-section{text-align:center;padding:100px 0 120px;background:#0c0c0b}
+  .why-section h2{font-size:36px;font-weight:700;margin-bottom:60px;color:#fff}
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1200px;margin:0 auto;padding:0 6%}
+  .feature-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:36px;border-radius:18px;transition:transform .28s ease, box-shadow .28s ease;box-shadow:0 10px 36px rgba(0,0,0,0.45);border:1px solid rgba(217,177,75,0.04)}
+  .feature-card:hover{transform:translateY(-8px);box-shadow:var(--glow-soft)}
+  .icon-circle{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+  .icon-circle svg{fill:#111;width:32px;height:32px}
+  .feature-card h3{font-size:20px;font-weight:700;margin-bottom:10px;color:#fff}
+  .feature-card p{font-size:15px;color:#bbb;line-height:1.6}
 
-/* ---------- 7-DAY BOOTCAMP (course schedule) ---------- */
-.bootcamp-section{padding:80px 0 60px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
-.bootcamp-section h2{font-size:34px;color:#f6f2e6;margin-bottom:28px}
-.bootcamp-grid{max-width:1200px;margin:0 auto;padding:0 6%;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.day-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:22px 20px;min-height:220px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45);position:relative;transition:transform .28s,box-shadow .28s}
-.day-card:hover{transform:translateY(-6px);box-shadow:var(--glow-soft)}
-.day-pill{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--card);padding:6px 14px;border-radius:20px;font-weight:700;color:var(--accent);border:1px solid rgba(217,177,75,0.12);font-size:13px}
-.day-card h4{margin-top:18px;font-size:15px;font-weight:700;color:#fff}
-.day-card ul{margin:12px 0 0;padding-left:16px;color:#cfcfcf;line-height:1.6;font-size:14px}
-.day-card ul li{margin-bottom:8px}
+  /* ---------- 7-DAY BOOTCAMP (course schedule) ---------- */
+  .bootcamp-section{padding:80px 0 60px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
+  .bootcamp-section h2{font-size:34px;color:#f6f2e6;margin-bottom:28px}
+  .bootcamp-grid{max-width:1200px;margin:0 auto;padding:0 6%;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .day-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:22px 20px;min-height:220px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45);position:relative;transition:transform .28s,box-shadow .28s}
+  .day-card:hover{transform:translateY(-6px);box-shadow:var(--glow-soft)}
+  .day-pill{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--card);padding:6px 14px;border-radius:20px;font-weight:700;color:var(--accent);border:1px solid rgba(217,177,75,0.12);font-size:13px}
+  .day-card h4{margin-top:18px;font-size:15px;font-weight:700;color:#fff}
+  .day-card ul{margin:12px 0 0;padding-left:16px;color:#cfcfcf;line-height:1.6;font-size:14px}
+  .day-card ul li{margin-bottom:8px}
 
-/* ---------- BONUSES ---------- */
-.bonus-section{padding:80px 0 100px;background:linear-gradient(180deg,#0c0d0c 0%, #0b0b0b 100%);text-align:center}
-.bonus-section h2{font-size:34px;color:#f6f2e6;margin-bottom:12px}
-.bonus-section .lead{color:#bfbfbf;max-width:860px;margin:12px auto 40px;font-size:15px;line-height:1.7}
-.bonus-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:0 6%}
-.bonus-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:30px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45);display:flex;flex-direction:column;align-items:center;min-height:200px;transition:transform .22s,box-shadow .22s}
-.bonus-card:hover{transform:translateY(-6px);box-shadow:var(--glow-soft)}
-.bonus-icon{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
-.bonus-card h4{font-size:16px;margin-bottom:8px}
-.bonus-price{color:var(--accent);font-weight:800;margin-bottom:10px}
-.bonus-desc{color:#cfcfcf;font-size:13px;text-align:center;line-height:1.6}
+  /* ---------- BONUSES ---------- */
+  .bonus-section{padding:80px 0 100px;background:linear-gradient(180deg,#0c0d0c 0%, #0b0b0b 100%);text-align:center}
+  .bonus-section h2{font-size:34px;color:#f6f2e6;margin-bottom:12px}
+  .bonus-section .lead{color:#bfbfbf;max-width:860px;margin:12px auto 40px;font-size:15px;line-height:1.7}
+  .bonus-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:0 6%}
+  .bonus-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:30px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45);display:flex;flex-direction:column;align-items:center;min-height:200px;transition:transform .22s,box-shadow .22s}
+  .bonus-card:hover{transform:translateY(-6px);box-shadow:var(--glow-soft)}
+  .bonus-icon{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--accent),#b98d24);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+  .bonus-card h4{font-size:16px;margin-bottom:8px}
+  .bonus-price{color:var(--accent);font-weight:800;margin-bottom:10px}
+  .bonus-desc{color:#cfcfcf;font-size:13px;text-align:center;line-height:1.6}
 
-.bonus-cta{max-width:360px;margin:48px auto 0;background:linear-gradient(180deg,#0b0b0b,#101010);padding:26px;border-radius:14px;border:1px solid rgba(217,177,75,0.08);box-shadow:0 20px 60px rgba(217,177,75,0.06)}
-.bonus-cta .ttl{font-weight:800;font-size:20px;color:#fff;margin-bottom:6px}
-.bonus-cta .val{font-weight:900;color:var(--accent);font-size:26px;margin-bottom:8px}
-.bonus-cta p{color:#c5c5c5;font-size:13px;margin-bottom:12px}
-.claim-btn{display:inline-block;padding:12px 22px;border-radius:40px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);transition:transform .18s}
-.claim-btn:hover{transform:translateY(-3px)}
+  .bonus-cta{max-width:360px;margin:48px auto 0;background:linear-gradient(180deg,#0b0b0b,#101010);padding:26px;border-radius:14px;border:1px solid rgba(217,177,75,0.08);box-shadow:0 20px 60px rgba(217,177,75,0.06)}
+  .bonus-cta .ttl{font-weight:800;font-size:20px;color:#fff;margin-bottom:6px}
+  .bonus-cta .val{font-weight:900;color:var(--accent);font-size:26px;margin-bottom:8px}
+  .claim-btn{display:inline-block;padding:12px 22px;border-radius:40px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);transition:transform .18s}
+  .claim-btn:hover{transform:translateY(-3px)}
 
-/* ---------- ABOUT US ---------- */
-.about-section{padding:80px 0 40px;background:linear-gradient(180deg,#0f0f0f 0%, #0d0d0d 100%);text-align:center}
-.about-section h2{font-size:34px;color:var(--accent);margin-bottom:18px}
-.about-section p{color:#cfcfcf;max-width:900px;margin:0 auto 18px;line-height:1.8}
-.stats-row{display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap}
-.mini-card{border:1px solid rgba(217,177,75,0.08);padding:18px 24px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));min-width:130px}
-.mini-card .k{font-weight:800;color:var(--accent);font-size:20px}
-.mini-card .t{color:var(--muted);font-size:13px;margin-top:6px}
+  /* ---------- ABOUT US ---------- */
+  .about-section{padding:80px 0 40px;background:linear-gradient(180deg,#0f0f0f 0%, #0d0d0d 100%);text-align:center}
+  .about-section h2{font-size:34px;color:var(--accent);margin-bottom:18px}
+  .about-section p{color:#cfcfcf;max-width:900px;margin:0 auto 18px;line-height:1.8}
+  .stats-row{display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+  .mini-card{border:1px solid rgba(217,177,75,0.08);padding:18px 24px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));min-width:130px}
+  .mini-card .k{font-weight:800;color:var(--accent);font-size:20px}
+  .mini-card .t{color:var(--muted);font-size:13px;margin-top:6px}
 
-.mission{margin:28px auto 6px;max-width:1000px;border-left:4px solid var(--accent);padding:18px;background:linear-gradient(90deg, rgba(217,177,75,0.03), transparent);color:#d9d7c5;border-radius:8px}
+  .mission{margin:28px auto 6px;max-width:1000px;border-left:4px solid var(--accent);padding:18px;background:linear-gradient(90deg, rgba(217,177,75,0.03), transparent);color:#d9d7c5;border-radius:8px}
 
-/* ---------- TESTIMONIALS ---------- */
-.testimonials{padding:70px 0 60px;text-align:center;background:linear-gradient(180deg,#0c0b0b 0%, #0b0b0b 100%)}
-.testimonials h2{font-size:32px;color:var(--accent);margin-bottom:24px}
-.test-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0 6%}
-.test-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45)}
-.stars{color:var(--accent);margin-bottom:10px}
-.quote{font-size:14px;color:#d0d0d0;line-height:1.7;margin-bottom:14px;font-style:italic}
-.author{font-weight:800;color:#fff;font-size:14px}
-.role{color:var(--muted);font-size:12px}
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials{padding:70px 0 60px;text-align:center;background:linear-gradient(180deg,#0c0b0b 0%, #0b0b0b 100%)}
+  .testimonials h2{font-size:32px;color:var(--accent);margin-bottom:24px}
+  .test-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0 6%}
+  .test-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:14px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.45)}
+  .stars{color:var(--accent);margin-bottom:10px}
+  .quote{font-size:14px;color:#d0d0d0;line-height:1.7;margin-bottom:14px;font-style:italic}
+  .author{font-weight:800;color:#fff;font-size:14px}
+  .role{color:var(--muted);font-size:12px}
 
-/* ---------- PRICING CARD ---------- */
-.pricing-section{padding:80px 0 120px;text-align:center;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%)}
-.pricing-section h2{font-size:34px;color:var(--accent);margin-bottom:18px}
-.pricing-wrap{max-width:360px;margin:28px auto 0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow-strong)}
-.badge-limited{position:relative;display:inline-block;background:var(--accent);color:#111;padding:6px 12px;border-radius:18px;font-weight:800;margin-bottom:8px;font-size:12px}
-.price-old{color:var(--muted);text-decoration:line-through;font-size:14px}
-.price{font-size:44px;font-weight:900;color:var(--accent);margin:6px 0}
-.price-sub{color:#cfcfcf;font-size:13px;margin-bottom:12px}
-.features-list{text-align:left;margin:14px 0 18px;padding-left:16px;color:#cfcfcf;line-height:1.7}
-.features-list li{margin-bottom:8px}
-.enroll-btn{display:inline-block;padding:12px 20px;border-radius:30px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);margin-top:12px}
+  /* ---------- PRICING CARD ---------- */
+  .pricing-section{padding:80px 0 120px;text-align:center;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%)}
+  .pricing-section h2{font-size:34px;color:var(--accent);margin-bottom:18px}
+  .pricing-wrap{max-width:360px;margin:28px auto 0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:var(--glow-strong)}
+  .badge-limited{position:relative;display:inline-block;background:var(--accent);color:#111;padding:6px 12px;border-radius:18px;font-weight:800;margin-bottom:8px;font-size:12px}
+  .price-old{color:var(--muted);text-decoration:line-through;font-size:14px}
+  .price{font-size:44px;font-weight:900;color:var(--accent);margin:6px 0}
+  .price-sub{color:#cfcfcf;font-size:13px;margin-bottom:12px}
+  .features-list{text-align:left;margin:14px 0 18px;padding-left:16px;color:#cfcfcf;line-height:1.7}
+  .features-list li{margin-bottom:8px}
+  .enroll-btn{display:inline-block;padding:12px 20px;border-radius:30px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);margin-top:12px}
 
-/* ---------- INLINE FORM SECTION (hero-style) ---------- */
-.lead-section{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:start;padding:60px 0}
-@media(max-width:980px){ .lead-section{grid-template-columns:1fr; } .lead-left{order:1} .lead-right{order:2} }
-.lead-left .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-.lead-left .big-h{font-family:Poppins,Inter;font-size:44px;line-height:1.05;margin:8px 0 18px;color:#fff}
-.lead-left .sub{color:var(--muted);max-width:640px;font-size:16px;margin-bottom:22px}
-.lead-form{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 24px 68px rgba(0,0,0,0.6)}
-.lead-form label{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
-.lead-form input[type="text"], .lead-form input[type="email"], .lead-form input[type="tel"]{width:100%;padding:12px 14px;border-radius:8px;border:1px solid rgba(217,177,75,0.12);background:transparent;color:#fff;font-size:14px;outline:none;margin-bottom:12px}
-.lead-form .radio-group{margin-top:6px;margin-bottom:12px;color:var(--muted)}
+  /* ---------- INLINE FORM SECTION (hero-style) ---------- */
+  .lead-section{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:start;padding:60px 0}
+  @media(max-width:980px){ .lead-section{grid-template-columns:1fr; } .lead-left{order:1} .lead-right{order:2} }
+  .lead-left .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .lead-left .big-h{font-family:Poppins,Inter;font-size:44px;line-height:1.05;margin:8px 0 18px;color:#fff}
+  .lead-left .sub{color:var(--muted);max-width:640px;font-size:16px;margin-bottom:22px}
+  .lead-form{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 24px 68px rgba(0,0,0,0.6)}
+  .lead-form label{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
+  .lead-form input[type="text"], .lead-form input[type="email"], .lead-form input[type="tel"]{width:100%;padding:12px 14px;border-radius:8px;border:1px solid rgba(217,177,75,0.12);background:transparent;color:#fff;font-size:14px;outline:none;margin-bottom:12px}
+  .lead-form .radio-group{margin-top:6px;margin-bottom:12px;color:var(--muted)}
 
-.lead-form .submit-row{display:flex;gap:12px;align-items:center;margin-top:8px}
-.lead-form .submit-btn{flex:1;background:linear-gradient(180deg,var(--accent),var(--accent-dark));padding:12px 16px;border-radius:40px;color:#111;font-weight:800;border:none;cursor:pointer;box-shadow:var(--glow-soft)}
-.lead-form .call-btn{background:transparent;border:2px solid rgba(217,177,75,0.12);color:var(--accent);padding:10px 14px;border-radius:12px;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
+  .lead-form .submit-row{display:flex;gap:12px;align-items:center;margin-top:8px}
+  .lead-form .submit-btn{flex:1;background:linear-gradient(180deg,var(--accent),var(--accent-dark));padding:12px 16px;border-radius:40px;color:#111;font-weight:800;border:none;cursor:pointer;box-shadow:var(--glow-soft)}
+  .lead-form .call-btn{background:transparent;border:2px solid rgba(217,177,75,0.12);color:var(--accent);padding:10px 14px;border-radius:12px;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
 
-.note{color:var(--muted);font-size:13px;margin-top:10px}
+  .note{color:var(--muted);font-size:13px;margin-top:10px}
 
-/* ---------- FAQ (corrected and animated) ---------- */
-.faq-section{padding:40px 0 80px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
-.faq-section h2{font-size:44px;color:var(--accent);margin-bottom:18px}
-.faq-wrap{max-width:1000px;margin:0 auto;padding:0 6%;}
-.accordion-item{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border-radius:14px;border:2px solid rgba(217,177,75,0.12);margin-bottom:14px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.45);transition:transform .24s,box-shadow .24s;position:relative;z-index:1}
-.accordion-item[aria-expanded="true"]{transform:translateY(-10px);box-shadow:var(--glow-strong);z-index:5}
-.accordion-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;cursor:pointer}
-.accordion-header button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px}
-.q-text{font-weight:700;color:var(--accent);font-size:18px;text-align:left}
-.icon-round{width:40px;height:40px;border-radius:999px;background:linear-gradient(180deg,#1a1a1a,#101010);display:flex;align-items:center;justify-content:center;border:2px solid rgba(217,177,75,0.18);color:var(--accent);font-weight:900;transition:transform .2s}
-.accordion-item[aria-expanded="true"] .icon-round{transform:rotate(180deg); background:var(--accent); color:#111; border-color:rgba(0,0,0,0.08)}
-.panel{padding:0 18px;color:#d0d0d0;text-align:left;line-height:1.8;background:linear-gradient(180deg, rgba(217,177,75,0.01), transparent)}
-.panel-inner{padding:16px 0;margin:0}
+  /* ---------- FAQ ---------- */
+  .faq-section{padding:40px 0 80px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
+  .faq-section h2{font-size:44px;color:var(--accent);margin-bottom:18px}
+  .faq-wrap{max-width:1000px;margin:0 auto;padding:0 6%;}
+  .accordion-item{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border-radius:14px;border:2px solid rgba(217,177,75,0.12);margin-bottom:14px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.45);transition:transform .24s,box-shadow .24s}
+  .accordion-item[aria-expanded="true"]{transform:translateY(-6px);box-shadow:var(--glow-strong)}
+  .accordion-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;cursor:pointer}
+  .accordion-header button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px}
+  .q-text{font-weight:700;color:var(--accent);font-size:18px;text-align:left}
+  .icon-round{width:40px;height:40px;border-radius:999px;background:linear-gradient(180deg,#1a1a1a,#101010);display:flex;align-items:center;justify-content:center;border:2px solid rgba(217,177,75,0.18);color:var(--accent);font-weight:900;transition:transform .2s}
+  .accordion-item[aria-expanded="true"] .icon-round{transform:rotate(180deg); background:var(--accent); color:#111; border-color:rgba(0,0,0,0.08)}
+  .panel{padding:0 18px;color:#d0d0d0;text-align:left;line-height:1.8;background:linear-gradient(180deg, rgba(217,177,75,0.01), transparent)}
+  .panel-inner{padding:16px 0;margin:0}
 
-/* collapse animation handled by max-height transitions */
-.panel-collapsed{max-height:0;overflow:hidden;transition:max-height .36s cubic-bezier(.2,.9,.2,1)}
-.panel-open{transition:max-height .36s cubic-bezier(.2,.9,.2,1);overflow:hidden}
+  .panel-collapsed{max-height:0;overflow:hidden;transition:max-height .36s cubic-bezier(.2,.9,.2,1)}
+  .panel-open{transition:max-height .36s cubic-bezier(.2,.9,.2,1);overflow:hidden}
 
-/* ---------- Animations & small JS helpers ---------- */
-.fade-up{opacity:0;transform:translateY(16px);animation:fadeUp .7s cubic-bezier(.2,.9,.2,1) forwards}
-.fade-delay-1{animation-delay:.12s}
-.fade-delay-2{animation-delay:.28s}
-.fade-delay-3{animation-delay:.42s}
-@keyframes fadeUp{to{opacity:1;transform:none}}
+  /* animations */
+  .fade-up{opacity:0;transform:translateY(16px);animation:fadeUp .7s cubic-bezier(.2,.9,.2,1) forwards}
+  .fade-delay-1{animation-delay:.12s}
+  .fade-delay-2{animation-delay:.28s}
+  .fade-delay-3{animation-delay:.42s}
+  @keyframes fadeUp{to{opacity:1;transform:none}}
 
-@keyframes floaty { 0% { transform: translateY(0); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0); } }
+  @keyframes floaty { 0% { transform: translateY(0); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0); } }
 
-/* responsive */
-@media(max-width:1100px){
-  .features-grid{grid-template-columns:repeat(2,1fr)}
-  .bootcamp-grid{grid-template-columns:repeat(2,1fr)}
-  .bonus-grid{grid-template-columns:repeat(2,1fr)}
-  .test-grid{grid-template-columns:repeat(2,1fr)}
-  .hero-h{font-size:52px}
-  .faq-section h2{font-size:36px}
-}
-@media(max-width:800px){
-  .hero-inner{flex-direction:column;align-items:flex-start}
-  .right{order:2;width:100%;margin-top:20px}
-  .hero-h{font-size:42px}
-  .video-frame{width:100%;height:240px}
-  .features-grid{grid-template-columns:1fr}
-  .bootcamp-grid{grid-template-columns:1fr}
-  .bonus-grid{grid-template-columns:1fr}
-  .test-grid{grid-template-columns:1fr}
-  .stop-heading{font-size:34px}
-  .about-section h2{font-size:28px}
-}
-@media(max-width:480px){
-  .hero-h{font-size:30px}
-  .stop-heading{font-size:28px}
-  .stop-subtext{font-size:15px}
-  .cta-row{gap:10px}
-  .btn{padding:10px 16px}
-  .day-card{min-height:unset;padding:16px}
-  .bonus-card{min-height:unset;padding:18px}
-  .pricing-wrap{padding:18px}
-  .faq-section h2{font-size:26px}
-  .q-text{font-size:16px}
-  .lead-left .big-h{font-size:28px}
-}
+  /* responsive */
+  @media(max-width:1100px){
+    .features-grid{grid-template-columns:repeat(2,1fr)}
+    .bootcamp-grid{grid-template-columns:repeat(2,1fr)}
+    .bonus-grid{grid-template-columns:repeat(2,1fr)}
+    .test-grid{grid-template-columns:repeat(2,1fr)}
+    .hero-h{font-size:52px}
+    .faq-section h2{font-size:36px}
+  }
+  @media(max-width:800px){
+    .hero-inner{flex-direction:column;align-items:flex-start}
+    .right{order:2;width:100%;margin-top:20px}
+    .hero-h{font-size:42px}
+    .video-frame{width:100%;height:240px}
+    .features-grid{grid-template-columns:1fr}
+    .bootcamp-grid{grid-template-columns:1fr}
+    .bonus-grid{grid-template-columns:1fr}
+    .test-grid{grid-template-columns:1fr}
+    .stop-heading{font-size:34px}
+    .about-section h2{font-size:28px}
+
+    /* make tickers static row (so they don't overlap hero text) */
+    .ticker{position:static;display:inline-flex;margin:10px 8px;padding:10px 12px;transform:none;box-shadow:none;border:none;background:transparent}
+    .ticker small{color:var(--muted)}
+    .ticker .val{font-size:15px}
+    .ticker-row{display:flex;justify-content:center;gap:8px;margin-top:12px}
+  }
+  @media(max-width:480px){
+    .hero-h{font-size:30px}
+    .stop-heading{font-size:28px}
+    .stop-subtext{font-size:15px}
+    .cta-row{gap:10px}
+    .btn{padding:10px 16px}
+    .day-card{min-height:unset;padding:16px}
+    .bonus-card{min-height:unset;padding:18px}
+    .pricing-wrap{padding:18px}
+    .faq-section h2{font-size:26px}
+    .q-text{font-size:16px}
+    .lead-left .big-h{font-size:28px}
+  }
 </style>
 </head>
 <body>
@@ -268,22 +264,19 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
     <div class="left">
       <div class="logo-wrap">
         <div class="logo" aria-hidden="true">
-          <!-- placeholder SVG logo -->
+          <!-- minimal logo, no "WiFiMoney" text anywhere -->
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 3c3.866 0 7.1 1.866 9.001 4.712l-1.6 1.1C18.9 6.7 15.7 5 12 5S5.1 6.7 4.599 8.812L3 7.7C4.901 4.866 8.134 3 12 3zm0 4a8.957 8.957 0 0 1 6.364 2.636l-1.414 1.414A6.96 6.96 0 0 0 12 9a6.96 6.96 0 0 0-4.95 2.05L5.636 9.636A8.957 8.957 0 0 1 12 7zM7 13a5 5 0 1 1 10 0 5 5 0 0 1-10 0z"/>
+            <path d="M12 3c3.866 0 7.1 1.866 9.001 4.712l-1.6 1.1C18.9 6.7 15.7 5 12 5S5.1 6.7 4.599 8.812L3 7.7C4.901 4.866 8.134 3 12 3z" fill="currentColor"/>
           </svg>
         </div>
         <div style="display:flex;flex-direction:column;">
-          <div style="display:flex;gap:10px;align-items:center;">
-            <div class="badge">#1 Trading Course 2025</div>
-          </div>
-          <div style="color:var(--muted);font-size:13px;margin-top:8px">WIFI MONEY</div>
+          <div style="color:var(--muted);font-size:13px;margin-top:8px">&nbsp;</div>
         </div>
       </div>
 
       <h1 class="hero-h"><span>Master </span><span class="gold">Professional Trading</span><br>Build Wealth from Anywhere</h1>
 
-      <p class="sub">Transform from beginner to profitable trader with our comprehensive course. Learn proven strategies used by Wall Street professionals.</p>
+      <p class="sub">Transform from beginner to profitable trader with our comprehensive course. Learn proven strategies used by professional traders.</p>
 
       <div class="cta-row">
         <button class="btn btn-cta" id="hero-enroll" data-src="enroll">🎓 ENROLL IN COURSE</button>
@@ -291,7 +284,6 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
       </div>
 
       <div class="stats" aria-hidden="true">
-        <!-- these will animate on scroll -->
         <div class="stat pulse card-strong">
           <div class="num" data-target="15000" data-duration="1500">0</div>
           <div class="label">Students Enrolled</div>
@@ -305,10 +297,14 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
           <div class="label">Success Rate</div>
         </div>
       </div>
+
+      <!-- mobile-safe ticker row (appears only on small screens) -->
+      <div class="ticker-row" id="tickerRowMobile" aria-hidden="true" style="display:none"></div>
+
     </div>
 
     <div class="right">
-      <div class="video-frame floaty pulse card-shine" id="previewCard" aria-hidden="true">
+      <div class="video-frame floaty pulse" id="previewCard" aria-hidden="true">
         <div class="video-thumb">
           <div style="font-weight:800;font-size:16px;color:var(--accent)">Course Preview</div>
           <div style="color:var(--muted);font-size:13px;margin-top:8px;text-align:center;max-width:240px">12 modules • Live trading sessions • Proven strategies</div>
@@ -317,14 +313,22 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
       </div>
     </div>
 
-    <div class="ticker t1 fade-delay-2"><small>EURUSD</small><div class="neg">-0.3%</div></div>
-    <div class="ticker t2 fade-delay-3"><small>BTCUSD</small><div class="neg">-4.6%</div></div>
-    <div class="ticker t3 fade-delay-1"><small>AAPL</small><div class="neg">-2.4%</div></div>
+    <!-- floating tickers (desktop) -->
+    <div class="ticker t1 float" data-symbol="EURUSD" data-value="-0.3" role="note" aria-label="EURUSD change">
+      <small>EURUSD</small><span class="val">-0.3%</span>
+    </div>
+    <div class="ticker t2 float" data-symbol="BTCUSD" data-value="-4.6" role="note" aria-label="BTCUSD change">
+      <small>BTCUSD</small><span class="val">-4.6%</span>
+    </div>
+    <div class="ticker t3 float" data-symbol="AAPL" data-value="-2.4" role="note" aria-label="AAPL change">
+      <small>AAPL</small><span class="val">-2.4%</span>
+    </div>
+
   </div>
 </header>
 
 <!-- STOP LOSING -->
-<section class="stop-losing-section fade-up fade-delay-2 card-shine">
+<section class="stop-losing-section fade-up fade-delay-2">
   <div class="container">
     <h2 class="stop-heading">Stop <span class="highlight">Losing Money</span> in the Markets</h2>
     <p class="stop-subtext">
@@ -340,25 +344,25 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
   <div class="container">
     <h2>Why Choose Our Trading Course?</h2>
     <div class="features-grid">
-      <div class="feature-card card-shine">
+      <div class="feature-card">
         <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M4 5h16v2H4zM4 10h16v2H4zM4 15h10v2H4z"/></svg></div>
         <h3>Professional Strategies</h3>
         <p>Learn the exact strategies used by institutional traders and hedge funds to generate consistent profits in any market condition.</p>
       </div>
 
-      <div class="feature-card card-shine">
+      <div class="feature-card">
         <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z"/></svg></div>
         <h3>Risk Management Mastery</h3>
         <p>Master advanced risk management techniques that protect your capital and ensure long-term trading success.</p>
       </div>
 
-      <div class="feature-card card-shine">
+      <div class="feature-card">
         <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 3.3-2.1 6.1-5 7v6h-4v-6c-2.9-.9-5-3.7-5-7a7 7 0 017-7z"/></svg></div>
         <h3>Trading Psychology</h3>
         <p>Develop the mental discipline and emotional control required to make rational decisions under pressure.</p>
       </div>
 
-      <div class="feature-card card-shine">
+      <div class="feature-card">
         <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M17 10.5V6c0-1.1-.9-2-2-2H5C3.9 4 3 4.9 3 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-4.5l4 4V6.5l-4 4z"/></svg></div>
         <h3>Live Trading Sessions</h3>
         <p>Watch real trades unfold in live market conditions and learn to apply strategies in real-time scenarios.</p>
@@ -373,7 +377,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
     <h2 style="text-align:center;margin-bottom:34px;color:#f6f2e6">7-Day Intensive Trading <span style="color:var(--accent)">Bootcamp</span></h2>
 
     <div class="bootcamp-grid">
-      <div class="day-card card-shine">
+      <div class="day-card">
         <div class="day-pill">Day 1</div>
         <h4>Foundation & Market Basics</h4>
         <ul>
@@ -385,7 +389,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </ul>
       </div>
 
-      <div class="day-card card-shine">
+      <div class="day-card">
         <div class="day-pill">Day 2</div>
         <h4>Core Concepts to Trade Confidently</h4>
         <ul>
@@ -397,7 +401,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </ul>
       </div>
 
-      <div class="day-card card-shine">
+      <div class="day-card">
         <div class="day-pill">Day 3</div>
         <h4>Live Trading Walkthrough + Platform Basics</h4>
         <ul>
@@ -409,7 +413,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </ul>
       </div>
 
-      <div class="day-card card-shine">
+      <div class="day-card">
         <div class="day-pill">Day 4</div>
         <h4>Chart Analysis & Indicators</h4>
         <ul>
@@ -421,7 +425,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </ul>
       </div>
 
-      <div class="day-card card-shine">
+      <div class="day-card">
         <div class="day-pill">Day 5</div>
         <h4>Strategy Day – 21+ Proven Forex Setups</h4>
         <ul>
@@ -433,7 +437,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </ul>
       </div>
 
-      <div class="day-card card-shine">
+      <div class="day-card">
         <div class="day-pill">Day 6</div>
         <h4>Fundamental & Sentiment Analysis</h4>
         <ul>
@@ -445,7 +449,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </ul>
       </div>
 
-      <div class="day-card card-shine">
+      <div class="day-card">
         <div class="day-pill">Day 7</div>
         <h4>Go Live + Broker Account Setup</h4>
         <ul>
@@ -464,38 +468,38 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
 <section class="bonus-section fade-up">
   <div class="container">
     <h2>Exclusive Bonuses for First 50 Participants</h2>
-    <p class="lead">Join the 7-Day Live Forex bootcamp and unlock exclusive tools, templates, and expert support designed to fast-track your success — available only to the first 50 confirmed joinees.</p>
+    <p class="lead">Join the 7-Day Live bootcamp and unlock exclusive tools, templates, and expert support designed to fast-track your success — available only to the first 50 confirmed joinees.</p>
 
     <div class="bonus-grid">
-      <div class="bonus-card card-shine">
+      <div class="bonus-card">
         <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M5 4h14v2H5zM5 8h14v2H5zM5 12h14v2H5z" fill="#111"/></svg></div>
         <h4>Ready to Use Strategy Templates</h4>
         <div class="bonus-price">₹2,000/-</div>
         <div class="bonus-desc">Professional trading templates that you can implement immediately without any guesswork or setup time.</div>
       </div>
 
-      <div class="bonus-card card-shine">
+      <div class="bonus-card">
         <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z" fill="#111"/></svg></div>
         <h4>Live Demo Account Setup Support</h4>
         <div class="bonus-price">₹1,500/-</div>
         <div class="bonus-desc">Personal assistance in setting up your demo trading account with optimal configurations for learning.</div>
       </div>
 
-      <div class="bonus-card card-shine">
+      <div class="bonus-card">
         <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M12 2a7 7 0 017 7c0 3.3-2.1 6.1-5 7v6h-4v-6c-2.9-.9-5-3.7-5-7a7 7 0 017-7z" fill="#111"/></svg></div>
         <h4>Lifetime Telegram Support Group</h4>
         <div class="bonus-price">₹3,000/-</div>
         <div class="bonus-desc">Access to our exclusive Telegram community for ongoing support, trade discussions, and market updates.</div>
       </div>
 
-      <div class="bonus-card card-shine">
+      <div class="bonus-card">
         <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M17 10.5V6c0-1.1-.9-2-2-2H5C3.9 4 3 4.9 3 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-4.5l4 4V6.5l-4 4z" fill="#111"/></svg></div>
         <h4>Class Recordings (All 7 Days)</h4>
         <div class="bonus-price">₹2,000/-</div>
         <div class="bonus-desc">Complete recordings of all live sessions so you can revisit any concept or strategy whenever needed.</div>
       </div>
 
-      <div class="bonus-card card-shine">
+      <div class="bonus-card">
         <div class="bonus-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px"><path d="M12 2a2 2 0 110 4 2 2 0 010-4zm-6 8h12v2H6zm0 4h12v2H6z" fill="#111"/></svg></div>
         <h4>Beginner Friendly Trading Checklist</h4>
         <div class="bonus-price">₹1,500/-</div>
@@ -507,28 +511,28 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
       <div class="ttl">Total Bonus Value:</div>
       <div class="val">₹10,000/-</div>
       <p>All bonuses included FREE with your course enrollment</p>
-      <a class="claim-btn" href="#claim">🎁 CLAIM YOUR BONUSES NOW</a>
+      <a class="claim-btn" href="#lead-form">🎁 CLAIM YOUR BONUSES NOW</a>
     </div>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section class="about-section fade-up card-shine">
+<section class="about-section fade-up">
   <div class="container">
     <h2>About Us</h2>
-    <p>WiFi Money is an education-first platform dedicated to empowering individuals with the right knowledge, tools, consultation, and mentorship to succeed in the financial markets — especially in Forex trading.</p>
+    <p>We are an education-first platform dedicated to empowering individuals with the right knowledge, tools, consultation, and mentorship to succeed in the financial markets — especially in Forex trading.</p>
     <p>We don't just teach theory. We provide practical, actionable training, real-time trade analysis, expert consultation, and hand-holding support that helps traders build skill, confidence, and consistent income.</p>
 
     <div class="stats-row" role="list" aria-label="Key stats">
-      <div class="mini-card card-shine" role="listitem">
+      <div class="mini-card" role="listitem">
         <div class="k">50+</div>
         <div class="t">Expert Mentors</div>
       </div>
-      <div class="mini-card card-shine" role="listitem">
+      <div class="mini-card" role="listitem">
         <div class="k">20,000+</div>
         <div class="t">Empowered Individuals</div>
       </div>
-      <div class="mini-card card-shine" role="listitem">
+      <div class="mini-card" role="listitem">
         <div class="k">100%</div>
         <div class="t">Transparent</div>
       </div>
@@ -545,21 +549,21 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
   <div class="container">
     <h2>Student Success Stories</h2>
     <div class="test-grid">
-      <div class="test-card card-shine">
+      <div class="test-card">
         <div class="stars">★★★★★</div>
-        <div class="quote">"This course completely transformed my trading approach. I went from losing ₹8,000 in my first year to making ₹20,000 profit in just 6 months after completing WiFiMoney."</div>
+        <div class="quote">"This course completely transformed my trading approach. I went from losing ₹8,000 in my first year to making ₹20,000 profit in just 6 months after completing the training."</div>
         <div class="author">Tanishka Chauhan</div>
         <div class="role">Software Engineer — Full-time Trader</div>
       </div>
 
-      <div class="test-card card-shine">
+      <div class="test-card">
         <div class="stars">★★★★★</div>
         <div class="quote">"The risk management module alone saved me from bankruptcy. Now I trade with confidence, knowing exactly how to protect my capital."</div>
         <div class="author">Rahul Tiwari</div>
         <div class="role">Business Owner — Profitable Trader</div>
       </div>
 
-      <div class="test-card card-shine">
+      <div class="test-card">
         <div class="stars">★★★★★</div>
         <div class="quote">"The live trading sessions are pure gold. Watching the instructor trade in real-time and explaining every decision taught me more than years of YouTube videos."</div>
         <div class="author">Michael Rodriguez</div>
@@ -574,7 +578,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
   <div class="container">
     <h2>Secure Your Trading Future Today</h2>
 
-    <div class="pricing-wrap card-shine" role="region" aria-label="Special offer">
+    <div class="pricing-wrap" role="region" aria-label="Special offer">
       <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-direction:column">
         <div class="badge-limited">LIMITED TIME OFFER</div>
         <div class="price-old">₹9,999</div>
@@ -596,21 +600,21 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
   </div>
 </section>
 
-<!-- LEAD / FORM SECTION (final integrated form as requested) -->
+<!-- LEAD / FORM -->
 <section class="lead-section container fade-up" id="lead-form" aria-labelledby="lead-h">
   <div class="lead-left">
     <div class="brand" aria-hidden="true">
-      <div class="logo" title="WiFi Money">
+      <div class="logo" title="">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3c3.866 0 7.1 1.866 9.001 4.712l-1.6 1.1C18.9 6.7 15.7 5 12 5S5.1 6.7 4.599 8.812L3 7.7C4.901 4.866 8.134 3 12 3z"/></svg>
       </div>
       <div>
-        <div class="title">WIFI MONEY</div>
+        <div class="title" style="color:var(--muted);font-size:13px">&nbsp;</div>
       </div>
     </div>
 
     <h2 id="lead-h" class="big-h">Ready to Transform Your <span class="gold">Financial Future?</span></h2>
 
-    <p class="sub">Join thousands of successful traders who've mastered the markets with WiFiMoney. Mentorship by <strong>Rukyya Mam</strong> is included.</p>
+    <p class="sub">Join thousands of successful traders who've mastered the markets. Mentorship by <strong>Rukyya Mam</strong> is included.</p>
 
     <div class="cta-row" style="margin-bottom:8px">
       <button class="btn btn-cta" id="cta-enroll" data-source="enroll" type="button">ENROLL NOW</button>
@@ -674,8 +678,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
 
     <div class="faq-wrap" role="list">
 
-      <!-- Item 1 (open by default) -->
-      <div class="accordion-item card-shine" role="listitem" aria-expanded="true">
+      <div class="accordion-item" role="listitem" aria-expanded="true">
         <div class="accordion-header">
           <button aria-controls="panel1" aria-expanded="true" type="button">
             <div class="q-text">Do I need prior trading experience to enroll?</div>
@@ -689,8 +692,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </div>
       </div>
 
-      <!-- Item 2 -->
-      <div class="accordion-item card-shine" role="listitem" aria-expanded="false">
+      <div class="accordion-item" role="listitem" aria-expanded="false">
         <div class="accordion-header">
           <button aria-controls="panel2" aria-expanded="false" type="button">
             <div class="q-text">How much capital do I need to start trading?</div>
@@ -704,8 +706,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </div>
       </div>
 
-      <!-- Item 3 -->
-      <div class="accordion-item card-shine" role="listitem" aria-expanded="false">
+      <div class="accordion-item" role="listitem" aria-expanded="false">
         <div class="accordion-header">
           <button aria-controls="panel3" aria-expanded="false" type="button">
             <div class="q-text">How long does it take to complete the course?</div>
@@ -719,8 +720,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </div>
       </div>
 
-      <!-- Item 4 -->
-      <div class="accordion-item card-shine" role="listitem" aria-expanded="false">
+      <div class="accordion-item" role="listitem" aria-expanded="false">
         <div class="accordion-header">
           <button aria-controls="panel4" aria-expanded="false" type="button">
             <div class="q-text">Is there ongoing support after course completion?</div>
@@ -734,8 +734,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         </div>
       </div>
 
-      <!-- Item 5 -->
-      <div class="accordion-item card-shine" role="listitem" aria-expanded="false">
+      <div class="accordion-item" role="listitem" aria-expanded="false">
         <div class="accordion-header">
           <button aria-controls="panel5" aria-expanded="false" type="button">
             <div class="q-text">What makes this course different from free YouTube content?</div>
@@ -756,17 +755,14 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
 <script>
   /* Respect reduce motion */
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.fade-up, .pulse, .card-shine::before').forEach(el => { if(el.style) el.style.animation = 'none'; });
-    document.querySelectorAll('.fade-up').forEach(el=>{ el.style.opacity=1; el.style.transform='none';});
+    document.querySelectorAll('.fade-up, .pulse, .float, .ticker').forEach(el => { el.style.animation = 'none'; el.style.opacity = 1; el.style.transform = 'none'; });
   }
 
   /* COUNT-UP animation for stats when visible */
   (function(){
     const els = document.querySelectorAll('.num[data-target]');
     if(!els.length) return;
-
     function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
-
     function animate(el){
       const raw = el.dataset.target;
       const decimals = parseInt(el.dataset.decimals || '0', 10);
@@ -781,7 +777,6 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
       }
       requestAnimationFrame(frame);
     }
-
     const io = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if(entry.isIntersecting){
@@ -790,11 +785,10 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         }
       });
     }, {threshold:0.6});
-
     els.forEach(el=> io.observe(el));
   })();
 
-  /* Accordion logic - independent toggles, with lift & z-index */
+  /* Accordion logic - independent toggles (animated) */
   (function(){
     const items = document.querySelectorAll('.accordion-item');
     items.forEach(item => {
@@ -803,7 +797,6 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
       const icon = item.querySelector('.icon-round');
       const inner = panel.querySelector('.panel-inner');
 
-      // initialize panels based on aria-expanded
       const isOpen = item.getAttribute('aria-expanded') === 'true';
       if (isOpen) {
         panel.style.maxHeight = inner.scrollHeight + 'px';
@@ -819,7 +812,6 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         btn.setAttribute('aria-expanded','false');
       }
 
-      // toggle handler
       btn.addEventListener('click', () => {
         const currentlyOpen = item.getAttribute('aria-expanded') === 'true';
         if (!currentlyOpen) {
@@ -839,7 +831,6 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
         }
       });
 
-      // update maxHeight on content resize
       if (window.ResizeObserver && inner) {
         const ro = new ResizeObserver(() => {
           if (item.getAttribute('aria-expanded') === 'true') {
@@ -855,9 +846,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
   (function(){
     const preview = document.getElementById('previewCard');
     if(preview){
-      // gentle float
       preview.style.animation = 'floaty 6s ease-in-out infinite';
-      // pointer parallax
       document.addEventListener('mousemove', (e)=>{
         const w = window.innerWidth, h = window.innerHeight;
         const x = (e.clientX - w/2)/w;
@@ -867,10 +856,110 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
     }
   })();
 
+  /* Tickers: gentle float + live random updates + color change + mobile repositioning */
+  (function(){
+    const whatsappNumber = '917249960757'; // +91 72499 60757 used for WA links below
+
+    // Gather ticker elements
+    const tickers = Array.from(document.querySelectorAll('.ticker'));
+    // also a mobile row holder
+    const tickerRowMobile = document.getElementById('tickerRowMobile');
+
+    // If on small screens, show mobile row container
+    function adaptMobileTickers(){
+      if(window.innerWidth <= 800 && tickerRowMobile){
+        tickerRowMobile.style.display = 'flex';
+        // clone tokens into row (if not already)
+        if(!tickerRowMobile.hasChildNodes()){
+          tickers.forEach(t => {
+            const sym = t.dataset.symbol || (t.querySelector('small') && t.querySelector('small').textContent);
+            const val = t.dataset.value || (t.querySelector('.val') && t.querySelector('.val').textContent);
+            const el = document.createElement('div');
+            el.className = 'ticker mobile-t';
+            el.innerHTML = `<small>${sym}</small><span class="val">${val}%</span>`;
+            tickerRowMobile.appendChild(el);
+          });
+        }
+      } else if(tickerRowMobile){
+        // cleanup for larger screens
+        tickerRowMobile.style.display = 'none';
+        while(tickerRowMobile.firstChild) tickerRowMobile.removeChild(tickerRowMobile.firstChild);
+      }
+    }
+    adaptMobileTickers();
+    window.addEventListener('resize', adaptMobileTickers);
+
+    // helper to format percent with sign
+    function formatPct(val){
+      const s = (val >= 0 ? '+' : '');
+      return `${s}${val.toFixed(1)}%`;
+    }
+
+    // random update routine with varied interval/step per ticker
+    tickers.forEach((t, idx) => {
+      // initial value (from data-value or text)
+      let cur = parseFloat(t.dataset.value || (t.querySelector('.val') && t.querySelector('.val').textContent) ) || 0;
+      // random interval between 1800 to 4200 ms
+      const baseInterval = 1600 + Math.floor(Math.random() * 3200) + idx*300;
+      // small unique amplitude per ticker
+      const amp = 0.2 + Math.random()*1.1;
+
+      // initial paint
+      function paint(){
+        const valEl = t.querySelector('.val') || t;
+        const formatted = formatPct(cur);
+        if(valEl) valEl.textContent = formatted;
+        // color
+        if(cur < 0) {
+          (t.querySelector('.val') || t).style.color = 'var(--minus-color)';
+        } else {
+          (t.querySelector('.val') || t).style.color = 'var(--plus-color)';
+        }
+      }
+      paint();
+
+      // set a unique animation-duration slightly different for each ticker to avoid sync
+      const dur = 3.6 + Math.random()*2.4;
+      t.style.animationDuration = dur + 's';
+      t.classList.add('float');
+
+      // function to perform small random change
+      function randomStep(){
+        // random direction and step
+        const step = (Math.random() * amp) * (Math.random() > 0.5 ? 1 : -1);
+        // apply but keep within reasonable range (-9.9% to +9.9%)
+        cur = Math.max(-9.9, Math.min(9.9, cur + step));
+        // round to 1 decimal for display
+        cur = Math.round(cur * 10) / 10;
+        paint();
+        // also update mobile row copies if present
+        if(tickerRowMobile && tickerRowMobile.children.length){
+          // find corresponding mobile child by index
+          const mobileChild = tickerRowMobile.children[idx];
+          if(mobileChild) {
+            const mValEl = mobileChild.querySelector('.val');
+            if(mValEl) mValEl.textContent = formatPct(cur);
+            mValEl.style.color = cur < 0 ? 'var(--minus-color)' : 'var(--plus-color)';
+          }
+        }
+      }
+
+      // initial small pulsing to show movement
+      setTimeout(randomStep, 500 + idx*120);
+
+      // scheduled updates with small random jitter
+      (function scheduleNext(){
+        const jitter = Math.floor(Math.random()*700) - 350; // -350..+350ms
+        setTimeout(()=>{
+          randomStep();
+          scheduleNext();
+        }, baseInterval + jitter);
+      })();
+    });
+  })();
+
   /* Form + CTA integration (lead form -> WhatsApp) with validation */
   (function(){
-    const whatsappNumber = '917249960757'; // +91 72499 60757
-
     const heroEnroll = document.getElementById('hero-enroll');
     const heroCurr = document.getElementById('hero-curr');
     const ctaEnroll = document.getElementById('cta-enroll');
@@ -883,6 +972,7 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
     const leadSuccess = document.getElementById('leadSuccess');
     const leadWhats = document.getElementById('leadWhats');
     const pricingEnroll = document.getElementById('pricing-enroll');
+    const whatsappNumber = '917249960757'; // +91 72499 60757
 
     function scrollToForm(source){
       if(source) leadSource.value = source;
@@ -953,16 +1043,11 @@ header.hero{position:relative;z-index:2;padding:70px 0 30px;}
       });
     }
 
-    // ensure tel links are correct
+    // ensure tel links are set to the stated number
     document.querySelectorAll('a[href^="tel:"]').forEach(a => a.href = 'tel:+917249960757');
 
   })();
 
-  /* Small throttle helper */
-  function throttle(fn, wait){
-    let t = 0;
-    return function(...a){ const now = Date.now(); if(now - t > wait){ t = now; fn(...a); } };
-  }
 </script>
 
 </body>
