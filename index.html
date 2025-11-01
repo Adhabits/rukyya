@@ -144,6 +144,24 @@
   .features-list li{margin-bottom:8px}
   .enroll-btn{display:inline-block;padding:12px 20px;border-radius:30px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#111;font-weight:800;text-decoration:none;box-shadow:0 12px 40px rgba(217,177,75,0.14);margin-top:12px}
 
+  /* ---------- INLINE FORM SECTION (hero-style) ---------- */
+  .lead-section{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:start;padding:60px 0}
+  @media(max-width:980px){ .lead-section{grid-template-columns:1fr; } .lead-left{order:1} .lead-right{order:2} }
+  .lead-left .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .lead-left .big-h{font-family:Poppins,Inter;font-size:44px;line-height:1.05;margin:8px 0 18px;color:#fff}
+  .lead-left .sub{color:var(--muted);max-width:640px;font-size:16px;margin-bottom:22px}
+  .socials-row{display:flex;gap:14px;margin-top:18px}
+  .socials-row a{width:54px;height:54px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#111;text-decoration:none;font-weight:800;box-shadow:0 10px 40px rgba(217,177,75,0.08)}
+
+  .lead-form{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;border:1px solid rgba(217,177,75,0.06);box-shadow:0 18px 56px rgba(0,0,0,0.6)}
+  .lead-form label{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
+  .lead-form input[type="text"], .lead-form input[type="email"], .lead-form input[type="tel"]{width:100%;padding:12px 14px;border-radius:8px;border:1px solid rgba(217,177,75,0.12);background:transparent;color:#fff;font-size:14px;outline:none;margin-bottom:12px}
+  .lead-form .radio-group{margin-top:6px;margin-bottom:12px;color:var(--muted)}
+
+  .lead-form .submit-row{display:flex;gap:12px;align-items:center;margin-top:8px}
+  .lead-form .submit-btn{flex:1;background:linear-gradient(180deg,var(--accent),var(--accent-dark));padding:12px 16px;border-radius:40px;color:#111;font-weight:800;border:none;cursor:pointer}
+  .lead-form .call-btn{background:transparent;border:2px solid rgba(217,177,75,0.12);color:var(--accent);padding:10px 14px;border-radius:12px;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
+
   /* ---------- FAQ (corrected) ---------- */
   .faq-section{padding:80px 0 120px;background:linear-gradient(180deg,#0b0b0b 0%, #0f0f0f 100%);text-align:center}
   .faq-section h2{font-size:44px;color:var(--accent);margin-bottom:28px}
@@ -204,6 +222,7 @@
     .pricing-wrap{padding:18px}
     .faq-section h2{font-size:26px}
     .q-text{font-size:16px}
+    .lead-left .big-h{font-size:28px}
   }
 </style>
 </head>
@@ -235,8 +254,8 @@
       <p class="sub">Transform from beginner to profitable trader with our comprehensive course. Learn proven strategies used by Wall Street professionals.</p>
 
       <div class="cta-row">
-        <a class="btn btn-cta" href="#enroll" aria-label="Enroll in course">🎓 ENROLL IN COURSE</a>
-        <a class="btn btn-ghost" href="#curriculum" aria-label="View curriculum">▶ VIEW CURRICULUM</a>
+        <button class="btn btn-cta" id="hero-enroll" data-src="enroll">🎓 ENROLL IN COURSE</button>
+        <button class="btn btn-ghost" id="hero-curr" data-src="curriculum">▶ VIEW CURRICULUM</button>
       </div>
 
       <div class="stats" aria-hidden="true">
@@ -529,9 +548,88 @@
           <li>✔ Mobile App Access</li>
         </ul>
 
-        <a class="enroll-btn" href="#enroll">🎓 ENROLL NOW - SAVE ₹9500</a>
+        <a class="enroll-btn" id="pricing-enroll" href="#lead-form">🎓 ENROLL NOW - SAVE ₹9500</a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- LEAD / FORM SECTION (final integrated form as requested) -->
+<section class="lead-section container fade-up" id="lead-form" aria-labelledby="lead-h">
+  <div class="lead-left">
+    <div class="brand" aria-hidden="true">
+      <div class="logo" title="WiFi Money">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3c3.866 0 7.1 1.866 9.001 4.712l-1.6 1.1C18.9 6.7 15.7 5 12 5S5.1 6.7 4.599 8.812L3 7.7C4.901 4.866 8.134 3 12 3z"/></svg>
+      </div>
+      <div>
+        <div class="title">WIFI MONEY</div>
+      </div>
+    </div>
+
+    <h2 id="lead-h" class="big-h">Ready to Transform Your <span class="gold">Financial Future?</span></h2>
+
+    <p class="sub">Join thousands of successful traders who've mastered the markets with WiFiMoney. Mentorship by <strong>Rukyya Mam</strong> is included.</p>
+
+    <div class="cta-row" style="margin-bottom:8px">
+      <button class="cta-btn" id="cta-enroll" data-source="enroll" type="button">ENROLL NOW</button>
+      <button class="cta-ghost" id="cta-callback" data-source="callback" type="button">BOOK CALLBACK</button>
+      <span class="src-badge" id="cta-badge" style="display:none">Selected: <span id="cta-selected"></span></span>
+    </div>
+
+    <div class="socials-row" aria-hidden="true">
+      <a href="#" title="Facebook"><svg viewBox="0 0 24 24"><path d="M14 2h3v4h-3v14h-5V6H7V2h3V0h4z"/></svg></a>
+      <a href="#" title="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9c-.6.3-1.2.5-1.9.6.7-.4 1.2-1.1 1.5-1.9-.6.4-1.3.6-2.1.8C18.8 4 18.1 4 17.5 4c-1.9 0-3.3 1.8-2.8 3.6C11.2 7.4 8 5.7 5.6 3c-.9 1.5-.5 3.4 1 4.3-.5 0-1-.2-1.5-.4v.1c0 1.7 1.3 3.2 3 3.5-.4.1-.8.1-1.2.1-.3 0-.6 0-.9-.1.6 2 2.5 3.4 4.7 3.5-1.6 1.3-3.6 2-5.7 2-.4 0-.8 0-1.2-.1 2 1.3 4.4 2 7 2 8.4 0 13-7.1 13-13.2v-.6c.9-.6 1.7-1.3 2.3-2.1-.8.4-1.6.7-2.5.8z"/></svg></a>
+      <a href="#" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 7a5 5 0 100 10 5 5 0 000-10zm7-1a2 2 0 11-4 0 2 2 0 014 0zM4 5v14c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2z"/></svg></a>
+      <a href="#" title="YouTube"><svg viewBox="0 0 24 24"><path d="M10 15l5-3-5-3v6zm12-6.5v7c0 2-1.6 3.5-3.5 3.5H5.5C3.6 19 2 17.5 2 15.5v-7C2 6.5 3.6 5 5.5 5h13C20.4 5 22 6.5 22 8.5z"/></svg></a>
+      <a href="#" title="Discord"><svg viewBox="0 0 24 24"><path d="M7 7h10v2H7z"/></svg></a>
+    </div>
+  </div>
+
+  <div class="lead-right">
+    <form id="leadForm" class="lead-form" autocomplete="off" novalidate>
+      <h3 style="margin:0 0 12px;color:var(--accent);font-family:Poppins,Inter;">Secure Your Spot — Quick Form</h3>
+
+      <div style="display:flex;gap:10px;margin-bottom:12px">
+        <div style="flex:1">
+          <label for="l_fname">First Name *</label>
+          <input id="l_fname" name="firstName" type="text" placeholder="First Name" required />
+        </div>
+        <div style="flex:1">
+          <label for="l_lname">Last Name *</label>
+          <input id="l_lname" name="lastName" type="text" placeholder="Last Name" required />
+        </div>
+      </div>
+
+      <label for="l_phone">Phone *</label>
+      <input id="l_phone" name="phone" type="tel" placeholder="9876543210" required inputmode="tel" />
+
+      <label for="l_email">Email *</label>
+      <input id="l_email" name="email" type="email" placeholder="name@example.com" required />
+
+      <div class="radio-group" role="radiogroup" aria-label="Currently trading?">
+        <div style="font-weight:700;margin-bottom:6px;color:var(--muted)">Are you currently trading in Forex/Stock Market?</div>
+        <label><input type="radio" name="trading" value="Yes" /> Yes</label>
+        <label><input type="radio" name="trading" value="No" checked /> No</label>
+      </div>
+
+      <input type="hidden" name="mentor" value="Rukyya Mam" />
+      <input type="hidden" name="source" id="lead-source" value="direct"/>
+
+      <div style="display:flex;gap:10px;align-items:center">
+        <button type="submit" class="submit-btn" id="leadSubmit">ENROLL NOW - SAVE ₹9500/-</button>
+        <a class="call-btn" id="leadCall" href="tel:+917249960757"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="opacity:.9"><path d="M6.6 10.8a15.05 15.05 0 006.6 6.6l2.2-2.2a1 1 0 01.9-.25c1 .3 2 .5 2.9.5a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h2.7a1 1 0 011 1c0 1 .2 2 .5 2.9.1.3 0 .7-.2.9L6.6 10.8z" fill="#d9b14b"/></svg> Call</a>
+      </div>
+
+      <div class="note" style="margin-top:12px">After submitting you'll be redirected to WhatsApp to complete booking. WhatsApp will open a message to <strong>Rukyya Mam</strong> at <strong>+91 72499 60757</strong>.</div>
+
+      <div class="success" id="leadSuccess" role="status" aria-live="polite" style="display:none">
+        <p id="leadSuccessText">We opened WhatsApp to complete your booking — if WhatsApp didn't open, click the button below to message directly.</p>
+        <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+          <a id="leadWhats" class="claim-btn" style="background:linear-gradient(180deg,var(--accent),var(--accent-dark));padding:10px 14px;border-radius:12px;color:#111;text-decoration:none;font-weight:800" href="#" target="_blank" rel="noopener">Message on WhatsApp</a>
+          <a id="leadCallDirect" class="call-btn" href="tel:+917249960757">📞 Call +91 72499 60757</a>
+        </div>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -622,23 +720,24 @@
 </section>
 
 <script>
-  // Respect reduce motion
+  /* Respect reduce motion */
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll('.fade-up').forEach(el => { el.style.animation = 'none'; el.style.opacity = 1; el.style.transform = 'none'; });
   }
 
-  // Accordion logic - MULTIPLE items can be open (independent toggles)
+  /* Accordion logic - independent toggles (multiple open) */
   (function(){
     const items = document.querySelectorAll('.accordion-item');
     items.forEach(item => {
       const btn = item.querySelector('.accordion-header button');
       const panel = item.querySelector('.panel');
       const icon = item.querySelector('.icon-round');
+      const inner = panel.querySelector('.panel-inner');
 
-      // initialize each panel using its aria-expanded
+      // initialize panels based on aria-expanded
       const isOpen = item.getAttribute('aria-expanded') === 'true';
       if (isOpen) {
-        panel.style.maxHeight = panel.scrollHeight + 'px';
+        panel.style.maxHeight = inner.scrollHeight + 'px';
         panel.classList.remove('panel-collapsed'); panel.classList.add('panel-open');
         panel.setAttribute('aria-hidden','false');
         icon.textContent = '−';
@@ -651,20 +750,17 @@
         btn.setAttribute('aria-expanded','false');
       }
 
-      // toggle on click (independent)
-      btn.addEventListener('click', (e)=>{
+      // toggle handler
+      btn.addEventListener('click', () => {
         const currentlyOpen = item.getAttribute('aria-expanded') === 'true';
         if (!currentlyOpen) {
-          // open this item
           item.setAttribute('aria-expanded','true');
           panel.classList.remove('panel-collapsed'); panel.classList.add('panel-open');
-          // set maxHeight to scrollHeight to animate open
-          panel.style.maxHeight = panel.scrollHeight + 'px';
+          panel.style.maxHeight = inner.scrollHeight + 'px';
           panel.setAttribute('aria-hidden','false');
           icon.textContent = '−';
           btn.setAttribute('aria-expanded','true');
         } else {
-          // close this item
           item.setAttribute('aria-expanded','false');
           panel.classList.remove('panel-open'); panel.classList.add('panel-collapsed');
           panel.style.maxHeight = '0px';
@@ -674,9 +770,7 @@
         }
       });
 
-      // if content inside panel changes height after open (images, etc.), keep maxHeight updated
-      // observe for size changes to panel-inner and update maxHeight if open
-      const inner = panel.querySelector('.panel-inner');
+      // update maxHeight on content resize
       if (window.ResizeObserver && inner) {
         const ro = new ResizeObserver(() => {
           if (item.getAttribute('aria-expanded') === 'true') {
@@ -688,9 +782,9 @@
     });
   })();
 
-  // slight parallax for right panel on mouse move (subtle)
+  /* Parallax for hero right-side */
   (function(){
-    const right = document.querySelector('.right');
+    const right = document.querySelector('.right') || document.querySelector('.video-frame');
     document.addEventListener('mousemove', (e)=>{
       if(!right) return;
       const w = window.innerWidth, h = window.innerHeight;
@@ -698,6 +792,101 @@
       const y = (e.clientY - h/2)/h;
       right.style.transform = `translate3d(${x*8}px, ${y*8}px, 0)`;
     });
+  })();
+
+  /* Form + CTA integration (both lead-form and lead-section) */
+  (function(){
+    const whatsappNumber = '917249960757'; // +91 7249960757
+    /* Hero/CTA buttons that scroll to lead form and set source */
+    const heroEnroll = document.getElementById('hero-enroll');
+    const heroCurr = document.getElementById('hero-curr');
+    const ctaEnroll = document.getElementById('cta-enroll');
+    const ctaCallback = document.getElementById('cta-callback');
+    const ctaBadge = document.getElementById('cta-badge');
+    const ctaSelected = document.getElementById('cta-selected');
+    const leadSource = document.getElementById('lead-source');
+    const leadForm = document.getElementById('leadForm');
+    const leadSubmit = document.getElementById('leadSubmit');
+    const leadSuccess = document.getElementById('leadSuccess');
+    const leadWhats = document.getElementById('leadWhats');
+
+    // helper: scroll to form
+    function scrollToForm(source){
+      if(source) leadSource.value = source;
+      if(ctaBadge){ ctaBadge.style.display='inline-block'; ctaSelected.textContent = source; }
+      const el = document.getElementById('lead-form');
+      if(el) { el.scrollIntoView({behavior:'smooth', block:'center'}); setTimeout(()=>{ document.getElementById('l_fname').focus(); }, 600); }
+    }
+
+    // connect CTAs
+    [heroEnroll, heroCurr, ctaEnroll, ctaCallback].forEach(btn=>{
+      if(!btn) return;
+      btn.addEventListener('click', ()=> {
+        const src = btn.dataset.src || btn.dataset.source || 'cta';
+        scrollToForm(src);
+      });
+      btn.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+    });
+
+    // validation
+    function validate(fields){
+      if(!fields.firstName || !fields.lastName) return 'Please enter full name.';
+      const digits = fields.phone.replace(/\D/g,'');
+      if(!/^\d{10,15}$/.test(digits)) return 'Please enter a valid phone number (digits only).';
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) return 'Please enter a valid email.';
+      return null;
+    }
+
+    function openWhatsAppMessage(data){
+      const mentor = data.mentor || 'Rukyya Mam';
+      const name = `${data.firstName} ${data.lastName}`;
+      const msg = `Hi ${mentor},%0A%0AI would like to enroll.%0A%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(data.phone)}%0AEmail: ${encodeURIComponent(data.email)}%0ACurrently trading: ${encodeURIComponent(data.trading)}%0ASource: ${encodeURIComponent(data.source)}%0A%0APlease contact me to proceed.`;
+      const waUrl = `https://wa.me/${whatsappNumber}?text=${msg}`;
+      window.open(waUrl, '_blank');
+      if(leadWhats) leadWhats.href = waUrl;
+      if(leadSuccess) leadSuccess.style.display = 'block';
+    }
+
+    // handle lead form submit
+    if(leadForm){
+      leadForm.addEventListener('submit', function(ev){
+        ev.preventDefault();
+        const fd = new FormData(leadForm);
+        const data = {
+          firstName: (fd.get('firstName') || '').trim(),
+          lastName: (fd.get('lastName') || '').trim(),
+          phone: (fd.get('phone') || '').trim(),
+          email: (fd.get('email') || '').trim(),
+          trading: fd.get('trading') || 'No',
+          mentor: fd.get('mentor') || 'Rukyya Mam',
+          source: fd.get('source') || 'direct'
+        };
+        const err = validate(data);
+        if(err){ alert(err); return; }
+        // UX
+        const old = leadSubmit.innerHTML;
+        leadSubmit.disabled = true;
+        leadSubmit.innerHTML = 'Opening WhatsApp...';
+        setTimeout(()=>{
+          openWhatsAppMessage(data);
+          leadSubmit.disabled = false;
+          leadSubmit.innerHTML = old;
+        }, 700);
+      });
+    }
+
+    // also ensure tel links are correct
+    const telEls = document.querySelectorAll('a[href^="tel:"]');
+    telEls.forEach(a => a.href = 'tel:+917249960757');
+
+    // If there are any other "enroll" links, set scroll
+    const pricingEnroll = document.getElementById('pricing-enroll');
+    if(pricingEnroll){
+      pricingEnroll.addEventListener('click', (e) => { e.preventDefault(); scrollToForm('pricing'); });
+    }
+
   })();
 </script>
 
