@@ -4,7 +4,7 @@
 <base href="https://2ozeaqeyzkkhk.ok.kimi.link">
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>TeamUniversal - Professional  Trading Mastery</title>
+    <title>TeamUniversal - Professional Trading Mastery</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <style>
@@ -800,219 +800,133 @@
             font-weight: bold;
         }
 
-        /* Enhanced Form Section */
-        .enrollment-section {
-            padding: 100px 0;
-            background: var(--bg-primary);
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            padding: 20px;
+            overflow-y: auto;
         }
 
-        .enrollment-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
-            max-width: 1200px;
-            margin: 0 auto;
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .enrollment-info {
-            padding-right: 40px;
+        .modal-content {
+            background: linear-gradient(135deg, var(--glass-strong), var(--glass));
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
         }
 
-        .enrollment-title {
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: rgba(45, 212, 191, 0.1);
+        }
+
+        .modal-title {
             font-family: 'Poppins', sans-serif;
-            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-size: 24px;
             font-weight: 800;
             margin-bottom: 20px;
             background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-        }
-
-        .enrollment-subtitle {
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        .mentor-highlight {
-            background: linear-gradient(135deg, var(--glass-strong), var(--glass));
-            padding: 20px;
-            border-radius: var(--radius);
-            border: 1px solid rgba(45, 212, 191, 0.2);
-            margin-bottom: 30px;
-        }
-
-        .mentor-name {
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 4px;
-        }
-
-        .mentor-title {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .enrollment-form {
-            background: linear-gradient(135deg, var(--glass-strong), var(--glass));
-            padding: 40px;
-            border-radius: var(--radius);
-            border: 1px solid rgba(45, 212, 191, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .form-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 24px;
             text-align: center;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        /* Compact Form Styles for Modal */
+        .modal-form {
+            margin-top: 20px;
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
+        .modal .form-group {
+            margin-bottom: 15px;
         }
 
-        .form-label {
-            display: block;
-            color: var(--text-secondary);
+        .modal .form-label {
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .modal .form-input {
+            padding: 10px 14px;
             font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 8px;
         }
 
-        .form-input {
-            width: 100%;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(45, 212, 191, 0.2);
-            border-radius: var(--radius-sm);
-            color: var(--text-primary);
+        .modal .form-radio-label {
             font-size: 14px;
-            transition: var(--transition);
         }
 
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.1);
+        .modal .form-submit {
+            padding: 12px;
+            font-size: 14px;
+            margin-top: 10px;
         }
 
-        .form-radio-group {
-            margin: 16px 0;
+        .modal .form-note {
+            font-size: 11px;
+            margin-top: 12px;
         }
 
-        .form-radio-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            color: var(--text-secondary);
-        }
+        /* Responsive Modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 20px;
+                margin: 10px;
+            }
 
-        .form-radio-label input[type="radio"] {
-            accent-color: var(--accent);
-        }
+            .modal-title {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
 
-        .form-submit {
-            width: 100%;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            color: var(--bg-primary);
-            padding: 16px;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--glow-soft);
-        }
-
-        .form-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--glow-strong);
-        }
-
-        .form-note {
-            margin-top: 16px;
-            font-size: 12px;
-            color: var(--text-muted);
-            text-align: center;
-            line-height: 1.4;
-        }
-
-        /* FAQ Section */
-        .faq-section {
-            padding: 100px 0;
-            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: linear-gradient(135deg, var(--glass-strong), var(--glass));
-            border-radius: var(--radius);
-            border: 1px solid rgba(45, 212, 191, 0.1);
-            backdrop-filter: blur(10px);
-            margin-bottom: 16px;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .faq-item:hover {
-            border-color: rgba(45, 212, 191, 0.3);
-        }
-
-        .faq-question {
-            padding: 24px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .faq-toggle {
-            width: 24px;
-            height: 24px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--bg-primary);
-            font-weight: bold;
-            transition: var(--transition);
-        }
-
-        .faq-item.active .faq-toggle {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            padding: 0 24px 24px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            display: none;
-        }
-
-        .faq-item.active .faq-answer {
-            display: block;
+            .modal .form-row {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
         }
 
         /* Responsive Design */
@@ -1146,7 +1060,7 @@
                 <a href="#features" style="color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition);">Features</a>
                 <a href="#curriculum" style="color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition);">Curriculum</a>
                 <a href="#pricing" style="color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition);">Pricing</a>
-                <a href="#enroll" class="btn btn-primary" style="padding: 10px 20px; font-size: 14px;">Enroll Now</a>
+                <button class="btn btn-primary" onclick="openModal()" style="padding: 10px 20px; font-size: 14px; border: none;">Enroll Now</button>
             </div>
         </div>
     </nav>
@@ -1170,10 +1084,10 @@
                         Learn proven strategies used by Wall Street professionals.
                     </p>
                     <div class="cta-group">
-                        <a href="#enroll" class="btn btn-primary">
+                        <button class="btn btn-primary" onclick="openModal()">
                             <i class="fas fa-rocket"></i>
                             Start Free Trial Now
-                        </a>
+                        </button>
                         <a href="#curriculum" class="btn btn-secondary">
                             <i class="fas fa-play"></i>
                             View Curriculum
@@ -1197,7 +1111,7 @@
                 </div>
                 <div class="hero-right fade-in-delay-2">
                     <div class="hero-image-container">
-                        <img src="https://i.postimg.cc/Bv2FWQrG/IMG-20251013-WA0116(4).jpg" alt="Rukkya Khan - Trading Mentor" class="hero-image"/>
+                        <img src="https://i.postimg.cc/4xYfHLP2/IMG-20251014-WA0074.jpg" alt="Rukkya Khan - Trading Mentor" class="hero-image"/>
                         <div class="image-overlay"></div>
                         <div class="floating-badge">
                             <i class="fas fa-crown"></i> Expert Mentor
@@ -1504,10 +1418,10 @@
                 <p class="total-bonus-note">
                     All bonuses included FREE with your course enrollment
                 </p>
-                <a href="#enroll" class="btn btn-primary">
+                <button class="btn btn-primary" onclick="openModal()">
                     <i class="fas fa-gift"></i>
                     Claim Your Bonuses Now
-                </a>
+                </button>
             </div>
         </div>
     </section>
@@ -1588,118 +1502,93 @@
                     <li>₹10,000 Worth of Bonuses</li>
                 </ul>
                 
-                <a href="#enroll" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                <button class="btn btn-primary" onclick="openModal()" style="width: 100%; justify-content: center;">
                     <i class="fas fa-rocket"></i>
                     Start Free Trial Now
-                </a>
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Enrollment Section -->
-    <section id="enroll" class="enrollment-section">
-        <div class="container">
-            <div class="enrollment-container">
-                <div class="enrollment-info fade-in">
-                    <h2 class="enrollment-title">
-                        Ready to Transform Your<br/>
-                        <span style="color: var(--accent);">Financial Future?</span>
-                    </h2>
-                    <p class="enrollment-subtitle">
-                        Join thousands of successful traders who've mastered the markets with TeamUniversal.
-                        Our proven system, expert mentorship, and supportive community will guide you 
-                        every step of the way.
-                    </p>
-                    
-                    <div class="mentor-highlight">
-                        <div class="mentor-name">Rukkya Khan</div>
-                        <div class="mentor-title">Lead Trading Mentor &amp; Course Instructor</div>
+    <!-- Modal/Popup Form -->
+    <div id="enrollmentModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h3 class="modal-title">Claim Your FREE Trial</h3>
+            
+            <form id="modalForm" class="modal-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">First Name *</label>
+                        <input type="text" class="form-input" name="firstName" required=""/>
                     </div>
-                    
-                    <p style="color: var(--text-secondary); font-size: 14px;">
-                        <strong>WhatsApp Support:</strong> 72499 60757<br/>
-                        <strong>Response Time:</strong> Usually within 2 hours
-                    </p>
+                    <div class="form-group">
+                        <label class="form-label">Last Name *</label>
+                        <input type="text" class="form-input" name="lastName" required=""/>
+                    </div>
                 </div>
                 
-                <div class="enrollment-form fade-in" style="animation-delay: 0.2s;">
-                    <h3 class="form-title">Secure Your FREE Trial Spot</h3>
-                    <form id="enrollmentForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">First Name *</label>
-                                <input type="text" class="form-input" name="firstName" required=""/>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Last Name *</label>
-                                <input type="text" class="form-input" name="lastName" required=""/>
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Phone Number *</label>
-                                <input type="tel" class="form-input" name="phone" required="" inputmode="tel"/>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">City *</label>
-                                <input type="text" class="form-input" name="city" required=""/>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Age *</label>
-                                <input type="number" class="form-input" name="age" required="" min="18" max="100"/>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Profession *</label>
-                                <input type="text" class="form-input" name="profession" required=""/>
-                            </div>
-                        </div>
-
-                        <div class="form-radio-group">
-                            <label class="form-label">Gender</label>
-                            <label class="form-radio-label">
-                                <input type="radio" name="gender" value="Male"/>
-                                <span>Male</span>
-                            </label>
-                            <label class="form-radio-label">
-                                <input type="radio" name="gender" value="Female"/>
-                                <span>Female</span>
-                            </label>
-                            <label class="form-radio-label">
-                                <input type="radio" name="gender" value="Other"/>
-                                <span>Other</span>
-                            </label>
-                        </div>
-                        
-                        <div class="form-radio-group">
-                            <label class="form-label">Are you currently trading in Forex/Stock Market?</label>
-                            <label class="form-radio-label">
-                                <input type="radio" name="trading" value="Yes"/>
-                                <span>Yes, I have some experience</span>
-                            </label>
-                            <label class="form-radio-label">
-                                <input type="radio" name="trading" value="No" checked=""/>
-                                <span>No, I'm a complete beginner</span>
-                            </label>
-                        </div>
-                        
-                        <button type="submit" class="form-submit">
-                            <i class="fas fa-rocket"></i>
-                            Claim FREE Trial Now
-                        </button>
-                        
-                        <div class="form-note">
-                            After submitting, you'll be redirected to WhatsApp to complete your booking. 
-                            If WhatsApp doesn't open automatically, message 72499 60757 directly.
-                        </div>
-                    </form>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Phone Number *</label>
+                        <input type="tel" class="form-input" name="phone" required="" inputmode="tel"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">City *</label>
+                        <input type="text" class="form-input" name="city" required=""/>
+                    </div>
                 </div>
-            </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Age *</label>
+                        <input type="number" class="form-input" name="age" required="" min="18" max="100"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Profession *</label>
+                        <input type="text" class="form-input" name="profession" required=""/>
+                    </div>
+                </div>
+
+                <div class="form-radio-group">
+                    <label class="form-label">Gender</label>
+                    <label class="form-radio-label">
+                        <input type="radio" name="gender" value="Male"/>
+                        <span>Male</span>
+                    </label>
+                    <label class="form-radio-label">
+                        <input type="radio" name="gender" value="Female"/>
+                        <span>Female</span>
+                    </label>
+                    <label class="form-radio-label">
+                        <input type="radio" name="gender" value="Other"/>
+                        <span>Other</span>
+                    </label>
+                </div>
+                
+                <div class="form-radio-group">
+                    <label class="form-label">Trading Experience</label>
+                    <label class="form-radio-label">
+                        <input type="radio" name="trading" value="Yes"/>
+                        <span>Yes, I have some experience</span>
+                    </label>
+                    <label class="form-radio-label">
+                        <input type="radio" name="trading" value="No" checked=""/>
+                        <span>No, I'm a complete beginner</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="form-submit">
+                    <i class="fas fa-rocket"></i>
+                    Claim FREE Trial Now
+                </button>
+                
+                <div class="form-note">
+                    After submitting, you'll be redirected to WhatsApp. If it doesn't open, message 72499 60757 directly.
+                </div>
+            </form>
         </div>
-    </section>
+    </div>
 
     <!-- FAQ Section -->
     <section class="faq-section">
@@ -1783,6 +1672,24 @@
     </footer>
 
     <script>
+        // Modal Functions
+        function openModal() {
+            document.getElementById('enrollmentModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('enrollmentModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('enrollmentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
         // Particle System
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
@@ -1866,8 +1773,8 @@
             }
         }
 
-        // Form Submission
-        document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
+        // Form Submission (for modal)
+        document.getElementById('modalForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
@@ -1900,6 +1807,9 @@
             
             // Open WhatsApp
             window.open(whatsappUrl, '_blank');
+            
+            // Close modal
+            closeModal();
             
             // Show success message
             alert('WhatsApp opened! If it didn\'t open automatically, please message 72499 60757 directly.');
