@@ -1,25 +1,27 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <base href="https://2ozeaqeyzkkhk.ok.kimi.link">
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>WiFi Money - Professional Trading Mastery</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Poppins:wght@600;700;800;900&amp;display=swap" rel="stylesheet"/>
+    <title>TeamUniversal - Professional Trading Mastery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <style>
         :root {
-            --bg-primary: #0a0b0d;
-            --bg-secondary: #0f1112;
-            --bg-tertiary: #1a1c1e;
-            --accent: #d9b14b;
-            --accent-dark: #b88f33;
-            --accent-light: #f4d87a;
+            --bg-primary: #0a0d0d;
+            --bg-secondary: #0f1414;
+            --bg-tertiary: #1a2121;
+            --accent: #2dd4bf;
+            --accent-dark: #14b8a6;
+            --accent-light: #5eead4;
             --text-primary: #ffffff;
-            --text-secondary: #a6b0b4;
-            --text-muted: #6a7378;
+            --text-secondary: #a0b0b0;
+            --text-muted: #6a7a7a;
             --glass: rgba(255, 255, 255, 0.02);
             --glass-strong: rgba(255, 255, 255, 0.08);
-            --glow-strong: 0 36px 80px rgba(217, 177, 75, 0.18);
-            --glow-soft: 0 14px 40px rgba(217, 177, 75, 0.08);
+            --glow-strong: 0 36px 80px rgba(45, 212, 191, 0.18);
+            --glow-soft: 0 14px 40px rgba(45, 212, 191, 0.08);
             --radius: 16px;
             --radius-sm: 8px;
             --transition: all 0.3s cubic-bezier(0.2, 0.9, 0.2, 1);
@@ -46,8 +48,8 @@
             z-index: 0;
             pointer-events: none;
             background-image: 
-                linear-gradient(0deg, rgba(217, 177, 75, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(217, 177, 75, 0.03) 1px, transparent 1px);
+                linear-gradient(0deg, rgba(45, 212, 191, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(45, 212, 191, 0.03) 1px, transparent 1px);
             background-size: 60px 60px;
             opacity: 0.3;
             mix-blend-mode: overlay;
@@ -103,7 +105,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 30% 40%, rgba(217, 177, 75, 0.1) 0%, transparent 50%);
+            background: radial-gradient(circle at 30% 40%, rgba(45, 212, 191, 0.1) 0%, transparent 50%);
             pointer-events: none;
         }
 
@@ -189,21 +191,34 @@
         .btn-secondary {
             background: transparent;
             color: var(--accent);
-            border: 2px solid rgba(217, 177, 75, 0.3);
+            border: 2px solid rgba(45, 212, 191, 0.3);
             backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            background: rgba(217, 177, 75, 0.1);
+            background: rgba(45, 212, 191, 0.1);
             border-color: var(--accent);
             transform: translateY(-2px);
         }
 
+        /* Side-by-Side Stats Layout */
         .hero-stats {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr;
             gap: 24px;
             max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .hero-stats .stat-card:first-child {
+            justify-self: center;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .hero-stats .stat-card:nth-child(2),
+        .hero-stats .stat-card:nth-child(3) {
+            justify-self: center;
         }
 
         .stat-card {
@@ -211,7 +226,7 @@
             padding: 20px;
             border-radius: var(--radius);
             text-align: center;
-            border: 1px solid rgba(217, 177, 75, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.1);
             backdrop-filter: blur(10px);
         }
 
@@ -236,68 +251,66 @@
             position: relative;
         }
 
-        .hero-visual {
+        /* New Hero Image Styles */
+        .hero-image-container {
             width: 100%;
             max-width: 480px;
-            height: 400px;
-            background: linear-gradient(135deg, var(--glass-strong), var(--glass));
-            border-radius: var(--radius);
-            border: 1px solid rgba(217, 177, 75, 0.2);
             position: relative;
+            border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--glow-strong);
+            transition: var(--transition);
+            animation: floatImage 6s ease-in-out infinite;
         }
 
-        .hero-visual::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(217, 177, 75, 0.1) 50%, transparent 70%);
-            animation: shimmer 3s infinite;
+        .hero-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
         }
 
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+        .hero-image-container:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 48px 100px rgba(45, 212, 191, 0.25);
+            animation-play-state: paused;
         }
 
-        .visual-content {
+        .hero-image-container:hover .hero-image {
+            transform: scale(1.1);
+        }
+
+        .image-overlay {
             position: absolute;
             inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            text-align: center;
+            background: linear-gradient(135deg, transparent 0%, rgba(45, 212, 191, 0.1) 100%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .play-button {
-            width: 80px;
-            height: 80px;
+        .hero-image-container:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .floating-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--glow-soft);
-        }
-
-        .play-button:hover {
-            transform: scale(1.1);
-            box-shadow: var(--glow-strong);
-        }
-
-        .play-button i {
-            font-size: 32px;
             color: var(--bg-primary);
-            margin-left: 4px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 14px;
+            box-shadow: 0 4px 20px rgba(45, 212, 191, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         /* Market Ticker */
@@ -322,7 +335,7 @@
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
             padding: 12px 16px;
             border-radius: var(--radius-sm);
-            border: 1px solid rgba(217, 177, 75, 0.2);
+            border: 1px solid rgba(45, 212, 191, 0.2);
             backdrop-filter: blur(10px);
             font-size: 12px;
             font-weight: 600;
@@ -403,7 +416,7 @@
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
             padding: 40px 30px;
             border-radius: var(--radius);
-            border: 1px solid rgba(217, 177, 75, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.1);
             backdrop-filter: blur(10px);
             transition: var(--transition);
             position: relative;
@@ -429,7 +442,7 @@
         .feature-card:hover {
             transform: translateY(-8px);
             box-shadow: var(--glow-strong);
-            border-color: rgba(217, 177, 75, 0.3);
+            border-color: rgba(45, 212, 191, 0.3);
         }
 
         .feature-icon {
@@ -510,7 +523,7 @@
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
             padding: 30px;
             border-radius: var(--radius);
-            border: 1px solid rgba(217, 177, 75, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.1);
             backdrop-filter: blur(10px);
         }
 
@@ -560,7 +573,7 @@
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
             padding: 30px;
             border-radius: var(--radius);
-            border: 1px solid rgba(217, 177, 75, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.1);
             backdrop-filter: blur(10px);
             text-align: center;
             transition: var(--transition);
@@ -668,7 +681,7 @@
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
             padding: 30px;
             border-radius: var(--radius);
-            border: 1px solid rgba(217, 177, 75, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.1);
             backdrop-filter: blur(10px);
             position: relative;
         }
@@ -738,6 +751,13 @@
             display: inline-block;
         }
 
+        .pricing-free {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
         .pricing-original {
             color: var(--text-muted);
             text-decoration: line-through;
@@ -746,9 +766,9 @@
         }
 
         .pricing-current {
-            font-size: 48px;
-            font-weight: 900;
-            color: var(--accent);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-secondary);
             margin-bottom: 8px;
         }
 
@@ -821,7 +841,7 @@
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
             padding: 20px;
             border-radius: var(--radius);
-            border: 1px solid rgba(217, 177, 75, 0.2);
+            border: 1px solid rgba(45, 212, 191, 0.2);
             margin-bottom: 30px;
         }
 
@@ -840,7 +860,7 @@
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
             padding: 40px;
             border-radius: var(--radius);
-            border: 1px solid rgba(217, 177, 75, 0.2);
+            border: 1px solid rgba(45, 212, 191, 0.2);
             backdrop-filter: blur(10px);
         }
 
@@ -874,7 +894,7 @@
             width: 100%;
             padding: 12px 16px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(217, 177, 75, 0.2);
+            border: 1px solid rgba(45, 212, 191, 0.2);
             border-radius: var(--radius-sm);
             color: var(--text-primary);
             font-size: 14px;
@@ -885,7 +905,7 @@
             outline: none;
             border-color: var(--accent);
             background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 0 3px rgba(217, 177, 75, 0.1);
+            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.1);
         }
 
         .form-radio-group {
@@ -946,7 +966,7 @@
         .faq-item {
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
             border-radius: var(--radius);
-            border: 1px solid rgba(217, 177, 75, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.1);
             backdrop-filter: blur(10px);
             margin-bottom: 16px;
             overflow: hidden;
@@ -954,7 +974,7 @@
         }
 
         .faq-item:hover {
-            border-color: rgba(217, 177, 75, 0.3);
+            border-color: rgba(45, 212, 191, 0.3);
         }
 
         .faq-question {
@@ -1002,8 +1022,19 @@
                 gap: 40px;
             }
 
-            .hero-visual {
-                height: 300px;
+            .hero-image-container {
+                max-width: 100%;
+            }
+
+            /* Mobile stats layout */
+            .hero-stats {
+                grid-template-columns: 1fr 1fr;
+                max-width: 300px;
+            }
+
+            .hero-stats .stat-card:first-child {
+                grid-column: 1 / -1;
+                max-width: 150px;
             }
 
             .market-ticker {
@@ -1029,11 +1060,6 @@
 
             .form-row {
                 grid-template-columns: 1fr;
-            }
-
-            .hero-stats {
-                grid-template-columns: 1fr;
-                max-width: 200px;
             }
 
             .cta-group {
@@ -1075,6 +1101,29 @@
             z-index: 1000;
             transition: width 0.1s ease;
         }
+
+        /* New Animation for Image */
+        @keyframes floatImage {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* Premium Badge */
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+            animation: pulse 1.5s infinite;
+        }
     </style>
 <script src="https://statics.moonshot.cn/sdk/preview-widgets.min.js" defer=""></script></head>
 <body>
@@ -1086,13 +1135,12 @@
     <div class="particles" id="particles"></div>
 
     <!-- Navigation -->
-    <nav style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(10, 11, 13, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(217, 177, 75, 0.1); padding: 20px 0;">
+    <nav style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(10, 11, 13, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(45, 212, 191, 0.1); padding: 20px 0;">
         <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
             <div style="display: flex; align-items: center; gap: 12px;">
-                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-chart-line" style="color: var(--bg-primary); font-size: 20px;"></i>
-                </div>
-                <span style="font-weight: 800; font-size: 18px;">WiFi Money</span>
+                <!-- MODIFIED: TeamUniversal Logo Image -->
+                <img src="https://i.postimg.cc/sDs098pK/Teamuniversal-logo.jpg" alt="TeamUniversal Logo" style="height: 40px; width: auto; border-radius: 8px;"/>
+                <span style="font-weight: 800; font-size: 18px;">TeamUniversal</span>
             </div>
             <div style="display: flex; gap: 30px; align-items: center;">
                 <a href="#features" style="color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition);">Features</a>
@@ -1124,13 +1172,14 @@
                     <div class="cta-group">
                         <a href="#enroll" class="btn btn-primary">
                             <i class="fas fa-rocket"></i>
-                            Start Learning Now
+                            Start Free Trial Now
                         </a>
                         <a href="#curriculum" class="btn btn-secondary">
                             <i class="fas fa-play"></i>
                             View Curriculum
                         </a>
                     </div>
+                    <!-- MODIFIED: Side-by-Side Stats Layout -->
                     <div class="hero-stats">
                         <div class="stat-card fade-in-delay-1">
                             <span class="stat-number" data-count="15000">0</span>
@@ -1147,15 +1196,11 @@
                     </div>
                 </div>
                 <div class="hero-right fade-in-delay-2">
-                    <div class="hero-visual">
-                        <div class="visual-content">
-                            <div class="play-button">
-                                <i class="fas fa-play"></i>
-                            </div>
-                            <h3 style="margin-bottom: 12px; color: var(--accent);">Course Preview</h3>
-                            <p style="color: var(--text-secondary); font-size: 14px;">
-                                12 modules • Live trading sessions • Proven strategies
-                            </p>
+                    <div class="hero-image-container">
+                        <img src="https://i.postimg.cc/Bv2FWQrG/IMG-20251013-WA0116(4).jpg" alt="Rukkya Khan - Trading Mentor" class="hero-image"/>
+                        <div class="image-overlay"></div>
+                        <div class="floating-badge">
+                            <i class="fas fa-crown"></i> Expert Mentor
                         </div>
                     </div>
                 </div>
@@ -1474,7 +1519,7 @@
                 <h2 class="section-title">Student Success Stories</h2>
                 <p class="section-subtitle">
                     Real results from real students who transformed their trading journey 
-                    with WiFi Money&#39;s comprehensive education.
+                    with TeamUniversal's comprehensive education.
                 </p>
             </div>
             
@@ -1483,7 +1528,7 @@
                     <div class="testimonial-stars">★★★★★</div>
                     <p class="testimonial-text">
                         This course completely transformed my trading approach. I went from losing ₹8,000 
-                        in my first year to making ₹20,000 profit in just 6 months after completing WiFiMoney.
+                        in my first year to making ₹20,000 profit in just 6 months after completing TeamUniversal.
                     </p>
                     <div class="testimonial-author">Tanishka Chauhan</div>
                     <div class="testimonial-role">Software Engineer → Full-time Trader</div>
@@ -1518,17 +1563,19 @@
             <div class="section-header fade-in">
                 <h2 class="section-title">Secure Your Trading Future Today</h2>
                 <p class="section-subtitle">
-                    Join thousands of successful traders who&#39;ve mastered the markets with WiFiMoney. 
-                    Limited time offer - save over 90% today.
+                    Join thousands of successful traders who've mastered the markets with TeamUniversal.
+                    Start completely FREE for your first month!
                 </p>
             </div>
             
             <div class="pricing-card fade-in" style="animation-delay: 0.2s;">
-                <div class="pricing-badge">LIMITED TIME OFFER</div>
-                <div class="pricing-original">₹9,999</div>
-                <div class="pricing-current">₹499</div>
+                <div class="premium-badge">
+                    <i class="fas fa-fire"></i> LIMITED TIME OFFER
+                </div>
+                <div class="pricing-free">FREE</div>
+                <div class="pricing-current">For First Month</div>
                 <div class="pricing-note">
-                    Complete Course + Lifetime Access + Live Mentorship
+                    Then ₹499/month • Cancel anytime • No hidden fees
                 </div>
                 
                 <ul class="pricing-features">
@@ -1543,7 +1590,7 @@
                 
                 <a href="#enroll" class="btn btn-primary" style="width: 100%; justify-content: center;">
                     <i class="fas fa-rocket"></i>
-                    Enroll Now - Save ₹9500
+                    Start Free Trial Now
                 </a>
             </div>
         </div>
@@ -1559,24 +1606,24 @@
                         <span style="color: var(--accent);">Financial Future?</span>
                     </h2>
                     <p class="enrollment-subtitle">
-                        Join thousands of successful traders who&#39;ve mastered the markets with WiFiMoney. 
+                        Join thousands of successful traders who've mastered the markets with TeamUniversal.
                         Our proven system, expert mentorship, and supportive community will guide you 
                         every step of the way.
                     </p>
                     
                     <div class="mentor-highlight">
-                        <div class="mentor-name">Rukyya Mam</div>
+                        <div class="mentor-name">Rukkya Khan</div>
                         <div class="mentor-title">Lead Trading Mentor &amp; Course Instructor</div>
                     </div>
                     
                     <p style="color: var(--text-secondary); font-size: 14px;">
-                        <strong>WhatsApp Support:</strong> +91 72499 60757<br/>
+                        <strong>WhatsApp Support:</strong> 72499 60757<br/>
                         <strong>Response Time:</strong> Usually within 2 hours
                     </p>
                 </div>
                 
                 <div class="enrollment-form fade-in" style="animation-delay: 0.2s;">
-                    <h3 class="form-title">Secure Your Spot - Quick Form</h3>
+                    <h3 class="form-title">Secure Your FREE Trial Spot</h3>
                     <form id="enrollmentForm">
                         <div class="form-row">
                             <div class="form-group">
@@ -1589,14 +1636,42 @@
                             </div>
                         </div>
                         
-                        <div class="form-group">
-                            <label class="form-label">Phone Number *</label>
-                            <input type="tel" class="form-input" name="phone" required="" inputmode="tel"/>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Phone Number *</label>
+                                <input type="tel" class="form-input" name="phone" required="" inputmode="tel"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">City *</label>
+                                <input type="text" class="form-input" name="city" required=""/>
+                            </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Email Address *</label>
-                            <input type="email" class="form-input" name="email" required=""/>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Age *</label>
+                                <input type="number" class="form-input" name="age" required="" min="18" max="100"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Profession *</label>
+                                <input type="text" class="form-input" name="profession" required=""/>
+                            </div>
+                        </div>
+
+                        <div class="form-radio-group">
+                            <label class="form-label">Gender</label>
+                            <label class="form-radio-label">
+                                <input type="radio" name="gender" value="Male"/>
+                                <span>Male</span>
+                            </label>
+                            <label class="form-radio-label">
+                                <input type="radio" name="gender" value="Female"/>
+                                <span>Female</span>
+                            </label>
+                            <label class="form-radio-label">
+                                <input type="radio" name="gender" value="Other"/>
+                                <span>Other</span>
+                            </label>
                         </div>
                         
                         <div class="form-radio-group">
@@ -1607,18 +1682,18 @@
                             </label>
                             <label class="form-radio-label">
                                 <input type="radio" name="trading" value="No" checked=""/>
-                                <span>No, I&#39;m a complete beginner</span>
+                                <span>No, I'm a complete beginner</span>
                             </label>
                         </div>
                         
                         <button type="submit" class="form-submit">
                             <i class="fas fa-rocket"></i>
-                            Enroll Now - Save ₹9500/-
+                            Claim FREE Trial Now
                         </button>
                         
                         <div class="form-note">
-                            After submitting, you&#39;ll be redirected to WhatsApp to complete your booking. 
-                            If WhatsApp doesn&#39;t open automatically, you&#39;ll see alternative contact options.
+                            After submitting, you'll be redirected to WhatsApp to complete your booking. 
+                            If WhatsApp doesn't open automatically, message 72499 60757 directly.
                         </div>
                     </form>
                 </div>
@@ -1673,7 +1748,7 @@
                         <div class="faq-toggle">+</div>
                     </div>
                     <div class="faq-answer">
-                        Absolutely! You get lifetime access to our private Discord community, monthly live Q&amp;A sessions, and ongoing mentorship opportunities. Our support doesn&#39;t end when you finish the course.
+                        Absolutely! You get lifetime access to our private Discord community, monthly live Q&amp;A sessions, and ongoing mentorship opportunities. Our support doesn't end when you finish the course.
                     </div>
                 </div>
                 
@@ -1683,7 +1758,7 @@
                         <div class="faq-toggle">+</div>
                     </div>
                     <div class="faq-answer">
-                        Our course provides a structured, step-by-step learning path with real mentorship, live trading examples, and a proven system. You get personalized feedback, access to professional tools, and accountability that free content can&#39;t provide.
+                        Our course provides a structured, step-by-step learning path with real mentorship, live trading examples, and a proven system. You get personalized feedback, access to professional tools, and accountability that free content can't provide.
                     </div>
                 </div>
             </div>
@@ -1691,19 +1766,18 @@
     </section>
 
     <!-- Footer -->
-    <footer style="background: var(--bg-primary); padding: 40px 0; border-top: 1px solid rgba(217, 177, 75, 0.1);">
+    <footer style="background: var(--bg-primary); padding: 40px 0; border-top: 1px solid rgba(45, 212, 191, 0.1);">
         <div class="container" style="text-align: center;">
             <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 20px;">
-                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-chart-line" style="color: var(--bg-primary); font-size: 20px;"></i>
-                </div>
-                <span style="font-weight: 800; font-size: 18px;">WiFi Money</span>
+                <!-- MODIFIED: TeamUniversal Footer Logo Image -->
+                <img src="https://i.postimg.cc/sDs098pK/Teamuniversal-logo.jpg" alt="TeamUniversal Logo" style="height: 40px; width: auto; border-radius: 8px;"/>
+                <span style="font-weight: 800; font-size: 18px;">TeamUniversal</span>
             </div>
             <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">
                 Empowering traders with professional education and proven strategies since 2020.
             </p>
             <p style="color: var(--text-muted); font-size: 12px;">
-                © 2025 WiFi Money. All rights reserved. | Risk Disclaimer: Trading involves substantial risk of loss.
+                © 2025 TeamUniversal. All rights reserved. | Risk Disclaimer: Trading involves substantial risk of loss.
             </p>
         </div>
     </footer>
@@ -1801,12 +1875,15 @@
                 firstName: formData.get('firstName'),
                 lastName: formData.get('lastName'),
                 phone: formData.get('phone'),
-                email: formData.get('email'),
+                city: formData.get('city'),
+                age: formData.get('age'),
+                profession: formData.get('profession'),
+                gender: formData.get('gender'),
                 trading: formData.get('trading')
             };
             
             // Validation
-            if (!data.firstName || !data.lastName || !data.phone || !data.email) {
+            if (!data.firstName || !data.lastName || !data.phone || !data.city || !data.age || !data.profession) {
                 alert('Please fill in all required fields.');
                 return;
             }
@@ -1817,14 +1894,7 @@
                 return;
             }
             
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(data.email)) {
-                alert('Please enter a valid email address.');
-                return;
-            }
-            
-            // Create WhatsApp message
-            const message = `Hi Rukyya Mam,%0A%0AI would like to enroll in the WiFi Money trading course.%0A%0AName: ${encodeURIComponent(data.firstName + ' ' + data.lastName)}%0APhone: ${encodeURIComponent(data.phone)}%0AEmail: ${encodeURIComponent(data.email)}%0AExperience: ${encodeURIComponent(data.trading)}%0A%0APlease contact me to proceed with the enrollment.`;
+            const message = `Hi Rukkya Mam,%0A%0AI would like to claim my FREE trial of the TeamUniversal trading course.%0A%0AName: ${encodeURIComponent(data.firstName + ' ' + data.lastName)}%0APhone: ${encodeURIComponent(data.phone)}%0ACity: ${encodeURIComponent(data.city)}%0AAge: ${encodeURIComponent(data.age)}%0AProfession: ${encodeURIComponent(data.profession)}%0AGender: ${encodeURIComponent(data.gender || 'Not specified')}%0AExperience: ${encodeURIComponent(data.trading)}%0A%0APlease contact me to activate my free trial.`;
             
             const whatsappUrl = `https://wa.me/917249960757?text=${message}`;
             
@@ -1832,7 +1902,7 @@
             window.open(whatsappUrl, '_blank');
             
             // Show success message
-            alert('WhatsApp opened! If it didn\'t open automatically, please message +91 72499 60757 directly.');
+            alert('WhatsApp opened! If it didn\'t open automatically, please message 72499 60757 directly.');
         });
 
         // Scroll Progress Bar
@@ -1892,17 +1962,16 @@
             });
         });
 
-        // Add some interactive effects
+        // Mouse move parallax effect
         document.addEventListener('mousemove', function(e) {
             const mouseX = e.clientX / window.innerWidth;
             const mouseY = e.clientY / window.innerHeight;
             
-            // Subtle parallax effect for hero visual
-            const heroVisual = document.querySelector('.hero-visual');
-            if (heroVisual && window.innerWidth > 768) {
-                const moveX = (mouseX - 0.5) * 20;
-                const moveY = (mouseY - 0.5) * 20;
-                heroVisual.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            const heroImage = document.querySelector('.hero-image-container');
+            if (heroImage && window.innerWidth > 768) {
+                const moveX = (mouseX - 0.5) * 15;
+                const moveY = (mouseY - 0.5) * 15;
+                heroImage.style.transform = `translate(${moveX}px, ${moveY}px)`;
             }
         });
     </script>
