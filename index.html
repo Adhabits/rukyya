@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<base href="https://2ozeaqeyzkkhk.ok.kimi.link    ">
+<base href="https://2ozeaqeyzkkhk.ok.kimi.link">
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
     <title>Professional Trading Mastery</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300    ;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css    "/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <style>
         :root {
             --bg-primary: #0a0d0d;
@@ -35,6 +35,8 @@
             color: var(--text-primary);
             overflow-x: hidden;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .grid-bg {
@@ -121,14 +123,14 @@
             padding: 8px 20px;
             border-radius: 25px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: clamp(12px, 1.5vw, 14px);
             margin-bottom: 24px;
             box-shadow: var(--glow-soft);
         }
 
         .hero-title {
             font-family: 'Poppins', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2rem, 5vw, 4rem);
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 24px;
@@ -139,7 +141,7 @@
         }
 
         .hero-subtitle {
-            font-size: 18px;
+            font-size: clamp(14px, 1.8vw, 18px);
             color: var(--text-secondary);
             margin-bottom: 32px;
             max-width: 480px;
@@ -156,14 +158,14 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 16px 32px;
+            padding: clamp(12px, 1.5vw, 16px) clamp(20px, 2.5vw, 32px);
             border-radius: 50px;
             font-weight: 700;
             text-decoration: none;
             transition: var(--transition);
             cursor: pointer;
             border: none;
-            font-size: 16px;
+            font-size: clamp(14px, 1.5vw, 16px);
             position: relative;
             overflow: hidden;
         }
@@ -194,26 +196,15 @@
 
         .hero-stats {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .hero-stats .stat-card:first-child {
-            justify-self: center;
-            width: 100%;
-            max-width: 200px;
-        }
-
-        .hero-stats .stat-card:nth-child(2),
-        .hero-stats .stat-card:nth-child(3) {
-            justify-self: center;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            max-width: 100%;
+            margin-top: 30px;
         }
 
         .stat-card {
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
-            padding: 20px;
+            padding: clamp(15px, 2vw, 20px);
             border-radius: var(--radius);
             text-align: center;
             border: 1px solid rgba(45, 212, 191, 0.1);
@@ -221,7 +212,7 @@
         }
 
         .stat-number {
-            font-size: 28px;
+            font-size: clamp(20px, 3vw, 28px);
             font-weight: 900;
             color: var(--accent);
             display: block;
@@ -229,7 +220,7 @@
         }
 
         .stat-label {
-            font-size: 12px;
+            font-size: clamp(10px, 1.2vw, 12px);
             color: var(--text-secondary);
             font-weight: 500;
         }
@@ -291,7 +282,7 @@
             padding: 10px 20px;
             border-radius: 25px;
             font-weight: 800;
-            font-size: 14px;
+            font-size: clamp(12px, 1.5vw, 14px);
             box-shadow: 0 4px 20px rgba(45, 212, 191, 0.3);
             animation: pulse 2s infinite;
         }
@@ -320,7 +311,7 @@
             border-radius: var(--radius-sm);
             border: 1px solid rgba(45, 212, 191, 0.2);
             backdrop-filter: blur(10px);
-            font-size: 12px;
+            font-size: clamp(10px, 1.2vw, 12px);
             font-weight: 600;
             min-width: 80px;
             text-align: center;
@@ -337,7 +328,7 @@
 
         .ticker-symbol {
             color: var(--text-secondary);
-            font-size: 10px;
+            font-size: clamp(8px, 1vw, 10px);
             margin-bottom: 2px;
         }
 
@@ -348,19 +339,18 @@
         .positive { color: #6fe08b; }
         .negative { color: #ff6b6b; }
 
-        .features-section {
-            padding: 100px 0;
-            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        .features-section, .curriculum-section, .bonuses-section, .testimonials-section, .pricing-section, .faq-section {
+            padding: clamp(60px, 8vw, 100px) 0;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: clamp(40px, 5vw, 60px);
         }
 
         .section-title {
             font-family: 'Poppins', sans-serif;
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(1.8rem, 4vw, 3rem);
             font-weight: 800;
             margin-bottom: 16px;
             background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
@@ -370,7 +360,7 @@
         }
 
         .section-subtitle {
-            font-size: 18px;
+            font-size: clamp(14px, 1.8vw, 18px);
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
@@ -378,15 +368,15 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(20px, 3vw, 30px);
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .feature-card {
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
-            padding: 40px 30px;
+            padding: clamp(30px, 4vw, 40px) clamp(20px, 3vw, 30px);
             border-radius: var(--radius);
             border: 1px solid rgba(45, 212, 191, 0.1);
             backdrop-filter: blur(10px);
@@ -418,24 +408,24 @@
         }
 
         .feature-icon {
-            width: 64px;
-            height: 64px;
+            width: clamp(56px, 6vw, 64px);
+            height: clamp(56px, 6vw, 64px);
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 24px;
+            margin-bottom: clamp(20px, 3vw, 24px);
             box-shadow: var(--glow-soft);
         }
 
         .feature-icon i {
-            font-size: 28px;
+            font-size: clamp(24px, 3vw, 28px);
             color: var(--bg-primary);
         }
 
         .feature-title {
-            font-size: 20px;
+            font-size: clamp(18px, 2vw, 20px);
             font-weight: 700;
             margin-bottom: 12px;
             color: var(--text-primary);
@@ -444,11 +434,7 @@
         .feature-description {
             color: var(--text-secondary);
             line-height: 1.6;
-        }
-
-        .curriculum-section {
-            padding: 100px 0;
-            background: var(--bg-primary);
+            font-size: clamp(13px, 1.5vw, 15px);
         }
 
         .curriculum-timeline {
@@ -469,37 +455,37 @@
 
         .curriculum-day {
             position: relative;
-            margin-bottom: 40px;
-            padding-left: 80px;
+            margin-bottom: clamp(30px, 4vw, 40px);
+            padding-left: clamp(60px, 8vw, 80px);
         }
 
         .day-number {
             position: absolute;
             left: 0;
             top: 0;
-            width: 60px;
-            height: 60px;
+            width: clamp(50px, 6vw, 60px);
+            height: clamp(50px, 6vw, 60px);
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 18px;
+            font-size: clamp(16px, 2vw, 18px);
             color: var(--bg-primary);
             box-shadow: var(--glow-soft);
         }
 
         .day-content {
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
-            padding: 30px;
+            padding: clamp(20px, 3vw, 30px);
             border-radius: var(--radius);
             border: 1px solid rgba(45, 212, 191, 0.1);
             backdrop-filter: blur(10px);
         }
 
         .day-title {
-            font-size: 20px;
+            font-size: clamp(18px, 2vw, 20px);
             font-weight: 700;
             margin-bottom: 12px;
             color: var(--accent);
@@ -516,6 +502,7 @@
             margin-bottom: 8px;
             position: relative;
             padding-left: 20px;
+            font-size: clamp(13px, 1.5vw, 15px);
         }
 
         .day-topics li::before {
@@ -526,22 +513,17 @@
             font-weight: bold;
         }
 
-        .bonuses-section {
-            padding: 100px 0;
-            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-        }
-
         .bonuses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: clamp(16px, 2.5vw, 24px);
             max-width: 1200px;
-            margin: 0 auto 60px;
+            margin: 0 auto clamp(40px, 5vw, 60px);
         }
 
         .bonus-card {
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
-            padding: 30px;
+            padding: clamp(20px, 3vw, 30px);
             border-radius: var(--radius);
             border: 1px solid rgba(45, 212, 191, 0.1);
             backdrop-filter: blur(10px);
@@ -567,23 +549,23 @@
         }
 
         .bonus-icon {
-            width: 56px;
-            height: 56px;
+            width: clamp(48px, 5vw, 56px);
+            height: clamp(48px, 5vw, 56px);
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 16px;
+            margin: 0 auto clamp(12px, 2vw, 16px);
         }
 
         .bonus-icon i {
-            font-size: 24px;
+            font-size: clamp(20px, 2.5vw, 24px);
             color: var(--bg-primary);
         }
 
         .bonus-title {
-            font-size: 16px;
+            font-size: clamp(14px, 1.8vw, 16px);
             font-weight: 700;
             margin-bottom: 8px;
             color: var(--text-primary);
@@ -592,12 +574,12 @@
         .bonus-value {
             color: var(--accent);
             font-weight: 800;
-            font-size: 18px;
+            font-size: clamp(16px, 2vw, 18px);
             margin-bottom: 12px;
         }
 
         .bonus-description {
-            font-size: 14px;
+            font-size: clamp(12px, 1.4vw, 14px);
             color: var(--text-secondary);
             line-height: 1.5;
         }
@@ -605,7 +587,7 @@
         .total-bonus {
             text-align: center;
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
-            padding: 40px;
+            padding: clamp(30px, 4vw, 40px);
             border-radius: var(--radius);
             border: 2px solid var(--accent);
             max-width: 500px;
@@ -614,14 +596,14 @@
         }
 
         .total-bonus-title {
-            font-size: 20px;
+            font-size: clamp(18px, 2vw, 20px);
             font-weight: 700;
             margin-bottom: 8px;
             color: var(--text-primary);
         }
 
         .total-bonus-value {
-            font-size: 36px;
+            font-size: clamp(28px, 4vw, 36px);
             font-weight: 900;
             color: var(--accent);
             margin-bottom: 12px;
@@ -629,26 +611,21 @@
 
         .total-bonus-note {
             color: var(--text-secondary);
-            font-size: 14px;
+            font-size: clamp(12px, 1.5vw, 14px);
             margin-bottom: 20px;
-        }
-
-        .testimonials-section {
-            padding: 100px 0;
-            background: var(--bg-secondary);
         }
 
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: clamp(20px, 3vw, 30px);
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .testimonial-card {
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
-            padding: 30px;
+            padding: clamp(20px, 3vw, 30px);
             border-radius: var(--radius);
             border: 1px solid rgba(45, 212, 191, 0.1);
             backdrop-filter: blur(10px);
@@ -668,37 +645,33 @@
 
         .testimonial-stars {
             color: var(--accent);
-            margin-bottom: 16px;
-            font-size: 18px;
+            margin-bottom: clamp(12px, 2vw, 16px);
+            font-size: clamp(16px, 2vw, 18px);
         }
 
         .testimonial-text {
             font-style: italic;
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: clamp(16px, 2vw, 20px);
             line-height: 1.6;
-            font-size: 15px;
+            font-size: clamp(13px, 1.5vw, 15px);
         }
 
         .testimonial-author {
             font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 4px;
+            font-size: clamp(14px, 1.8vw, 16px);
         }
 
         .testimonial-role {
-            font-size: 12px;
+            font-size: clamp(10px, 1.2vw, 12px);
             color: var(--text-muted);
-        }
-
-        .pricing-section {
-            padding: 100px 0;
-            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
         }
 
         .pricing-card {
             background: linear-gradient(135deg, var(--glass-strong), var(--glass));
-            padding: 40px;
+            padding: clamp(30px, 4vw, 40px);
             border-radius: var(--radius);
             border: 2px solid var(--accent);
             backdrop-filter: blur(10px);
@@ -708,33 +681,30 @@
             box-shadow: var(--glow-strong);
         }
 
-        .pricing-badge {
-            background: var(--accent);
-            color: var(--bg-primary);
-            padding: 8px 20px;
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            padding: clamp(6px, 1vw, 8px) clamp(12px, 2vw, 16px);
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            display: inline-block;
+            font-weight: 700;
+            font-size: clamp(10px, 1.2vw, 12px);
+            margin-bottom: clamp(12px, 2vw, 16px);
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+            animation: pulse 1.5s infinite;
         }
 
         .pricing-free {
-            font-size: 48px;
+            font-size: clamp(36px, 5vw, 48px);
             font-weight: 900;
             color: var(--accent);
             margin-bottom: 8px;
         }
 
-        .pricing-original {
-            color: var(--text-muted);
-            text-decoration: line-through;
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-
         .pricing-current {
-            font-size: 24px;
+            font-size: clamp(20px, 2.5vw, 24px);
             font-weight: 700;
             color: var(--text-secondary);
             margin-bottom: 8px;
@@ -742,13 +712,13 @@
 
         .pricing-note {
             color: var(--text-secondary);
-            font-size: 14px;
+            font-size: clamp(12px, 1.5vw, 14px);
             margin-bottom: 24px;
         }
 
         .pricing-features {
             list-style: none;
-            margin: 0 0 30px 0;
+            margin: 0 0 clamp(24px, 3vw, 30px) 0;
             padding: 0;
             text-align: left;
         }
@@ -758,6 +728,7 @@
             margin-bottom: 12px;
             position: relative;
             padding-left: 24px;
+            font-size: clamp(13px, 1.5vw, 15px);
         }
 
         .pricing-features li::before {
@@ -766,11 +737,6 @@
             left: 0;
             color: var(--accent);
             font-weight: bold;
-        }
-
-        .faq-section {
-            padding: 100px 0;
-            background: var(--bg-primary);
         }
 
         .faq-container {
@@ -783,7 +749,7 @@
             border-radius: var(--radius);
             border: 1px solid rgba(45, 212, 191, 0.1);
             backdrop-filter: blur(10px);
-            margin-bottom: 16px;
+            margin-bottom: clamp(12px, 2vw, 16px);
             overflow: hidden;
             transition: var(--transition);
         }
@@ -793,7 +759,7 @@
         }
 
         .faq-question {
-            padding: 20px 24px;
+            padding: clamp(16px, 2vw, 20px) clamp(20px, 2.5vw, 24px);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -801,6 +767,7 @@
             font-weight: 600;
             color: var(--text-primary);
             transition: var(--transition);
+            font-size: clamp(14px, 1.8vw, 16px);
         }
 
         .faq-question:hover {
@@ -808,7 +775,7 @@
         }
 
         .faq-toggle {
-            font-size: 24px;
+            font-size: clamp(20px, 2.5vw, 24px);
             color: var(--accent);
             transition: var(--transition);
         }
@@ -821,17 +788,18 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease;
-            padding: 0 24px;
+            padding: 0 clamp(20px, 2.5vw, 24px);
         }
 
         .faq-item.active .faq-answer {
             max-height: 200px;
-            padding-bottom: 20px;
+            padding-bottom: clamp(16px, 2vw, 20px);
         }
 
         .faq-answer p {
             color: var(--text-secondary);
             line-height: 1.6;
+            font-size: clamp(13px, 1.5vw, 15px);
         }
 
         .form-backdrop {
@@ -874,8 +842,8 @@
             backdrop-filter: blur(20px);
             border-radius: var(--radius);
             padding: 0;
-            max-width: 500px;
-            width: 100%;
+            width: 90%;
+            max-width: 900px;
             max-height: 85vh;
             overflow: hidden;
             position: relative;
@@ -896,7 +864,7 @@
 
         .modal-header {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            padding: 25px 30px;
+            padding: clamp(18px, 2.5vw, 25px) clamp(20px, 3vw, 30px);
             color: var(--bg-primary);
             position: relative;
             overflow: hidden;
@@ -927,61 +895,66 @@
 
         .modal-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 24px;
+            font-size: clamp(18px, 2.5vw, 24px);
             font-weight: 800;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
         .modal-subtitle {
-            font-size: 14px;
+            font-size: clamp(11px, 1.5vw, 14px);
             opacity: 0.9;
         }
 
         .modal-body {
-            padding: 30px;
+            padding: clamp(20px, 3vw, 30px);
             overflow-y: auto;
             max-height: calc(85vh - 120px);
         }
 
-        .form-row {
+        /* NEW: Responsive Horizontal Form Layout */
+        #modalForm {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            margin-bottom: 20px;
+            align-items: end;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 0;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
         }
 
         .form-label {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 13px;
+            font-size: clamp(11px, 1.2vw, 13px);
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .form-label i {
             color: var(--accent);
-            font-size: 14px;
+            font-size: clamp(12px, 1.5vw, 14px);
         }
 
         .form-input, .form-select {
             width: 100%;
-            padding: 14px 16px;
+            padding: clamp(12px, 1.5vw, 14px) clamp(14px, 2vw, 16px);
             border: 2px solid rgba(45, 212, 191, 0.2);
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.03);
             color: var(--text-primary);
-            font-size: 14px;
+            font-size: clamp(12px, 1.5vw, 14px);
             transition: var(--transition);
             font-family: 'Inter', sans-serif;
         }
@@ -998,31 +971,36 @@
             opacity: 0.6;
         }
 
+        /* NEW: Horizontal Radio Buttons */
         .form-radio-group {
-            margin-bottom: 20px;
+            margin-bottom: 0;
+            grid-column: 1 / -1;
         }
 
         .form-radio-group .form-label {
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .radio-options {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .form-radio-label {
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 12px;
+            padding: clamp(10px, 1.5vw, 12px) clamp(12px, 2vw, 15px);
             background: rgba(255, 255, 255, 0.03);
             border: 2px solid rgba(45, 212, 191, 0.2);
             border-radius: 8px;
             cursor: pointer;
             transition: var(--transition);
-            font-size: 13px;
+            font-size: clamp(11px, 1.3vw, 13px);
+            flex: 1;
+            min-width: 150px;
+            justify-content: center;
         }
 
         .form-radio-label:hover {
@@ -1041,14 +1019,15 @@
         }
 
         .form-submit {
+            grid-column: 1 / -1;
             width: 100%;
-            padding: 16px;
+            padding: clamp(14px, 1.8vw, 16px);
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             color: var(--bg-primary);
             border: none;
             border-radius: 50px;
             font-weight: 800;
-            font-size: 16px;
+            font-size: clamp(14px, 1.5vw, 16px);
             cursor: pointer;
             transition: var(--transition);
             display: flex;
@@ -1057,7 +1036,7 @@
             gap: 10px;
             position: relative;
             overflow: hidden;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         .form-submit:hover {
@@ -1070,10 +1049,11 @@
         }
 
         .form-note {
-            font-size: 11px;
+            grid-column: 1 / -1;
+            font-size: clamp(10px, 1.2vw, 11px);
             color: var(--text-muted);
             text-align: center;
-            margin-top: 15px;
+            margin-top: 10px;
             line-height: 1.4;
         }
 
@@ -1140,59 +1120,50 @@
             100% { transform: translateY(0px) rotate(0deg); }
         }
 
-        .premium-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #f97316, #ea580c);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 12px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
-            animation: pulse 1.5s infinite;
+        /* Responsive Breakpoints */
+
+        /* Tablet (769px - 1024px) */
+        @media (max-width: 1024px) {
+            .hero-content {
+                gap: 40px;
+            }
+            
+            .container {
+                padding: 0 4%;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bonuses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .modal-content-enhanced {
+                max-width: 700px;
+            }
         }
 
+        /* Mobile (481px - 768px) */
         @media (max-width: 768px) {
             .hero-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
 
-            .hero-image-container {
-                max-width: 100%;
-            }
-
             .hero-stats {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
                 max-width: 300px;
+                margin: 30px auto 0;
             }
 
-            .hero-stats .stat-card:first-child {
-                grid-column: 1 / -1;
-                max-width: 150px;
-            }
-
-            .market-ticker {
-                display: none;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .bonuses-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
+            .brand-badge {
+                margin-bottom: 16px;
             }
 
             .cta-group {
@@ -1203,9 +1174,94 @@
             .btn {
                 justify-content: center;
             }
+
+            .features-grid,
+            .testimonials-grid,
+            .bonuses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .market-ticker {
+                display: none;
+            }
+
+            .modal-content-enhanced {
+                width: 95%;
+                max-width: 400px;
+            }
+
+            /* Stack form fields vertically */
+            #modalForm {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.full-width,
+            .form-submit,
+            .form-note {
+                grid-column: 1;
+            }
+
+            .radio-options {
+                flex-direction: column;
+            }
+        }
+
+        /* Small Mobile (320px - 480px) */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 5%;
+            }
+
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .hero-stats {
+                gap: 12px;
+            }
+
+            .modal-content-enhanced {
+                width: 100%;
+                border-radius: 12px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .form-submit {
+                padding: 12px;
+            }
+        }
+
+        /* Landscape Mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                min-height: auto;
+                padding: 80px 0 40px;
+            }
+
+            .modal-content-enhanced {
+                max-height: 90vh;
+            }
+
+            .modal-body {
+                max-height: calc(90vh - 100px);
+            }
+        }
+
+        /* Large Desktop (1440px+) */
+        @media (min-width: 1440px) {
+            .container {
+                max-width: 1400px;
+            }
+
+            .hero-content {
+                gap: 80px;
+            }
         }
     </style>
-<script src="https://statics.moonshot.cn/sdk/preview-widgets.min.js    " defer=""></script></head>
+<script src="https://statics.moonshot.cn/sdk/preview-widgets.min.js" defer=""></script></head>
 <body>
     <!-- Scroll Progress Bar -->
     <div class="scroll-progress"></div>
@@ -1257,7 +1313,6 @@
                             View Curriculum
                         </a>
                     </div>
-                    <!-- CTA Button added in hero stats area -->
                     <div class="hero-stats">
                         <div class="stat-card fade-in-delay-1">
                             <span class="stat-number" data-count="15000">0</span>
@@ -1281,7 +1336,7 @@
                 </div>
                 <div class="hero-right fade-in-delay-2">
                     <div class="hero-image-container">
-                        <img src="https://i.postimg.cc/4xYfHLP2/IMG-20251014-WA0074.jpg    " alt="Trading Mentor" class="hero-image"/>
+                        <img src="https://i.postimg.cc/4xYfHLP2/IMG-20251014-WA0074.jpg" alt="Trading Mentor" class="hero-image"/>
                         <div class="image-overlay"></div>
                         <div class="floating-badge">
                             <i class="fas fa-crown"></i> Expert Mentor
@@ -1388,7 +1443,7 @@
                     </div>
                     <h3 class="feature-title">Lifetime Support</h3>
                     <p class="feature-description">
-                        Get lifetime access to our private community, monthly Q&amp;A sessions, 
+                        Get lifetime access to our private community, monthly Q&A sessions, 
                         and continuous course updates.
                     </p>
                 </div>
@@ -1418,7 +1473,7 @@
                 <div class="curriculum-day fade-in">
                     <div class="day-number">1</div>
                     <div class="day-content">
-                        <h3 class="day-title">Foundation &amp; Market Basics</h3>
+                        <h3 class="day-title">Foundation & Market Basics</h3>
                         <ul class="day-topics">
                             <li>Forex vs Stocks comparison</li>
                             <li>Global Trading Sessions overview</li>
@@ -1460,12 +1515,12 @@
                 <div class="curriculum-day fade-in" style="animation-delay: 0.3s;">
                     <div class="day-number">4</div>
                     <div class="day-content">
-                        <h3 class="day-title">Chart Analysis &amp; Indicators</h3>
+                        <h3 class="day-title">Chart Analysis & Indicators</h3>
                         <ul class="day-topics">
                             <li>Candlesticks patterns and reading</li>
                             <li>Chart Types and their applications</li>
                             <li>Trend Analysis identification</li>
-                            <li>Perfect Entries &amp; Exits timing</li>
+                            <li>Perfect Entries & Exits timing</li>
                             <li>Technical indicators integration</li>
                         </ul>
                     </div>
@@ -1478,7 +1533,7 @@
                         <ul class="day-topics">
                             <li>Double Top/Bottom pattern strategies</li>
                             <li>Support-Resistance level trading</li>
-                            <li>Supply &amp; Demand zone identification</li>
+                            <li>Supply & Demand zone identification</li>
                             <li>Multiple high-probability setups</li>
                             <li>Strategy backtesting and validation</li>
                         </ul>
@@ -1488,7 +1543,7 @@
                 <div class="curriculum-day fade-in" style="animation-delay: 0.5s;">
                     <div class="day-number">6</div>
                     <div class="day-content">
-                        <h3 class="day-title">Fundamental &amp; Sentiment Analysis</h3>
+                        <h3 class="day-title">Fundamental & Sentiment Analysis</h3>
                         <ul class="day-topics">
                             <li>Major News Events impact analysis</li>
                             <li>NFP and economic calendar mastery</li>
@@ -1589,7 +1644,6 @@
                 </div>
             </div>
             
-            <!-- CTA Button added in bonuses section -->
             <div style="text-align: center; margin-top: 40px;">
                 <button class="wa-btn" onclick="openModal()">
                     <i class="fas fa-gift"></i>
@@ -1749,7 +1803,7 @@
                         <div class="faq-toggle">+</div>
                     </div>
                     <div class="faq-answer">
-                        <p>Absolutely! You get lifetime access to our private Discord community, monthly live Q&amp;A sessions, and ongoing mentorship opportunities. Our support doesn't end when you finish the course.</p>
+                        <p>Absolutely! You get lifetime access to our private Discord community, monthly live Q&A sessions, and ongoing mentorship opportunities. Our support doesn't end when you finish the course.</p>
                     </div>
                 </div>
                 
@@ -1790,7 +1844,7 @@
             
             <div class="modal-body">
                 <form id="modalForm">
-                    <div class="form-group">
+                    <div class="form-group full-width">
                         <label class="form-label">
                             <i class="fas fa-user"></i>
                             Full Name *
@@ -1805,54 +1859,51 @@
                         </label>
                         <input type="tel" class="form-input" name="phone" required placeholder="10-digit number" maxlength="10">
                     </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">
-                                <i class="fas fa-map-marker-alt"></i>
-                                City *
-                            </label>
-                            <input type="text" class="form-input" name="city" required placeholder="Your city">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">
-                                <i class="fas fa-calendar"></i>
-                                Age *
-                            </label>
-                            <input type="number" class="form-input" name="age" required placeholder="Your age" min="18" max="100">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">
-                                <i class="fas fa-briefcase"></i>
-                                Profession *
-                            </label>
-                            <select class="form-select" name="profession" required>
-                                <option value="">Select Profession</option>
-                                <option value="Job Person">Job Person</option>
-                                <option value="Housewife">Housewife</option>
-                                <option value="Student">Student</option>
-                                <option value="Trader">Trader</option>
-                            </select>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="form-label">
-                                <i class="fas fa-venus-mars"></i>
-                                Gender *
-                            </label>
-                            <select class="form-select" name="gender" required>
-                                <option value="">Select Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-map-marker-alt"></i>
+                            City *
+                        </label>
+                        <input type="text" class="form-input" name="city" required placeholder="Your city">
                     </div>
                     
                     <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-calendar"></i>
+                            Age *
+                        </label>
+                        <input type="number" class="form-input" name="age" required placeholder="Your age" min="18" max="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-briefcase"></i>
+                            Profession *
+                        </label>
+                        <select class="form-select" name="profession" required>
+                            <option value="">Select Profession</option>
+                            <option value="Job Person">Job Person</option>
+                            <option value="Housewife">Housewife</option>
+                            <option value="Student">Student</option>
+                            <option value="Trader">Trader</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-venus-mars"></i>
+                            Gender *
+                        </label>
+                        <select class="form-select" name="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-radio-group">
                         <label class="form-label">
                             <i class="fas fa-chart-line"></i>
                             Trading Experience *
